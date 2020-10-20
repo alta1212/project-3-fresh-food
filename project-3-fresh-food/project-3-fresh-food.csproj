@@ -235,6 +235,7 @@
     <Content Include="Views\Index\Sorry.cshtml" />
     <Content Include="Views\Contact\SendContact.cshtml" />
     <Content Include="Views\Contact\AboutUs.cshtml" />
+    <None Include="Properties\PublishProfiles\testtk16 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

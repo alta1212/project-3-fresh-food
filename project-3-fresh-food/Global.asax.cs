@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -14,14 +15,23 @@ namespace project_3_fresh_food
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
-        protected void Application_Error()
+        protected void Application_Error(object sender, EventArgs e)
         {
-            // Sets 404 HTTP exceptions to be handled via IIS (behavior is specified in the "httpErrors" section in the Web.config file)
-            var error = Server.GetLastError();
-            if ((error as HttpException)?.GetHttpCode() == 404)
+            Exception lastErrorInfo = Server.GetLastError();
+            Exception errorInfo = null;
+
+            bool isNotFound = false;
+            if (lastErrorInfo != null)
+            {
+                errorInfo = lastErrorInfo.GetBaseException();
+                var error = errorInfo as HttpException;
+                if (error != null)
+                    isNotFound = error.GetHttpCode() == (int)HttpStatusCode.NotFound;
+            }
+            if (isNotFound)
             {
                 Server.ClearError();
-                Response.StatusCode = 404;
+                Response.Redirect("~/Index/Sorry");
             }
         }
     }
