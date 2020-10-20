@@ -1,0 +1,282 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/MainLayOut.cshtml";
+}
+
+<!--Cart Start -->
+<div class="section">
+    <div class="container">
+
+        <!-- Cart Table Start -->
+        <table class="andro_responsive-table">
+            <thead>
+                <tr>
+                    <th class="remove-item"></th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qunantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="remove">
+                        <button type="button" class="close-btn close-danger remove-from-cart">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </td>
+                    <td data-title="Product">
+                        <div class="andro_cart-product-wrapper">
+                            <img src="~/assets/img/products/1.png" alt="prod1">
+                            <div class="andro_cart-product-body">
+                                <h6> <a href="#">Kiwi</a> </h6>
+                                <p>2 Kilos</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-title="Price"> <strong>12.99$</strong> </td>
+                    <td class="quantity" data-title="Quantity">
+                        <input type="number" class="qty form-control" value="1">
+                    </td>
+                    <td data-title="Total"> <strong>12.99$</strong> </td>
+                </tr>
+                <tr>
+                    <td class="remove">
+                        <button type="button" class="close-btn close-danger remove-from-cart">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </td>
+                    <td data-title="Product">
+                        <div class="andro_cart-product-wrapper">
+                            <img src="~/assets/img/products/5.png" alt="prod1">
+                            <div class="andro_cart-product-body">
+                                <h6> <a href="#">Watermelons</a> </h6>
+                                <p>1 Piece</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-title="Price"> <strong>9.99$</strong> </td>
+                    <td class="quantity" data-title="Quantity">
+                        <input type="number" class="qty form-control" value="1">
+                    </td>
+                    <td data-title="Total"> <strong>9.99$</strong> </td>
+                </tr>
+                <tr>
+                    <td class="remove">
+                        <button type="button" class="close-btn close-danger remove-from-cart">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </td>
+                    <td data-title="Product">
+                        <div class="andro_cart-product-wrapper">
+                            <img src="~/assets/img/products/4.png" alt="prod1">
+                            <div class="andro_cart-product-body">
+                                <h6> <a href="#">Cucumbers</a> </h6>
+                                <p>3 Kilos</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-title="Price"> <strong>13.99$</strong> </td>
+                    <td class="quantity" data-title="Quantity">
+                        <input type="number" class="qty form-control" value="1">
+                    </td>
+                    <td data-title="Total"> <strong>13.99$</strong> </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <!-- Cart Table End -->
+        <!-- Coupon Code Start -->
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="form-group mb-0">
+                    <div class="input-group mb-0">
+                        <input type="text" class="form-control" placeholder="Enter Coupon Code" aria-label="Coupon Code">
+                        <div class="input-group-append">
+                            <button class="andro_btn-custom shadow-none" type="button">Apply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Coupon Code End -->
+
+    </div>
+</div>
+<!-- Cart End -->
+<!-- Cart form Start -->
+<div class="section pt-0">
+    <div class="container">
+
+        <div class="row andro_cart-form">
+            <div class="col-lg-6 andro_upsells">
+
+                <div class="section-title flex-title">
+                    <h4 class="title">Upsells</h4>
+                    <div class="andro_arrows">
+                        <i class="fa fa-arrow-left slick-arrow slider-prev"></i>
+                        <i class="fa fa-arrow-right slick-arrow slider-next"></i>
+                    </div>
+                </div>
+
+                <!-- Upsells Start -->
+                <div class="andro_upsells-slider">
+
+                    <!-- Product Start -->
+                    <div class="andro_product andro_product-list andro_product-has-controls andro_product-has-buttons">
+                        <div class="andro_product-thumb">
+                            <a href="product-single.html"><img src="~/assets/img/products/5.png" alt="product"></a>
+                        </div>
+                        <div class="andro_product-body">
+                            <div class="andro_rating-wrapper">
+                                <div class="andro_rating">
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                </div>
+                                <span>5 Stars</span>
+                            </div>
+                            <h5 class="andro_product-title"> <a href="product-single.html"> Watermelons </a> </h5>
+                            <div class="andro_product-price">
+                                <span>11$</span>
+                                <span>24$</span>
+                            </div>
+                            <p>Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
+                        </div>
+                        <div class="andro_product-footer">
+                            <div class="andro_product-buttons">
+                                <a href="#" class="andro_btn-custom primary">Add To Cart</a>
+                                <a href="#" class="andro_btn-custom light">Quick View</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product End -->
+                    <!-- Product Start -->
+                    <div class="andro_product andro_product-list andro_product-has-controls andro_product-has-buttons">
+                        <div class="andro_product-thumb">
+                            <a href="product-single.html"><img src="~/assets/img/products/14.png" alt="product"></a>
+                        </div>
+                        <div class="andro_product-body">
+                            <div class="andro_rating-wrapper">
+                                <div class="andro_rating">
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <span>4 Stars</span>
+                            </div>
+                            <h5 class="andro_product-title"> <a href="product-single.html"> Grapes </a> </h5>
+                            <div class="andro_product-price">
+                                <span>11$</span>
+                            </div>
+                            <p>Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
+                        </div>
+                        <div class="andro_product-footer">
+                            <div class="andro_product-buttons">
+                                <a href="#" class="andro_btn-custom primary">Add To Cart</a>
+                                <a href="#" class="andro_btn-custom light">Quick View</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product End -->
+                    <!-- Product Start -->
+                    <div class="andro_product andro_product-list andro_product-has-controls andro_product-has-buttons">
+                        <div class="andro_product-thumb">
+                            <a href="product-single.html"><img src="~/assets/img/products/12.png" alt="product"></a>
+                        </div>
+                        <div class="andro_product-body">
+                            <div class="andro_rating-wrapper">
+                                <div class="andro_rating">
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                </div>
+                                <span>5 Stars</span>
+                            </div>
+                            <h5 class="andro_product-title"> <a href="product-single.html"> Brocoli </a> </h5>
+                            <div class="andro_product-price">
+                                <span>11$</span>
+                            </div>
+                            <p>Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
+                        </div>
+                        <div class="andro_product-footer">
+                            <div class="andro_product-buttons">
+                                <a href="#" class="andro_btn-custom primary">Add To Cart</a>
+                                <a href="#" class="andro_btn-custom light">Quick View</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product End -->
+                    <!-- Product Start -->
+                    <div class="andro_product andro_product-list andro_product-has-controls andro_product-has-buttons">
+                        <div class="andro_product-thumb">
+                            <a href="product-single.html"><img src="~/assets/img/products/6.png" alt="product"></a>
+                        </div>
+                        <div class="andro_product-body">
+                            <div class="andro_rating-wrapper">
+                                <div class="andro_rating">
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                    <i class="fa fa-star active"></i>
+                                </div>
+                                <span>5 Stars</span>
+                            </div>
+                            <h5 class="andro_product-title"> <a href="product-single.html"> Oranges </a> </h5>
+                            <div class="andro_product-price">
+                                <span>11$</span>
+                            </div>
+                            <p>Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
+                        </div>
+                        <div class="andro_product-footer">
+                            <div class="andro_product-buttons">
+                                <a href="#" class="andro_btn-custom primary">Add To Cart</a>
+                                <a href="#" class="andro_btn-custom light">Quick View</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product End -->
+
+                </div>
+                <!-- Upsells End -->
+
+            </div>
+            <div class="col-lg-6">
+                <div class="section-title">
+                    <h4 class="title">Cart Total</h4>
+                </div>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Subtotal</th>
+                            <td>90.99$</td>
+                        </tr>
+                        <tr>
+                            <th>Tax</th>
+                            <td> 9.99$ <span class="small">(11%)</span> </td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <td> <b>99.99$</b> </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#" class="andro_btn-custom primary btn-block">Proceeed to Checkout</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Cart form End -->
