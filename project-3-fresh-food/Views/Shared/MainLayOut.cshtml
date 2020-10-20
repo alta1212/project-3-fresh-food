@@ -131,7 +131,7 @@
                                         </div>
 
                                         <div class="qty-outter">
-                                            <a href="product-single.html" class="andro_btn-custom">Buy Now</a>
+                                            <a href="/Product/Product_Details" class="andro_btn-custom">Buy Now</a>
                                             <div class="qty">
                                                 <span class="qty-subtract"><i class="fa fa-minus"></i></span>
                                                 <input type="text" name="qty" value="1">
@@ -243,16 +243,16 @@
 
     <!-- Aside (Mobile Navigation) -->
     <aside class="andro_aside andro_aside-left">
-        <a class="navbar-brand" href="index.html"> <img src="~/assets/img/logo.png" alt="logo"> </a>
+        <a class="navbar-brand" href="index"> <img src="~/assets/img/logo.png" alt="logo"> </a>
 
         <ul>
             <li class="menu-item">
-                <a href="#">Trang chủ</a>
+                <a href="/Index/Index">Trang chủ</a>
             </li>
             <li class="menu-item menu-item-has-children">
-                <a href="#">Blog</a>
+                <a href="/Blog/Blog">Blog</a>
             </li>
-            <li class="menu-item"> <a href="contact-us.html">Contact Us</a> </li>
+            <li class="menu-item"> <a href="/Contact/SendContact">Contact Us</a> </li>
         </ul>
 
     </aside>
@@ -272,7 +272,7 @@
                         <li> <a href="#"> <i class="fab fa-youtube"></i> </a> </li>
                     </ul>
                     <ul class="andro_header-top-links">
-                        <li class="menu-item"><a href="login.html"> My Account </a></li>
+                        <li class="menu-item"><a href="/Account/Login"> My Account </a></li>
                     </ul>
                 </div>
             </div>
@@ -283,7 +283,7 @@
             <div class="container">
                 <nav class="navbar">
                     <!-- Logo -->
-                    <a class="navbar-brand" href="index.html"> <img src="~/assets/img/logo.png" alt="logo"> </a>
+                    <a class="navbar-brand" href="/Index/Index"> <img src="~/assets/img/logo.png" alt="logo"> </a>
 
                     <!-- thay vào phần seach -->
                     @Html.Partial("_Seachbar")
@@ -302,13 +302,13 @@
                     <!-- Menu -->
                     <ul class="navbar-nav">
                         <li class="menu-item menu-item-has-children">
-                            <a href="#">Trang chủ</a>
+                            <a href="/Index/Index">Trang chủ</a>
                         </li>
                         <li class="menu-item menu-item-has-children">
-                            <a href="#">Blog</a>
+                            <a href="/Blog/Blog">Blog</a>
                         </li>
                         <li class="menu-item menu-item-has-children mega-menu-wrapper">
-                            <a href="shop-v1.html">Shop</a>
+                            <a href="/Product/Shop">Shop</a>
                             <ul class="sub-menu">
                                 <li>
                                     <div class="container">
@@ -320,7 +320,7 @@
                                                         Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC,
                                                         making it over 2000 years old.
                                                     </p>
-                                                    <a href="login.html" class="andro_btn-custom shadow-none btn-sm">Become a Member</a>
+                                                    <a href="/Account/Login" class="andro_btn-custom shadow-none btn-sm">Become a Member</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -329,7 +329,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="menu-item"> <a href="contact-us.html">Contact Us</a> </li>
+                        <li class="menu-item"> <a href="/Contact/SendContact">Contact Us</a> </li>
                     </ul>
 
                     <!-- Side navigation toggle -->
@@ -416,11 +416,11 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 footer-widget">
                         <h5 class="widget-title">Information</h5>
                         <ul>
-                            <li> <a href="index.html">Home</a> </li>
-                            <li> <a href="blog-grid.html">Blog</a> </li>
-                            <li> <a href="about-us.html">About Us</a> </li>
-                            <li> <a href="shop-v1.html">Shop</a> </li>
-                            <li> <a href="contact-us.html">Contact Us</a> </li>
+                            <li> <a href="/Index/Index">Home</a> </li>
+                            <li> <a href="/Blog/Blog">Blog</a> </li>
+                            <li> <a href="/Contact/AboutUs">About Us</a> </li>
+                            <li> <a href="/Product/Shop">Shop</a> </li>
+                            <li> <a href="/Contact/SendContact">Contact Us</a> </li>
                         </ul>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 footer-widget">
@@ -436,11 +436,11 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 footer-widget">
                         <h5 class="widget-title">Others</h5>
                         <ul>
-                            <li> <a href="checkout.html">Checkout</a> </li>
-                            <li> <a href="cart.html">Cart</a> </li>
-                            <li> <a href="product-single.html">Product</a> </li>
-                            <li> <a href="shop-v1.html">Shop</a> </li>
-                            <li> <a href="legal.html">Legal</a> </li>
+                            <li> <a href="/Product/CheckOut">Checkout</a> </li>
+                            <li> <a href="/Product/Cart">Cart</a> </li>
+                            <li> <a href="/Product/Product_Details">Product</a> </li>
+                            <li> <a href="/Product/Shop">Shop</a> </li>
+                          
                         </ul>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 footer-widget">

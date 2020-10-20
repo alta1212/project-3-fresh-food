@@ -189,6 +189,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -232,6 +233,8 @@
     <Content Include="Views\Blog\Blog_Details.cshtml" />
     <Content Include="Views\Product\CheckOut.cshtml" />
     <Content Include="Views\Index\Sorry.cshtml" />
+    <Content Include="Views\Contact\SendContact.cshtml" />
+    <Content Include="Views\Contact\AboutUs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
