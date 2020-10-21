@@ -95,6 +95,7 @@
     <Content Include="assets\css\plugins\slick-theme.css" />
     <Content Include="assets\css\plugins\slick.css" />
     <Content Include="assets\css\style.css" />
+    <Content Include="assets\favicon.ico" />
     <Content Include="assets\fonts\flaticon\flaticon.css" />
     <Content Include="assets\fonts\flaticon\Flaticon.svg" />
     <Content Include="assets\fonts\font-awesome\css\all.min.css" />
@@ -124,6 +125,7 @@
     <Content Include="assets\img\blog\7.jpg" />
     <Content Include="assets\img\blog\8.jpg" />
     <Content Include="assets\img\blog\9.jpg" />
+    <Content Include="assets\img\cancel.svg" />
     <Content Include="assets\img\clients\1.png" />
     <Content Include="assets\img\clients\2.png" />
     <Content Include="assets\img\clients\3.png" />
@@ -235,7 +237,11 @@
     <Content Include="Views\Index\Sorry.cshtml" />
     <Content Include="Views\Contact\SendContact.cshtml" />
     <Content Include="Views\Contact\AboutUs.cshtml" />
+    <None Include="Properties\PublishProfiles\foodtk16 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\testtk16 - Web Deploy.pubxml" />
+    <Content Include="Views\Shared\_Account.cshtml" />
+    <Content Include="Views\Account\sent.cshtml" />
+    <Content Include="Views\Account\verification.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

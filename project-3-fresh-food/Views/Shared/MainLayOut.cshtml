@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="~/assets/css/style.css">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/favicon.ico">
 
 </head>
 
@@ -271,9 +271,8 @@
                         <li> <a href="#"> <i class="fab fa-linkedin-in"></i> </a> </li>
                         <li> <a href="#"> <i class="fab fa-youtube"></i> </a> </li>
                     </ul>
-                    <ul class="andro_header-top-links">
-                        <li class="menu-item"><a href="/Account/Login"> My Account </a></li>
-                    </ul>
+                    <!--tài khoản-->
+                    @Html.Partial("_account")
                 </div>
             </div>
         </div>
@@ -440,7 +439,7 @@
                             <li> <a href="/Product/Cart">Cart</a> </li>
                             <li> <a href="/Product/Product_Details">Product</a> </li>
                             <li> <a href="/Product/Shop">Shop</a> </li>
-                          
+
                         </ul>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 footer-widget">
@@ -499,6 +498,6 @@
 
 </body>
 @RenderSection("Scripts", required: false)
-
+@RenderSection("Styles", false)
 <!-- Mirrored from androthemes.com/themes/html/organista/home-v2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Oct 2020 15:05:26 GMT -->
 </html>

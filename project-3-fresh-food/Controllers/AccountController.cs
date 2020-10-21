@@ -18,5 +18,17 @@ namespace project_3_fresh_food.Controllers
         {
             return View();
         }
+        public ActionResult Sent()
+        {
+            return View();
+        }
+        public ActionResult Verification()
+        {
+            return View();
+        }
+        public ActionResult FillInfo()
+        {
+            return View();
+        }
     }
 }
