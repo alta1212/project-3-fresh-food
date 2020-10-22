@@ -23,7 +23,7 @@ namespace DTO_Data_Transfer_Object_
         public string  verificationcode ;
         public string  tenkhachhang ;
         public string  anhdaidien ;
-
+        public string active;
         public KHACH_HANG()
         {
        
@@ -69,10 +69,14 @@ namespace DTO_Data_Transfer_Object_
             get { return makhachhang; }
             set { makhachhang = value; }
         }
-
+        public string Active
+        {
+            get { return active; }
+            set { active = value; }
+        }
         public string  TaiKhoan {
-            get { return makhachhang; }
-            set { makhachhang = value; }
+            get { return taikhoan; }
+            set { taikhoan = value; }
         }
         public string  MatKhau {
             get { return matkhau; }

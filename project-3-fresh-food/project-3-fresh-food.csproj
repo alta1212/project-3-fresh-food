@@ -185,6 +185,8 @@
     <Content Include="assets\js\plugins\slick.min.js" />
     <Content Include="assets\js\plugins\waypoint.js" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\Controllers\account.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -241,7 +243,7 @@
     <None Include="Properties\PublishProfiles\testtk16 - Web Deploy.pubxml" />
     <Content Include="Views\Shared\_Account.cshtml" />
     <Content Include="Views\Account\sent.cshtml" />
-    <Content Include="Views\Account\verification.cshtml" />
+    <Content Include="Views\Account\Active.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -252,7 +254,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL%28Business Logic Layer %29\BLL%28Business Logic Layer %29.csproj">
+      <Project>{A48CE1CA-CE18-4DBA-9122-4AABD686702B}</Project>
+      <Name>BLL%28Business Logic Layer %29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO%28Data Transfer Object%29\DTO%28Data Transfer Object%29.csproj">
+      <Project>{2BAED398-2677-4344-A468-FB7EA509A1AA}</Project>
+      <Name>DTO%28Data Transfer Object%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

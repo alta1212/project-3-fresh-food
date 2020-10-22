@@ -41,8 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="KHACH_HANG_BLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceInterface\IAccountBll.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAO%28Data Access Object%29\DAO%28Data Access Object%29.csproj">
+      <Project>{37977709-4BFD-49B8-8B74-9702BD73B38E}</Project>
+      <Name>DAO%28Data Access Object%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO%28Data Transfer Object%29\DTO%28Data Transfer Object%29.csproj">
+      <Project>{2BAED398-2677-4344-A468-FB7EA509A1AA}</Project>
+      <Name>DTO%28Data Transfer Object%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
