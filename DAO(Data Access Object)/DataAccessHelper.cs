@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -25,7 +26,15 @@ namespace DAO_Data_Access_Object_
                 return val;
             }
         }
-
+        public static bool ExecuteNonQueryWithoutProcedure(string connectionString,string cmdtext)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(cmdtext,conn);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            return reader.Read();
+           
+        }
 
         private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, CommandType cmdType, string cmdText, SqlParameter[] cmdParms)
         {

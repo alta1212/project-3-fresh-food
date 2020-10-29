@@ -13,11 +13,7 @@ namespace BLL_Business_Logic_Layer__
     {
 
         private readonly KHACH_HANG_DAO dao = new KHACH_HANG_DAO();
-        public void dologin(KHACH_HANG KHACH_HANG)
-        {
 
-          
-        }
 
         public void DoRegister(KHACH_HANG KHACH_HANG,string code)
         {
@@ -29,6 +25,11 @@ namespace BLL_Business_Logic_Layer__
         {
             dao.Active(code);
             
+        }
+
+        public bool DoLogin(KHACH_HANG kHACH_HANG)
+        {
+           return dao.Login(kHACH_HANG);
         }
     }
 }

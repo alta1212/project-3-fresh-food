@@ -114,5 +114,9 @@ namespace project_3_fresh_food.Controllers
             SmtpServer.EnableSsl = true;
             SmtpServer.Send(mail);
         }
+        public bool DoLogin(KHACH_HANG KHACH_HANG)
+        {
+           return acc.DoLogin(KHACH_HANG);
+        }
     }
 }

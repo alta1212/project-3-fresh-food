@@ -31,6 +31,12 @@ namespace DAO_Data_Access_Object_
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "activeacc", parm);
         }
 
+        public bool Login(KHACH_HANG kHACH_HANG)
+        {
+            string cmdtext = string.Format("Select * from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'",kHACH_HANG.taikhoan,kHACH_HANG.matkhau);
+            return DataAccessHelper.ExecuteNonQueryWithoutProcedure(DataAccessHelper.ConnectionString,cmdtext);
+        }
+
         public int register(KHACH_HANG kHACH_HANG,string code)
         {
             SqlParameter[] parm = new SqlParameter[]
