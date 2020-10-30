@@ -1,10 +1,8 @@
-﻿var login = angular.module('accountLogin', ['ngCookies']);
-var signup = angular.module('accountSignup', ['ngCookies']);
-var send = angular.module('sendmail', ['ngCookies']);
+﻿var app = angular.module('project', ['ngCookies']);
 
 
 
-login.controller("login", function ($scope, $http,$cookies) {
+app.controller("login", function ($scope, $http,$cookies) {
     $scope.btntext = "Đăng Nhập";//giá trị nút đăng nhập
     $scope.DangNhap = function () {//được gọi khi bấm nút đăng nhập
         $scope.btntext = "Đang Đang Nhập....";
@@ -27,7 +25,7 @@ login.controller("login", function ($scope, $http,$cookies) {
 
 })
 
-signup.controller("SignUp", function ($scope, $http, $cookies) {
+app.controller("SignUp", function ($scope, $http, $cookies) {
     $scope.btntext = "Đăng ký";
     $scope.register = function () {//được gọi khi bấm nút đăng ký
         document.getElementById("btnsubmit").setAttribute("disable", true);
@@ -60,7 +58,7 @@ signup.controller("SignUp", function ($scope, $http, $cookies) {
     }
 
 })
-send.controller("sender", function ($scope, $http, $cookies) {
+app.controller("sender", function ($scope, $http, $cookies) {
     if ($cookies.getObject('taikhoan') == null) {
         //  window.location = "https://localhost:44389/Index/Index";
     }
