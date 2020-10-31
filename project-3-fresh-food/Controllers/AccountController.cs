@@ -4,6 +4,7 @@ using DTO_Data_Transfer_Object_;
 using Mailjet.Client;
 using Mailjet.Client.Resources;
 using Newtonsoft.Json.Linq;
+using project_3_fresh_food.function;
 using System;
 using System.ComponentModel.Design;
 using System.Web.Mvc;
@@ -11,8 +12,11 @@ using System.Web.Mvc;
 
 namespace project_3_fresh_food.Controllers
 {
+    
     public class AccountController : Controller
     {
+        getimage img = new getimage();
+        tool to = new tool();
         IAccountBll acc = new KHACH_HANG_BLL();
         // GET: Account
         // Xử lý các sự kiện liên quan đến tài khoản
@@ -32,9 +36,16 @@ namespace project_3_fresh_food.Controllers
         {
             return View();
         }
-        public ActionResult FillInfo()
+        public ActionResult FillInfo(string tentk,string mk, KHACH_HANG KHACH_HANG)
         {
+            if(tentk!=null)
+            addinfo(tentk,mk, KHACH_HANG);
             return View();
+        }
+        public void addinfo(string tentk,string mk, KHACH_HANG KHACH_HANG)
+        {
+           
+            acc.fillinfo(tentk,mk, insertimg(img), KHACH_HANG);
         }
         public void DoRegister(KHACH_HANG KHACH_HANG)
         {
@@ -49,8 +60,19 @@ namespace project_3_fresh_food.Controllers
         }
         public ActionResult Active(string code)
         {
-            ViewBag.status = acc.active(code);
-            return View();
+            try//nếu khách hàng vào trang active mà k có code xác nhận sẽ điều hướng về trang đăng nhập
+            {
+                ViewBag.status = acc.active(code); 
+                return View();
+            }
+           catch
+            {
+                return View("Login");
+
+
+            }
+
+          
 
         }
         public int ActiveAcc(string code)
@@ -128,7 +150,7 @@ namespace project_3_fresh_food.Controllers
           
         }
      
-        public bool DoLogin(KHACH_HANG KHACH_HANG)
+        public int DoLogin(KHACH_HANG KHACH_HANG)
         {
             return acc.DoLogin(KHACH_HANG);
         }
@@ -138,6 +160,11 @@ namespace project_3_fresh_food.Controllers
             string code = Guid.NewGuid().ToString();
             acc.resend(tk,mail,code);
             RunAsync(mail, code).Wait();
+        }    
+     
+        public string insertimg(getimage img1 )
+        {
+            return to.insertavt(img1);
         }    
     }
 }

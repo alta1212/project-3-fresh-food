@@ -24,47 +24,8 @@ namespace DTO_Data_Transfer_Object_
         public string  tenkhachhang ;
         public string  anhdaidien ;
         public string active;
-        public KHACH_HANG()
-        {
-       
-        }
-        public KHACH_HANG(KHACH_HANG khach)
-        {
-            this.makhachhang =khach.makhachhang;
-            this.taikhoan = khach.taikhoan;
-            this.matkhau = khach.matkhau;
-            this.ngaytao = khach.ngaytao;
-            this.email = khach.email;
-            this.sodienthoai = khach.sodienthoai;
-            this.dateofbirth = khach.dateofbirth;
-            this.sex = khach.sex;
-            this.adress = khach.adress;
-            this.idFacebook = khach.idFacebook;
-            this.mafeedback = khach.mafeedback;
-            this.magiohang = khach.magiohang;
-            this.verificationcode = khach.verificationcode;
-            this.tenkhachhang = khach.tenkhachhang;
-            this.anhdaidien = khach.anhdaidien;
-
-        }
-        public KHACH_HANG(string makhachhang,string taikhoan,string matkhau,DateTime ngaytao,string email,string sodienthoai,DateTime dateofbirth,int sex,string adress,string idFacebook,string mafeedback,string magiohang,string verificationcode,string tenkhachhang,string anhdaidien)
-        {
-            this.makhachhang = makhachhang;
-            this.taikhoan = taikhoan;
-            this.matkhau = matkhau;
-            this.ngaytao = ngaytao;
-            this.email = email;
-            this.sodienthoai = sodienthoai;
-            this.dateofbirth = dateofbirth;
-            this.sex = sex;
-            this.adress = adress;
-            this.idFacebook = idFacebook;
-            this.mafeedback = mafeedback;
-            this.magiohang = magiohang;
-            this.verificationcode = verificationcode;
-            this.tenkhachhang = tenkhachhang;
-            this.anhdaidien = anhdaidien;
-        }
+        
+      
         public string  MaKhachhang {
             get { return makhachhang; }
             set { makhachhang = value; }

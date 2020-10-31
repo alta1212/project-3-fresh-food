@@ -1,6 +1,7 @@
 ﻿using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -26,14 +27,19 @@ namespace DAO_Data_Access_Object_
                 return val;
             }
         }
-        public static bool ExecuteNonQueryWithoutProcedure(string connectionString,string cmdtext)
+        public static int dangnhap(string connectionString,string cmdtext)
         {
+            int back=4;
             SqlConnection conn = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(cmdtext,conn);
             conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            return reader.Read();
-           
+            SqlDataAdapter cmd = new SqlDataAdapter(cmdtext, connectionString);
+            DataTable dt = new DataTable();
+            cmd.Fill(dt);
+            foreach (DataRow dr in dt.Rows)
+            {
+                 back = int.Parse(dr[0].ToString());//trả về trạng thái tài khoản
+            }
+            return back;
         }
 
         private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, CommandType cmdType, string cmdText, SqlParameter[] cmdParms)

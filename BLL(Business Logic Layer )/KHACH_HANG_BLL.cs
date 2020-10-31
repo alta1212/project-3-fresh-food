@@ -27,7 +27,7 @@ namespace BLL_Business_Logic_Layer__
             
         }
 
-        public bool DoLogin(KHACH_HANG kHACH_HANG)
+        public int DoLogin(KHACH_HANG kHACH_HANG)
         {
            return dao.Login(kHACH_HANG);
         }
@@ -35,6 +35,11 @@ namespace BLL_Business_Logic_Layer__
         public void resend(string tk,string mail, string code)
         {
              dao.resend(tk,mail,code);
+        }
+
+        public void fillinfo(string tk, string mk,string img,KHACH_HANG KHACH_HANG)
+        {
+           dao.fillinfo(tk,mk,img,KHACH_HANG);
         }
     }
 }

@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "FillInfo";
+    Layout = "~/Views/Shared/MainLayOut.cshtml";
+}
+@section Scripts{
+
+    <script src="~/Scripts/Controllers/account.js"></script>
+    <script src="~/assets/info.js"></script>
+    <link href="~/assets/info.css" rel="stylesheet" />
+}
+<div ng-controller="fillinfo" class="main-content">
+
+    <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(https://tk16food.com/assets/img/ig/3.jpg); background-size: cover; background-position: center top;">
+        <!-- Mask -->
+        <span class="mask bg-gradient-default opacity-8"></span>
+        <!-- Header container -->
+        <div class="container-fluid d-flex align-items-center">
+            <div class="row">
+                <div class="col-lg-7 col-md-10">
+                    <h1 class="display-2 text-white">Hello {{username}}</h1>
+                    <p class="text-white mt-0 mb-5">Vui lòng hoàn tất thông tin của bạn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+        <div class="row">
+            <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                <div class="card-profile shadow">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 order-lg-2">
+                            <div class="card-profile-image">
+                                <a href="#">
+                                    <img src="https://picsum.photos/360/360" id="avt" class="rounded-circle">
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                    <span class="btn btn-primary btn-file">
+                        <span class="fileupload-new">Select file</span>
+                        <input id="file" name="anh" type="file" />
+                    </span>
+                </div>
+            </div>
+            <div class="col-xl-8 order-xl-1">
+                <div class="card bg-secondary shadow">
+                    <div class="card-body">
+                        <form>
+                            <h6 class="heading-small text-muted mb-4">Thông tin tài khoản</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-username">Username</label>
+                                            <input required type="text" id="input-username" class="form-control form-control-alternative" placeholder="{{username}}" readonly>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label"  for="input-first-name">Họ và tên</label>
+                                            <input required type="text" id="ten" class="form-control form-control-alternative" placeholder="First name">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            <!-- Address -->
+
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-address">Địa chỉ</label>
+                                            <input required id="address" class="form-control form-control-alternative" placeholder="Home Address" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-city">Số điện thoại</label>
+                                            <input  type="text" id="sdt" class="form-control form-control-alternative" placeholder="Số điện thoại">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="select">
+                                            <select  name="slct" id="sex">
+                                                <option value="1">Nam</option>
+                                                <option value="2">Nữ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="date">
+                                            <input required id="date" type="date" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            <!-- Description -->
+                            
+                            <button type="submit"  ng-click="fill()" class="btn btn-info">Lưu </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

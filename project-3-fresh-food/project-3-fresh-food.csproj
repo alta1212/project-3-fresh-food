@@ -177,6 +177,8 @@
     <Content Include="assets\img\products\7.png" />
     <Content Include="assets\img\products\8.png" />
     <Content Include="assets\img\products\9.png" />
+    <Content Include="assets\info.css" />
+    <Content Include="assets\info.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\plugins\bootstrap.min.js" />
     <Content Include="assets\js\plugins\imagesloaded.min.js" />
@@ -204,6 +206,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="function\tool.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -252,6 +255,7 @@
     <Content Include="Views\Shared\_Account.cshtml" />
     <Content Include="Views\Account\sent.cshtml" />
     <Content Include="Views\Account\Active.cshtml" />
+    <Content Include="Views\Account\FillInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
