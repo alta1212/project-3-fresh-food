@@ -19,7 +19,7 @@ namespace DAO_Data_Access_Object_
         private const string parm_Active= "@active";
         private const string parm_VerificationCode= "@VerificationCode";
 
-        public void Active(string guild)
+        public int Active(string guild)
         {
 
             SqlParameter[] parm = new SqlParameter[]
@@ -28,7 +28,22 @@ namespace DAO_Data_Access_Object_
             };
             parm[0].Value = guild;
 
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "activeacc", parm);
+           return DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "activeacc", parm);
+        }
+
+        public void resend(string tk,string mail, string code)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+            {
+                new SqlParameter(parm_TaiKhoan,SqlDbType.NVarChar,50),
+                new SqlParameter(parm_Email,SqlDbType.NVarChar,50),
+                new SqlParameter(parm_VerificationCode,SqlDbType.NVarChar,50),
+            };
+            parm[0].Value = tk;
+            parm[1].Value = mail;
+            parm[2].Value = code;
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "resendmail", parm);
+
         }
 
         public bool Login(KHACH_HANG kHACH_HANG)

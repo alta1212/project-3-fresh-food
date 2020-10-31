@@ -21,15 +21,20 @@ namespace BLL_Business_Logic_Layer__
         }
 
 
-        public void active(string code)
+        public int active(string code)
         {
-            dao.Active(code);
+          return  dao.Active(code);
             
         }
 
         public bool DoLogin(KHACH_HANG kHACH_HANG)
         {
            return dao.Login(kHACH_HANG);
+        }
+
+        public void resend(string tk,string mail, string code)
+        {
+             dao.resend(tk,mail,code);
         }
     }
 }

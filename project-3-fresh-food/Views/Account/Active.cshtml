@@ -3,28 +3,34 @@
     ViewBag.Title = "Active";
     Layout = "~/Views/Shared/MainLayOut.cshtml";
 }
+@section Scripts{
+    <script src="~/Scripts/Controllers/account.js"></script>
+}
+<div ng-controller="active">
+    <div ng-hide="success" class="section">
+        <div class="container">
+            <div class="andro_404-container">
+                <svg class="ft-green-tick" xmlns="http://www.w3.org/2000/svg" height="100" width="100" viewBox="0 0 48 48" aria-hidden="true">
+                    <circle class="circle" fill="#5bb543" cx="24" cy="24" r="22" />
+                    <path class="tick" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M14 27l5.917 4.917L34 17" />
+                </svg>
+                <h1>Xác minh thành công</h1>
+                <p>Cảm ơn bạn đã tin tưởng chúng tối</p>
+                <a href="/Account/FillInfo" class="andro_btn-custom light">Tiếp tục </a>
+            </div>
+        </div>
+    </div>
+    <div ng-init="init('@ViewBag.status')"></div>@*trả về giá trị 0-1 để kiểm tra có tk nào đc cập nhật k*@
+    <div ng-hide="fail" class="section">
+        <div class="container">
+            <div class="andro_404-container">
 
-<div style="display:none" class="section">
-    <div class="container">
-        <div class="andro_404-container">
-            <svg class="ft-green-tick" xmlns="http://www.w3.org/2000/svg" height="100" width="100" viewBox="0 0 48 48" aria-hidden="true">
-                <circle class="circle" fill="#5bb543" cx="24" cy="24" r="22" />
-                <path class="tick" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M14 27l5.917 4.917L34 17" />
-            </svg>
-            <h1>Xác minh thành công</h1>
-            <p>Cảm ơn bạn đã tin tưởng chúng tối</p>
-            <a href="/Account/FillInfo" class="andro_btn-custom light">Tiếp tục </a>
+                <object style="max-width:10%" data="~/assets/img/cancel.svg"></object>
+                <h1>Xác minh thất bại</h1>
+                <p>Liên kết xác minh đã được sử dụng hoặc không tồn lại vui lòng kiểm tra lại</p>
+                <a href="index" class="andro_btn-custom light">Go To Home Page</a>
+            </div>
         </div>
     </div>
 </div>
-<div class="section">
-    <div class="container">
-        <div class="andro_404-container">
 
-            <object style="max-width:10%" data="~/assets/img/cancel.svg"></object>
-            <h1>Xác minh thất bại</h1>
-            <p>Liên kết xác minh đã được sử dụng hoặc không tồn lại vui lòng kiểm tra lại</p>
-            <a href="index" class="andro_btn-custom light">Go To Home Page</a>
-        </div>
-    </div>
-</div>
