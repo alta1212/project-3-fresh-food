@@ -3,34 +3,6 @@
 
 
 app.controller("login", function ($scope, $http, $cookies) {
-    //if ($cookies.get('taikhoan') != "" && $cookies.get('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
-
-    //    var data = {
-
-    //        "KHACH_HANG.taikhoan": $cookies.get('taikhoan'),
-
-    //        "KHACH_HANG.matkhau": $cookies.get('matkhau'),
-
-
-    //    };
-    //    console.log(JSON.stringify(data));
-    //    $http({
-    //        method: "POST", //method gửi dữ liệu
-    //        url: '/Account/DoLogin', //gọi hàm controller/account/Login
-    //        data: JSON.stringify(data)
-    //    }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-    //        alert(bool.data.split(",")[0])
-    //        if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về
-    //            window.location = "https://localhost:44389/Index/Index";
-    //        }
-    //        else if (bool.data.split(",")[0] == "(1") {
-    //            window.location = "https://localhost:44389/Account/FillInfo"
-    //        }
-          
-
-    //    });
-
-    //}
 
     $scope.btntext = "Đăng Nhập"; //giá trị nút đăng nhập
     $scope.DangNhap = function () { //được gọi khi bấm nút đăng nhập
@@ -61,31 +33,6 @@ app.controller("login", function ($scope, $http, $cookies) {
 })
 
 app.controller("SignUp", function ($scope, $http, $cookies) {
-
-    if ($cookies.get('taikhoan') != "" && $cookies.get('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
-
-        var data = {
-
-            "KHACH_HANG.taikhoan": $cookies.get('taikhoan'),
-
-            "KHACH_HANG.matkhau": $cookies.get('matkhau'),
-
-
-        };
-        console.log(JSON.stringify(data));
-        $http({
-            method: "POST", //method gửi dữ liệu
-            url: '/Account/DoLogin', //gọi hàm controller/account/Login
-            data: JSON.stringify(data) //dữ liệu truyền vào user là tên biến đặt bên input
-        }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-            console.log(bool.data.split(",")[0])
-            if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về
-                window.location = "https://localhost:44389/Index/Index";
-            }
-
-        });
-
-    }
 
     $scope.tk = $scope.mail = true; //ẩn thông tin trung mail,tk sau này làm hamgf check
     $scope.btntext = "Đăng ký";
@@ -240,16 +187,16 @@ app.controller("fillinfo", function ($scope, $http, $cookies) {
 })
 
 app.controller("acccontroller", function ($scope, $http, $cookies) {
-    $scope.login = true;
+    $scope.lin = true;
    
-    //$scope.logout = function () {
+    $scope.logout = function () {
 
-    //    var cookies = $cookies.getAll();
-    //    angular.forEach(cookies, function (k) {
-    //        $cookies.remove(k);
-    //    });
-    //}
-    //if ($cookies.get('taikhoan') != "" && $cookies.get('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
+        var cookies = $cookies.getAll();
+        angular.forEach(cookies, function (k) {
+            $cookies.remove(k);
+        });
+    }
+    if ($cookies.get('taikhoan') != "" && $cookies.get('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
 
         var data = {
 
@@ -267,21 +214,21 @@ app.controller("acccontroller", function ($scope, $http, $cookies) {
         }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
             alert(bool.data.split(",")[0]+" l");
             if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về
-                $scope.login = true;
-                $scope.out = false;
+                $scope.lin = false;
+                $scope.out = true;
                 $scope.ten = bool.data.split(",")[1].slice(0, -1)
                 window.location = "https://localhost:44389/Index/Index";
             }
             else {
-                $scope.login = false;
-                $scope.out = true;
+                $scope.lin = true;
+                $scope.out = false;
             }
            
 
 
         });
 
-    //}
+    }
         
     
 })
