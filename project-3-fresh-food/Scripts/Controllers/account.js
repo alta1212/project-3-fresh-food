@@ -3,34 +3,34 @@
 
 
 app.controller("login", function ($scope, $http, $cookies) {
-    if ($cookies.get('taikhoan') != "" && $cookies.get('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
+    //if ($cookies.get('taikhoan') != "" && $cookies.get('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
 
-        var data = {
+    //    var data = {
 
-            "KHACH_HANG.taikhoan": $cookies.get('taikhoan'),
+    //        "KHACH_HANG.taikhoan": $cookies.get('taikhoan'),
 
-            "KHACH_HANG.matkhau": $cookies.get('matkhau'),
+    //        "KHACH_HANG.matkhau": $cookies.get('matkhau'),
 
 
-        };
-        console.log(JSON.stringify(data));
-        $http({
-            method: "POST", //method gửi dữ liệu
-            url: '/Account/DoLogin', //gọi hàm controller/account/Login
-            data: JSON.stringify(data)
-        }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-            console.log(bool.data)
-            if (bool.data == "2") { //kiểm tra dữ liệu đăng nhập trả về
-                window.location = "https://localhost:44389/Index/Index";
-            }
-            else if (bool.data == "1") {
-                window.location = "https://localhost:44389/Account/FillInfo"
-            }
+    //    };
+    //    console.log(JSON.stringify(data));
+    //    $http({
+    //        method: "POST", //method gửi dữ liệu
+    //        url: '/Account/DoLogin', //gọi hàm controller/account/Login
+    //        data: JSON.stringify(data)
+    //    }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
+    //        alert(bool.data.split(",")[0])
+    //        if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về
+    //            window.location = "https://localhost:44389/Index/Index";
+    //        }
+    //        else if (bool.data.split(",")[0] == "(1") {
+    //            window.location = "https://localhost:44389/Account/FillInfo"
+    //        }
           
 
-        });
+    //    });
 
-    }
+    //}
 
     $scope.btntext = "Đăng Nhập"; //giá trị nút đăng nhập
     $scope.DangNhap = function () { //được gọi khi bấm nút đăng nhập
@@ -40,14 +40,14 @@ app.controller("login", function ($scope, $http, $cookies) {
             url: '/Account/DoLogin', //gọi hàm controller/account/Login
             data: $scope.KHACH_HANG //dữ liệu truyền vào user là tên biến đặt bên input
         }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-            console.log(bool.data)
-            if (bool.data == "2") { //kiểm tra dữ liệu đăng nhập trả về nếu là 2 thì đã hoàn tát đăng ký
+            console.log(bool.data.split(",")[0])
+            if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về nếu là 2 thì đã hoàn tát đăng ký
                 $scope.btntext = "Thành công!";
                 $cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
                 $cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
 
                 window.location = "https://localhost:44389/Index/Index";
-            } else if (bool.data == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
+            } else if (bool.data.split(",")[0] == "(1") { //nếu là 1 thì chưa điền thông tin cá nhận
                 $scope.btntext = "Thành công!";
                 $cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
                 $cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
@@ -78,8 +78,8 @@ app.controller("SignUp", function ($scope, $http, $cookies) {
             url: '/Account/DoLogin', //gọi hàm controller/account/Login
             data: JSON.stringify(data) //dữ liệu truyền vào user là tên biến đặt bên input
         }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-            console.log(bool.data)
-            if (bool.data == "2") { //kiểm tra dữ liệu đăng nhập trả về
+            console.log(bool.data.split(",")[0])
+            if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về
                 window.location = "https://localhost:44389/Index/Index";
             }
 
@@ -146,6 +146,12 @@ app.controller("sender", function ($scope, $http, $cookies) {
             })
             console.log("đã gửi")
         }
+        $scope.clear = function () {
+            var cookies = $cookies.getAll();
+            angular.forEach(cookies, function (k) {
+                $cookies.remove(k);
+            });
+        }
     }
 })
 
@@ -184,10 +190,10 @@ app.controller("fillinfo", function ($scope, $http, $cookies) {
         url: '/Account/DoLogin', //gọi hàm controller/account/Login
         data: JSON.stringify(data)
     }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-        console.log(bool.data)
-        if (bool.data == "2") { //nếu là 2 thì tk đã hoàn tất chuyển về trang chủ
+        console.log(bool.data.split(",")[0])
+        if (bool.data.split(",")[0] == "(2") { //nếu là 2 thì tk đã hoàn tất chuyển về trang chủ
             window.location = "https://localhost:44389/Index/Index";
-        } else if (bool.data == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
+        } else if (bool.data.split(",")[0] == "(1") { //nếu là 1 thì chưa điền thông tin cá nhận
             $scope.username = $cookies.get('taikhoan');
             console.log("đúng tài khoản này rồi chưa điền thông tin");
             $scope.fill = function () {
@@ -220,11 +226,10 @@ app.controller("fillinfo", function ($scope, $http, $cookies) {
             }
 
         } else {
-            angular.forEach($cookies, function (cookie, key) {
-                if (key.indexOf('NAV-') > -1) {
-                    $window.sessionStorage.setItem(key, cookie);
-                    delete $cookies[key];
-                }
+
+            var cookies = $cookies.getAll();
+            angular.forEach(cookies, function (k) {
+                $cookies.remove(k);
             });
             window.location = "https://localhost:44389/Index/Index";
            
@@ -232,4 +237,51 @@ app.controller("fillinfo", function ($scope, $http, $cookies) {
 
         }
     })
+})
+
+app.controller("acccontroller", function ($scope, $http, $cookies) {
+    $scope.login = true;
+   
+    //$scope.logout = function () {
+
+    //    var cookies = $cookies.getAll();
+    //    angular.forEach(cookies, function (k) {
+    //        $cookies.remove(k);
+    //    });
+    //}
+    //if ($cookies.get('taikhoan') != "" && $cookies.get('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
+
+        var data = {
+
+            "KHACH_HANG.taikhoan": $cookies.get('taikhoan'),
+
+            "KHACH_HANG.matkhau": $cookies.get('matkhau'),
+
+
+        };
+        console.log(JSON.stringify(data));
+        $http({
+            method: "POST", //method gửi dữ liệu
+            url: '/Account/DoLogin', //gọi hàm controller/account/Login
+            data: JSON.stringify(data)
+        }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
+            alert(bool.data.split(",")[0]+" l");
+            if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về
+                $scope.login = true;
+                $scope.out = false;
+                $scope.ten = bool.data.split(",")[1].slice(0, -1)
+                window.location = "https://localhost:44389/Index/Index";
+            }
+            else {
+                $scope.login = false;
+                $scope.out = true;
+            }
+           
+
+
+        });
+
+    //}
+        
+    
 })

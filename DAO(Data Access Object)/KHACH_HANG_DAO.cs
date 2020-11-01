@@ -71,9 +71,9 @@ namespace DAO_Data_Access_Object_
 
         }
 
-        public int Login(KHACH_HANG kHACH_HANG)
+        public (int, string) Login(KHACH_HANG kHACH_HANG)
         {
-            string cmdtext = string.Format("Select Active from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", kHACH_HANG.taikhoan, kHACH_HANG.matkhau);
+            string cmdtext = string.Format("Select tenkhachhang,active from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", kHACH_HANG.taikhoan, kHACH_HANG.matkhau);
             return DataAccessHelper.dangnhap(DataAccessHelper.ConnectionString, cmdtext);
         }
 

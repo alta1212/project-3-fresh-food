@@ -12,7 +12,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
     {
        void DoRegister(KHACH_HANG KHACH_HANG,string code);
        int active(string code);
-       int DoLogin(KHACH_HANG kHACH_HANG);
+       (int, string) DoLogin(KHACH_HANG kHACH_HANG);
        void resend(string tk,string mail,string code);
        void fillinfo(string tk,string mk,string img,KHACH_HANG KHACH_HANG);
     }

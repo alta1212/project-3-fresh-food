@@ -150,7 +150,7 @@ namespace project_3_fresh_food.Controllers
           
         }
      
-        public int DoLogin(KHACH_HANG KHACH_HANG)
+        public (int, string) DoLogin(KHACH_HANG KHACH_HANG)
         {
             return acc.DoLogin(KHACH_HANG);
         }

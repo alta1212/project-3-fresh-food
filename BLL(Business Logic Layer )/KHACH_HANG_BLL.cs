@@ -27,7 +27,7 @@ namespace BLL_Business_Logic_Layer__
             
         }
 
-        public int DoLogin(KHACH_HANG kHACH_HANG)
+        public (int, string) DoLogin(KHACH_HANG kHACH_HANG)
         {
            return dao.Login(kHACH_HANG);
         }
