@@ -92,6 +92,7 @@ namespace project_3_fresh_food.Controllers
      
         public string insertimg(getimage img1 )
         {
+            
             return to.insertavt(img1);
         }    
     }
