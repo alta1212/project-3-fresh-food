@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\css.css" />
     <Content Include="assets\css\plugins\animate.min.css" />
     <Content Include="assets\css\plugins\bootstrap.min.css" />
     <Content Include="assets\css\plugins\ion.rangeSlider.min.css" />
@@ -195,6 +196,7 @@
     <Content Include="assets\js\plugins\waypoint.js" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-cookies.js" />
+    <Content Include="Scripts\angular-imgur-upload.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\Controllers\account.js" />
     <Content Include="Web.config" />

@@ -1,36 +1,7 @@
-﻿var app = angular.module('project', ['ngCookies']);
+﻿var app = angular.module('project', ['imgurUpload']);
 
 
-
-app.controller("login", function ($scope, $http, $cookies) {
-    if ($cookies.get('taikhoan') != "" && $cookies.get('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
-
-        var data = {
-
-            "KHACH_HANG.taikhoan": $cookies.get('taikhoan'),
-
-            "KHACH_HANG.matkhau": $cookies.get('matkhau'),
-
-
-        };
-        console.log(JSON.stringify(data));
-        $http({
-            method: "POST", //method gửi dữ liệu
-            url: '/Account/DoLogin', //gọi hàm controller/account/Login
-            data: JSON.stringify(data)
-        }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-            console.log(bool.data)
-            if (bool.data == "2") { //kiểm tra dữ liệu đăng nhập trả về
-                window.location = "https://localhost:44389/Index/Index";
-            }
-            else if (bool.data == "1") {
-                window.location = "https://localhost:44389/Account/FillInfo"
-            }
-          
-
-        });
-
-    }
+app.controller("login", function ($scope, $http) {
 
     $scope.btntext = "Đăng Nhập"; //giá trị nút đăng nhập
     $scope.DangNhap = function () { //được gọi khi bấm nút đăng nhập
@@ -40,17 +11,20 @@ app.controller("login", function ($scope, $http, $cookies) {
             url: '/Account/DoLogin', //gọi hàm controller/account/Login
             data: $scope.KHACH_HANG //dữ liệu truyền vào user là tên biến đặt bên input
         }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-            console.log(bool.data)
-            if (bool.data == "2") { //kiểm tra dữ liệu đăng nhập trả về nếu là 2 thì đã hoàn tát đăng ký
+            console.log(bool.data.split(",")[0])
+            if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về nếu là 2 thì đã hoàn tát đăng ký
                 $scope.btntext = "Thành công!";
-                $cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
-                $cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
-
+                //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
+                //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
+                localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
+                localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
                 window.location = "https://localhost:44389/Index/Index";
-            } else if (bool.data == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
+            } else if (bool.data.split(",")[0] == "(1") { //nếu là 1 thì chưa điền thông tin cá nhận
                 $scope.btntext = "Thành công!";
-                $cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
-                $cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
+                //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
+                //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
+                localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
+                localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
 
                 window.location = "https://localhost:44389/Account/FillInfo";
             } else //thông tin đăng nhập k đúng
@@ -60,32 +34,7 @@ app.controller("login", function ($scope, $http, $cookies) {
 
 })
 
-app.controller("SignUp", function ($scope, $http, $cookies) {
-
-    if ($cookies.get('taikhoan') != "" && $cookies.get('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
-
-        var data = {
-
-            "KHACH_HANG.taikhoan": $cookies.get('taikhoan'),
-
-            "KHACH_HANG.matkhau": $cookies.get('matkhau'),
-
-
-        };
-        console.log(JSON.stringify(data));
-        $http({
-            method: "POST", //method gửi dữ liệu
-            url: '/Account/DoLogin', //gọi hàm controller/account/Login
-            data: JSON.stringify(data) //dữ liệu truyền vào user là tên biến đặt bên input
-        }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-            console.log(bool.data)
-            if (bool.data == "2") { //kiểm tra dữ liệu đăng nhập trả về
-                window.location = "https://localhost:44389/Index/Index";
-            }
-
-        });
-
-    }
+app.controller("SignUp", function ($scope, $http) {
 
     $scope.tk = $scope.mail = true; //ẩn thông tin trung mail,tk sau này làm hamgf check
     $scope.btntext = "Đăng ký";
@@ -111,10 +60,10 @@ app.controller("SignUp", function ($scope, $http, $cookies) {
                 alert("ed");
             });
 
-            $cookies.put('taikhoan', $scope.KHACH_HANG.TaiKhoan); //lưu tên tài khoản
-            $cookies.put('matkhau', $scope.KHACH_HANG.MatKhau); //lưu mật khẩu
-            $cookies.put('mail', $scope.KHACH_HANG.Email);
-            $cookies.put('reg', "1"); //kiểm tra trạng thái reg
+            localStorage.setItem('taikhoan', $scope.KHACH_HANG.TaiKhoan); //lưu tên tài khoản
+            localStorage.setItem('matkhau', $scope.KHACH_HANG.MatKhau); //lưu mật khẩu
+            localStorage.setItem('mail', $scope.KHACH_HANG.Email);
+            localStorage.setItem('reg', "1"); //kiểm tra trạng thái reg
             window.location = "https://localhost:44389/Account/sent"; //điều hướng về trang send
 
 
@@ -124,19 +73,14 @@ app.controller("SignUp", function ($scope, $http, $cookies) {
 
 })
 
-app.controller("sender", function ($scope, $http, $cookies) {
-    if ($cookies.getObject('reg') == null) { //xoá tất cả cookie
-        angular.forEach($cookies, function (cookie, key) {
-            if (key.indexOf('NAV-') > -1) {
-                $window.sessionStorage.setItem(key, cookie);
-                delete $cookies[key];
-            }
-        });
+app.controller("sender", function ($scope, $http) {
+    if (localStorage.getItem('reg') == null) { //xoá tất cả cookie
+        localStorage.clear();
         window.location = "https://localhost:44389/Index/Index";
     } else {
         var data = {
-            tk: $cookies.get('taikhoan'),
-            mail: $cookies.get('mail'),
+            tk: localStorage.getItem('taikhoan'),
+            mail: localStorage.getItem('mail'),
         };
         $scope.resend = function () {
             $http({
@@ -146,13 +90,14 @@ app.controller("sender", function ($scope, $http, $cookies) {
             })
             console.log("đã gửi")
         }
+
     }
 })
 
-app.controller("active", function ($scope, $http, $cookies) {
+app.controller("active", function ($scope, $http) {
     $scope.success = true;
     $scope.go = function () {
-        window.location = "https://localhost:44389/Account/FillInfo?tentk=" + $cookies.get('taikhoan')
+        window.location = "https://tk16food.com/Account/FillInfo"
     }
     $scope.init = function (status) {
         if (status == "1") {
@@ -166,16 +111,16 @@ app.controller("active", function ($scope, $http, $cookies) {
     }
 })
 
-app.controller("fillinfo", function ($scope, $http, $cookies) {
+app.controller("fillinfo", function ($scope, $http, imgurUpload) {
 
 
 
 
     var data = {
 
-        "KHACH_HANG.taikhoan": $cookies.get('taikhoan'),
+        "KHACH_HANG.taikhoan": localStorage.getItem('taikhoan'),
 
-        "KHACH_HANG.matkhau": $cookies.get('matkhau'),
+        "KHACH_HANG.matkhau": localStorage.getItem('matkhau'),
 
 
     };
@@ -184,52 +129,112 @@ app.controller("fillinfo", function ($scope, $http, $cookies) {
         url: '/Account/DoLogin', //gọi hàm controller/account/Login
         data: JSON.stringify(data)
     }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-        console.log(bool.data)
-        if (bool.data == "2") { //nếu là 2 thì tk đã hoàn tất chuyển về trang chủ
+        console.log(bool.data.split(",")[0])
+        if (bool.data.split(",")[0] == "(2") { //nếu là 2 thì tk đã hoàn tất chuyển về trang chủ
             window.location = "https://localhost:44389/Index/Index";
-        } else if (bool.data == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
-            $scope.username = $cookies.get('taikhoan');
+        } else if (bool.data.split(",")[0] == "(1") { //nếu là 1 thì chưa điền thông tin cá nhận
+            $scope.username = localStorage.getItem('taikhoan');
             console.log("đúng tài khoản này rồi chưa điền thông tin");
+
+            $scope.link = "ahi";
+
             $scope.fill = function () {
+                if (document.getElementById('file').files.length == 0) {
+                    $scope.noimage = {
+                        "color": "red",
+                        "display": "block"
+                    }
+                }
+
+                var image = document.getElementById('file').files[0];
+
+                var clientId = "5c31a53dda3c8e0";
+                imgurUpload.setClientId(clientId);
+                imgurUpload
+                    .upload(image)
+                    .then(function (a) {
+                        $scope.link = a.data.link
+   
+
+
                 var info = //lưu thông tin khách vào object
                 {
 
-                    tentk: $cookies.get('taikhoan'),
-                    mk: $cookies.get('matkhau'),
+                    tentk: localStorage.getItem('taikhoan'),
+                    mk: localStorage.getItem('matkhau'),
                     "KHACH_HANG.SoDienThoai": document.getElementById('sdt').value,
                     "KHACH_HANG.DateOfBirth": document.getElementById('date').value,
                     "KHACH_HANG.Sex": document.getElementById('sex').value,
                     "KHACH_HANG.TenKhachHang": document.getElementById('ten').value,
-                    "getimage.anh": document.getElementById('avt').value,
+                    "KHACH_HANG.AnhDaiDien": $scope.link,
                     "KHACH_HANG.Adress": document.getElementById('address').value,
                 }
-                alert(document.getElementById('avt').value);
+                        console.log(info)
+                     
                 $http({
-                    method: 'POST',
-                    url: '/Account/insertimg',
-                    data: info["getimage.anh"]
-                })
-                $http({
-                    method: 'POST',
-                    url: '/Account/addinfo',//cập nhật i4 khách
+                    method: 'post',
+                    url: '/account/addinfo', //cập nhật i4 khách
                     data: info
                 })
-               
-                window.location = "https://localhost:44389/Index/Index";
 
+                window.location = "https://localhost:44389/Index/Index";
+})
             }
 
         } else {
-            angular.forEach($cookies, function (cookie, key) {
-                if (key.indexOf('NAV-') > -1) {
-                    $window.sessionStorage.setItem(key, cookie);
-                    delete $cookies[key];
-                }
-            });
+
+            localStorage.clear();
             window.location = "https://localhost:44389/Index/Index";
-           
+
 
 
         }
     })
+})
+
+app.controller("acccontroller", function ($scope, $http) {
+    $scope.lin = true;
+
+    $scope.logout = function () {
+
+        localStorage.clear();
+        window.location = "https://localhost:44389/Account/login";
+    }
+    if (localStorage.getItem('taikhoan') != "" && localStorage.getItem('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
+
+        var data = {
+
+            "KHACH_HANG.taikhoan": localStorage.getItem('taikhoan'),
+
+            "KHACH_HANG.matkhau": localStorage.getItem('matkhau'),
+
+
+        };
+        console.log(JSON.stringify(data));
+        $http({
+            method: "POST", //method gửi dữ liệu
+            url: '/Account/DoLogin', //gọi hàm controller/account/Login
+            data: JSON.stringify(data)
+        }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
+            if (bool.data.split(",")[0] == "(1" && window.location.href != "https://localhost:44389/Account/FillInfo") {
+                $scope.lin = false;
+                $scope.out = true;
+                window.location = "https://localhost:44389/Account/FillInfo";
+            } else if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về
+                $scope.lin = false;
+                $scope.out = true;
+                $scope.ten = bool.data.split(",")[1].slice(0, -1)
+
+            } else {
+                $scope.lin = true;
+                $scope.out = false;
+            }
+
+
+
+        });
+
+    }
+
+
 })

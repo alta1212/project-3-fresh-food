@@ -13,6 +13,7 @@ namespace DAO_Data_Access_Object_
 {
     public class DataAccessHelper
     {//chuỗi kết nối
+
         public static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
         public static int ExecuteNonQuery(string connectionString, CommandType cmdType, string cmdText, params SqlParameter[] commandParameters)
         {
@@ -27,9 +28,10 @@ namespace DAO_Data_Access_Object_
                 return val;
             }
         }
-        public static int dangnhap(string connectionString,string cmdtext)
+        public static (int,string) dangnhap(string connectionString,string cmdtext)
         {
             int back=4;
+            string name="";
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlDataAdapter cmd = new SqlDataAdapter(cmdtext, connectionString);
@@ -37,9 +39,13 @@ namespace DAO_Data_Access_Object_
             cmd.Fill(dt);
             foreach (DataRow dr in dt.Rows)
             {
-                 back = int.Parse(dr[0].ToString());//trả về trạng thái tài khoản
+                 name = dr[0].ToString();
+                 back = int.Parse(dr[1].ToString());//trả về trạng thái tài khoản
+
             }
-            return back;
+          
+
+            return (back,name);
         }
 
         private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, CommandType cmdType, string cmdText, SqlParameter[] cmdParms)

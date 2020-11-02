@@ -32,7 +32,7 @@ namespace DAO_Data_Access_Object_
             return DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "activeacc", parm);
         }
 
-        public void fillinfo(string tk, string mk,string img, KHACH_HANG kHACH_HANG)
+        public void fillinfo(string tk, string mk, KHACH_HANG kHACH_HANG)
         {
             SqlParameter[] parm = new SqlParameter[]
             {
@@ -52,7 +52,7 @@ namespace DAO_Data_Access_Object_
             parm[4].Value = kHACH_HANG.sodienthoai;
             parm[5].Value = kHACH_HANG.Sex;
             parm[6].Value = kHACH_HANG.dateofbirth;
-            parm[7].Value = img;
+            parm[7].Value = kHACH_HANG.anhdaidien;
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "fillinfo", parm);
         }
 
@@ -71,9 +71,9 @@ namespace DAO_Data_Access_Object_
 
         }
 
-        public int Login(KHACH_HANG kHACH_HANG)
+        public (int, string) Login(KHACH_HANG kHACH_HANG)
         {
-            string cmdtext = string.Format("Select Active from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", kHACH_HANG.taikhoan, kHACH_HANG.matkhau);
+            string cmdtext = string.Format("Select tenkhachhang,active from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", kHACH_HANG.taikhoan, kHACH_HANG.matkhau);
             return DataAccessHelper.dangnhap(DataAccessHelper.ConnectionString, cmdtext);
         }
 

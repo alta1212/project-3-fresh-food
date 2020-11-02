@@ -1,0 +1,39 @@
+﻿#noimage{
+    display:none;
+}
+#dropuser .user-dropdown-trigger {
+    cursor: pointer;
+    display: inline-block;
+}
+
+    #dropuser .user-dropdown-trigger:hover .user-dropdown-menu {
+        display: block;
+    }
+
+    #dropuser .user-dropdown-trigger img {
+        border-radius: 50%;
+        vertical-align: middle;
+        margin-left: 5px;
+    }
+#dropuser .user-dropdown-trigger {
+    cursor: pointer;
+    display: inline-block;
+}
+
+#dropuser .user-dropdown-trigger:hover .user-dropdown-menu {
+    display: block;
+}
+
+    #dropuser .user-dropdown-trigger img {
+        border-radius: 50%;
+        vertical-align: middle;
+        margin-left: 5px;
+    }
+
+#dropuser .user-dropdown-menu {
+    display: none;
+    padding: 0;
+    list-style-type: none;
+    padding: 0;
+    border-radius: 3px;
+}
