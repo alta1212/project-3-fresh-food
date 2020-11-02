@@ -41,9 +41,9 @@ namespace BLL_Business_Logic_Layer__
              dao.resend(tk,mail,code);
         }
 
-        public void fillinfo(string tk, string mk,string img,KHACH_HANG KHACH_HANG)
+        public void fillinfo(string tk, string mk,KHACH_HANG KHACH_HANG)
         {
-           dao.fillinfo(tk,mk,img,KHACH_HANG);
+           dao.fillinfo(tk,mk,KHACH_HANG);
         }
     }
 }

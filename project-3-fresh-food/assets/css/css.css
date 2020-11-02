@@ -1,4 +1,7 @@
-﻿#dropuser .user-dropdown-trigger {
+﻿#noimage{
+    display:none;
+}
+#dropuser .user-dropdown-trigger {
     cursor: pointer;
     display: inline-block;
 }

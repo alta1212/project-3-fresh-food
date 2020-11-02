@@ -12,7 +12,7 @@ namespace project_3_fresh_food.Controllers
 
     public class AccountController : Controller
     {
-        getimage img = new getimage();
+      
         tool to = new tool();
         IAccountBll acc = new KHACH_HANG_BLL();
         // GET: Account
@@ -42,7 +42,7 @@ namespace project_3_fresh_food.Controllers
         public void addinfo(string tentk,string mk, KHACH_HANG KHACH_HANG)
         {
            
-            acc.fillinfo(tentk,mk, insertimg(img), KHACH_HANG);
+            acc.fillinfo(tentk,mk, KHACH_HANG);
         }
         public void DoRegister(KHACH_HANG KHACH_HANG)
         {
@@ -90,10 +90,5 @@ namespace project_3_fresh_food.Controllers
             to.RunAsync(mail, code).Wait();
         }    
      
-        public string insertimg(getimage img1 )
-        {
-            
-            return to.insertavt(img1);
-        }    
     }
 }

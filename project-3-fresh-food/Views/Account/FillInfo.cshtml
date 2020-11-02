@@ -5,11 +5,13 @@
 }
 @section Scripts{
 
- 
+
+
     <script src="~/assets/info.js"></script>
     <link href="~/assets/info.css" rel="stylesheet" />
+
 }
-<div ng-controller="fillinfo" class="main-content">
+<div ng-controller="fillinfo" id="a" class="main-content">
 
     <!-- Header -->
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(https://tk16food.com/assets/img/ig/3.jpg); background-size: cover; background-position: center top;">
@@ -45,7 +47,7 @@
                 <div class="fileupload fileupload-new" data-provides="fileupload">
                     <span class="btn btn-primary btn-file">
                         <span class="fileupload-new">Select file</span>
-                        <input id="file" name="anh" type="file" />
+                        <input required id="file" name="anh" type="file" />
                     </span>
                 </div>
             </div>
@@ -62,12 +64,12 @@
                                             <input required type="text" id="input-username" class="form-control form-control-alternative" placeholder="{{username}}" readonly>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group focused">
-                                            <label class="form-control-label"  for="input-first-name">Họ và tên</label>
+                                            <label class="form-control-label" for="input-first-name">Họ và tên</label>
                                             <input required type="text" id="ten" class="form-control form-control-alternative" placeholder="First name">
                                         </div>
                                     </div>
@@ -89,12 +91,12 @@
                                     <div class="col-lg-4">
                                         <div class="form-group focused">
                                             <label class="form-control-label" for="input-city">Số điện thoại</label>
-                                            <input  type="text" id="sdt" class="form-control form-control-alternative" placeholder="Số điện thoại">
+                                            <input type="text" id="sdt" class="form-control form-control-alternative" placeholder="Số điện thoại">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="select">
-                                            <select  name="slct" id="sex">
+                                            <select name="slct" id="sex">
                                                 <option value="1">Nam</option>
                                                 <option value="2">Nữ</option>
                                             </select>
@@ -109,8 +111,9 @@
                             </div>
                             <hr class="my-4">
                             <!-- Description -->
-                            
-                            <button type="submit"  ng-click="fill()" class="btn btn-info">Lưu </button>
+                            @*;*@
+                            <a id="noimage" ng-style="noimage"> vui lòng chọn 1 bức ảnh</a>
+                            <button type="submit" ng-click="fill()" class="btn btn-info">Lưu </button>
                         </form>
                     </div>
                 </div>

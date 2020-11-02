@@ -14,6 +14,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
        int active(string code);
        (int, string) DoLogin(KHACH_HANG kHACH_HANG);
        void resend(string tk,string mail,string code);
-       void fillinfo(string tk,string mk,string img,KHACH_HANG KHACH_HANG);
+       void fillinfo(string tk,string mk,KHACH_HANG KHACH_HANG);
     }
 }
