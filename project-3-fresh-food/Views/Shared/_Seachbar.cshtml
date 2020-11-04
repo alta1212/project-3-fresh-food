@@ -1,45 +1,20 @@
-﻿<div class="andro_search-adv">
-    <form method="post">
+﻿@section script
+{
+    <script src="~/Scripts/Controllers/product.js"></script>
+}
+<div class="andro_search-adv">
+    <form @*ng-controller="seach"*@ method="post">
         <div class="andro_search-adv-cats">
             <span>Loại sản phẩm</span>
 
             <div class="sub-menu">
                 <div class="andro_dropdown-scroll">
-                    <label>
-                        <input type="checkbox" name="category1" value="food">
-                        Food
+                    <label ng-repeat="i in lsp">
+                        <input type="checkbox" name="{{i.TenLoaiSanPham}}" value="{{i.maloaisanpham}}">
+                        {{i.TenLoaiSanPham}}
                         <i class="fas fa-check"></i>
                     </label>
-                    <label>
-                        <input type="checkbox" name="category2" value="home-care">
-                        Home Care
-                        <i class="fas fa-check"></i>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="category3" value="keto">
-                        Keto
-                        <i class="fas fa-check"></i>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="category4" value="baskets">
-                        Baskets
-                        <i class="fas fa-check"></i>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="category5" value="supplements">
-                        Supplements
-                        <i class="fas fa-check"></i>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="category6" value="baby-kids">
-                        Baby & Kids care
-                        <i class="fas fa-check"></i>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="category7" value="serum">
-                        Serum
-                        <i class="fas fa-check"></i>
-                    </label>
+
                 </div>
 
             </div>

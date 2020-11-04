@@ -1,6 +1,5 @@
 ﻿var app = angular.module('project', ['imgurUpload']);
 
-
 app.controller("login", function ($scope, $http) {
 
     $scope.btntext = "Đăng Nhập"; //giá trị nút đăng nhập
@@ -9,17 +8,17 @@ app.controller("login", function ($scope, $http) {
         $http({
             method: "POST", //method gửi dữ liệu
             url: '/Account/DoLogin', //gọi hàm controller/account/Login
-            data: $scope.KHACH_HANG //dữ liệu truyền vào user là tên biến đặt bên input
+            params: $scope.KHACH_HANG //dữ liệu truyền vào user là tên biến đặt bên input
         }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-            console.log(bool.data.split(",")[0])
-            if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về nếu là 2 thì đã hoàn tát đăng ký
+            console.log(bool)
+            if (bool.data[0].Active == "2") { //kiểm tra dữ liệu đăng nhập trả về nếu là 2 thì đã hoàn tát đăng ký
                 $scope.btntext = "Thành công!";
                 //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
                 //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
                 localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
                 localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
                 window.location = "https://localhost:44389/Index/Index";
-            } else if (bool.data.split(",")[0] == "(1") { //nếu là 1 thì chưa điền thông tin cá nhận
+            } else if (bool.data[0].Active == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
                 $scope.btntext = "Thành công!";
                 //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
                 //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
@@ -27,7 +26,16 @@ app.controller("login", function ($scope, $http) {
                 localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
 
                 window.location = "https://localhost:44389/Account/FillInfo";
-            } else //thông tin đăng nhập k đúng
+            } else if (bool.data[0].Active == "0") { //nếu là 1 thì chưa điền thông tin cá nhận
+                $scope.btntext = "Thành công!";
+                //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
+                //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
+                localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
+                localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
+
+                window.location = "https://localhost:44389/Account/sent";
+            }
+            else //thông tin đăng nhập k đúng
                 $scope.btntext = "Thông tin đăng nhập không chính xác";
         });
     }
@@ -94,10 +102,11 @@ app.controller("sender", function ($scope, $http) {
     }
 })
 
-app.controller("active", function ($scope, $http) {
+app.controller("active", function ($scope) {
+    localStorage.removeItem("reg");
     $scope.success = true;
     $scope.go = function () {
-        window.location = "https://tk16food.com/Account/FillInfo"
+        window.location = "https://localhost:44389/Account/FillInfo"
     }
     $scope.init = function (status) {
         if (status == "1") {
@@ -198,15 +207,15 @@ app.controller("acccontroller", function ($scope, $http) {
     $scope.logout = function () {
 
         localStorage.clear();
-        window.location = "https://localhost:44389/Account/login";
+        window.location = "https://localhost:44389/Account/Login";
     }
     if (localStorage.getItem('taikhoan') != "" && localStorage.getItem('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
 
         var data = {
 
-            "KHACH_HANG.taikhoan": localStorage.getItem('taikhoan'),
+            taikhoan: localStorage.getItem('taikhoan'),
 
-            "KHACH_HANG.matkhau": localStorage.getItem('matkhau'),
+            matkhau: localStorage.getItem('matkhau'),
 
 
         };
@@ -214,22 +223,29 @@ app.controller("acccontroller", function ($scope, $http) {
         $http({
             method: "POST", //method gửi dữ liệu
             url: '/Account/DoLogin', //gọi hàm controller/account/Login
-            data: JSON.stringify(data)
-        }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-            if (bool.data.split(",")[0] == "(1" && window.location.href != "https://localhost:44389/Account/FillInfo") {
+            params: data
+        }).then(function (bool)
+        { //gọi  khi thành công và lấy giá trị hàm trên trả vê
+            console.log(bool.data[0])
+            if (bool.data[0].Active == "1" && window.location.href != "https://localhost:44389/account/fillinfo")
+            {
                 $scope.lin = false;
                 $scope.out = true;
-                window.location = "https://localhost:44389/Account/FillInfo";
-            } else if (bool.data.split(",")[0] == "(2") { //kiểm tra dữ liệu đăng nhập trả về
+                window.location = "https://localhost:44389/account/fillinfo";
+            }
+            else if (bool.data[0].Active == "2" || bool.data[0].Active == "0") { //kiểm tra dữ liệu đăng nhập trả về
                 $scope.lin = false;
                 $scope.out = true;
-                $scope.ten = bool.data.split(",")[1].slice(0, -1)
+                $scope.ten = bool.data[0].TenKhachHang
+                if (window.location.href == "https://localhost:44389/Account/Login")
+                window.location = "https://localhost:44389/Index/Index";
 
-            } else {
+            }
+            else
+            {
                 $scope.lin = true;
                 $scope.out = false;
             }
-
 
 
         });

@@ -1,4 +1,5 @@
-﻿using Microsoft.SqlServer.Server;
+﻿using DTO_Data_Transfer_Object_;
+using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace DAO_Data_Access_Object_
 {
@@ -28,25 +30,30 @@ namespace DAO_Data_Access_Object_
                 return val;
             }
         }
-        public static (int,string) dangnhap(string connectionString,string cmdtext)
+        public static SqlDataReader getallLsp(string connectionString, string cmdtext ) 
         {
-            int back=4;
-            string name="";
+          
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
-            SqlDataAdapter cmd = new SqlDataAdapter(cmdtext, connectionString);
+            SqlCommand cmd = new SqlCommand(cmdtext,conn);
+            SqlDataReader read = cmd.ExecuteReader();
+            return read;
+
+        }
+       
+
+        public static DataTable log(string cmdtxt)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            conn.Open();
+            SqlDataAdapter cmd = new SqlDataAdapter(cmdtxt, conn);
+
+
             DataTable dt = new DataTable();
             cmd.Fill(dt);
-            foreach (DataRow dr in dt.Rows)
-            {
-                 name = dr[0].ToString();
-                 back = int.Parse(dr[1].ToString());//trả về trạng thái tài khoản
-
-            }
-          
-
-            return (back,name);
+            return dt;
         }
+
 
         private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, CommandType cmdType, string cmdText, SqlParameter[] cmdParms)
         {

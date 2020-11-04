@@ -44,8 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KHACH_HANG_BLL.cs" />
+    <Compile Include="LOAI_SAN_PHAM_BLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterface\IAccountBll.cs" />
+    <Compile Include="ServiceInterface\IProduct.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAO%28Data Access Object%29\DAO%28Data Access Object%29.csproj">

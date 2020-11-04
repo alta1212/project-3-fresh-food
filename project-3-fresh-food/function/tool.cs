@@ -59,7 +59,7 @@ namespace project_3_fresh_food.function
   
                                 </body>
                                 </html>";
-            body = body.Replace("{{link}}", "https://localhost:44389/Account/Active?code=" + code);
+            body = body.Replace("{{link}}", "https://tk16food.com/Account/Active?code=" + code);
             MailjetClient client = new MailjetClient("eab093ad170fb96f2874dc2bdd25bf4b", "8b27607aa189e35d2993002d7c0d0200")
             {
                 Version = ApiVersion.V3_1,

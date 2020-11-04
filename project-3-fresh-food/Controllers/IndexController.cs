@@ -1,8 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
+using BLL_Business_Logic_Layer__.ServiceInterface;
+using BLL_Business_Logic_Layer__;
+using DTO_Data_Transfer_Object_;
 
 namespace project_3_fresh_food.Controllers
 {
@@ -10,6 +15,8 @@ namespace project_3_fresh_food.Controllers
     {
         // GET: Index
         //xử lý trang chủ
+        IProduct lsp = new LOAI_SAN_PHAM_BLL();
+        IList<LOAI_SAN_PHAM> listlsp;
         public ActionResult Index()//trang chủ
         {
             return View();
@@ -19,6 +26,11 @@ namespace project_3_fresh_food.Controllers
             Response.StatusCode = 404;
 
             return View();
+        }
+        public JsonResult getLsP()
+        {
+            listlsp = lsp.GetLsp();
+            return Json(listlsp, JsonRequestBehavior.AllowGet);
         }
     }
 }
