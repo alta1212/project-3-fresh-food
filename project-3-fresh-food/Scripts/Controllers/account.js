@@ -127,21 +127,21 @@ app.controller("fillinfo", function ($scope, $http, imgurUpload) {
 
     var data = {
 
-        "KHACH_HANG.taikhoan": localStorage.getItem('taikhoan'),
+       taikhoan: localStorage.getItem('taikhoan'),
 
-        "KHACH_HANG.matkhau": localStorage.getItem('matkhau'),
+        matkhau: localStorage.getItem('matkhau'),
 
 
     };
     $http({
-        method: "POST", //method gửi dữ liệu
-        url: '/Account/DoLogin', //gọi hàm controller/account/Login
-        data: JSON.stringify(data)
+        mmethod: "POST", //method gửi dữ liệu
+            url: '/Account/DoLogin', //gọi hàm controller/account/Login
+            params:data
     }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-        console.log(bool.data.split(",")[0])
-        if (bool.data.split(",")[0] == "(2") { //nếu là 2 thì tk đã hoàn tất chuyển về trang chủ
+        console.log(bool.data[0])
+        if (bool.data[0].Active == "2") { //nếu là 2 thì tk đã hoàn tất chuyển về trang chủ
             window.location = "https://localhost:44389/Index/Index";
-        } else if (bool.data.split(",")[0] == "(1") { //nếu là 1 thì chưa điền thông tin cá nhận
+        } else if (bool.data[0].Active == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
             $scope.username = localStorage.getItem('taikhoan');
             console.log("đúng tài khoản này rồi chưa điền thông tin");
 
