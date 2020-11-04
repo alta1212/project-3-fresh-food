@@ -54,6 +54,8 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -199,6 +201,7 @@
     <Content Include="Scripts\angular-imgur-upload.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\Controllers\account.js" />
+    <Content Include="Scripts\Controllers\product.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

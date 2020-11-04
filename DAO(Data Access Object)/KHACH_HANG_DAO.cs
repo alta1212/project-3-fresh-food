@@ -1,5 +1,6 @@
 ﻿using DTO_Data_Transfer_Object_;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -30,6 +31,25 @@ namespace DAO_Data_Access_Object_
             parm[0].Value = guild;
 
             return DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "activeacc", parm);
+        }
+
+        public IList<KHACH_HANG> Log(string tk, string mk)
+        {
+
+            DataTable dt = new DataTable();
+            string cmdtext = string.Format("Select tenkhachhang,active from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", tk, mk);
+            dt = DataAccessHelper.log(cmdtext);
+            List<KHACH_HANG> li = new List<KHACH_HANG>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                KHACH_HANG sp = new KHACH_HANG();
+                sp.tenkhachhang = dr[0].ToString();
+                sp.active = dr[1].ToString();
+
+                li.Add(sp);
+            }
+            return li;
+
         }
 
         public void fillinfo(string tk, string mk, KHACH_HANG kHACH_HANG)
@@ -71,11 +91,7 @@ namespace DAO_Data_Access_Object_
 
         }
 
-        public (int, string) Login(KHACH_HANG kHACH_HANG)
-        {
-            string cmdtext = string.Format("Select tenkhachhang,active from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", kHACH_HANG.taikhoan, kHACH_HANG.matkhau);
-            return DataAccessHelper.dangnhap(DataAccessHelper.ConnectionString, cmdtext);
-        }
+       
 
         public int register(KHACH_HANG kHACH_HANG, string code)
         {
