@@ -1,5 +1,7 @@
 ﻿var app = angular.module('project', ['imgurUpload']);
 
+
+
 app.controller("login", function ($scope, $http) {
 
     $scope.btntext = "Đăng Nhập"; //giá trị nút đăng nhập
@@ -145,9 +147,10 @@ app.controller("fillinfo", function ($scope, $http, imgurUpload) {
             $scope.username = localStorage.getItem('taikhoan');
             console.log("đúng tài khoản này rồi chưa điền thông tin");
 
-            $scope.link = "ahi";
+            $scope.link = "placeholder";
 
             $scope.fill = function () {
+              
                 if (document.getElementById('file').files.length == 0) {
                     $scope.noimage = {
                         "color": "red",
@@ -165,7 +168,7 @@ app.controller("fillinfo", function ($scope, $http, imgurUpload) {
                         $scope.link = a.data.link
    
 
-
+                        
                 var info = //lưu thông tin khách vào object
                 {
 
@@ -177,15 +180,18 @@ app.controller("fillinfo", function ($scope, $http, imgurUpload) {
                     "KHACH_HANG.TenKhachHang": document.getElementById('ten').value,
                     "KHACH_HANG.AnhDaiDien": $scope.link,
                     "KHACH_HANG.Adress": document.getElementById('address').value,
-                }
+                        }
+                      
+
                         console.log(info)
-                     
+                      
                 $http({
                     method: 'post',
                     url: '/account/addinfo', //cập nhật i4 khách
                     data: info
                 })
-
+                      
+                    
                 window.location = "https://localhost:44389/Index/Index";
 })
             }
@@ -203,6 +209,8 @@ app.controller("fillinfo", function ($scope, $http, imgurUpload) {
 
 app.controller("acccontroller", function ($scope, $http) {
     $scope.lin = true;
+
+
 
     $scope.logout = function () {
 
@@ -237,6 +245,7 @@ app.controller("acccontroller", function ($scope, $http) {
                 $scope.lin = false;
                 $scope.out = true;
                 $scope.ten = bool.data[0].TenKhachHang
+                $scope.anhdaidien = "data:image/jpeg;base64," + hexToBase64(bool.data[0].TenKhachHang.anhdaidien);
                 if (window.location.href == "https://localhost:44389/Account/Login")
                 window.location = "https://localhost:44389/Index/Index";
 

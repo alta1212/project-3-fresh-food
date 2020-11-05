@@ -1,4 +1,4 @@
-﻿using DTO_Data_Transfer_Object_;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -14,11 +14,11 @@ using System.Xml.Linq;
 using Mailjet.Client;
 using Mailjet.Client.Resources;
 using Newtonsoft.Json.Linq;
-namespace project_3_fresh_food.function
+namespace tool
 {
-    public class tool
+    public class Class1
     {
-        public async System.Threading.Tasks.Task RunAsync(string mail, string code)
+    public async System.Threading.Tasks.Task RunAsync(string mail, string code)
         {
             string body = @"<!DOCTYPE html>
                                 <body style=""width:100%; height:100%; margin:0; padding:32px; font: normal normal normal 14px/21px Arial,sans-serif; color:#333; background-color:#f1f1f1; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;"">
@@ -87,7 +87,28 @@ namespace project_3_fresh_food.function
             MailjetResponse response = await client.PostAsync(request);
 
         }
+        //chèn ảnh
+        public  Image GetImageFromUrl(string url)
+        {
+            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
 
-     
+            using (HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse())
+            {
+                using (Stream stream = httpWebReponse.GetResponseStream())
+                {
+                    return Image.FromStream(stream);
+                }
+            }
+        }
+        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, imageIn.RawFormat);
+                return ms.ToArray();
+            }
+        }
+
     }
 }
+

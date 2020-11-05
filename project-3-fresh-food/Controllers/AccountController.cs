@@ -1,11 +1,9 @@
 ﻿using BLL_Business_Logic_Layer__;
 using BLL_Business_Logic_Layer__.ServiceInterface;
-using DTO_Data_Transfer_Object_;
-
-using project_3_fresh_food.function;
+using tool;
 using System;
 using System.Web.Mvc;
-
+using DTO_Data_Transfer_Object_;
 
 namespace project_3_fresh_food.Controllers
 {
@@ -13,7 +11,7 @@ namespace project_3_fresh_food.Controllers
     public class AccountController : Controller
     {
       
-        tool to = new tool();
+        Class1 to = new Class1();
         IAccountBll acc = new KHACH_HANG_BLL();
         // GET: Account
         // Xử lý các sự kiện liên quan đến tài khoản
@@ -33,10 +31,9 @@ namespace project_3_fresh_food.Controllers
         {
             return View();
         }
-        public ActionResult FillInfo(string tentk,string mk, KHACH_HANG KHACH_HANG)
+        public ActionResult FillInfo()
         {
-            if(tentk!=null)
-            addinfo(tentk,mk, KHACH_HANG);
+           
             return View();
         }
         public void addinfo(string tentk,string mk, KHACH_HANG KHACH_HANG)

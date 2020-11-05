@@ -22,7 +22,7 @@ namespace DTO_Data_Transfer_Object_
         public string  magiohang ;
         public string  verificationcode ;
         public string  tenkhachhang ;
-        public string  anhdaidien ;
+        public string anhdaidien ;
         public string active;
         
       
@@ -87,7 +87,7 @@ namespace DTO_Data_Transfer_Object_
             get { return tenkhachhang; }
             set { tenkhachhang = value; }
         }
-        public string  AnhDaiDien {
+        public string AnhDaiDien {
             get { return anhdaidien; }
             set { anhdaidien = value; }
         }
