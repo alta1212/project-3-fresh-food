@@ -66,7 +66,7 @@ namespace DAO_Data_Access_Object_
                     new SqlParameter(parm_SoDienThoai,SqlDbType.NVarChar,50),
                      new SqlParameter(parm_GioiTinh,SqlDbType.Bit),
                       new SqlParameter(parm_NgaySinh,SqlDbType.DateTime,50),
-                      new SqlParameter(parm_AnhDaiDien,SqlDbType.Image,50),
+                      new SqlParameter(parm_AnhDaiDien,SqlDbType.NVarChar,50),
             };
             parm[0].Value = tk;
             parm[1].Value = mk;
@@ -75,7 +75,9 @@ namespace DAO_Data_Access_Object_
             parm[4].Value = kHACH_HANG.sodienthoai;
             parm[5].Value = kHACH_HANG.Sex;
             parm[6].Value = kHACH_HANG.dateofbirth;
-            parm[7].Value = to.ImageToByteArray(to.GetImageFromUrl(string.Join(",", kHACH_HANG.anhdaidien)));
+            parm[7].Value = kHACH_HANG.anhdaidien;
+
+            //  parm[7].Value = to.ImageToByteArray(to.GetImageFromUrl(string.Join(",", kHACH_HANG.anhdaidien)));
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "fillinfo", parm);
         }
 

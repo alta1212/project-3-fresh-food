@@ -200,8 +200,7 @@
     <Content Include="Scripts\angular-cookies.js" />
     <Content Include="Scripts\angular-imgur-upload.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\Controllers\account.js" />
-    <Content Include="Scripts\Controllers\product.js" />
+    <Content Include="Scripts\Controllers\angular_code.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +237,7 @@
     <Content Include="assets\fonts\font-awesome\webfonts\fa-solid-900.woff" />
     <Content Include="assets\fonts\font-awesome\webfonts\fa-solid-900.woff2" />
     <Content Include="assets\fonts\font-awesome\webfonts\fa-solid-900d41d.eot" />
+    <None Include="Models\.placeholder" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\MainLayOut.cshtml" />
     <Content Include="Views\Shared\_Seachbar.cshtml" />
@@ -260,6 +260,8 @@
     <Content Include="Views\Account\sent.cshtml" />
     <Content Include="Views\Account\Active.cshtml" />
     <Content Include="Views\Account\FillInfo.cshtml" />
+    <Content Include="Views\Shared\_featuredproductindex.cshtml" />
+    <Content Include="Views\Shared\_NavMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -269,7 +271,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL%28Business Logic Layer %29\BLL%28Business Logic Layer %29.csproj">

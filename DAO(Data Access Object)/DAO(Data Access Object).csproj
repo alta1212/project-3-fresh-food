@@ -68,6 +68,7 @@
     <Compile Include="KHACH_HANG_DAO.cs" />
     <Compile Include="LOAI_SAN_PHAM_DAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SAN_PHAM_DAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

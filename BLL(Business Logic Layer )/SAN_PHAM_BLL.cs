@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace BLL_Business_Logic_Layer__
 {
-    public class LOAI_SAN_PHAM_BLL : IProductType
+    public class SAN_PHAM_BLL : IProduct
     {
-        LOAI_SAN_PHAM_DAO lsp = new  LOAI_SAN_PHAM_DAO();
-        public IList<LOAI_SAN_PHAM> GetLsp()
+        SAN_PHAM_DAO sp = new SAN_PHAM_DAO();
+        public IList<SAN_PHAM> Getall()
         {
-           return lsp.getAllLsp();
+            return sp.getallsp();
         }
+
     }
 }

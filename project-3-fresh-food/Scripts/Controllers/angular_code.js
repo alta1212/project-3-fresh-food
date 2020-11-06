@@ -1,6 +1,6 @@
 ﻿var app = angular.module('project', ['imgurUpload']);
 
-
+//sản phẩm
 
 app.controller("login", function ($scope, $http) {
 
@@ -245,7 +245,7 @@ app.controller("acccontroller", function ($scope, $http) {
                 $scope.lin = false;
                 $scope.out = true;
                 $scope.ten = bool.data[0].TenKhachHang
-                $scope.anhdaidien = "data:image/jpeg;base64," + hexToBase64(bool.data[0].TenKhachHang.anhdaidien);
+                $scope.anhdaidien = bool.data[0].TenKhachHang.anhdaidien;
                 if (window.location.href == "https://localhost:44389/Account/Login")
                 window.location = "https://localhost:44389/Index/Index";
 
@@ -262,4 +262,39 @@ app.controller("acccontroller", function ($scope, $http) {
     }
 
 
+})
+
+
+//seach bar
+app.controller("seach", function ($scope, $http) {
+    $http({
+        method: 'GET',
+        url: '/Index/getLsP',
+    }).then(function successCallback(response) {
+        $scope.lsp = response.data;
+        console.log($scope.lsp);
+        console.log(response.data[0].TenLoaiSanPham);
+    })
+})
+
+//trang chủ
+app.controller("featuredproducts", function ($scope, $http) {
+    $http({
+        method: 'GET',
+        url: '/Index/spHighlights',
+    }).then(function successCallback(response) {
+        $scope.featuredpro = response.data;
+        console.log($scope.featuredpro);
+      //  console.log(response.data[0].TenLoaiSanPham);
+    })
+})
+
+app.controller("navmenu", function ($scope, $http) {
+    $http({
+        method: 'GET',
+        url: '/Index/getLsP',
+    }).then(function successCallback(response) {
+        $scope.lsp = response.data;
+
+    })
 })

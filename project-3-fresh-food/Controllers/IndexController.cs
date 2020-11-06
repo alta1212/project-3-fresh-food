@@ -15,8 +15,10 @@ namespace project_3_fresh_food.Controllers
     {
         // GET: Index
         //xử lý trang chủ
-        IProduct lsp = new LOAI_SAN_PHAM_BLL();
+        IProductType lsp = new LOAI_SAN_PHAM_BLL();
+        IProduct sp = new SAN_PHAM_BLL();
         IList<LOAI_SAN_PHAM> listlsp;
+        IList<SAN_PHAM> listsp;
         public ActionResult Index()//trang chủ
         {
             return View();
@@ -31,6 +33,11 @@ namespace project_3_fresh_food.Controllers
         {
             listlsp = lsp.GetLsp();
             return Json(listlsp, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult spHighlights()
+        {
+            listsp = sp.Getall();
+            return Json(listsp, JsonRequestBehavior.AllowGet);
         }
     }
 }

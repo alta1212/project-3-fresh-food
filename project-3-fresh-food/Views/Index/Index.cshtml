@@ -3,53 +3,13 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MainLayOut.cshtml";
 }
-<!--thêm angular js code vào đây-->>
-@section Scripts{
-    <script src="#"></script>
-}
+
 <!-- Category Megamenu & Banner start -->
 <div class="section">
     <div class="container">
         <div class="row">
 
-            <!-- Menu Start -->
-            <div class="col-lg-3">
-                <div class="andro_category-mm">
-                    <div class="andro_category-mm-header">
-                        <h6> <i class="fas fa-th-large"></i> Categories</h6>
-                    </div>
-                    <div class="andro_category-mm-body">
-
-                        <ul>
-                            <!-- Level 1 -->
-
-                            <li class="andro_category-mm-item">
-                                <a href="#"> Food </a> 
-                            </li>
-
-                            <li class="andro_category-mm-item"> <a href="#"> Keto</a> </li>
-
-                            <li class="andro_category-mm-item ">
-                                <a href="#"> Baskets </a>
-                                <ul class="andro_category-mm-2-cols">                   
-                                </ul>
-                            </li>
-
-                            <li class="andro_category-mm-item"> <a href="#"> Baby & Kids Care</a> </li>
-                            <li class="andro_category-mm-item"> <a href="#"> Home Care</a> </li>
-                            <li class="andro_category-mm-item"> <a href="#"> Supplements</a> </li>
-                            <li class="andro_category-mm-item"> <a href="#"> Beauty Care</a> </li>
-                            <li class="andro_category-mm-item  andro_category-mm-item-expand">
-                                <a href="#"> <i class="fas fa-plus"></i> More Categories</a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-                </div>
-            </div>
-            <!-- Menu End -->
+            @Html.Partial("_Navmenu")
             <!-- Banner Start -->
             <div class="col-lg-9">
 
@@ -393,191 +353,9 @@
                     <h4 class="title">Featured Products</h4>
                 </div>
 
-                <div class="row">
-
-                    <!-- Product Start -->
-                    <div class="col-sm-6">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/7.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Ginger </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>19$</span>
-                                    <span>29$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-sm-6">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/8.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Lettuce </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>8$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-sm-6">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/9.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Tomatoes </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>6$</span>
-                                    <span></span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-sm-6">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/10.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Corn </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>19$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-sm-6">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/11.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Onions </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>13$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-sm-6">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/12.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Brocolis </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>19$</span>
-                                    <span>29$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
+                <div ng-controller="featuredproducts" class="row">
+                    @Html.Partial("_featuredproductindex")
+                  
 
                 </div>
 
@@ -745,6 +523,7 @@
 
     </div>
 </div>
+    
 <!-- Featured Products End -->
 <!-- Call to action Start -->
 <div class="section pt-0">
@@ -1118,4 +897,3 @@
     </div>
 </div>
 <!-- Blog Posts End -->
-

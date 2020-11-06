@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SAN_PHAM.cs" />
     <Compile Include="KHACH_HANG.cs" />
     <Compile Include="LOAI_SAN_PHAM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

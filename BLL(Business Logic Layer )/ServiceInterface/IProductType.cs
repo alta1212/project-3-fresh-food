@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace BLL_Business_Logic_Layer__.ServiceInterface
 {
-    public interface IProduct
+    public interface IProductType
     {
-        IList<SAN_PHAM> Getall();
+        IList<LOAI_SAN_PHAM> GetLsp();
+       
     }
 }
