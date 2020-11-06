@@ -17,5 +17,9 @@ namespace BLL_Business_Logic_Layer__
             return sp.getallsp();
         }
 
+        public IList<SAN_PHAM> getLatestSp()
+        {
+            return sp.getLatestSp();
+        }
     }
 }

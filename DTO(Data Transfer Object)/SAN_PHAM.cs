@@ -9,26 +9,29 @@ namespace DTO_Data_Transfer_Object_
    public class SAN_PHAM
     {
         public string maloaisanpham;
-        public string manhacc;
+        public string Tensanpham;
         public string masanpham;
-        public int soluong;
+        public int soluongnhap;
+        public int soluongban;
         public string mota;
-        public string Hinhanh;
+        public string hinhanh;
+        public string donvitinh;
+
 
         public string MaLoaiSanPham
         {
             get { return maloaisanpham; }
             set { maloaisanpham = value; }
         }
-        public string hinhanh
+        public string Hinhanh
         {
-            get { return Hinhanh; }
-            set { Hinhanh = value; }
+            get { return hinhanh; }
+            set { hinhanh = value; }
         }    
-        public string MaNhaCC
+        public string tensanpham
         {
-            get { return manhacc; }
-            set { manhacc = value; }
+            get { return Tensanpham; }
+            set { Tensanpham = value; }
         }
         public string MoTa
         {
@@ -40,10 +43,15 @@ namespace DTO_Data_Transfer_Object_
             get { return masanpham; }
             set { masanpham = value; }
         }
-        public int SoLuong
+        public int SoLuongnhap
         {
-            get { return soluong; }
-            set { soluong = value; }
+            get { return soluongnhap; }
+            set { soluongnhap = value; }
+        }
+        public int SoLuongban
+        {
+            get { return soluongban; }
+            set { soluongban = value; }
         }
     }
 }

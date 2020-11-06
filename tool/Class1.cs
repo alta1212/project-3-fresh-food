@@ -87,27 +87,27 @@ namespace tool
             MailjetResponse response = await client.PostAsync(request);
 
         }
-        //chèn ảnh
-        public  Image GetImageFromUrl(string url)
-        {
-            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+        ////chèn ảnh
+        //public  Image GetImageFromUrl(string url)
+        //{
+        //    HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
 
-            using (HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse())
-            {
-                using (Stream stream = httpWebReponse.GetResponseStream())
-                {
-                    return Image.FromStream(stream);
-                }
-            }
-        }
-        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
-        {
-            using (var ms = new MemoryStream())
-            {
-                imageIn.Save(ms, imageIn.RawFormat);
-                return ms.ToArray();
-            }
-        }
+        //    using (HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse())
+        //    {
+        //        using (Stream stream = httpWebReponse.GetResponseStream())
+        //        {
+        //            return Image.FromStream(stream);
+        //        }
+        //    }
+        //}
+        //public byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        //{
+        //    using (var ms = new MemoryStream())
+        //    {
+        //        imageIn.Save(ms, imageIn.RawFormat);
+        //        return ms.ToArray();
+        //    }
+        //}
 
     }
 }

@@ -39,5 +39,10 @@ namespace project_3_fresh_food.Controllers
             listsp = sp.Getall();
             return Json(listsp, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult getLatestSp()
+        {
+            listsp = sp.getLatestSp();
+            return Json(listsp, JsonRequestBehavior.AllowGet);
+        }
     }
 }
