@@ -11,5 +11,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
     {
         IList<SAN_PHAM> Getall();
         IList<SAN_PHAM> getLatestSp();
+
+        IList<SAN_PHAM> getBestSell();
     }
 }

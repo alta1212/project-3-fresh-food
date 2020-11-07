@@ -29,17 +29,25 @@ namespace project_3_fresh_food.Controllers
 
             return View();
         }
+        // Sản phẩm theo loại
         public JsonResult getLsP()
         {
             listlsp = lsp.GetLsp();
             return Json(listlsp, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult spHighlights()
+        // Sản phẩm nổi bật
+        public JsonResult spHighlights() 
         {
             listsp = sp.Getall();
             return Json(listsp, JsonRequestBehavior.AllowGet);
         }
-        
+        // Sản phẩm bán chạy
+        public JsonResult getBestSell()
+        {
+            listsp = sp.getBestSell();
+            return Json(listsp, JsonRequestBehavior.AllowGet);
+        }
+        // Sản phẩm mới nhất
         public JsonResult getLatestSp()
         {
             listsp = sp.getLatestSp();

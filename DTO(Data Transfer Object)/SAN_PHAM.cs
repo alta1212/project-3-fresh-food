@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DTO_Data_Transfer_Object_
+﻿namespace DTO_Data_Transfer_Object_
 {
-   public class SAN_PHAM
+    public class SAN_PHAM
     {
         public string maloaisanpham;
         public string Tensanpham;
@@ -16,8 +10,9 @@ namespace DTO_Data_Transfer_Object_
         public string mota;
         public string hinhanh;
         public string donvitinh;
+        public int stars;
         public int giamoi;
-        public int giacu;
+        public int giaban;
         public string MaLoaiSanPham
         {
             get { return maloaisanpham; }
@@ -27,7 +22,16 @@ namespace DTO_Data_Transfer_Object_
         {
             get { return hinhanh; }
             set { hinhanh = value; }
-        }    
+        }
+        public int Stars
+        {
+            get
+            {
+                return stars
+;
+            }
+            set { stars = value; }
+        }
         public string tensanpham
         {
             get { return Tensanpham; }
@@ -58,10 +62,10 @@ namespace DTO_Data_Transfer_Object_
             get { return giamoi; }
             set { giamoi = value; }
         }
-        public int Giacu
+        public int Giaban
         {
-            get { return giacu; }
-            set { giacu = value; }
+            get { return giaban; }
+            set { giaban = value; }
         }
     }
 }

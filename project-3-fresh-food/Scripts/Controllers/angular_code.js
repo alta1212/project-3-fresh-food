@@ -1,7 +1,7 @@
 ﻿var app = angular.module('project', ['imgurUpload']);
 
 //tài khoản
-
+// đăng nhập
 app.controller("login", function ($scope, $http, $window) {
    
     $scope.btntext = "Đăng Nhập"; //giá trị nút đăng nhập
@@ -44,6 +44,7 @@ app.controller("login", function ($scope, $http, $window) {
 
 })
 
+// đăng kí
 app.controller("SignUp", function ($window,$scope, $http) {
 
     $scope.tk = $scope.mail = true; //ẩn thông tin trung mail,tk sau này làm hamgf check
@@ -84,6 +85,7 @@ app.controller("SignUp", function ($window,$scope, $http) {
 
 })
 
+// chập nhận mail để tạo tài khoản
 app.controller("sender", function ($scope, $http, $window) {
     if (localStorage.getItem('reg') == null) { //xoá tất cả cookie
         localStorage.clear();
@@ -105,6 +107,7 @@ app.controller("sender", function ($scope, $http, $window) {
     }
 })
 
+// Tài khoản cần active để đăng nhập
 app.controller("active", function ($scope,$window) {
     localStorage.removeItem("reg");
     $scope.success = true;
@@ -123,6 +126,7 @@ app.controller("active", function ($scope,$window) {
     }
 })
 
+// Hiện thị thông tin của tài khoản
 app.controller("fillinfo", function ($window,$scope, $http, imgurUpload) {
 
 
@@ -207,7 +211,7 @@ app.controller("fillinfo", function ($window,$scope, $http, imgurUpload) {
         }
     })
 })
-
+ // Tài khoản
 app.controller("acccontroller", function ($window,$scope, $http) {
     $scope.lin = true;
    
@@ -279,7 +283,7 @@ app.controller("seach", function ($scope, $http) {
     })
 })
 
-//trang chủ
+//Hiện thị sản phẩm ngẫu nhiễn của cửa hàng
 app.controller("featuredproducts", function ($scope, $http) {
     $http({
         method: 'GET',
@@ -287,10 +291,23 @@ app.controller("featuredproducts", function ($scope, $http) {
     }).then(function successCallback(response) {
         $scope.featuredpro = response.data;
         console.log($scope.featuredpro);
-      //  console.log(response.data[0].TenLoaiSanPham);
+        console.log(response.data[0]);
     })
 })
 
+// Hiển thị sản phẩm bấn chạy
+app.controller("getBestSellProduct", function ($scope, $http) {
+    $http({
+        method: 'GET',
+        url: '/Index/getBestSell',
+    }).then(function successCallback(response) {
+        $scope.bestSellProduct = response.data;
+        console.log($scope.bestSellProduct);
+        console.log(response.data[0]);
+    })
+})
+
+// Hiện thị menu trái của cửa hàng
 app.controller("navmenu", function ($scope, $http) {
     $http({
         method: 'GET',

@@ -355,6 +355,7 @@
     <Content Include="Views\Account\FillInfo.cshtml" />
     <Content Include="Views\Shared\_featuredproductindex.cshtml" />
     <Content Include="Views\Shared\_NavMenu.cshtml" />
+    <Content Include="Views\Shared\_BestSellProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

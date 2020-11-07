@@ -1,0 +1,50 @@
+﻿<!-- Top Picks Start -->
+<div class="section section-padding pt-0" ng-controller="getBestSellProduct">
+    <div class="container">
+
+        <div class="section-title">
+            <h4 class="title">Top Picks</h4>
+        </div>
+
+        <div class="row" >
+
+            <!-- Product Start -->
+            <div class="col-lg-6" ng-repeat="i in bestSellProduct">
+                <div class="andro_product andro_product-list andro_product-has-controls andro_product-has-buttons">
+                    <div class="andro_product-thumb">
+                        <a href="/Product/Product_Details"><img src="{{i.Hinhanh}}" alt="product"></a>
+                    </div>
+                    <div class="andro_product-body">
+                        <div class="andro_rating-wrapper">
+                            <div class="andro_rating">
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <span>{{i.stars}}</span>
+                        </div>
+                        <h5 class="andro_product-title"> <a href="/Product/Product_Details"> {{i.tensanpham}} </a> </h5>
+                        <div class="andro_product-price">
+                            <span>{{i.giaban}}</span>
+                            <span>29$</span>
+                        </div>
+                        <p>{{i.MoTa}}.</p>
+
+                    </div>
+                    <div class="andro_product-footer">
+                        <div class="andro_product-buttons">
+                            <a href="#" class="andro_btn-custom primary">Add To Cart</a>
+                            <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product End -->
+           
+
+        </div>
+    </div>
+</div>
+<!-- Top Picks End -->
