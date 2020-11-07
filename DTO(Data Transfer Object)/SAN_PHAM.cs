@@ -16,8 +16,8 @@ namespace DTO_Data_Transfer_Object_
         public string mota;
         public string hinhanh;
         public string donvitinh;
-
-
+        public int giamoi;
+        public int giacu;
         public string MaLoaiSanPham
         {
             get { return maloaisanpham; }
@@ -52,6 +52,16 @@ namespace DTO_Data_Transfer_Object_
         {
             get { return soluongban; }
             set { soluongban = value; }
+        }
+        public int Giamoi
+        {
+            get { return giamoi; }
+            set { giamoi = value; }
+        }
+        public int Giacu
+        {
+            get { return giacu; }
+            set { giacu = value; }
         }
     }
 }
