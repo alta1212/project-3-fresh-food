@@ -34,7 +34,7 @@ namespace DAO_Data_Access_Object_
         {
           
             SqlConnection conn = new SqlConnection(connectionString);
-            conn.Open();
+                conn.Open();
             SqlCommand cmd = new SqlCommand(cmdtext,conn);
             SqlDataReader read = cmd.ExecuteReader();
             return read;
