@@ -294,6 +294,7 @@
     <Content Include="Scripts\angular-imgur-upload.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\Controllers\angular_code.js" />
+    <Content Include="TextFile1.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
