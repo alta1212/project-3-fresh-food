@@ -19,7 +19,7 @@ app.controller("login", function ($scope, $http, $window) {
                 //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
                 localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
                 localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
-                $window.location.href = '/Index/Index"';
+                $window.location.href = '/Index/Index';
             } else if (bool.data[0].Active == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
                 $scope.btntext = "Thành công!";
                 //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
@@ -239,8 +239,8 @@ app.controller("acccontroller", function ($window,$scope, $http) {
             params: data
         }).then(function (bool)
         { //gọi  khi thành công và lấy giá trị hàm trên trả vê
-            console.log(bool.data[0])
-            if (bool.data[0].Active == "1" && window.location.href != "https://localhost:44389/account/fillinfo")
+            console.log($window.location)
+            if (bool.data[0].Active == "1" && $window.location.pathname != "/account/fillinfo")
             {
                 $scope.lin = false;
                 $scope.out = true;
@@ -250,8 +250,9 @@ app.controller("acccontroller", function ($window,$scope, $http) {
                 $scope.lin = false;
                 $scope.out = true;
                 $scope.ten = bool.data[0].TenKhachHang
-                $scope.anhdaidien = bool.data[0].HinhAnh;
-                if (window.location.href == "https://localhost:44389/Account/Login")
+                $scope.anhdaidien = bool.data[0].AnhDaiDien;
+              
+                if ($window.location.pathname == "/Account/Login")
                     $window.location.href = '/Index/Index';
 
             }
@@ -314,6 +315,10 @@ app.controller("navmenu", function ($scope, $http) {
         url: '/Index/getLsP',
     }).then(function successCallback(response) {
         $scope.lsp = response.data;
+        console.log(response.data)
 
     })
+    $scope.getheoloai = function (maloai) {
+       
+    }
 })
