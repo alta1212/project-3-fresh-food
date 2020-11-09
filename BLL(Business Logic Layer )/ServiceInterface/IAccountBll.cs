@@ -15,5 +15,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
        void resend(string tk,string mail,string code);
        void fillinfo(string tk,string mk,KHACH_HANG KHACH_HANG);
         IList<KHACH_HANG> log(string tk, string mk);
+      
     }
 }

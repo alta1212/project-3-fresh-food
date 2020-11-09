@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL(Business Logic Layer )"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tool", "tool\tool.csproj", "{05B19F10-C691-4223-A15A-BA3A3117F9FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adminpage", "Adminpage\Adminpage.csproj", "{750CA255-7012-44EB-8032-F61D46CC8434}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{05B19F10-C691-4223-A15A-BA3A3117F9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05B19F10-C691-4223-A15A-BA3A3117F9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05B19F10-C691-4223-A15A-BA3A3117F9FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{750CA255-7012-44EB-8032-F61D46CC8434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{750CA255-7012-44EB-8032-F61D46CC8434}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{750CA255-7012-44EB-8032-F61D46CC8434}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{750CA255-7012-44EB-8032-F61D46CC8434}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

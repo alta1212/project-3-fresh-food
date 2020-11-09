@@ -54,6 +54,23 @@ namespace DAO_Data_Access_Object_
             return dt;
         }
 
+      
+
+        public static int checkhaslog(string id)
+        {
+
+
+            SqlConnection conn = new SqlConnection(ConnectionString);
+        
+               SqlCommand cmd = new SqlCommand("select * from KHACH_HANG where MaKhachHang ='"+id+"'",conn);
+                 conn.Open();
+            SqlDataReader read = cmd.ExecuteReader();
+              
+            if (read.Read())
+                return 1;
+            return 0;
+            
+        }
 
         private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, CommandType cmdType, string cmdText, SqlParameter[] cmdParms)
         {

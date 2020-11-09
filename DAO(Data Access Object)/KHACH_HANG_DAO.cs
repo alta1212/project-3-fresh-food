@@ -36,6 +36,7 @@ namespace DAO_Data_Access_Object_
             return DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "activeacc", parm);
         }
 
+
         public IList<KHACH_HANG> Log(string tk, string mk)
         {
 

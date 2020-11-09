@@ -3,7 +3,7 @@
 //tài khoản
 // đăng nhập
 app.controller("login", function ($scope, $http, $window) {
-   
+
     $scope.btntext = "Đăng Nhập"; //giá trị nút đăng nhập
     $scope.DangNhap = function () { //được gọi khi bấm nút đăng nhập
         $scope.btntext = "Đang Đang Nhập....";
@@ -45,7 +45,7 @@ app.controller("login", function ($scope, $http, $window) {
 })
 
 // đăng kí
-app.controller("SignUp", function ($window,$scope, $http) {
+app.controller("SignUp", function ($window, $scope, $http) {
 
     $scope.tk = $scope.mail = true; //ẩn thông tin trung mail,tk sau này làm hamgf check
     $scope.btntext = "Đăng ký";
@@ -75,7 +75,7 @@ app.controller("SignUp", function ($window,$scope, $http) {
             localStorage.setItem('matkhau', $scope.KHACH_HANG.MatKhau); //lưu mật khẩu
             localStorage.setItem('mail', $scope.KHACH_HANG.Email);
             localStorage.setItem('reg', "1"); //kiểm tra trạng thái reg
-           //điều hướng về trang send
+            //điều hướng về trang send
             $window.location.href = '/Account/sent';
 
 
@@ -108,7 +108,7 @@ app.controller("sender", function ($scope, $http, $window) {
 })
 
 // Tài khoản cần active để đăng nhập
-app.controller("active", function ($scope,$window) {
+app.controller("active", function ($scope, $window) {
     localStorage.removeItem("reg");
     $scope.success = true;
     $scope.go = function () {
@@ -127,14 +127,14 @@ app.controller("active", function ($scope,$window) {
 })
 
 // Hiện thị thông tin của tài khoản
-app.controller("fillinfo", function ($window,$scope, $http, imgurUpload) {
+app.controller("fillinfo", function ($window, $scope, $http, imgurUpload) {
 
 
 
 
     var data = {
 
-       taikhoan: localStorage.getItem('taikhoan'),
+        taikhoan: localStorage.getItem('taikhoan'),
 
         matkhau: localStorage.getItem('matkhau'),
 
@@ -142,8 +142,8 @@ app.controller("fillinfo", function ($window,$scope, $http, imgurUpload) {
     };
     $http({
         mmethod: "POST", //method gửi dữ liệu
-            url: '/Account/DoLogin', //gọi hàm controller/account/Login
-            params:data
+        url: '/Account/DoLogin', //gọi hàm controller/account/Login
+        params: data
     }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
         console.log(bool.data[0])
         if (bool.data[0].Active == "2") { //nếu là 2 thì tk đã hoàn tất chuyển về trang chủ
@@ -155,7 +155,7 @@ app.controller("fillinfo", function ($window,$scope, $http, imgurUpload) {
             $scope.link = "placeholder";
 
             $scope.fill = function () {
-              
+
                 if (document.getElementById('file').files.length == 0) {
                     $scope.noimage = {
                         "color": "red",
@@ -171,34 +171,34 @@ app.controller("fillinfo", function ($window,$scope, $http, imgurUpload) {
                     .upload(image)
                     .then(function (a) {
                         $scope.link = a.data.link
-   
 
-                        
-                var info = //lưu thông tin khách vào object
-                {
 
-                    tentk: localStorage.getItem('taikhoan'),
-                    mk: localStorage.getItem('matkhau'),
-                    "KHACH_HANG.SoDienThoai": document.getElementById('sdt').value,
-                    "KHACH_HANG.DateOfBirth": document.getElementById('date').value,
-                    "KHACH_HANG.Sex": document.getElementById('sex').value,
-                    "KHACH_HANG.TenKhachHang": document.getElementById('ten').value,
-                    "KHACH_HANG.AnhDaiDien": $scope.link,
-                    "KHACH_HANG.Adress": document.getElementById('address').value,
+
+                        var info = //lưu thông tin khách vào object
+                        {
+
+                            tentk: localStorage.getItem('taikhoan'),
+                            mk: localStorage.getItem('matkhau'),
+                            "KHACH_HANG.SoDienThoai": document.getElementById('sdt').value,
+                            "KHACH_HANG.DateOfBirth": document.getElementById('date').value,
+                            "KHACH_HANG.Sex": document.getElementById('sex').value,
+                            "KHACH_HANG.TenKhachHang": document.getElementById('ten').value,
+                            "KHACH_HANG.AnhDaiDien": $scope.link,
+                            "KHACH_HANG.Adress": document.getElementById('address').value,
                         }
-                      
+
 
                         console.log(info)
-                      
-                $http({
-                    method: 'post',
-                    url: '/account/addinfo', //cập nhật i4 khách
-                    data: info
-                })
-                      
-                    
+
+                        $http({
+                            method: 'post',
+                            url: '/account/addinfo', //cập nhật i4 khách
+                            data: info
+                        })
+
+
                         $window.location.href = '/Index/Index';
-})
+                    })
             }
 
         } else {
@@ -211,10 +211,10 @@ app.controller("fillinfo", function ($window,$scope, $http, imgurUpload) {
         }
     })
 })
- // Tài khoản
-app.controller("acccontroller", function ($window,$scope, $http) {
+// Tài khoản
+app.controller("acccontroller", function ($window, $scope, $http) {
     $scope.lin = true;
-   
+
     console.log($window.location.search);
 
     $scope.logout = function () {
@@ -237,11 +237,9 @@ app.controller("acccontroller", function ($window,$scope, $http) {
             method: "POST", //method gửi dữ liệu
             url: '/Account/DoLogin', //gọi hàm controller/account/Login
             params: data
-        }).then(function (bool)
-        { //gọi  khi thành công và lấy giá trị hàm trên trả vê
+        }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
             console.log($window.location)
-            if (bool.data[0].Active == "1" && $window.location.pathname != "/account/fillinfo")
-            {
+            if (bool.data[0].Active == "1" && $window.location.pathname != "/account/fillinfo") {
                 $scope.lin = false;
                 $scope.out = true;
                 $window.location.href = '/account/fillinfo';
@@ -251,13 +249,12 @@ app.controller("acccontroller", function ($window,$scope, $http) {
                 $scope.out = true;
                 $scope.ten = bool.data[0].TenKhachHang
                 $scope.anhdaidien = bool.data[0].AnhDaiDien;
-              
+
                 if ($window.location.pathname == "/Account/Login")
                     $window.location.href = '/Index/Index';
 
             }
-            else
-            {
+            else {
                 $scope.lin = true;
                 $scope.out = false;
             }
@@ -319,6 +316,6 @@ app.controller("navmenu", function ($scope, $http) {
 
     })
     $scope.getheoloai = function (maloai) {
-       
+
     }
 })
