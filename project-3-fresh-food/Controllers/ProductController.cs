@@ -43,5 +43,9 @@ namespace project_3_fresh_food.Controllers
 
             return Json(lis,JsonRequestBehavior.AllowGet);
         }    
+        public int getslsp()
+        {
+            return sp.getslsp();
+        }
     }
 }

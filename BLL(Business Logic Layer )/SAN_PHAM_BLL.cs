@@ -35,5 +35,10 @@ namespace BLL_Business_Logic_Layer__
         {
             return sp.getpagelistsp(page,pagesize);
         }
+        public int getslsp()
+        {
+
+            return sp.getslsp();
+        }
     }
 }

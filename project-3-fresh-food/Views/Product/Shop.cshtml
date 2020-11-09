@@ -6,14 +6,14 @@
 
 
 <div ng-controller="shop" class="section">
-    <div class="andro_section-fw">
+    <div class="container">
 
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-8">
 
                 <!-- Product Count & Orderby Start -->
                 <div class="andro_shop-global">
-                    <p>Showing <b>20</b> of <b>320</b> products </p>
+                    <p>Showing <b>{{show}}</b> of <b>{{sl}}</b> products </p>
                     <form method="post">
                         <select class="form-control" name="orderby">
                             <option value="default">Default sorting</option>
@@ -25,367 +25,52 @@
                     </form>
                 </div>
                 <!-- Product Count & Orderby End -->
-
-                <div class="row masonry" style="position: relative; height: 1259.9px;">
-
-
-                    <!-- Product Start -->
-                    <div  class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 214.275px; top: 0px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/9.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Lettuce </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>8$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Product Start -->
+                <div ng-repeat="i in lisp" class="andro_product andro_product-list">
+                    <div class="andro_product-thumb">
+                        <a href="product-single.html"><img src="{{i.hinhanh}}" alt="product"></a>
                     </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 428.55px; top: 0px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/9.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Tomatoes </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>6$</span>
-                                    <span></span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 642.825px; top: 0px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/10.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-badge andro_badge-sale">
-                                20% Off
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Corn </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>19$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 0px; top: 410.9px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-badge andro_badge-featured">
+                    <div class="andro_product-body">
+                        <div class="andro_rating-wrapper">
+                            <div class="andro_rating">
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
                                 <i class="fa fa-star"></i>
-                                <span>Featured</span>
                             </div>
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/11.png" alt="product"></a>
+                            <span>{{i.start}} Stars</span>
+                        </div>
+                        <h5 class="andro_product-title"> <a href="product-single.html">{{i.tensanpham}} </a> </h5>
+                        <p>{{i.mota}}</p>
+                        <div class="andro_product-footer">
+                            <div class="andro_product-price">
+                                <span>{{i.giaban}} vnd</span>
+                                <span>29$</span>
                             </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Onions </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>13$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
+                            <div class="btn-group">
+                                <a href="product-single.html" class="andro_btn-custom btn-sm">Buy Now</a>
+                                <button type="button" class="andro_btn-custom dropdown-toggle dropdown-toggle-split btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#quickViewModal"> <i class="fa fa-eye"></i> Quick View</a>
+                                    <a class="dropdown-item" href="#"> <i class="fa fa-sync"></i> Compare</a>
+                                    <a class="dropdown-item" href="#"> <i class="fa fa-heart"></i> Add To Wishlist</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 214.275px; top: 410.9px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/12.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Brocolis </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>19$</span>
-                                    <span>29$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 428.55px; top: 410.9px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/2.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Kiwi &amp; Strawberry </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>19$</span>
-                                    <span>29$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 642.825px; top: 410.9px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/4.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Cucumber </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>29$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 0px; top: 821.8px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/5.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Watermelons </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>29$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 214.275px; top: 821.8px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/6.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Oranges </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>29$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 642.825px; top: 821.8px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/14.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Grapes </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>29$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-                    <!-- Product Start -->
-                    <div class="col-md-3 col-sm-4 masonry-item" style="position: absolute; left: 428.55px; top: 849px;">
-                        <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
-                            <div class="andro_product-thumb">
-                                <a href="/Product/Product_Details"><img src="~/assets/img/products/15.png" alt="product"></a>
-                            </div>
-                            <div class="andro_product-body">
-                                <h6 class="andro_product-title"> <a href="/Product/Product_Details"> Apricots </a> </h6>
-                                <div class="andro_rating-wrapper">
-                                    <div class="andro_rating">
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star active"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="andro_product-footer">
-                                <div class="andro_product-price">
-                                    <span>13$</span>
-                                </div>
-                                <div class="andro_product-buttons">
-                                    <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                                    <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product End -->
-
                 </div>
-
-                <!-- Pagination Start -->
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                </ul>
-                <!-- Pagination End -->
+                <!-- Product End -->
+               
+                <a href="#" ng-style="loadpage" ng-click="showmore()" class="load-more"> Load More </a>
+                <!-- Load More End -->
 
             </div>
 
             <!-- Sidebar Start -->
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="sidebar">
 
                     <!-- Search Start -->
@@ -402,10 +87,40 @@
                     <div class="sidebar-widget">
                         <h5 class="widget-title"> Category </h5>
                         <ul class="sidebar-widget-list">
-                            <li ng-repeat="i in lsp">
+                            <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="{{i.maloaisanpham}}">
-                                    <label class="custom-control-label" for="{{i.maloaisanpham}}">{{i.tenloaisanpham}}</label>
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Food</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                    <label class="custom-control-label" for="customCheck2">Keto</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                    <label class="custom-control-label" for="customCheck3">Baskets</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
+                                    <label class="custom-control-label" for="customCheck4">Baby &amp; Kids Care</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                    <label class="custom-control-label" for="customCheck5">Home Care</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck6">
+                                    <label class="custom-control-label" for="customCheck6">Supplements</label>
                                 </div>
                             </li>
                         </ul>
@@ -473,17 +188,41 @@
                     <!-- Filter: Freshness Start -->
                     <div class="sidebar-widget">
                         <h5 class="widget-title"> Freshness </h5>
-                        <span class="irs irs--flat js-irs-0 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min" style="visibility: visible;">0 days</span><span class="irs-max" style="visibility: visible;">10 days</span><span class="irs-from" style="visibility: visible; left: 32.9067%;">4 days</span><span class="irs-to" style="visibility: visible; left: 51.6553%;">6 days</span><span class="irs-single" style="visibility: hidden; left: 33.4792%;">4 days — 6 days</span></span><span class="irs-grid" style="width: 93.7427%; left: 3.02867%;"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%; margin-left: -2.1534%;">0</span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 15%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol small" style="left: 5%"></span><span class="irs-grid-pol" style="left: 25%"></span><span class="irs-grid-text js-grid-text-1" style="left: 25%; visibility: visible; margin-left: -2.1534%;">3</span><span class="irs-grid-pol small" style="left: 45%"></span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 35%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-2" style="left: 50%; visibility: visible; margin-left: -2.1534%;">5</span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 65%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol small" style="left: 55%"></span><span class="irs-grid-pol" style="left: 75%"></span><span class="irs-grid-text js-grid-text-3" style="left: 75%; visibility: visible; margin-left: -2.1534%;">8</span><span class="irs-grid-pol small" style="left: 95%"></span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 85%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-4" style="left: 100%; margin-left: -3.13111%;">10</span></span><span class="irs-bar" style="left: 40.6257%; width: 18.7485%;"></span><span class="irs-shadow shadow-from" style="display: none;"></span><span class="irs-shadow shadow-to" style="display: none;"></span><span class="irs-handle from" style="left: 37.4971%;"><i></i><i></i><i></i></span><span class="irs-handle to type_last" style="left: 56.2456%;"><i></i><i></i><i></i></span></span><input type="text" class="js-range-slider irs-hidden-input" name="freshness_range" value="" data-type="double" data-min="0" data-max="10" data-from="4" data-to="6" data-grid="true" data-postfix=" days" tabindex="-1" readonly="">
+                        <span class="irs irs--flat js-irs-0 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min" style="visibility: visible;">0 days</span><span class="irs-max" style="visibility: visible;">10 days</span><span class="irs-from" style="visibility: visible; left: 34.8179%;">4 days</span><span class="irs-to" style="visibility: visible; left: 53.9036%;">6 days</span><span class="irs-single" style="visibility: hidden; left: 37.9304%;">4 days — 6 days</span></span><span class="irs-grid" style="width: 95.4286%; left: 2.18571%;"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%; margin-left: -1.57321%;">0</span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 15%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol small" style="left: 5%"></span><span class="irs-grid-pol" style="left: 25%"></span><span class="irs-grid-text js-grid-text-1" style="left: 25%; visibility: visible; margin-left: -1.57321%;">3</span><span class="irs-grid-pol small" style="left: 45%"></span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 35%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-2" style="left: 50%; visibility: visible; margin-left: -1.57321%;">5</span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 65%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol small" style="left: 55%"></span><span class="irs-grid-pol" style="left: 75%"></span><span class="irs-grid-text js-grid-text-3" style="left: 75%; visibility: visible; margin-left: -1.57321%;">8</span><span class="irs-grid-pol small" style="left: 95%"></span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 85%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-4" style="left: 100%; margin-left: -2.2875%;">10</span></span><span class="irs-bar" style="left: 40.4571%; width: 19.0857%;"></span><span class="irs-shadow shadow-from" style="display: none;"></span><span class="irs-shadow shadow-to" style="display: none;"></span><span class="irs-handle from" style="left: 38.1714%;"><i></i><i></i><i></i></span><span class="irs-handle to type_last" style="left: 57.2571%;"><i></i><i></i><i></i></span></span><input type="text" class="js-range-slider irs-hidden-input" name="freshness_range" value="" data-type="double" data-min="0" data-max="10" data-from="4" data-to="6" data-grid="true" data-postfix=" days" tabindex="-1" readonly="">
                     </div>
                     <!-- Filter: Freshness End -->
-
                     <!-- Filter: Price Start -->
                     <div class="sidebar-widget">
                         <h5 class="widget-title"> Price </h5>
-                        <span class="irs irs--flat js-irs-1 irs-with-grid">
-                        <span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min" style="visibility: hidden;">0 $</span><span class="irs-max" style="visibility: visible;">500 $</span><span class="irs-from" style="visibility: visible; left: -0.123834%;">10 $</span><span class="irs-to" style="visibility: visible; left: 29.3099%;">169 $</span><span class="irs-single" style="visibility: hidden; left: 9.32296%;">10 $ — 169 $</span></span><span class="irs-grid" style="width: 95.1851%; left: 2.30746%;"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%; margin-left: -1.65701%;">0</span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 15%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol small" style="left: 5%"></span><span class="irs-grid-pol" style="left: 25%"></span><span class="irs-grid-text js-grid-text-1" style="left: 25%; visibility: visible; margin-left: -3.16356%;">125</span><span class="irs-grid-pol small" style="left: 45%"></span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 35%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-2" style="left: 50%; visibility: visible; margin-left: -3.16356%;">250</span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 65%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol small" style="left: 55%"></span><span class="irs-grid-pol" style="left: 75%"></span><span class="irs-grid-text js-grid-text-3" style="left: 75%; visibility: visible; margin-left: -3.16356%;">375</span><span class="irs-grid-pol small" style="left: 95%"></span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 85%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-4" style="left: 100%; margin-left: -3.16356%;">500</span></span><span class="irs-bar" style="left: 4.31116%; width: 30.2689%;"></span><span class="irs-shadow shadow-from" style="display: none;"></span><span class="irs-shadow shadow-to" style="display: none;"></span><span class="irs-handle from" style="left: 1.9037%;"><i></i><i></i><i></i></span><span class="irs-handle to type_last" style="left: 32.1726%;"><i></i><i></i><i></i></span></span><input type="text" class="js-range-slider irs-hidden-input" name="freshness_range" value="" data-type="double" data-min="0" data-max="500" data-from="10" data-to="100" data-grid="true" data-postfix=" $" tabindex="-1" readonly="">
+                        <span class="irs irs--flat js-irs-1 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min" style="visibility: hidden;">0 $</span><span class="irs-max" style="visibility: visible;">500 $</span><span class="irs-from" style="visibility: visible; left: -0.0164286%;">10 $</span><span class="irs-to" style="visibility: visible; left: 16.3679%;">100 $</span><span class="irs-single" style="visibility: hidden; left: 3.17214%;">10 $ — 100 $</span></span><span class="irs-grid" style="width: 95.4286%; left: 2.18571%;"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%; margin-left: -1.57321%;">0</span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 15%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol small" style="left: 5%"></span><span class="irs-grid-pol" style="left: 25%"></span><span class="irs-grid-text js-grid-text-1" style="left: 25%; visibility: visible; margin-left: -3.00357%;">125</span><span class="irs-grid-pol small" style="left: 45%"></span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 35%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-2" style="left: 50%; visibility: visible; margin-left: -3.00357%;">250</span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 65%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol small" style="left: 55%"></span><span class="irs-grid-pol" style="left: 75%"></span><span class="irs-grid-text js-grid-text-3" style="left: 75%; visibility: visible; margin-left: -3.00357%;">375</span><span class="irs-grid-pol small" style="left: 95%"></span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 85%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-4" style="left: 100%; margin-left: -3.00357%;">500</span></span><span class="irs-bar" style="left: 4.19429%; width: 17.1771%;"></span><span class="irs-shadow shadow-from" style="display: none;"></span><span class="irs-shadow shadow-to" style="display: none;"></span><span class="irs-handle from" style="left: 1.90857%;"><i></i><i></i><i></i></span><span class="irs-handle to type_last" style="left: 19.0857%;"><i></i><i></i><i></i></span></span><input type="text" class="js-range-slider irs-hidden-input" name="freshness_range" value="" data-type="double" data-min="0" data-max="500" data-from="10" data-to="100" data-grid="true" data-postfix=" $" tabindex="-1" readonly="">
                     </div>
                     <!-- Filter: Price End -->
+                    <!-- Tags Start -->
+                    <div class="sidebar-widget">
+                        <h5 class="widget-title"> Popular Tags </h5>
+                        <div class="tagcloud">
+                            <a href="#">Health</a>
+                            <a href="#">Live Stock</a>
+                            <a href="#">Harvest</a>
+                            <a href="#">Better Life</a>
+                            <a href="#">Life style</a>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                    <!-- Newsletter Start -->
+                    <div class="sidebar-widget">
+                        <div class="andro_newsletter-form">
+                            <h5>Join our newsletter</h5>
+                            <p>Get exclusive weekly deals with our newsletter subscription</p>
+                            <form method="post">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="newsletter_email" placeholder="Email Address" value="">
+                                </div>
+                                <button type="submit" class="andro_btn-custom secondary btn-block shadow-none" name="button">Join Newsletter</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Newsletter End -->
 
                 </div>
             </div>

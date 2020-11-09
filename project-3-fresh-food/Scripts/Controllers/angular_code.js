@@ -323,48 +323,51 @@ app.controller("navmenu", function ($scope, $http, $window) {
 })
 
 app.controller("shop", function ($scope, $location, $http) {
+
     $http({
         method: 'GET',
-        url: '/Index/getLsP',
+        url: '/Product/getslsp',
+
     }).then(function successCallback(response) {
-        $scope.lsp = response.data;
+        $scope.sl = response.data;
+    })//lấy về sl sản phẩm
 
-
-    })
-
-    $scope.changeview = function () {
-
-        var pageselect = {
-            page: $scope.page,
-
-        }
-
-        $http({
-            method: 'GET',
-            url: '/Admin/getpagepro',
-            params: pageselect
-        }).then(function successCallback(response) {
-            $scope.lisp = response.data;
-            console.log(response.data)
-
-        })
-    }
+    $scope.show = 20;
 
 
     if ($location.search().ma == null) {
-
+        
         $http({
             method: 'GET',
-            url: '/Product/getpagesp?page=1&&pagesize=10',
+            url: '/Product/getpagesp?pagesize='+$scope.show+'&&page=1',
 
         }).then(function successCallback(response) {
             $scope.lisp = response.data;
             console.log(response.data)
 
         })
+      
+        $scope.showmore = function () {
+            $scope.show += 20
+            if ($scope.show > $scope.sl) {
+                $scope.show = $scope.sl;
+                $scope.loadpage = {
+                    "display": "none"
+                }
+            }
+            $http({
+                method: 'GET',
+                url: '/Product/getpagesp?pagesize=' + $scope.show + '&&page=1',
+
+            }).then(function successCallback(response) {
+                $scope.lisp = response.data;
+                console.log(response.data)
+            })
+        }
 
     }
     else {
+       
         $http({
             method: 'GET',
             url: '/Product/getbyloai#!?maloai=LSP001',

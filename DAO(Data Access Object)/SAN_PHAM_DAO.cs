@@ -8,7 +8,7 @@ using System.Dynamic;
 namespace DAO_Data_Access_Object_
 {
     public class SAN_PHAM_DAO
-    {
+    {   //get về 6 sản phẩm ngẫu nhiên đẻ đưa ra trang chủ
         public IList<SAN_PHAM> getallsp()
         {
             DataTable dt = new DataTable();
@@ -34,7 +34,7 @@ namespace DAO_Data_Access_Object_
             }
             return li;
         }
-
+        //get sản phẩm by loai
         public IList<SAN_PHAM> getbyloai(string loai, string page)
         {
             DataTable dt = new DataTable();
@@ -60,11 +60,12 @@ namespace DAO_Data_Access_Object_
             }
             return li;
         }
-
+        //lây về sp mới nhất
         public IList<SAN_PHAM> getLatestSp()
         {
             throw new NotImplementedException();
         }
+        //lấy về bán chạy nhất
         public IList<SAN_PHAM> getBestSell()
         {
             DataTable dt = new DataTable();
@@ -115,6 +116,7 @@ namespace DAO_Data_Access_Object_
                 sp.hinhanh = dr[6].ToString();
                 sp.donvitinh = dr[7].ToString();
                 sp.mota = dr[8].ToString();
+                sp.giaban = int.Parse(dr[9].ToString());
                 li.Add(sp);
             }
             return li;
@@ -122,5 +124,15 @@ namespace DAO_Data_Access_Object_
 
 
         }    
+        //lấy về sl sản phẩm
+        public int getslsp()
+        {
+            DataTable dt = new DataTable();
+
+            string cmdtext = string.Format(@"select count(masanpham) from [dbo].[SAN_PHAM]");
+            dt = DataAccessHelper.log(cmdtext);
+            return  int.Parse( dt.Rows[0][0].ToString());
+        }
+
     }
 }
