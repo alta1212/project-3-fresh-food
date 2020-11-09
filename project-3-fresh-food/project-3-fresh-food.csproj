@@ -289,6 +289,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Adminpage\Adminpage.csproj">
+      <Project>{750ca255-7012-44eb-8032-f61d46cc8434}</Project>
+      <Name>Adminpage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BLL%28Business Logic Layer %29\BLL%28Business Logic Layer %29.csproj">
       <Project>{A48CE1CA-CE18-4DBA-9122-4AABD686702B}</Project>
       <Name>BLL%28Business Logic Layer %29</Name>

@@ -13,6 +13,13 @@
         public int stars;
         public int giamoi;
         public int giaban;
+        public int soluongcon;
+
+        public int soluongCon
+        {
+            get { return soluongcon; }
+            set { soluongcon = value; }
+        }
         public string MaLoaiSanPham
         {
             get { return maloaisanpham; }

@@ -22,9 +22,18 @@ namespace BLL_Business_Logic_Layer__
             return sp.getBestSell();
         }
 
+        public IList<SAN_PHAM> getbyloaisp(string loai ,string page)
+        {
+            return sp.getbyloai(loai,page);
+        }
+
         public IList<SAN_PHAM> getLatestSp()
         {
             return sp.getLatestSp();
+        }
+        public IList<SAN_PHAM> getpagesp(int page,int pagesize)
+        {
+            return sp.getpagelistsp(page,pagesize);
         }
     }
 }

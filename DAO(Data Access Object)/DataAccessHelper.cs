@@ -16,7 +16,9 @@ namespace DAO_Data_Access_Object_
     public class DataAccessHelper
     {//chuỗi kết nối
 
-        public static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+     //   public static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+
+        public static readonly string ConnectionString = @"Server=tcp:tk16-1.database.windows.net,1433;Initial Catalog=SHOPFRESHFOOD;Persist Security Info=False;User ID=admintk16;Password=Anhlatuananh1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public static int ExecuteNonQuery(string connectionString, CommandType cmdType, string cmdText, params SqlParameter[] commandParameters)
         {
 
@@ -30,6 +32,8 @@ namespace DAO_Data_Access_Object_
                 return val;
             }
         }
+
+      
         public static SqlDataReader getallLsp(string connectionString, string cmdtext ) 
         {
           
@@ -56,21 +60,7 @@ namespace DAO_Data_Access_Object_
 
       
 
-        public static int checkhaslog(string id)
-        {
 
-
-            SqlConnection conn = new SqlConnection(ConnectionString);
-        
-               SqlCommand cmd = new SqlCommand("select * from KHACH_HANG where MaKhachHang ='"+id+"'",conn);
-                 conn.Open();
-            SqlDataReader read = cmd.ExecuteReader();
-              
-            if (read.Read())
-                return 1;
-            return 0;
-            
-        }
 
         private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, CommandType cmdType, string cmdText, SqlParameter[] cmdParms)
         {

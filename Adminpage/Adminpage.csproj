@@ -272,6 +272,8 @@
     <Content Include="asset\js\worldLow.js" />
     <Content Include="asset\js\wow.min.js" />
     <Content Include="Global.asax" />
+    <Content Include="script\angular.min.js" />
+    <Content Include="script\AngularController\Angularhome.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -319,6 +321,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Product.cshtml" />
     <Content Include="Views\_MainLayout.cshtml" />
+    <None Include="Properties\PublishProfiles\adtk16 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -331,6 +334,16 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL%28Business Logic Layer %29\BLL%28Business Logic Layer %29.csproj">
+      <Project>{a48ce1ca-ce18-4dba-9122-4aabd686702b}</Project>
+      <Name>BLL%28Business Logic Layer %29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO%28Data Transfer Object%29\DTO%28Data Transfer Object%29.csproj">
+      <Project>{2BAED398-2677-4344-A468-FB7EA509A1AA}</Project>
+      <Name>DTO%28Data Transfer Object%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

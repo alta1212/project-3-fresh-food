@@ -306,7 +306,7 @@ app.controller("getBestSellProduct", function ($scope, $http) {
 })
 
 // Hiện thị menu trái của cửa hàng
-app.controller("navmenu", function ($scope, $http) {
+app.controller("navmenu", function ($scope, $http, $window) {
     $http({
         method: 'GET',
         url: '/Index/getLsP',
@@ -316,6 +316,67 @@ app.controller("navmenu", function ($scope, $http) {
 
     })
     $scope.getheoloai = function (maloai) {
+   
 
+        $window.location.href = '/Product/Shop#!?maloai=' + maloai;
     }
 })
+
+app.controller("shop", function ($scope, $location, $http) {
+    $http({
+        method: 'GET',
+        url: '/Index/getLsP',
+    }).then(function successCallback(response) {
+        $scope.lsp = response.data;
+
+
+    })
+
+    $scope.changeview = function () {
+
+        var pageselect = {
+            page: $scope.page,
+
+        }
+
+        $http({
+            method: 'GET',
+            url: '/Admin/getpagepro',
+            params: pageselect
+        }).then(function successCallback(response) {
+            $scope.lisp = response.data;
+            console.log(response.data)
+
+        })
+    }
+
+
+    if ($location.search().ma == null) {
+
+        $http({
+            method: 'GET',
+            url: '/Product/getpagesp?page=1&&pagesize=10',
+
+        }).then(function successCallback(response) {
+            $scope.lisp = response.data;
+            console.log(response.data)
+
+        })
+
+    }
+    else {
+        $http({
+            method: 'GET',
+            url: '/Product/getbyloai#!?maloai=LSP001',
+         //   params=$location.search().maloai
+
+        }).then(function successCallback(response) {
+            $scope.lisp = response.data;
+            console.log(response.data)
+
+        })
+
+    }
+     
+})
+
