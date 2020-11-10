@@ -64,7 +64,7 @@
                 </div>
                 <!-- Product End -->
                
-                <a href="#" ng-style="loadpage" ng-click="showmore()" class="load-more"> Load More </a>
+                <a  ng-style="loadpage" ng-click="showmore()" class="load-more"> Load More </a>
                 <!-- Load More End -->
 
             </div>
@@ -84,45 +84,16 @@
                     </div>
                     <!-- Search End -->
                     <!-- Filter: Categories Start -->
-                    <div class="sidebar-widget">
+                    <div ng-controller="navmenu" class="sidebar-widget">
                         <h5 class="widget-title"> Category </h5>
                         <ul class="sidebar-widget-list">
-                            <li>
+                            <li ng-repeat="i in lsp">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">Food</label>
+                                    <input type="checkbox" class="custom-control-input" id="{{i.maloaisanpham}}">
+                                    <label class="custom-control-label" for="{{i.maloaisanpham}}">{{i.tenloaisanpham}}</label>
                                 </div>
                             </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label" for="customCheck2">Keto</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                    <label class="custom-control-label" for="customCheck3">Baskets</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                    <label class="custom-control-label" for="customCheck4">Baby &amp; Kids Care</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                    <label class="custom-control-label" for="customCheck5">Home Care</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                    <label class="custom-control-label" for="customCheck6">Supplements</label>
-                                </div>
-                            </li>
+    
                         </ul>
 
                     </div>

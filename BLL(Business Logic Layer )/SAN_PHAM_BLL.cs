@@ -35,10 +35,10 @@ namespace BLL_Business_Logic_Layer__
         {
             return sp.getpagelistsp(page,pagesize);
         }
-        public int getslsp()
+        public int getslsp(string maloai)
         {
 
-            return sp.getslsp();
+            return sp.getslsp(maloai);
         }
     }
 }

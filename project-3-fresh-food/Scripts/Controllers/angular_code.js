@@ -324,19 +324,21 @@ app.controller("navmenu", function ($scope, $http, $window) {
 
 app.controller("shop", function ($scope, $location, $http) {
 
-    $http({
-        method: 'GET',
-        url: '/Product/getslsp',
-
-    }).then(function successCallback(response) {
-        $scope.sl = response.data;
-    })//lấy về sl sản phẩm
+   
 
     $scope.show = 20;
 
 
-    if ($location.search().ma == null) {
-        
+    if ($location.search().maloai == null) {
+
+        $http({
+            method: 'GET',
+            url: '/Product/getslsp?maloai= ',
+
+        }).then(function successCallback(response) {
+            $scope.sl = response.data;
+        })//lấy về sl sản phẩm
+
         $http({
             method: 'GET',
             url: '/Product/getpagesp?pagesize='+$scope.show+'&&page=1',
@@ -347,38 +349,50 @@ app.controller("shop", function ($scope, $location, $http) {
 
         })
       
-        $scope.showmore = function () {
-            $scope.show += 20
-            if ($scope.show > $scope.sl) {
-                $scope.show = $scope.sl;
-                $scope.loadpage = {
-                    "display": "none"
-                }
-            }
-            $http({
-                method: 'GET',
-                url: '/Product/getpagesp?pagesize=' + $scope.show + '&&page=1',
-
-            }).then(function successCallback(response) {
-                $scope.lisp = response.data;
-                console.log(response.data)
-            })
-        }
+      
 
     }
     else {
-       
         $http({
             method: 'GET',
-            url: '/Product/getbyloai#!?maloai=LSP001',
+            url: '/Product/getslsp?maloai=' + $location.search().maloai,
+
+        }).then(function successCallback(response) {
+            $scope.sl = response.data;
+            if ($scope.show > $scope.sl) {
+            $scope.show = $scope.sl;
+        }
+        })//lấy về sl sản phẩm
+       
+
+        $http({
+            method: 'GET',
+            url: '/Product/getbyloai?maloai=' + $location.search().maloai,
          //   params=$location.search().maloai
 
         }).then(function successCallback(response) {
             $scope.lisp = response.data;
-            console.log(response.data)
-
+            console.log($scope.lisp)
         })
 
+
+    }
+    $scope.showmore = function () {
+        $scope.show += 20
+        if ($scope.show > $scope.sl) {
+            $scope.show = $scope.sl;
+            $scope.loadpage = {
+                "display": "none"
+            }
+        }
+        $http({
+            method: 'GET',
+            url: '/Product/getpagesp?pagesize=' + $scope.show + '&&page=1',
+
+        }).then(function successCallback(response) {
+            $scope.lisp = response.data;
+            console.log(response.data)
+        })
     }
      
 })

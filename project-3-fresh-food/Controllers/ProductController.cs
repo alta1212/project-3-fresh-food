@@ -43,9 +43,9 @@ namespace project_3_fresh_food.Controllers
 
             return Json(lis,JsonRequestBehavior.AllowGet);
         }    
-        public int getslsp()
+        public int getslsp(string maloai)
         {
-            return sp.getslsp();
+            return sp.getslsp(maloai);
         }
     }
 }

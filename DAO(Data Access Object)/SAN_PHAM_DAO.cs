@@ -125,11 +125,11 @@ namespace DAO_Data_Access_Object_
 
         }    
         //lấy về sl sản phẩm
-        public int getslsp()
+        public int getslsp(string maloai)
         {
             DataTable dt = new DataTable();
 
-            string cmdtext = string.Format(@"select count(masanpham) from [dbo].[SAN_PHAM]");
+            string cmdtext = string.Format(@"select count(masanpham) from [dbo].[SAN_PHAM] where maloaisanpham like '%{0}%'",maloai);
             dt = DataAccessHelper.log(cmdtext);
             return  int.Parse( dt.Rows[0][0].ToString());
         }

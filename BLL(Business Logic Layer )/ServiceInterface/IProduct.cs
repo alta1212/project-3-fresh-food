@@ -16,6 +16,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<SAN_PHAM> getpagesp(int page,int pagesize);
 
         IList<SAN_PHAM> getbyloaisp(string loai,string page);
-        int getslsp();
+        int getslsp(string maloai);
     }
 }
