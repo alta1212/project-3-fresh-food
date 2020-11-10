@@ -25,8 +25,7 @@ namespace DAO_Data_Access_Object_
                 sp.masanpham = dr[0].ToString();
                 sp.tensanpham = dr[1].ToString();
                 sp.hinhanh = dr[2].ToString();
-                sp.mota = dr[3].ToString();
-                
+                sp.mota = dr[3].ToString(); 
                 sp.stars = int.Parse(dr[4].ToString());
                 sp.donvitinh = dr[5].ToString();
                 sp.giaban = int.Parse(dr[6].ToString());
@@ -55,7 +54,9 @@ namespace DAO_Data_Access_Object_
                 sp.soluongCon = int.Parse(dr[5].ToString());
                 sp.hinhanh = dr[6].ToString();
                 sp.donvitinh = dr[7].ToString();
+                sp.stars = int.Parse(dr[9].ToString());
                 sp.mota = dr[8].ToString();
+                sp.giaban=int.Parse(dr[10].ToString());
                 li.Add(sp);
             }
             return li;
@@ -116,7 +117,8 @@ namespace DAO_Data_Access_Object_
                 sp.hinhanh = dr[6].ToString();
                 sp.donvitinh = dr[7].ToString();
                 sp.mota = dr[8].ToString();
-                sp.giaban = int.Parse(dr[9].ToString());
+                sp.stars = int.Parse(dr[9].ToString());
+                sp.giaban = int.Parse(dr[10].ToString());
                 li.Add(sp);
             }
             return li;
