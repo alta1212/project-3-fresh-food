@@ -34,9 +34,9 @@ namespace project_3_fresh_food.Controllers
         {
             return View();
         }
-        public JsonResult getpagesp(int page,int pagesize)
+        public JsonResult getpagesp(int pagesize)
         {
-            return admin.getpagepro(page,pagesize);
+            return admin.getpagepro(1,pagesize);
         }
         public JsonResult getbyloai(string maloai,string page)
         { lis = sp.getbyloaisp(maloai,page);

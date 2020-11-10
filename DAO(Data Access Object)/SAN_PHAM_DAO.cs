@@ -33,6 +33,8 @@ namespace DAO_Data_Access_Object_
             }
             return li;
         }
+
+
         //get sản phẩm by loai
         public IList<SAN_PHAM> getbyloai(string loai, string page)
         {
@@ -40,7 +42,7 @@ namespace DAO_Data_Access_Object_
             
             string cmdtext = string.Format(@"Select  SP.*,GB.GiaBan
                     From dbo.SAN_PHAM SP Inner join dbo.GIA_BAN GB
-	                        On SP.MaSanPham = GB.MaSanPham  and sp.maloaisanpham='{1}'  order by masanpham desc Offset 20*(1-1) Rows Fetch next 20 rows only", page,loai);
+	                        On SP.MaSanPham = GB.MaSanPham  and sp.maloaisanpham='{1}'  order by masanpham desc Offset 1 Rows Fetch next {0} rows only", page,loai);
             dt = DataAccessHelper.log(cmdtext);
             List<SAN_PHAM> li = new List<SAN_PHAM>();
             foreach (DataRow dr in dt.Rows)

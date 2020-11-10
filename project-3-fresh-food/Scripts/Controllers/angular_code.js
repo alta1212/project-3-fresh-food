@@ -222,7 +222,8 @@ app.controller("acccontroller", function ($window, $scope, $http) {
         localStorage.clear();
         $window.location.href = '/Account/Login';
     }
-    if (localStorage.getItem('taikhoan') != "" && localStorage.getItem('matkhau') != "") { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
+   
+    if (localStorage.getItem('taikhoan') != null && localStorage.getItem('matkhau') != null) { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
 
         var data = {
 
@@ -291,6 +292,7 @@ app.controller("featuredproducts", function ($scope, $http) {
         console.log($scope.featuredpro);
         console.log(response.data[0]);
     })
+    $scope.addtocart = function (msp) { alert("viết code thêm vào giỏ hàng ở dòng 295") }
 })
 
 // Hiển thị sản phẩm bấn chạy
@@ -321,7 +323,7 @@ app.controller("navmenu", function ($scope, $http, $window) {
         $window.location.href = '/Product/Shop#!?maloai=' + maloai;
     }
 })
-
+//hiển thị sản phẩm ra trang sản phẩm
 app.controller("shop", function ($scope, $location, $http) {
 
    
@@ -348,7 +350,25 @@ app.controller("shop", function ($scope, $location, $http) {
             console.log(response.data)
 
         })
-      
+        $scope.showmore = function () {
+
+            $scope.show += 20
+            if ($scope.show >= $scope.sl) {
+                $scope.show = $scope.sl;
+                $scope.loadpage = {
+                    "display": "none"
+                }
+            }
+
+            $http({
+                method: 'GET',
+                url: '/Product/getpagesp?pagesize=' + $scope.show  ,
+
+            }).then(function successCallback(response) {
+                $scope.lisp = response.data;
+                console.log(response.data)
+            })
+        }
       
 
     }
@@ -359,41 +379,54 @@ app.controller("shop", function ($scope, $location, $http) {
 
         }).then(function successCallback(response) {
             $scope.sl = response.data;
-            if ($scope.show > $scope.sl) {
-            $scope.show = $scope.sl;
+            if ($scope.show >= $scope.sl) {
+                $scope.show = $scope.sl;
+                $scope.loadpage = {
+                    "display": "none"
+                }
         }
         })//lấy về sl sản phẩm
        
 
         $http({
             method: 'GET',
-            url: '/Product/getbyloai?maloai=' + $location.search().maloai,
+            url: '/Product/getbyloai?maloai=' + $location.search().maloai + '&&page=' + $scope.show,
          //   params=$location.search().maloai
 
         }).then(function successCallback(response) {
             $scope.lisp = response.data;
             console.log($scope.lisp)
         })
+        $scope.showmore = function () {
 
-
-    }
-    $scope.showmore = function () {
-        $scope.show += 20
-        if ($scope.show > $scope.sl) {
-            $scope.show = $scope.sl;
-            $scope.loadpage = {
-                "display": "none"
+            $scope.show += 20
+            if ($scope.show >= $scope.sl) {
+                $scope.show = $scope.sl;
+                $scope.loadpage = {
+                    "display": "none"
+                }
             }
-        }
-        $http({
-            method: 'GET',
-            url: '/Product/getpagesp?pagesize=' + $scope.show + '&&page=1',
 
-        }).then(function successCallback(response) {
-            $scope.lisp = response.data;
-            console.log(response.data)
-        })
+            $http({
+                method: 'GET',
+                url: '/Product/getbyloai?maloai=' + $location.search().maloai + '&&page=' + $scope.show,
+
+            }).then(function successCallback(response) {
+                $scope.lisp = response.data;
+                console.log(response.data)
+            })
+        }
+
     }
+   
      
 })
 
+
+
+//sự kiện thực hiển ở quickview 
+app.controller("quickviewbuy", function ($scope, $location, $http) {
+    $scope.details = function (elm) {
+        alert("viết code truyền vào giỏ hàng ở dòng 430")
+    }
+})

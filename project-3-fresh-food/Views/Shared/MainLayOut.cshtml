@@ -185,7 +185,7 @@
     </header>
     <!-- Header End -->
     <!-- Quick View Modal Start -->
-    <div class="modal fade andro_quick-view-modal" id="quickViewModal" role="dialog" aria-hidden="true">
+    <div  class="modal fade andro_quick-view-modal" id="quickViewModal" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -218,17 +218,17 @@
                                     <h3> Tomatoes </h3>
 
                                     <div class="andro_product-price">
-                                        <span>8$</span>
-                                        <span>14$</span>
+                                        <span id="giagiam"></span>
+                                        <span id="giacu">14$</span>
                                     </div>
 
-                                    <p class="andro_product-excerpt">Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
+                                    <p class="andro_product-excerpt" id="mota">Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
 
                                     <form class="andro_product-atc-form">
 
                                         <div class="andro_product-variation-wrapper">
                                             <div class="form-group">
-                                                <select class="form-control" name="amount">
+                                                <select id="dvt" class="form-control" name="amount">
                                                     <option value="">Select Amount</option>
                                                     <option value="1">1 Kilo</option>
                                                     <option value="2">2 Kilos</option>
@@ -236,17 +236,11 @@
                                                     <option value="4">4 Kilos</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group">
-                                                <select class="form-control" name="breed">
-                                                    <option value="">Select a Breed</option>
-                                                    <option value="italian">Italian</option>
-                                                    <option value="egyptian">Egyptian</option>
-                                                </select>
-                                            </div>
+                                            
                                         </div>
 
                                         <div class="qty-outter">
-                                            <a href="/Product/Product_Details" class="andro_btn-custom">Buy Now</a>
+                                            <a id="qvbuybnt" href="#" class="andro_btn-custom">Buy Now</a>
                                             <div class="qty">
                                                 <span class="qty-subtract"><i class="fa fa-minus"></i></span>
                                                 <input type="text" name="qty" value="1">

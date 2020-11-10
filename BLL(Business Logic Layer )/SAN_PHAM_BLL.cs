@@ -31,6 +31,9 @@ namespace BLL_Business_Logic_Layer__
         {
             return sp.getLatestSp();
         }
+
+
+
         public IList<SAN_PHAM> getpagesp(int page,int pagesize)
         {
             return sp.getpagelistsp(page,pagesize);

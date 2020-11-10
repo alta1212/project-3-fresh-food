@@ -1,6 +1,6 @@
 ﻿  <!-- Product Start -->
 <div ng-repeat="i in featuredpro" class="col-sm-6">
-    <div class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
+    <div id="{{i.masanpham}}" class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
         <div class="andro_product-thumb">
             <a href="/Product/Product_Details"><img src="{{i.hinhanh}}" alt="product"></a>
         </div>
@@ -18,12 +18,15 @@
         </div>
         <div class="andro_product-footer">
             <div class="andro_product-price">
-                <span>{{i.giaban}}$</span>
+                <a style="display:none">{{i.mota}}</a>
+                <span>{{i.giaban}} VND</span>
                 <span>13$</span>
+                <a style="display:none">{{i.donvitinh}}</a>
             </div>
             <div class="andro_product-buttons">
-                <a href="#" class="andro_btn-custom primary">Add To Cart</a>
-                <a href="#" data-toggle="modal" data-target="#quickViewModal" class="andro_btn-custom light">Quick View</a>
+               
+                <a  ng-click="addtocart(i.masanpham)" href="#" class="andro_btn-custom primary">Add To Cart</a>
+                <a href="#" data-toggle="modal" onclick="s(this)"  data-target="#quickViewModal" class="andro_btn-custom light quickViewModal">Quick View</a>
             </div>
         </div>
     </div>
