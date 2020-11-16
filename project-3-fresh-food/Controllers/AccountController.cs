@@ -63,9 +63,9 @@ namespace project_3_fresh_food.Controllers
         }    
        
 
-        public JsonResult DoLogin(string taikhoan, string matkhau)
+        public JsonResult DoLogin(KHACH_HANG KHACH_HANG)
         {
-            return Json(acc.log(taikhoan, matkhau), JsonRequestBehavior.AllowGet);
+            return Json(acc.log(KHACH_HANG.taikhoan, KHACH_HANG.matkhau), JsonRequestBehavior.AllowGet);
         }
 
         public void resendmail(string tk,string mail)

@@ -47,5 +47,10 @@ namespace project_3_fresh_food.Controllers
         {
             return sp.getslsp(maloai);
         }
+        public JsonResult getsanpham(string masanpham)
+        {
+            var sanpham = sp.getthongtinsanpham(masanpham);
+            return Json(sanpham, JsonRequestBehavior.AllowGet);
+        }
     }
 }

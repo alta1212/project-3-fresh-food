@@ -34,6 +34,35 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
+        public object getttsanpham(string masanpham)
+        {
+             DataTable dt = new DataTable();
+            
+            string cmdtext = string.Format(@"Select  SP.*,GB.GiaBan,lsp.tenloaisanpham
+                    From dbo.SAN_PHAM SP Inner join dbo.GIA_BAN GB
+	                        On SP.MaSanPham = GB.MaSanPham inner join [dbo].[LOAI_SAN_PHAM] lsp on lsp.maloaisanpham=sp.maloaisanpham  and sp.masanpham='{0}'  order by masanpham ", masanpham);
+            dt = DataAccessHelper.log(cmdtext);
+            List<SAN_PHAM> li = new List<SAN_PHAM>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                SAN_PHAM sp = new SAN_PHAM();
+                sp.maloaisanpham = dr[0].ToString();
+                sp.masanpham = dr[1].ToString();
+                sp.tensanpham = dr[2].ToString();
+                sp.soluongnhap = int.Parse(dr[3].ToString());
+                sp.SoLuongban = int.Parse(dr[4].ToString());
+                sp.soluongCon = int.Parse(dr[5].ToString());
+                sp.hinhanh = dr[6].ToString();
+                sp.donvitinh = dr[7].ToString();
+                sp.stars = int.Parse(dr[9].ToString());
+                sp.mota = dr[8].ToString();
+                sp.giaban=int.Parse(dr[10].ToString());
+                sp.tenloaisanpham= dr[11].ToString();
+                li.Add(sp);
+            }
+            return li;
+        }
+
 
         //get sản phẩm by loai
         public IList<SAN_PHAM> getbyloai(string loai, string page)

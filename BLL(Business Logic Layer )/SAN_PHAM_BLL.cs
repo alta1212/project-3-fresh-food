@@ -43,5 +43,10 @@ namespace BLL_Business_Logic_Layer__
 
             return sp.getslsp(maloai);
         }
+
+        public object getthongtinsanpham(string masanpham)
+        {
+            return sp.getttsanpham(masanpham);
+        }
     }
 }

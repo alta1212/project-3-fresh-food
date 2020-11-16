@@ -14,7 +14,13 @@
         public int giamoi;
         public int giaban;
         public int soluongcon;
+        public string tenloaisanpham;
 
+        public string Tenloaisanpham
+        {
+            get { return tenloaisanpham; }
+            set { tenloaisanpham = value; }
+        }
         public int soluongCon
         {
             get { return soluongcon; }

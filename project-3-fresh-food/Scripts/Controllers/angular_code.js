@@ -10,35 +10,39 @@ app.controller("login", function ($scope, $http, $window) {
         $http({
             method: "POST", //method gửi dữ liệu
             url: '/Account/DoLogin', //gọi hàm controller/account/Login
-            params: $scope.KHACH_HANG //dữ liệu truyền vào user là tên biến đặt bên input
+            data: $scope.KHACH_HANG //dữ liệu truyền vào user là tên biến đặt bên input
         }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
             console.log(bool)
-            if (bool.data[0].Active == "2") { //kiểm tra dữ liệu đăng nhập trả về nếu là 2 thì đã hoàn tát đăng ký
-                $scope.btntext = "Thành công!";
-                //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
-                //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
-                localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
-                localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
-                $window.location.href = '/Index/Index';
-            } else if (bool.data[0].Active == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
-                $scope.btntext = "Thành công!";
-                //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
-                //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
-                localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
-                localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
+            try {
+                if (bool.data[0].Active == "2") { //kiểm tra dữ liệu đăng nhập trả về nếu là 2 thì đã hoàn tát đăng ký
+                    $scope.btntext = "Thành công!";
+                    //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
+                    //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
+                    localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
+                    localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
+                    $window.location.href = '/Index/Index';
+                } else if (bool.data[0].Active == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
+                    $scope.btntext = "Thành công!";
+                    //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
+                    //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
+                    localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
+                    localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
 
-                $window.location.href = '/Account/FillInfo';
-            } else if (bool.data[0].Active == "0") { //nếu là 1 thì chưa điền thông tin cá nhận
-                $scope.btntext = "Thành công!";
-                //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
-                //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
-                localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
-                localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
+                    $window.location.href = '/Account/FillInfo';
+                } else if (bool.data[0].Active == "0") { //nếu là 1 thì chưa điền thông tin cá nhận
+                    $scope.btntext = "Thành công!";
+                    //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
+                    //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
+                    localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
+                    localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
 
-                $window.location.href = '/Account/sent';
+                    $window.location.href = '/Account/sent';
+                }
             }
-            else //thông tin đăng nhập k đúng
+            catch {
                 $scope.btntext = "Thông tin đăng nhập không chính xác";
+            }
+           
         });
     }
 
@@ -214,8 +218,6 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload) {
 // Tài khoản
 app.controller("acccontroller", function ($window, $scope, $http) {
     $scope.lin = true;
-
-    console.log($window.location.search);
 
     $scope.logout = function () {
 
@@ -429,4 +431,26 @@ app.controller("quickviewbuy", function ($scope, $location, $http) {
     $scope.details = function (elm) {
         alert("viết code truyền vào giỏ hàng ở dòng 430")
     }
+})
+
+app.controller("productdetails", function ($scope, $location, $http, $window) {
+    var masanpham = $location.search().masanpham;
+    if (masanpham != null) {
+
+        $http({
+            method: 'GET',
+            url: '/Product/getsanpham?masanpham=' + masanpham,
+
+        }).then(function successCallback(response) {
+            $scope.i4 = response.data[0];
+            console.log($scope.i4)
+        })//lấy về i4 sản phẩm
+        $scope.addtocart = function () {
+            alert("")
+        }
+    }
+    else {
+        $window.location.href = '/Index/Index';
+    }
+  
 })

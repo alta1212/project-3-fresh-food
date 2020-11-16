@@ -445,16 +445,10 @@ function s(elm) {
     var id = all.id;
     $("#quickViewModal img").attr("src", anh);
     $("#quickViewModal h3").html(ten);
-    var op = "";
-   
-    for (var i = 1; i < 5; i++) {
-        op += '<option value="' + i + '">' + i +' '+dvt+'</option>';
-                                                       
-    }
-    $("#quickViewModal #dvt").html(op);
+
     $("#quickViewModal #mota").html(mota);
     $("#giagiam").html(giaban);
-    $("#quickViewModal #qvbuybnt").attr("href", "/Product_Details?masanpham="+id);
+    $("#quickViewModal #qvbuybnt").attr("href", "/Product/Product_Details#!?masanpham="+id);
     
     
    
