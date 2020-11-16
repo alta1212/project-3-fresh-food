@@ -34,9 +34,9 @@ namespace BLL_Business_Logic_Layer__
 
 
 
-        public IList<SAN_PHAM> getpagesp(int page,int pagesize)
+        public IList<SAN_PHAM> getPageProduct(int page,int pagesize)
         {
-            return sp.getpagelistsp(page,pagesize);
+            return sp.getPageListProduct(page,pagesize);
         }
         public int getslsp(string maloai)
         {

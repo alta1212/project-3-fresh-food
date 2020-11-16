@@ -127,13 +127,15 @@ namespace DAO_Data_Access_Object_
             return li;
         }
         //phân trang sản phẩm
-        public IList<SAN_PHAM> getpagelistsp(int page,int pagesize)
+        public IList<SAN_PHAM> getPageListProduct(int page,int pagesize)
         {
             DataTable dt = new DataTable();
-            //lấy về 6 sản phẩm bán chạy nhất
-            string cmdtext = string.Format(@"Select  SP.*,GB.GiaBan
-                    From dbo.SAN_PHAM SP Inner join dbo.GIA_BAN GB
-	                        On SP.MaSanPham = GB.MaSanPham order by masanpham desc Offset {0}*({1}-1) Rows Fetch next {0} rows only", page,pagesize);
+            //lấy về các sản phẩm theo pagesize
+            string cmdtext = string.Format(@"Select  SP.*,GB.GiaBan,LSP.TenLoaiSanPham
+                    From dbo.SAN_PHAM SP  Inner Join dbo.GIA_BAN GB 
+	                    On SP.MaSanPham = GB.MaSanPham Inner join dbo.LOAI_SAN_PHAM LSP
+                           On SP.MaLoaiSanPham = LSP.MaLoaiSanPham
+                                order by masanpham desc Offset {0}*({1}-1) Rows Fetch next {0} rows only", page,pagesize);
             dt = DataAccessHelper.log(cmdtext);
             List<SAN_PHAM> li = new List<SAN_PHAM>();
             foreach (DataRow dr in dt.Rows)
@@ -150,6 +152,8 @@ namespace DAO_Data_Access_Object_
                 sp.mota = dr[8].ToString();
                 sp.stars = int.Parse(dr[9].ToString());
                 sp.giaban = int.Parse(dr[10].ToString());
+                sp.tenloaisanpham = dr[11].ToString();
+
                 li.Add(sp);
             }
             return li;

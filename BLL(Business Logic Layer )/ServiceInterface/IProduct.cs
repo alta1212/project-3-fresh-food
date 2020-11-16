@@ -13,7 +13,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<SAN_PHAM> getLatestSp();
 
         IList<SAN_PHAM> getBestSell();
-        IList<SAN_PHAM> getpagesp(int page,int pagesize);
+        IList<SAN_PHAM> getPageProduct(int page,int pagesize);
 
         IList<SAN_PHAM> getbyloaisp(string loai,string page);
         int getslsp(string maloai);

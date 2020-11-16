@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Adminpage;
+using AdminPage;
 using BLL_Business_Logic_Layer__;
 using BLL_Business_Logic_Layer__.ServiceInterface;
 using DTO_Data_Transfer_Object_;
@@ -12,7 +12,7 @@ namespace project_3_fresh_food.Controllers
 {
     public class ProductController : Controller
     {
-        Adminpage.Controllers.AdminController admin = new Adminpage.Controllers.AdminController();
+        AdminPage.Controllers.SanPhamAdminController admin = new AdminPage.Controllers.SanPhamAdminController();
         // GET: Product
         //xử lý liên quan đến sản phẩm
         IList<SAN_PHAM> lis;
@@ -36,7 +36,7 @@ namespace project_3_fresh_food.Controllers
         }
         public JsonResult getpagesp(int pagesize)
         {
-            return admin.getpagepro(1,pagesize);
+            return admin.GetAllProduct(1,pagesize);
         }
         public JsonResult getbyloai(string maloai,string page)
         { lis = sp.getbyloaisp(maloai,page);
