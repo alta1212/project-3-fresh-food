@@ -441,7 +441,6 @@ function s(elm) {
     var ten = all.children[1].children[0].children[0].innerHTML;
     var giaban = all.children[2].children[0].children[1].innerHTML;
     var mota = all.children[2].children[0].children[0].innerHTML;
-    var dvt = all.children[2].children[0].children[3].innerHTML;
     var id = all.id;
     $("#quickViewModal img").attr("src", anh);
     $("#quickViewModal h3").html(ten);
@@ -451,89 +450,37 @@ function s(elm) {
     $("#quickViewModal #qvbuybnt").attr("href", "/Product/Product_Details#!?masanpham="+id);
     
     
-   
+
+    
 
 }
+function a(elm) {
+    var all = elm.parentElement.parentElement.parentElement;
+    var anh = all.children[0].children[0].children[0].src;
+    var ten = all.children[1].children[1].children[0].innerHTML;
+    var giaban = all.children[1].children[2].children[0].innerHTML;
+    var mota = all.children[1].children[3].innerHTML;
+    var id = all.id;
+    $("#quickViewModal img").attr("src", anh);
+    $("#quickViewModal h3").html(ten);
 
-//    <div class="modal fade andro_quick-view-modal" id="quickViewModal" role="dialog" aria-hidden="true">
-//        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-//            <div class="modal-content">
-//                <div class="modal-body">
+    $("#quickViewModal #mota").html(mota);
+    $("#giagiam").html(giaban);
+    $("#quickViewModal #qvbuybnt").attr("href", "/Product/Product_Details#!?masanpham=" + id);
+}
 
-//                    <div class="close-btn close-dark close" data-dismiss="modal">
-//                        <span></span>
-//                        <span></span>
-//                    </div>
 
-//                    <div class="container-fluid">
-//                        <div class="row">
-//                            <div class="col-md-5">
-//                                <img src="~/assets/img/products/9.png" alt="product">
-//                            </div>
-//                                <div class="col-md-7">
+function c(elm) {
+    var all = elm.parentElement.parentElement.parentElement.parentElement.parentElement;
+    var anh = all.children[0].children[0].children[0].src;
+    var ten = all.children[1].children[1].children[0].innerHTML;
+    var giaban = all.children[1].children[3].children[0].children[0].innerHTML;
+    var mota = all.children[1].children[2].innerHTML;
+    var id = all.id;
+    $("#quickViewModal img").attr("src", anh);
+    $("#quickViewModal h3").html(ten);
 
-//                                    <div class="andro_product-single-content">
-
-//                                        <div class="andro_rating-wrapper">
-//                                            <div class="andro_rating">
-//                                                <i class="fa fa-star active"></i>
-//                                                <i class="fa fa-star active"></i>
-//                                                <i class="fa fa-star active"></i>
-//                                                <i class="fa fa-star active"></i>
-//                                                <i class="fa fa-star"></i>
-//                                            </div>
-//                                            <span>4 Stars</span>
-//                                        </div>
-
-//                                        <h3> Tomatoes </h3>
-
-//                                        <div class="andro_product-price">
-//                                            <span>8$</span>
-//                                            <span>14$</span>
-//                                        </div>
-
-//                                        <p class="andro_product-excerpt">Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
-
-//                                        <form class="andro_product-atc-form">
-
-//                                            <div class="andro_product-variation-wrapper">
-//                                                <div class="form-group">
-//                                                    <select class="form-control" name="amount">
-//                                                        <option value="">Select Amount</option>
-//                                                        <option value="1">1 Kilo</option>
-//                                                        <option value="2">2 Kilos</option>
-//                                                        <option value="3">3 Kilos</option>
-//                                                        <option value="4">4 Kilos</option>
-//                                                    </select>
-//                                                </div>
-//                                                <div class="form-group">
-//                                                    <select class="form-control" name="breed">
-//                                                        <option value="">Select a Breed</option>
-//                                                        <option value="italian">Italian</option>
-//                                                        <option value="egyptian">Egyptian</option>
-//                                                    </select>
-//                                                </div>
-//                                            </div>
-
-//                                            <div class="qty-outter">
-//                                                <a href="/Product/Product_Details" class="andro_btn-custom">Buy Now</a>
-//                                                <div class="qty">
-//                                                    <span class="qty-subtract"><i class="fa fa-minus"></i></span>
-//                                                    <input type="text" name="qty" value="1">
-//                                                        <span class="qty-add"><i class="fa fa-plus"></i></span>
-//                                            </div>
-//                                                </div>
-
-//                                    </form>
-
-//                                </div>
-
-//                                    </div>
-//                                </div>
-//                            </div>
-
-//                        </div>
-//                    </div>
-//                </div>
-//            </div>
-       
+    $("#quickViewModal #mota").html(mota);
+    $("#giagiam").html(giaban);
+    $("#quickViewModal #qvbuybnt").attr("href", "/Product/Product_Details#!?masanpham=" + id);
+}

@@ -55,14 +55,24 @@ namespace project_3_fresh_food.Controllers
 
           
 
-        
-        public int ActiveAcc(string code)
-        {
-          
-            return acc.active(code);
-        }    
-       
 
+        public ActionResult Active(string code)
+        {
+            try//nếu khách hàng vào trang active mà k có code xác nhận sẽ điều hướng về trang đăng nhập
+            {
+                ViewBag.status = acc.active(code);
+                return View();
+            }
+            catch
+            {
+                return View("Login");
+
+
+            }
+
+
+
+        }
         public JsonResult DoLogin(KHACH_HANG KHACH_HANG)
         {
             return Json(acc.log(KHACH_HANG.taikhoan, KHACH_HANG.matkhau), JsonRequestBehavior.AllowGet);

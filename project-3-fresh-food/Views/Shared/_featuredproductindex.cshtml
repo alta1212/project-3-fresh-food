@@ -2,7 +2,7 @@
 <div ng-repeat="i in featuredpro" class="col-sm-6">
     <div id="{{i.masanpham}}" class="andro_product andro_product-minimal andro_product-has-controls andro_product-has-buttons">
         <div class="andro_product-thumb">
-            <a href="/Product/Product_Details"><img src="{{i.hinhanh}}" alt="product"></a>
+            <a href="/Product/Product_Details#!?masanpham={{i.masanpham}}"><img src="{{i.hinhanh}}" alt="product"></a>
         </div>
         <div class="andro_product-body">
             <h6 class="andro_product-title"> <a href="product-single.html"> {{i.tensanpham}} </a> </h6>
