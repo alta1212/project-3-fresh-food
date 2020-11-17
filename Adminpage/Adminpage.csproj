@@ -276,11 +276,27 @@
     <Content Include="Assets\js\waypoints.min.js" />
     <Content Include="Assets\js\worldLow.js" />
     <Content Include="Assets\js\wow.min.js" />
+    <Content Include="Assets\res\css\main.css" />
+    <Content Include="Assets\res\css\util.css" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="Assets\res\images\icons\favicon.ico" />
+    <Content Include="Assets\res\images\img-01.png" />
+    <Content Include="Assets\res\vendor\animate\animate.css" />
+    <Content Include="Assets\res\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Assets\res\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Assets\res\vendor\bootstrap\js\popper.js" />
+    <Content Include="Assets\res\vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="Assets\res\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="Assets\res\vendor\select2\select2.min.css" />
+    <Content Include="Assets\res\vendor\select2\select2.min.js" />
+    <Content Include="Assets\res\vendor\tilt\tilt.jquery.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\accountsAdminController.cs" />
     <Compile Include="Controllers\SanPhamAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -320,6 +336,15 @@
     <Content Include="Assets\fonts\slick.woff" />
     <Content Include="Assets\fonts\slickd41d.eot" />
     <Content Include="Assets\images\book\book.pdf" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.eot" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.ttf" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.woff2" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="Assets\res\fonts\montserrat\Montserrat-Bold.ttf" />
+    <Content Include="Assets\res\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="Assets\res\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="Assets\res\fonts\poppins\Poppins-Regular.ttf" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
@@ -328,6 +353,7 @@
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\SanPhamAdmin\ManagerProduct.cshtml" />
     <Content Include="Views\Shared\_TitelPage.cshtml" />
+    <Content Include="Views\accountsAdmin\login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

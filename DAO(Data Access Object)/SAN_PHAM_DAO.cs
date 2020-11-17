@@ -34,6 +34,40 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
+        public IList<SAN_PHAM> searchName(string name,int page,int pagesize)
+        {
+            DataTable dt = new DataTable();
+            //lấy về các sản phẩm theo pagesize
+            string cmdtext = string.Format(@"Select  SP.*,GB.GiaBan,LSP.TenLoaiSanPham
+                    From dbo.SAN_PHAM SP  Inner Join dbo.GIA_BAN GB 
+	                    On SP.MaSanPham = GB.MaSanPham Inner join dbo.LOAI_SAN_PHAM LSP
+                           On SP.MaLoaiSanPham = LSP.MaLoaiSanPham and sp.tensanpham like'%{2}%'
+                                order by masanpham desc Offset {0}*({1}-1) Rows Fetch next {0} rows only", pagesize, page,name);
+            dt = DataAccessHelper.log(cmdtext);
+           
+            List<SAN_PHAM> li = new List<SAN_PHAM>();
+            
+            foreach (DataRow dr in dt.Rows)
+            {
+                SAN_PHAM sp = new SAN_PHAM();
+                sp.maloaisanpham = dr[0].ToString();
+                sp.masanpham = dr[1].ToString();
+                sp.tensanpham = dr[2].ToString();
+                sp.soluongnhap = int.Parse(dr[3].ToString());
+                sp.SoLuongban = int.Parse(dr[4].ToString());
+                sp.soluongCon = int.Parse(dr[5].ToString());
+                sp.hinhanh = dr[6].ToString();
+                sp.donvitinh = dr[7].ToString();
+                sp.mota = dr[8].ToString();
+                sp.stars = int.Parse(dr[9].ToString());
+                sp.giaban = int.Parse(dr[10].ToString());
+                sp.tenloaisanpham = dr[11].ToString();
+
+                li.Add(sp);
+            }
+            return li;
+        }
+
         public object getttsanpham(string masanpham)
         {
              DataTable dt = new DataTable();

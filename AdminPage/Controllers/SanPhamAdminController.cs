@@ -28,5 +28,11 @@ namespace AdminPage.Controllers
             sanPham = product.getPageProduct(size, page);
             return Json(sanPham, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult searchNameProduct(string name, int page, int size)
+        {
+            sanPham = product.searchName(name,  page, size);
+            return Json(sanPham, JsonRequestBehavior.AllowGet);
+        }
+       
     }
 }

@@ -48,5 +48,10 @@ namespace BLL_Business_Logic_Layer__
         {
             return sp.getttsanpham(masanpham);
         }
+
+        public IList<SAN_PHAM> searchName(string name, int page, int pagesize)
+        {
+            return sp.searchName(name,page,pagesize);
+        }
     }
 }
