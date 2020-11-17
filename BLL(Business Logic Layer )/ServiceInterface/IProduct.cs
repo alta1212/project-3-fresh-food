@@ -16,6 +16,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<SAN_PHAM> getPageProduct(int page,int pagesize);
 
         IList<SAN_PHAM> getbyloaisp(string loai,string page);
+        void addtocart(string mkh, string msp);
         int getslsp(string maloai);
         object getthongtinsanpham(string masanpham);
         IList<SAN_PHAM> searchName(string name, int page, int pagesize);

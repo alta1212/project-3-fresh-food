@@ -12,10 +12,7 @@ namespace AdminPage.Controllers
     public class SanPhamAdminController : Controller
     {
         // GET: SanPhamAdmin
-        public ActionResult Index()
-        {
-            return View();
-        }
+     
         public ActionResult ManagerProduct()
         {
             return View();
@@ -33,6 +30,6 @@ namespace AdminPage.Controllers
             sanPham = product.searchName(name,  page, size);
             return Json(sanPham, JsonRequestBehavior.AllowGet);
         }
-       
+
     }
 }

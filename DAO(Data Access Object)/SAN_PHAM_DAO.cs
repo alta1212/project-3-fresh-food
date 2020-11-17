@@ -11,6 +11,7 @@ namespace DAO_Data_Access_Object_
     {   //get về 6 sản phẩm ngẫu nhiên đẻ đưa ra trang chủ
         public IList<SAN_PHAM> getallsp()
         {
+
             DataTable dt = new DataTable();
             string cmdtext = string.Format(@"
             Select TOP(6) SP.MaSanPham,SP.TenSanPham,SP.HinhAnh,SP.MoTa,SP.Stars,SP.DonViTinh,GB.GiaBan
@@ -32,6 +33,20 @@ namespace DAO_Data_Access_Object_
                 li.Add(sp);
             }
             return li;
+        }
+
+        public void addtocart(string mkh, string msp)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+             {
+                new SqlParameter("",SqlDbType.NVarChar,50),
+                new SqlParameter("",SqlDbType.NVarChar,50),
+              
+             };
+            parm[0].Value = mkh;
+            parm[1].Value = msp;
+           
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "register", parm);
         }
 
         public IList<SAN_PHAM> searchName(string name,int page,int pagesize)
@@ -198,6 +213,7 @@ namespace DAO_Data_Access_Object_
         //lấy về sl sản phẩm
         public int getslsp(string maloai)
         {
+       
             DataTable dt = new DataTable();
 
             string cmdtext = string.Format(@"select count(masanpham) from [dbo].[SAN_PHAM] where maloaisanpham like '%{0}%'",maloai);
