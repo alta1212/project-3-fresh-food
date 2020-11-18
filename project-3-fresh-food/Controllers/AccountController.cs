@@ -12,7 +12,7 @@ namespace project_3_fresh_food.Controllers
     {
       
         Class1 to = new Class1();
-        IAccountBll acc = new KHACH_HANG_BLL();
+        IAccount acc = new KHACH_HANG_BLL();
         // GET: Account
         // Xử lý các sự kiện liên quan đến tài khoản
         public ActionResult Login()

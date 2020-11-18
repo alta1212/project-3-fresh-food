@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL_Business_Logic_Layer__.ServiceInterface
 {
-    public interface IAccountBll
+    public interface IAccount
     {
        void DoRegister(KHACH_HANG KHACH_HANG,string code);
        int active(string code);

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BLL_Business_Logic_Layer__
 {
-    public class KHACH_HANG_BLL : IAccountBll
+    public class KHACH_HANG_BLL : IAccount
     {
 
         private readonly KHACH_HANG_DAO dao = new KHACH_HANG_DAO();

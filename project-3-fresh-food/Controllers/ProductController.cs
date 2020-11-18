@@ -52,5 +52,6 @@ namespace project_3_fresh_food.Controllers
             var sanpham = sp.getthongtinsanpham(masanpham);
             return Json(sanpham, JsonRequestBehavior.AllowGet);
         }
+      
     }
 }

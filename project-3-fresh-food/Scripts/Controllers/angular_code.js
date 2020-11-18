@@ -42,7 +42,7 @@ app.controller("login", function ($scope, $http, $window) {
             catch {
                 $scope.btntext = "Thông tin đăng nhập không chính xác";
             }
-           
+
         });
     }
 
@@ -224,7 +224,7 @@ app.controller("acccontroller", function ($window, $scope, $http) {
         localStorage.clear();
         $window.location.href = '/Account/Login';
     }
-   
+
     if (localStorage.getItem('taikhoan') != null && localStorage.getItem('matkhau') != null) { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
 
         var data = {
@@ -320,7 +320,7 @@ app.controller("navmenu", function ($scope, $http, $window) {
 
     })
     $scope.getheoloai = function (maloai) {
-   
+
 
         $window.location.href = '/Product/Shop#!?maloai=' + maloai;
     }
@@ -328,7 +328,7 @@ app.controller("navmenu", function ($scope, $http, $window) {
 //hiển thị sản phẩm ra trang sản phẩm
 app.controller("shop", function ($scope, $location, $http) {
 
-   
+
 
     $scope.show = 20;
 
@@ -345,7 +345,7 @@ app.controller("shop", function ($scope, $location, $http) {
 
         $http({
             method: 'GET',
-            url: '/Product/getpagesp?pagesize='+$scope.show+'&&page=1',
+            url: '/Product/getpagesp?pagesize=' + $scope.show + '&&page=1',
 
         }).then(function successCallback(response) {
             $scope.lisp = response.data;
@@ -364,14 +364,14 @@ app.controller("shop", function ($scope, $location, $http) {
 
             $http({
                 method: 'GET',
-                url: '/Product/getpagesp?pagesize=' + $scope.show  ,
+                url: '/Product/getpagesp?pagesize=' + $scope.show,
 
             }).then(function successCallback(response) {
                 $scope.lisp = response.data;
                 console.log(response.data)
             })
         }
-      
+
 
     }
     else {
@@ -386,14 +386,14 @@ app.controller("shop", function ($scope, $location, $http) {
                 $scope.loadpage = {
                     "display": "none"
                 }
-        }
+            }
         })//lấy về sl sản phẩm
-       
+
 
         $http({
             method: 'GET',
             url: '/Product/getbyloai?maloai=' + $location.search().maloai + '&&page=' + $scope.show,
-         //   params=$location.search().maloai
+            //   params=$location.search().maloai
 
         }).then(function successCallback(response) {
             $scope.lisp = response.data;
@@ -420,8 +420,8 @@ app.controller("shop", function ($scope, $location, $http) {
         }
 
     }
-   
-     
+
+
 })
 
 
@@ -452,5 +452,7 @@ app.controller("productdetails", function ($scope, $location, $http, $window) {
     else {
         $window.location.href = '/Index/Index';
     }
-  
+
 })
+
+app.controller('cart', function () { })

@@ -12,6 +12,12 @@ namespace BLL_Business_Logic_Layer__
     public class SAN_PHAM_BLL : IProduct
     {
         SAN_PHAM_DAO sp = new SAN_PHAM_DAO();
+
+        public void addtocart(string mkh, string msp)
+        {
+            sp.addtocart(mkh,msp);
+        }
+
         public IList<SAN_PHAM> Getall()
         {
             return sp.getallsp();

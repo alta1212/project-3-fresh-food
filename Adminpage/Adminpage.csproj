@@ -282,6 +282,7 @@
     <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.svg" />
     <Content Include="Assets\res\images\icons\favicon.ico" />
     <Content Include="Assets\res\images\img-01.png" />
+    <Content Include="Assets\res\js\main.js" />
     <Content Include="Assets\res\vendor\animate\animate.css" />
     <Content Include="Assets\res\vendor\bootstrap\css\bootstrap.min.css" />
     <Content Include="Assets\res\vendor\bootstrap\js\bootstrap.min.js" />
@@ -296,8 +297,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\accountsAdminController.cs" />
-    <Compile Include="Controllers\LoaiSanPhamController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\SanPhamAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -354,8 +354,9 @@
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\SanPhamAdmin\ManagerProduct.cshtml" />
     <Content Include="Views\Shared\_TitelPage.cshtml" />
-    <Content Include="Views\accountsAdmin\login.cshtml" />
-    <Content Include="Views\LoaiSanPham\GetAllProductType.cshtml" />
+    <Content Include="Views\Admin\login.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminAcc.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -366,6 +367,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\guestEvent\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL%28Business Logic Layer %29\BLL%28Business Logic Layer %29.csproj">
