@@ -62,14 +62,13 @@ myApp.controller('managerProduct', function ($scope, $location, $window, $http) 
 myApp.controller('managerProductType', function ($scope,  $http) {
     $http({
         method: 'get',
-        url: '/LoaiSanPham/GetAllProductTypeJS'
+        url: '/LoaiSanPhamAdmin/GetAllProductTypeJS'
 
     })
         .then(function (jsonResults) {
             $scope.getJsonResults = jsonResults.data;
-            console.log($scope.getJsonResults)
+            console.log($scope.getJsonResults)  
         })
-
 }
 );
 
@@ -113,8 +112,9 @@ myApp.controller('adminIndex', function ($scope, $http) {//thống kê trên tra
        
     })
 })
+
 myApp.controller("accAdminNav", function ($scope, $http, $window) {
-    
+
     if (localStorage.getItem("email") != null && localStorage.getItem("matkhau") != null) {
         var i4 = {
             email: localStorage.getItem("email"),
@@ -125,13 +125,13 @@ myApp.controller("accAdminNav", function ($scope, $http, $window) {
             url: '/Admin/log',
             data: i4
         }).then(function (call) {
-           
+
             if (call.data.length != 0) {
                 localStorage.setItem("hinhanh", call.data[0].hinhanh)
                 localStorage.setItem("ten", call.data[0].tennhanvien)
                 $scope.anh = localStorage.getItem("hinhanh");
                 $scope.ten = localStorage.getItem("ten");
-                
+
             }
             else {
                 localStorage.clear();
@@ -139,6 +139,10 @@ myApp.controller("accAdminNav", function ($scope, $http, $window) {
             }
         })
 
+    }
+    else {
+        localStorage.clear();
+        $window.location.href = '/Admin/login';
     }
     $scope.signout = function () {
         localStorage.clear();

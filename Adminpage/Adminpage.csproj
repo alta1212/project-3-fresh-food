@@ -298,6 +298,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\LoaiSanPhamAdminController.cs" />
     <Compile Include="Controllers\SanPhamAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -357,6 +358,7 @@
     <Content Include="Views\Admin\login.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_AdminAcc.cshtml" />
+    <Content Include="Views\LoaiSanPhamAdmin\GetAllProductType.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

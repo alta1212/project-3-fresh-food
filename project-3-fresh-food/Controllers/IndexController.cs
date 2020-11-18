@@ -32,7 +32,7 @@ namespace project_3_fresh_food.Controllers
         // Sản phẩm theo loại
         public JsonResult getLsP()
         {
-            listlsp = lsp.GetLsp();
+            listlsp = lsp.GetAllLSP();
             return Json(listlsp, JsonRequestBehavior.AllowGet);
         }
         // Sản phẩm nổi bật

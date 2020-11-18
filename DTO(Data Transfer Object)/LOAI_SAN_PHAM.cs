@@ -13,13 +13,13 @@ namespace DTO_Data_Transfer_Object_
         public string mota;
         public int soLuong;
 
-        public LOAI_SAN_PHAM(string maloai, string tenloai, string mota,int soLuong)
+        public LOAI_SAN_PHAM(string maloai, string tenloai, string mota, int soLuong)
         {
             this.maloaisanpham = maloai;
             this.tenloaisanpham = tenloai;
             this.mota = mota;
             this.soLuong = soLuong;
-          
+
         }
         public LOAI_SAN_PHAM()
         {
@@ -28,7 +28,7 @@ namespace DTO_Data_Transfer_Object_
         public string MaLoaiSanPham
         {
             get { return maloaisanpham; }
-            set {  maloaisanpham =value; }
+            set { maloaisanpham = value; }
         }
 
         public string TenLoaiSanPham

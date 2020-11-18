@@ -300,7 +300,7 @@
       <Name>BLL%28Business Logic Layer %29</Name>
     </ProjectReference>
     <ProjectReference Include="..\DTO%28Data Transfer Object%29\DTO%28Data Transfer Object%29.csproj">
-      <Project>{2BAED398-2677-4344-A468-FB7EA509A1AA}</Project>
+      <Project>{2baed398-2677-4344-a468-fb7ea509a1aa}</Project>
       <Name>DTO%28Data Transfer Object%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\tool\tool.csproj">
