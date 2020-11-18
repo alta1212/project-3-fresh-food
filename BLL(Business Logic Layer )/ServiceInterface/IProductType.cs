@@ -9,7 +9,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
 {
     public interface IProductType
     {
-        IList<LOAI_SAN_PHAM> GetLsp();
+        IList<LOAI_SAN_PHAM> GetAllLSP();
        
     }
 }

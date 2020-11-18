@@ -16,6 +16,11 @@
         public int soluongcon;
         public string tenloaisanpham;
 
+        //public SAN_PHAM(string maLoaiSanPham,string tenLoaiSanPham, string maSanPham, int soLuongNhap, int soLuongBan, string moTa, string hinhAnh, string donViTinh,  int stars, int giaMoi, int giaBan, int soLuongCon, string tenloaiSanPham) 
+        //{
+        //    this.maloaisanpham = maLoaiSanPham;
+        //    this
+        //}
         public string Tenloaisanpham
         {
             get { return tenloaisanpham; }

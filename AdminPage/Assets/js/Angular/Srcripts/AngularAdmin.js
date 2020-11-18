@@ -59,6 +59,22 @@ myApp.controller('managerProduct', function ($scope, $location, $window, $http) 
 
     }
 );
+myApp.controller('managerProductType', function ($scope,  $http) {
+    $http({
+        method: 'get',
+        url: '/LoaiSanPham/GetAllProductTypeJS'
+
+    })
+        .then(function (jsonResults) {
+            $scope.getJsonResults = jsonResults.data;
+            console.log($scope.getJsonResults)
+        })
+
+}
+);
+
+
+
 
 myApp.controller('loginAdmin', function ($scope) {
     $scope.login = function () {

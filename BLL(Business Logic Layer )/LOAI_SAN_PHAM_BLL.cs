@@ -11,10 +11,10 @@ namespace BLL_Business_Logic_Layer__
 {
     public class LOAI_SAN_PHAM_BLL : IProductType
     {
-        LOAI_SAN_PHAM_DAO lsp = new  LOAI_SAN_PHAM_DAO();
-        public IList<LOAI_SAN_PHAM> GetLsp()
+        LOAI_SAN_PHAM_DAO LSP = new  LOAI_SAN_PHAM_DAO();
+        public IList<LOAI_SAN_PHAM> GetAllLSP()
         {
-           return lsp.getAllLsp();
+           return LSP.GetAllLSP();
         }
     }
 }

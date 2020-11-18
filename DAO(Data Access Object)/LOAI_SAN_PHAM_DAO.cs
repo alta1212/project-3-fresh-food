@@ -14,17 +14,25 @@ namespace DAO_Data_Access_Object_
         private const string parm_MaLoaiSanPham = "@MaLoaiSanPham";
         private const string parm_TenLoaiSanPham = "@TenLoaiSanPham";
         private const string parm_Mota = "@MoTa";
-        public IList<LOAI_SAN_PHAM> getAllLsp()
-        { 
-            string cmdtext = "select * from [dbo].[LOAI_SAN_PHAM]";
-            SqlDataReader read = DataAccessHelper.getallLsp(DataAccessHelper.ConnectionString,cmdtext);
-            IList<LOAI_SAN_PHAM> list = new List<LOAI_SAN_PHAM>();
-            while (read.Read())
+        public IList<LOAI_SAN_PHAM> GetAllLSP()
+        {
+            DataTable dt = new DataTable();
+            string cmdText = string.Format(@"
+                Select LSP.*, Count(SP.MaLoaiSanPham) as 'Số lượng' From [dbo].[LOAI_SAN_PHAM] LSP Inner join [dbo].[SAN_PHAM] SP
+                    On LSP.MaLoaiSanPham = SP.MaLoaiSanPham
+                        Group By LSP.MaLoaiSanPham, LSP.TenLoaiSanPham, LSP.MoTa");
+            dt = DataAccessHelper.log(cmdText);
+            List<LOAI_SAN_PHAM> li = new List<LOAI_SAN_PHAM>();
+            foreach (DataRow dr in dt.Rows)
             {
-                list.Add(new LOAI_SAN_PHAM(read["MaLoaiSanPham"].ToString(), read["TenLoaiSanPham"].ToString(), read["MoTa"].ToString()));
+                LOAI_SAN_PHAM lsp = new LOAI_SAN_PHAM();
+                lsp.maloaisanpham = dr[0].ToString();
+                lsp.tenloaisanpham = dr[1].ToString();
+                lsp.mota = dr[2].ToString();
+                lsp.soLuong = int.Parse(dr[3].ToString());
+                li.Add(lsp);
             }
-            read.Dispose();
-            return list;
+            return li;
         }
     }
 }
