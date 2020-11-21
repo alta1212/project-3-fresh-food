@@ -138,7 +138,7 @@ myApp.controller("accAdminNav", function ($scope, $http, $window) {
                 $window.location.href = '/Admin/login';
             }
         })
-
+       
     }
     else {
         localStorage.clear();
