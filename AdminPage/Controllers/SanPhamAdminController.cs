@@ -22,7 +22,7 @@ namespace AdminPage.Controllers
         IList<SAN_PHAM> sanPham;
         public JsonResult GetAllProduct(int page, int size)
         {
-            sanPham = product.getPageProduct(size, page);
+            sanPham = product.getPageProduct(page, size);
             return Json(sanPham, JsonRequestBehavior.AllowGet);
         }
         public JsonResult searchNameProduct(string name, int page, int size)

@@ -1,45 +1,72 @@
-﻿namespace DTO_Data_Transfer_Object_
+﻿using System;
+
+namespace DTO_Data_Transfer_Object_
 {
     public class SAN_PHAM
     {
-        public string maloaisanpham;
-        public string Tensanpham;
-        public string masanpham;
-        public int soluongnhap;
-        public int soluongban;
-        public string mota;
-        public string hinhanh;
-        public string donvitinh;
-        public int stars;
-        public int giamoi;
-        public int giaban;
-        public int soluongcon;
-        public string tenloaisanpham;
+        private string maLoaiSanPham;
+        private string tenSanPham;
+        private string maSanPham;
+        private int soLuongNhap;
+        private int soLuongBan;
+        private string moTa;
+        private string hinhAnh;
+        private string donViTinh;
+        private int stars;
+        private int giaMoi;
+        private int giaBan;
+        private int soLuongCon;
+        private string tenLoaiSanPham;
+        private DateTime ngayBatDauKM;
+        private DateTime ngayKetThucKM;
 
-        //public SAN_PHAM(string maLoaiSanPham,string tenLoaiSanPham, string maSanPham, int soLuongNhap, int soLuongBan, string moTa, string hinhAnh, string donViTinh,  int stars, int giaMoi, int giaBan, int soLuongCon, string tenloaiSanPham) 
-        //{
-        //    this.maloaisanpham = maLoaiSanPham;
-        //    this
-        //}
+        public SAN_PHAM()
+        {
+
+        }
+        public SAN_PHAM(string maLoaiSanPham, string tenLoaiSanPham, string maSanPham, int soLuongNhap, int soLuongBan, string moTa, string hinhAnh, string donViTinh, int stars, int giaMoi, int giaBan, int soLuongCon, string tenloaiSanPham, DateTime ngayBatDauKM, DateTime ngayKetThucKM)
+        {
+            this.maLoaiSanPham = maLoaiSanPham;
+            this.tenLoaiSanPham = tenLoaiSanPham;
+            this.maSanPham = maSanPham;
+            this.soLuongNhap = soLuongNhap;
+            this.soLuongBan = soLuongBan;
+            this.moTa = moTa;
+            this.hinhAnh = hinhAnh;
+            this.donViTinh = donViTinh;
+            this.stars = stars;
+            this.giaMoi = giaMoi;
+            this.giaBan = giaBan;
+            this.soLuongCon = soluongCon;
+            this.tenLoaiSanPham = tenLoaiSanPham;
+            this.ngayBatDauKM = ngayBatDauKM;
+            this.ngayKetThucKM = ngayKetThucKM;
+
+        }
+        public string DonViTinh
+        {
+            get { return donViTinh; }
+            set { donViTinh = value; }
+        }
         public string Tenloaisanpham
         {
-            get { return tenloaisanpham; }
-            set { tenloaisanpham = value; }
+            get { return tenLoaiSanPham; }
+            set { tenLoaiSanPham = value; }
         }
         public int soluongCon
         {
-            get { return soluongcon; }
-            set { soluongcon = value; }
+            get { return soLuongCon; }
+            set { soLuongCon = value; }
         }
         public string MaLoaiSanPham
         {
-            get { return maloaisanpham; }
-            set { maloaisanpham = value; }
+            get { return maLoaiSanPham; }
+            set { maLoaiSanPham = value; }
         }
         public string Hinhanh
         {
-            get { return hinhanh; }
-            set { hinhanh = value; }
+            get { return hinhAnh; }
+            set { hinhAnh = value; }
         }
         public int Stars
         {
@@ -52,38 +79,40 @@
         }
         public string tensanpham
         {
-            get { return Tensanpham; }
-            set { Tensanpham = value; }
+            get { return tenSanPham; }
+            set { tenSanPham = value; }
         }
         public string MoTa
         {
-            get { return mota; }
-            set { mota = value; }
+            get { return moTa; }
+            set { moTa = value; }
         }
         public string MaSanPham
         {
-            get { return masanpham; }
-            set { masanpham = value; }
+            get { return maSanPham; }
+            set { maSanPham = value; }
         }
         public int SoLuongnhap
         {
-            get { return soluongnhap; }
-            set { soluongnhap = value; }
+            get { return soLuongNhap; }
+            set { soLuongNhap = value; }
         }
         public int SoLuongban
         {
-            get { return soluongban; }
-            set { soluongban = value; }
+            get { return soLuongBan; }
+            set { soLuongBan = value; }
         }
         public int Giamoi
         {
-            get { return giamoi; }
-            set { giamoi = value; }
+            get { return giaMoi; }
+            set { giaMoi = value; }
         }
         public int Giaban
         {
-            get { return giaban; }
-            set { giaban = value; }
+            get { return giaBan; }
+            set { giaBan = value; }
         }
+        public DateTime NgayBatDauKM { get { return ngayBatDauKM; } set { ngayBatDauKM = value; } }
+        public DateTime NgayKetThucKM { get { return ngayKetThucKM; } set { ngayKetThucKM = value; } }
     }
 }

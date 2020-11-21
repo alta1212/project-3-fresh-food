@@ -16,7 +16,6 @@ namespace project_3_fresh_food.Controllers
         // GET: Product
         //xử lý liên quan đến sản phẩm
         IList<SAN_PHAM> lis;
-
         IProduct sp = new SAN_PHAM_BLL();
         public ActionResult Shop()//shop toàn bộ sản phẩm
         {
@@ -34,13 +33,14 @@ namespace project_3_fresh_food.Controllers
         {
             return View();
         }
+        // pageSize là số phần sản phẩm được hiện thị
         public JsonResult getpagesp(int pagesize)
         {
-            return admin.GetAllProduct(1,pagesize);
+            return admin.GetAllProduct(pagesize,1);
         }
         public JsonResult getbyloai(string maloai,string page)
-        { lis = sp.getbyloaisp(maloai,page);
-
+        { 
+            lis = sp.getbyloaisp(maloai,page);
             return Json(lis,JsonRequestBehavior.AllowGet);
         }    
         public int getslsp(string maloai)
@@ -52,6 +52,13 @@ namespace project_3_fresh_food.Controllers
             var sanpham = sp.getthongtinsanpham(masanpham);
             return Json(sanpham, JsonRequestBehavior.AllowGet);
         }
-      
+
+        public JsonResult GetProductDiscount()
+        {
+            lis = sp.getProductDiscount();
+            return Json(lis, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

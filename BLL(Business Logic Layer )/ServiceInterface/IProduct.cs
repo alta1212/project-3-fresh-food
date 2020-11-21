@@ -10,10 +10,14 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
     public interface IProduct
     {
         IList<SAN_PHAM> Getall();
+        // Lấy sản phẩm 
         IList<SAN_PHAM> getLatestSp();
-
+        // Lấy sản phẩm bán chạy
         IList<SAN_PHAM> getBestSell();
+        // Phân trang sản phẩm của trang admin
         IList<SAN_PHAM> getPageProduct(int page,int pagesize);
+        // Lấy sản phẩm giảm giá
+        IList<SAN_PHAM> getProductDiscount();
 
         IList<SAN_PHAM> getbyloaisp(string loai,string page);
         void addtocart(string mkh, string msp);

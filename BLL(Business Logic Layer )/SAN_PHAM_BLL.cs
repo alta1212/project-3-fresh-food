@@ -39,7 +39,10 @@ namespace BLL_Business_Logic_Layer__
         }
 
 
-
+        public IList<SAN_PHAM> getProductDiscount()
+        {
+            return sp.getProductDiscount();
+        }
         public IList<SAN_PHAM> getPageProduct(int page,int pagesize)
         {
             return sp.getPageListProduct(page,pagesize);

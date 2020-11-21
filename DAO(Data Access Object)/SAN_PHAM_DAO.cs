@@ -23,13 +23,13 @@ namespace DAO_Data_Access_Object_
             foreach (DataRow dr in dt.Rows)
             {
                 SAN_PHAM sp = new SAN_PHAM();
-                sp.masanpham = dr[0].ToString();
+                sp.MaSanPham = dr[0].ToString();
                 sp.tensanpham = dr[1].ToString();
-                sp.hinhanh = dr[2].ToString();
-                sp.mota = dr[3].ToString(); 
-                sp.stars = int.Parse(dr[4].ToString());
-                sp.donvitinh = dr[5].ToString();
-                sp.giaban = int.Parse(dr[6].ToString());
+                sp.Hinhanh = dr[2].ToString();
+                sp.MoTa = dr[3].ToString();
+                sp.Stars = int.Parse(dr[4].ToString());
+                sp.DonViTinh = dr[5].ToString();
+                sp.Giaban = int.Parse(dr[6].ToString());
                 li.Add(sp);
             }
             return li;
@@ -65,19 +65,18 @@ namespace DAO_Data_Access_Object_
             foreach (DataRow dr in dt.Rows)
             {
                 SAN_PHAM sp = new SAN_PHAM();
-                sp.maloaisanpham = dr[0].ToString();
-                sp.masanpham = dr[1].ToString();
+                sp.MaLoaiSanPham = dr[0].ToString();
+                sp.MaSanPham = dr[1].ToString();
                 sp.tensanpham = dr[2].ToString();
-                sp.soluongnhap = int.Parse(dr[3].ToString());
+                sp.SoLuongnhap = int.Parse(dr[3].ToString());
                 sp.SoLuongban = int.Parse(dr[4].ToString());
                 sp.soluongCon = int.Parse(dr[5].ToString());
-                sp.hinhanh = dr[6].ToString();
-                sp.donvitinh = dr[7].ToString();
-                sp.mota = dr[8].ToString();
-                sp.stars = int.Parse(dr[9].ToString());
-                sp.giaban = int.Parse(dr[10].ToString());
-                sp.tenloaisanpham = dr[11].ToString();
-
+                sp.Hinhanh = dr[6].ToString();
+                sp.DonViTinh = dr[7].ToString();
+                sp.MoTa = dr[8].ToString();
+                sp.Stars = int.Parse(dr[9].ToString());
+                sp.Giaban = int.Parse(dr[10].ToString());
+                sp.Tenloaisanpham = dr[11].ToString();
                 li.Add(sp);
             }
             return li;
@@ -89,24 +88,24 @@ namespace DAO_Data_Access_Object_
             
             string cmdtext = string.Format(@"Select  SP.*,GB.GiaBan,lsp.tenloaisanpham
                     From dbo.SAN_PHAM SP Inner join dbo.GIA_BAN GB
-	                        On SP.MaSanPham = GB.MaSanPham inner join [dbo].[LOAI_SAN_PHAM] lsp on lsp.maloaisanpham=sp.maloaisanpham  and sp.masanpham='{0}'  order by masanpham ", masanpham);
+	                        On SP.MaSanPham = GB.MaSanPham inner join [dbo].[LOAI_SAN_PHAM] lsp on lsp.maLoaiSanPham=sp.maLoaiSanPham  and sp.masanpham='{0}'  order by masanpham ", masanpham);
             dt = DataAccessHelper.log(cmdtext);
             List<SAN_PHAM> li = new List<SAN_PHAM>();
             foreach (DataRow dr in dt.Rows)
             {
                 SAN_PHAM sp = new SAN_PHAM();
-                sp.maloaisanpham = dr[0].ToString();
-                sp.masanpham = dr[1].ToString();
-                sp.tensanpham = dr[2].ToString();
-                sp.soluongnhap = int.Parse(dr[3].ToString());
-                sp.SoLuongban = int.Parse(dr[4].ToString());
+                sp.MaLoaiSanPham = dr[0].ToString();
+                sp.MaSanPham = dr[1].ToString();
+                sp.SoLuongnhap = int.Parse(dr[3].ToString());
                 sp.soluongCon = int.Parse(dr[5].ToString());
-                sp.hinhanh = dr[6].ToString();
-                sp.donvitinh = dr[7].ToString();
-                sp.stars = int.Parse(dr[9].ToString());
-                sp.mota = dr[8].ToString();
-                sp.giaban=int.Parse(dr[10].ToString());
-                sp.tenloaisanpham= dr[11].ToString();
+                sp.SoLuongban = int.Parse(dr[4].ToString());
+                sp.tensanpham = dr[2].ToString();
+                sp.Hinhanh = dr[6].ToString();
+                sp.DonViTinh = dr[7].ToString();
+                sp.Stars = int.Parse(dr[9].ToString());
+                sp.MoTa = dr[8].ToString();
+                sp.Giaban=int.Parse(dr[10].ToString());
+                sp.Tenloaisanpham= dr[11].ToString();
                 li.Add(sp);
             }
             return li;
@@ -120,23 +119,23 @@ namespace DAO_Data_Access_Object_
             
             string cmdtext = string.Format(@"Select  SP.*,GB.GiaBan
                     From dbo.SAN_PHAM SP Inner join dbo.GIA_BAN GB
-	                        On SP.MaSanPham = GB.MaSanPham  and sp.maloaisanpham='{1}'  order by masanpham desc Offset 1 Rows Fetch next {0} rows only", page,loai);
+	                        On SP.MaSanPham = GB.MaSanPham  and sp.maLoaiSanPham='{1}'  order by masanpham desc Offset 1 Rows Fetch next {0} rows only", page,loai);
             dt = DataAccessHelper.log(cmdtext);
             List<SAN_PHAM> li = new List<SAN_PHAM>();
             foreach (DataRow dr in dt.Rows)
             {
                 SAN_PHAM sp = new SAN_PHAM();
-                sp.maloaisanpham = dr[0].ToString();
-                sp.masanpham = dr[1].ToString();
+                sp.MaLoaiSanPham = dr[0].ToString();
+                sp.MaSanPham = dr[1].ToString();
                 sp.tensanpham = dr[2].ToString();
-                sp.soluongnhap = int.Parse(dr[3].ToString());
+                sp.SoLuongnhap = int.Parse(dr[3].ToString());
                 sp.SoLuongban = int.Parse(dr[4].ToString());
                 sp.soluongCon = int.Parse(dr[5].ToString());
-                sp.hinhanh = dr[6].ToString();
-                sp.donvitinh = dr[7].ToString();
-                sp.stars = int.Parse(dr[9].ToString());
-                sp.mota = dr[8].ToString();
-                sp.giaban=int.Parse(dr[10].ToString());
+                sp.Hinhanh = dr[6].ToString();
+                sp.DonViTinh = dr[7].ToString();
+                sp.Stars = int.Parse(dr[9].ToString());
+                sp.MoTa = dr[8].ToString();
+                sp.Giaban=int.Parse(dr[10].ToString());
                 li.Add(sp);
             }
             return li;
@@ -163,45 +162,75 @@ namespace DAO_Data_Access_Object_
             foreach (DataRow dr in dt.Rows)
             {
                 SAN_PHAM sp = new SAN_PHAM();
-                sp.masanpham = dr[0].ToString();
+                sp.MaSanPham = dr[0].ToString();
                 sp.tensanpham = dr[1].ToString();
-                sp.hinhanh = dr[2].ToString();
-                sp.mota = dr[3].ToString();
+                sp.Hinhanh = dr[2].ToString();
+                sp.MoTa = dr[3].ToString();
 
-                sp.stars = int.Parse(dr[4].ToString());
-                sp.donvitinh = dr[5].ToString();
-                sp.giaban = int.Parse(dr[6].ToString());
+                sp.Stars = int.Parse(dr[4].ToString());
+                sp.DonViTinh = dr[5].ToString();
+                sp.Giaban = int.Parse(dr[6].ToString());
                 li.Add(sp);
             }
             return li;
         }
+        //Get các sản phẩm bán chạy
+        public IList<SAN_PHAM> getProductDiscount()
+        {
+            DataTable dt = new DataTable();
+            //lấy về 6 sản phẩm bán chạy nhất
+            string cmdtext = string.Format(@"
+            Select Top(6) PP.MaSanPham, PP.TenSanPham, PP.HinhAnh, PP.MoTa, PP.Stars, PP.DonViTinh, PP.GiaBan,PP.GiaBan- PP.GiaBan / 100 * GG.PhanTram as N'Tiền giảm',GG.PhanTram,GG.NgayBatDau,GG.NgayKetThuc
+		        From ProductAndPrice PP Inner Join dbo.Gia_Giam GG
+			        On PP.MaSanPham = GG.MaSanPham 
+						Where GG.NgayBatDau < GETDATE() And GG.NgayKetThuc >GETDATE()");
+            dt = DataAccessHelper.log(cmdtext);
+            List<SAN_PHAM> li = new List<SAN_PHAM>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                int giaBan = int.Parse(dr[6].ToString());
+                int phanTram = int.Parse(dr[8].ToString());
+                SAN_PHAM sp = new SAN_PHAM();
+                sp.MaSanPham = dr[0].ToString();
+                sp.tensanpham = dr[1].ToString();
+                sp.Hinhanh = dr[2].ToString();
+                sp.MoTa = dr[3].ToString();
+
+                sp.Stars = int.Parse(dr[4].ToString());
+                sp.DonViTinh = dr[5].ToString();
+                sp.Giaban = int.Parse(dr[6].ToString());
+                sp.Giamoi = giaBan - giaBan * phanTram / 100;
+                li.Add(sp);
+            }
+            return li;
+        }
+        // Lấy 
         //phân trang sản phẩm
         public IList<SAN_PHAM> getPageListProduct(int page,int pagesize)
         {
             DataTable dt = new DataTable();
             //lấy về các sản phẩm theo pagesize
-            string cmdtext = string.Format(@"Select  SP.*,GB.GiaBan,LSP.TenLoaiSanPham
-                    From dbo.SAN_PHAM SP  Inner Join dbo.GIA_BAN GB 
-	                    On SP.MaSanPham = GB.MaSanPham Inner join dbo.LOAI_SAN_PHAM LSP
-                           On SP.MaLoaiSanPham = LSP.MaLoaiSanPham
-                                order by masanpham desc Offset {0}*({1}-1) Rows Fetch next {0} rows only", page,pagesize);
+            string cmdtext = string.Format(@"
+                        Select PAAPT.*,PAAPDT.GiaBan - PAAPDT.GiaBan * PAAPDT.PhanTram / 100 N'Giá Khuyến Mại' From ProductAndAllPriceTest PAAPT Left Join ProductAndAllPriceDiscountTest PAAPDT 
+	                        On PAAPT.MaSanPham = PAAPDT.MaSanPham
+                        Order By PAAPT.MaSanPham Asc Offset {0}*({1}-1) Rows Fetch next {0} rows only", page,pagesize);
             dt = DataAccessHelper.log(cmdtext);
             List<SAN_PHAM> li = new List<SAN_PHAM>();
             foreach (DataRow dr in dt.Rows)
             {
                 SAN_PHAM sp = new SAN_PHAM();
-                sp.maloaisanpham = dr[0].ToString();
-                sp.masanpham = dr[1].ToString();
+                sp.MaLoaiSanPham = dr[0].ToString();
+                sp.MaSanPham = dr[1].ToString();
                 sp.tensanpham = dr[2].ToString();
-                sp.soluongnhap = int.Parse(dr[3].ToString());
+                sp.SoLuongnhap = int.Parse(dr[3].ToString());
                 sp.SoLuongban = int.Parse(dr[4].ToString());
                 sp.soluongCon = int.Parse(dr[5].ToString());
-                sp.hinhanh = dr[6].ToString();
-                sp.donvitinh = dr[7].ToString();
-                sp.mota = dr[8].ToString();
-                sp.stars = int.Parse(dr[9].ToString());
-                sp.giaban = int.Parse(dr[10].ToString());
-                sp.tenloaisanpham = dr[11].ToString();
+                sp.Hinhanh = dr[6].ToString();
+                sp.DonViTinh = dr[7].ToString();
+                sp.MoTa = dr[8].ToString();
+                sp.Stars = int.Parse(dr[9].ToString());
+                sp.Giaban = int.Parse(dr[10].ToString());
+                sp.Tenloaisanpham = dr[11].ToString();
 
                 li.Add(sp);
             }

@@ -279,6 +279,7 @@
     <Content Include="Views\Shared\_featuredproductindex.cshtml" />
     <Content Include="Views\Shared\_NavMenu.cshtml" />
     <Content Include="Views\Shared\_BestSellProduct.cshtml" />
+    <Content Include="Views\Shared\_ProductDiscount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

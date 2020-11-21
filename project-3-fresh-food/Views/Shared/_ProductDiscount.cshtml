@@ -1,35 +1,35 @@
 ﻿<!-- Top Picks Start -->
-<div class="section section-padding pt-0" ng-controller="getBestSellProduct">
+<div class="section section-padding pt-0" ng-controller="getProductDiscount">
     <div class="container">
 
         <div class="section-title">
-            <h4 class="title">Top Picks</h4>
+            <h4 class="title">Product Discount</h4>
         </div>
 
-        <div class="row" >
+        <div class="row">
 
             <!-- Product Start -->
-            <div class="col-lg-6" ng-repeat="i in bestSellProduct">
+            <div class="col-lg-6" ng-repeat="i in GetProductDiscount">
                 <div class="andro_product andro_product-list andro_product-has-controls andro_product-has-buttons">
                     <div class="andro_product-thumb">
                         <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}"><img src="{{i.Hinhanh}}" alt="product"></a>
                     </div>
                     <div class="andro_product-body">
                         <div class="andro_rating-wrapper">
-                            <div style="display:flex">
-                                <div class="andro_rating" ng-repeat="Star in [1,2,3,4,5]">
-                                    <div ng-switch="i.Stars >=Star">
-                                         <div ng-switch-when="true">
-                                            <i class="fa fa-star active"></i>
-                                         </div>
-                                     </div>
-                                </div>
+                            <div class="andro_rating">
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star active"></i>
+                                <i class="fa fa-star"></i>
                             </div>
                             <span>{{i.Stars}}</span>
                         </div>
                         <h5 class="andro_product-title"> <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}"> {{i.TenSanPham}} </a> </h5>
                         <div class="andro_product-price">
-                            <span>{{i.Giaban | number }} VNĐ</span>
+
+                            <span>{{i.Giamoi | number }} VNĐ</span>
+                            <span>{{i.Giaban| number }} VNĐ</span>
                         </div>
                         <p>{{i.MoTa}}.</p>
 
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <!-- Product End -->
-           
+
 
         </div>
     </div>
