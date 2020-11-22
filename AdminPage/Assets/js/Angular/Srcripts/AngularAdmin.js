@@ -1,4 +1,4 @@
-﻿var myApp = angular.module('myApp', ['imgurUpload'])
+﻿var myApp = angular.module('myApp', [])
 
 
 myApp.controller('managerProduct', function ($scope, $location, $window, $http) {
@@ -36,14 +36,14 @@ myApp.controller('managerProduct', function ($scope, $location, $window, $http) 
                 })
             }
         }
-    )
+        )
 
     $scope.searchname = function (name) {
-       
+
         var pages = {
             page: 1,
             size: $scope.pagesize,
-            name:name
+            name: name
         }
 
         $http({
@@ -57,9 +57,9 @@ myApp.controller('managerProduct', function ($scope, $location, $window, $http) 
         })
     }
 
-    }
+}
 );
-myApp.controller('managerProductType', function ($scope,  $http) {
+myApp.controller('managerProductType', function ($scope, $http) {
     $http({
         method: 'get',
         url: '/LoaiSanPhamAdmin/GetAllProductTypeJS'
@@ -67,7 +67,7 @@ myApp.controller('managerProductType', function ($scope,  $http) {
     })
         .then(function (jsonResults) {
             $scope.getJsonResults = jsonResults.data;
-            console.log($scope.getJsonResults)  
+            console.log($scope.getJsonResults)
         })
 }
 );
@@ -76,17 +76,17 @@ myApp.controller('managerProductType', function ($scope,  $http) {
 
 
 myApp.controller('loginAdmin', function ($scope, $http, $window) {
-      $scope.fail = { "display": "none"}
+    $scope.fail = { "display": "none" }
     $scope.login = function () {
-      
+
         $http({
             method: "POST", //method gửi dữ liệu
             url: '/Admin/log', //gọi hàm controller/account/Login
             data: $scope.admin
         }).then(function (bool) {
-            if (bool.data.length!=0) { 
+            if (bool.data.length != 0) {
                 console.log(bool)
-             
+
                 localStorage.setItem("email", $scope.admin.email)
                 localStorage.setItem("matkhau", $scope.admin.matkhau)
                 $window.location.href = '/Admin/Index';
@@ -109,7 +109,7 @@ myApp.controller('adminIndex', function ($scope, $http) {//thống kê trên tra
         $scope.product = callback.data[0].product;
         $scope.order = callback.data[0].order;
         console.log(callback.data[0].user)
-       
+
     })
 })
 
@@ -138,7 +138,7 @@ myApp.controller("accAdminNav", function ($scope, $http, $window) {
                 $window.location.href = '/Admin/login';
             }
         })
-       
+
     }
     else {
         localStorage.clear();
@@ -152,54 +152,16 @@ myApp.controller("accAdminNav", function ($scope, $http, $window) {
 
 myApp.controller('addLsp', function ($scope, $http) {
     $scope.addlsp = function () {
-    var data = {
-        "lsp.MaLoaiSanPham": $scope.mlsp,
-        "lsp.TenLoaiSanPham": $scope.tenlsp,
-        "lsp.MoTa": $scope.mota
-    }
-    $http({
-        method: 'post',
-        url: '/Admin/themlsp',
-        data: data
-    })
-    }
-
-})
-myApp.controller('addPro', function ($scope, $http) {
-    $http({
-        method: 'get',
-        url: '/LoaiSanPhamAdmin/GetAllProductTypeJS'
-
-    }).then(function (jsonResults) {
-            $scope.getJsonResults = jsonResults.data;
-           
-    })
-
-    $scope.addProduct = function () {
-
-        var image = document.getElementById('file').files[0];
-
-        var clientId = "5c31a53dda3c8e0";
-        imgurUpload.setClientId(clientId);
-        imgurUpload
-            .upload(image)
-            .then(function (a) {
-                $scope.link = a.data.link
-                var data = {
-                    "sp.MaLoaiSanPham": $scope.MaLoaiSanPham,
-                    "sp.MaSanPham": $scope.MaSanPham,
-                    "sp.tensanpham": $scope.tensanpham,
-                    "sp.SoLuongNhap": $scope.SoLuongNhap,
-                    "sp.HinhAnh": $scope.link,
-                    "sp.DonViTinh": $scope.DonViTinh,
-                    "sp.GiaBan": $scope.GiaBan
-                }
-
-            $http({
-                method: 'POST',
-                url: '/Admin/themsp',
-                data: data
-            })
+        var data = {
+            "lsp.MaLoaiSanPham": $scope.mlsp,
+            "lsp.TenLoaiSanPham": $scope.tenlsp,
+            "lsp.MoTa": $scope.mota
+        }
+        $http({
+            method: 'post',
+            url: '/Admin/themlsp',
+            data: data
         })
     }
+
 })

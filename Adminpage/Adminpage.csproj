@@ -383,6 +383,10 @@
       <Project>{2baed398-2677-4344-a468-fb7ea509a1aa}</Project>
       <Name>DTO%28Data Transfer Object%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\project-3-fresh-food\project-3-fresh-food.csproj">
+      <Project>{4b3e9a9a-bd81-46fd-843f-4822766c2627}</Project>
+      <Name>project-3-fresh-food</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

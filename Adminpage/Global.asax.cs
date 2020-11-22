@@ -13,6 +13,9 @@ namespace AdminPage
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+          
+
         }
+      
     }
 }
