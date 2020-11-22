@@ -149,3 +149,19 @@ myApp.controller("accAdminNav", function ($scope, $http, $window) {
         $window.location.href = '/Admin/login';
     }
 })
+
+myApp.controller('addLsp', function ($scope, $http) {
+    $scope.addlsp = function () {
+    var data = {
+        "lsp.MaLoaiSanPham": $scope.mlsp,
+        "lsp.TenLoaiSanPham": $scope.tenlsp,
+        "lsp.MoTa": $scope.mota
+    }
+    $http({
+        method: 'post',
+        url: '/Admin/themlsp',
+        data: data
+    })
+    }
+
+})

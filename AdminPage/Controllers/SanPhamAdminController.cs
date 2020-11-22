@@ -30,6 +30,9 @@ namespace AdminPage.Controllers
             sanPham = product.searchName(name,  page, size);
             return Json(sanPham, JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult AddProductType()
+        {
+            return View();
+        }
     }
 }
