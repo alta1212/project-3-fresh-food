@@ -24,7 +24,7 @@ namespace BLL_Business_Logic_Layer__
             return ad.login(tk, mk);
         }
 
-        public void themLsp(LOAI_SAN_PHAM_BLL lsp)
+        public void themLsp(LOAI_SAN_PHAM lsp)
         {
             ad.themlsp(lsp);
         }

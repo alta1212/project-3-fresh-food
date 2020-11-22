@@ -30,7 +30,7 @@ namespace AdminPage.Controllers
         {
             return View();
         }
-        public void themlsp(LOAI_SAN_PHAM_BLL lsp)
+        public void themlsp(LOAI_SAN_PHAM lsp)
         {
             ad.themLsp(lsp);
         }
