@@ -53,5 +53,9 @@ namespace project_3_fresh_food.Controllers
             listsp = sp.getLatestSp();
             return Json(listsp, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult dayly()
+        {
+            return Json(sp.getdaylyDeal(), JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿var myApp = angular.module('myApp', [])
+﻿var myApp = angular.module('myApp', ['imgurUpload'])
 
 
 myApp.controller('managerProduct', function ($scope, $location, $window, $http) {
@@ -164,4 +164,42 @@ myApp.controller('addLsp', function ($scope, $http) {
     })
     }
 
+})
+myApp.controller('addPro', function ($scope, $http) {
+    $http({
+        method: 'get',
+        url: '/LoaiSanPhamAdmin/GetAllProductTypeJS'
+
+    }).then(function (jsonResults) {
+            $scope.getJsonResults = jsonResults.data;
+           
+    })
+
+    $scope.addProduct = function () {
+
+        var image = document.getElementById('file').files[0];
+
+        var clientId = "5c31a53dda3c8e0";
+        imgurUpload.setClientId(clientId);
+        imgurUpload
+            .upload(image)
+            .then(function (a) {
+                $scope.link = a.data.link
+                var data = {
+                    "sp.MaLoaiSanPham": $scope.MaLoaiSanPham,
+                    "sp.MaSanPham": $scope.MaSanPham,
+                    "sp.tensanpham": $scope.tensanpham,
+                    "sp.SoLuongNhap": $scope.SoLuongNhap,
+                    "sp.HinhAnh": $scope.link,
+                    "sp.DonViTinh": $scope.DonViTinh,
+                    "sp.GiaBan": $scope.GiaBan
+                }
+
+            $http({
+                method: 'POST',
+                url: '/Admin/themsp',
+                data: data
+            })
+        })
+    }
 })

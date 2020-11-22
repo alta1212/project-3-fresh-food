@@ -19,13 +19,15 @@ namespace DTO_Data_Transfer_Object_
         private string tenLoaiSanPham;
         private DateTime ngayBatDauKM;
         private DateTime ngayKetThucKM;
+        private int phantram;
 
         public SAN_PHAM()
         {
 
         }
-        public SAN_PHAM(string maLoaiSanPham, string tenLoaiSanPham, string maSanPham, int soLuongNhap, int soLuongBan, string moTa, string hinhAnh, string donViTinh, int stars, int giaMoi, int giaBan, int soLuongCon, string tenloaiSanPham, DateTime ngayBatDauKM, DateTime ngayKetThucKM)
+        public SAN_PHAM(int phaNtram,string maLoaiSanPham, string tenLoaiSanPham, string maSanPham, int soLuongNhap, int soLuongBan, string moTa, string hinhAnh, string donViTinh, int stars, int giaMoi, int giaBan, int soLuongCon, string tenloaiSanPham, DateTime ngayBatDauKM, DateTime ngayKetThucKM)
         {
+            this.phantram = phaNtram;
             this.maLoaiSanPham = maLoaiSanPham;
             this.tenLoaiSanPham = tenLoaiSanPham;
             this.maSanPham = maSanPham;
@@ -47,6 +49,11 @@ namespace DTO_Data_Transfer_Object_
         {
             get { return donViTinh; }
             set { donViTinh = value; }
+        }
+        public int PhanTram
+        {
+            get { return phantram; }
+            set { phantram = value; }
         }
         public string Tenloaisanpham
         {

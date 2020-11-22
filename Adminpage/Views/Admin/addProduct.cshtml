@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "addProduct";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div ng-controller="addPro" id="content-page" class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Add Books</h4>
+                        </div>
+                    </div>
+                    <div class="iq-card-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Mã sản phẩm:</label>
+                                <input ng-model="MaSanPham" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Tên sản phẩm:</label>
+                                <input ng-model="tensanpham" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Loại Sản Phẩm:</label>
+                                <select ng-model="Tenloaisanpham" class="form-control" id="exampleFormControlSelect1">
+                                    <option value="{{i.MaLoaiSanPham}}" ng-repeat="i in getJsonResults">{{i.TenLoaiSanPham}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Hình Ảnh:</label>
+                                <div class="custom-file">
+                                    <input type="file" id="file" class="custom-file-input" accept="image/png, image/jpeg">
+                                    <label class="custom-file-label">Choose file</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Đơn vị tính:</label>
+                                <div class="custom-file">
+                                    <input  ng-model="DonViTinh" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá bán :</label>
+                                <input ng-model="GiaBan" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Mô Tả:</label>
+                                <textarea ng-model="MoTa" class="form-control" rows="4"></textarea>
+                            </div>
+                            <button ng-click="addProduct()" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

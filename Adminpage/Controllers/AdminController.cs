@@ -34,5 +34,13 @@ namespace AdminPage.Controllers
         {
             ad.themLsp(lsp);
         }
+        public ActionResult addProduct()
+        {
+            return View();
+        }
+        public void themsp(SAN_PHAM sp)
+        {
+            ad.themsp(sp);
+        }
     }
 }

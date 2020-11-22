@@ -67,5 +67,10 @@ namespace BLL_Business_Logic_Layer__
         {
             return sp.getListFeedBack(masanpham);
         }
+
+        public IList<SAN_PHAM> getdaylyDeal()
+        {
+            return sp.getDaylydeal();
+        }
     }
 }

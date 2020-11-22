@@ -25,5 +25,8 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         object getthongtinsanpham(string masanpham);
         IList<SAN_PHAM> searchName(string name, int page, int pagesize);
         IList<FeedBack_DTO> getListFeedBack(string masanpham);
+        //lấy sản phẩm giảm giá trong ngày
+        IList<SAN_PHAM> getdaylyDeal();
+
     }
 }

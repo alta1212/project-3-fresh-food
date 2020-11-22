@@ -35,6 +35,32 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
+        public void themSp(SAN_PHAM sp)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+             {
+                new SqlParameter("@MaSanPham",SqlDbType.NVarChar,20),
+                new SqlParameter("@MaLoaiSanPham",SqlDbType.NVarChar,50),
+                new SqlParameter("@TenSanPham",SqlDbType.NVarChar,50),
+                new SqlParameter("@SoLuongCon",SqlDbType.Int),
+                new SqlParameter("@Soluong",SqlDbType.Int),
+                new SqlParameter("@HinhAnh",SqlDbType.NVarChar,50),
+                new SqlParameter("@DonViTinh",SqlDbType.NVarChar,50),
+                new SqlParameter("@MoTa",SqlDbType.NVarChar,500),
+                new SqlParameter("@GiaBan",SqlDbType.Int),
+             };
+            parm[0].Value = sp.MaSanPham;
+            parm[1].Value = sp.Tenloaisanpham;
+            parm[2].Value = sp.tensanpham;
+            parm[3].Value = sp.soluongCon;
+            parm[4].Value = sp.SoLuongnhap;
+            parm[5].Value = sp.Hinhanh;
+            parm[6].Value = sp.DonViTinh;
+            parm[7].Value = sp.MoTa;
+            parm[7].Value = sp.Giaban;
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Insert_Into_Product", parm);
+        }
+
         public void themlsp(LOAI_SAN_PHAM lsp)
         {
             SqlParameter[] parm = new SqlParameter[]

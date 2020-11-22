@@ -241,6 +241,7 @@
     <Content Include="Assets\images\user\10.jpg" />
     <Content Include="Assets\images\user\11.jpg" />
     <Content Include="Assets\images\user\11.png" />
+    <Content Include="Assets\js\Angular\angular-imgur-upload.js" />
     <Content Include="Assets\js\Angular\angular.min.js" />
     <Content Include="Assets\js\Angular\Srcripts\AngularAdmin.js" />
     <Content Include="Assets\js\animated.js" />
@@ -360,6 +361,7 @@
     <Content Include="Views\Shared\_AdminAcc.cshtml" />
     <Content Include="Views\LoaiSanPhamAdmin\GetAllProductType.cshtml" />
     <Content Include="Views\SanPhamAdmin\AddProductType.cshtml" />
+    <Content Include="Views\Admin\addProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

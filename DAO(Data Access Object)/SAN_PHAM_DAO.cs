@@ -36,6 +36,32 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
+        //lấy về sản phẩm sale trong ngày
+        public IList<SAN_PHAM> getDaylydeal()
+        {
+            DataTable dt = new DataTable();
+
+            string cmdtext = string.Format(@"
+ Select PAAPT.*,PAAPDT.GiaBan - PAAPDT.GiaBan * PAAPDT.PhanTram / 100 N'Giá Khuyến Mại',PAAPDT.PhanTram From ProductAndAllPriceTest PAAPT Left Join ProductAndAllPriceDiscountTest PAAPDT 
+	                        On PAAPT.MaSanPham = PAAPDT.MaSanPham where GETDATE() BETWEEN NgayBatDau and NgayKetThuc");
+            dt = DataAccessHelper.log(cmdtext);
+            List<SAN_PHAM> li = new List<SAN_PHAM>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                SAN_PHAM sp = new SAN_PHAM();
+                sp.MaSanPham = dr[1].ToString();
+                sp.tensanpham = dr[2].ToString();
+                sp.Hinhanh = dr[6].ToString();
+                sp.MoTa = dr[8].ToString();
+                sp.Stars = int.Parse(dr[9].ToString());
+                sp.Giaban = int.Parse(dr[10].ToString());
+                sp.Giamoi = int.Parse(dr[12].ToString());
+                sp.PhanTram = int.Parse(dr[13].ToString());
+                li.Add(sp);
+            }
+            return li;
+        }
+
         public void addtocart(string mkh, string msp)
         {
             SqlParameter[] parm = new SqlParameter[]

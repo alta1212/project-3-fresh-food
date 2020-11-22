@@ -28,5 +28,10 @@ namespace BLL_Business_Logic_Layer__
         {
             ad.themlsp(lsp);
         }
+
+        public void themsp(SAN_PHAM sp)
+        {
+            ad.themSp(sp);
+        }
     }
 }

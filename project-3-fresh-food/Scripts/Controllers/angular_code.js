@@ -482,3 +482,23 @@ app.controller("productdetails", function ($scope, $location, $http, $window) {
 });
 
 app.controller('cart', function () { })
+
+
+
+app.controller('daylyDeal', function ($scope, $http) {
+    $http({
+        method: 'get',
+        url: '/Index/dayly'
+
+    }).then(function (jsonResults) {
+        $scope.getJsonResults = jsonResults.data;
+        console.log($scope.getJsonResults)
+    })
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
