@@ -7,12 +7,18 @@
         <div class="andro_product-body">
             <h6 class="andro_product-title"> <a href="product-single.html"> {{i.tensanpham}} </a> </h6>
             <div class="andro_rating-wrapper">
-                <div class="andro_rating">
-                    <i class="fa fa-star active"></i>
-                    <i class="fa fa-star active"></i>
-                    <i class="fa fa-star active"></i>
-                    <i class="fa fa-star active"></i>
-                    <i class="fa fa-star"></i>
+                <div style="display:flex">
+                    <div class="andro_rating" ng-repeat="Star in [1,2,3,4,5]">
+                        <div ng-switch="i.Stars >=Star">
+                            <div ng-switch-when="true">
+                                <i class="fa fa-star active"></i>
+                            </div>
+                            <div ng-switch-when="false">
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

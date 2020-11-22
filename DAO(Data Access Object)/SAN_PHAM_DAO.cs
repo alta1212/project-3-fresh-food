@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Dynamic;
+using System.Globalization;
 
 namespace DAO_Data_Access_Object_
 {
@@ -47,6 +48,36 @@ namespace DAO_Data_Access_Object_
             parm[1].Value = msp;
            
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "register", parm);
+        }
+
+        public IList<FeedBack_DTO> getListFeedBack(string masanpham)
+        {
+            DataTable dt = new DataTable();
+            //lấy về các sản phẩm theo pagesize
+            string cmdtext = string.Format(@"
+                Select KH.TenKhachHang,KH.HinhAnh, FB.*
+                    From dbo.KHACH_HANG KH Right Join dbo.FEED_BACK FB 
+	                    On KH.MaKhachHang = FB.MaKhachHang
+		                    Where FB.MaSanPham = '{0}'", masanpham);
+            dt = DataAccessHelper.log(cmdtext);
+
+            List<FeedBack_DTO> li = new List<FeedBack_DTO>();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                FeedBack_DTO fb = new FeedBack_DTO();
+                fb.TenKhachHang = dr[0].ToString();
+                fb.HinhAnhKh =dr[1].ToString();
+                fb.MaFeedBack = dr[2].ToString();
+                fb.MaSanPham = dr[3].ToString();
+                fb.MaKhachHang = dr[4].ToString();
+                fb.BinhLuan = dr[5].ToString();
+                fb.HinhAnh = dr[6].ToString();
+                fb.NgayBinhLuan = Convert.ToDateTime(dr[7].ToString());
+                fb.Stars = float.Parse( dr[8].ToString());
+                li.Add(fb);
+            }
+            return li;
         }
 
         public IList<SAN_PHAM> searchName(string name,int page,int pagesize)
@@ -213,7 +244,7 @@ namespace DAO_Data_Access_Object_
             string cmdtext = string.Format(@"
                         Select PAAPT.*,PAAPDT.GiaBan - PAAPDT.GiaBan * PAAPDT.PhanTram / 100 N'Giá Khuyến Mại' From ProductAndAllPriceTest PAAPT Left Join ProductAndAllPriceDiscountTest PAAPDT 
 	                        On PAAPT.MaSanPham = PAAPDT.MaSanPham
-                        Order By PAAPT.MaSanPham Asc Offset {0}*({1}-1) Rows Fetch next {0} rows only", page,pagesize);
+                        Order By PAAPT.MaSanPham Asc Offset {1}*({0}-1) Rows Fetch next {1} rows only", page,pagesize);
             dt = DataAccessHelper.log(cmdtext);
             List<SAN_PHAM> li = new List<SAN_PHAM>();
             foreach (DataRow dr in dt.Rows)
@@ -231,7 +262,12 @@ namespace DAO_Data_Access_Object_
                 sp.Stars = int.Parse(dr[9].ToString());
                 sp.Giaban = int.Parse(dr[10].ToString());
                 sp.Tenloaisanpham = dr[11].ToString();
-
+                try
+                {
+                    sp.Giamoi= int.Parse(dr[12].ToString());
+                }
+                catch { }
+                
                 li.Add(sp);
             }
             return li;

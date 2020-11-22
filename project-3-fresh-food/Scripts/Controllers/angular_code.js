@@ -460,11 +460,25 @@ app.controller("productdetails", function ($scope, $location, $http, $window) {
         $scope.addtocart = function () {
             alert("")
         }
+        $http({
+            method: 'GET',
+            url: '/Product/getFb?masanpham=' + masanpham,
+        }).then(function successCallback(response) {
+            $scope.fb = response.data;
+            console.log($scope.fb)
+        })
     }
     else {
         $window.location.href = '/Index/Index';
     }
-
-})
+    console.log()
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
 
 app.controller('cart', function () { })

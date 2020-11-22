@@ -62,5 +62,10 @@ namespace BLL_Business_Logic_Layer__
         {
             return sp.searchName(name,page,pagesize);
         }
+
+        public IList<FeedBack_DTO> getListFeedBack(string masanpham)
+        {
+            return sp.getListFeedBack(masanpham);
+        }
     }
 }

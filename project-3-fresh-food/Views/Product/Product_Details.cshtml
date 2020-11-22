@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="andro_product-single-thumb">
-                        <img src="{{i4.hinhanh}}" alt="product">
+                        <img src="{{i4.Hinhanh}}" alt="product">
                     </div>
 
                     <!-- Pagination Start -->
@@ -55,20 +55,26 @@
                         </div>
 
                         <div class="andro_rating-wrapper">
-                            <div class="andro_rating">
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star"></i>
+                            <div style="display:flex">
+                                <div class="andro_rating" ng-repeat="Star in [1,2,3,4,5]">
+                                    <div ng-switch="i4.Stars >=Star">
+                                        <div ng-switch-when="true">
+                                            <i class="fa fa-star active"></i>
+                                        </div>
+                                        <div ng-switch-when="false">
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                            <span>4 Stars</span>
+                            <span>{{i4.Stars}} Stars</span>
                         </div>
 
                         <h3>{{i4.tensanpham}}</h3>
 
                         <div class="andro_product-price">
-                            <span>{{i4.giaban}} VND</span>
+                            <span>{{i4.Giaban}} VND</span>
                             <span>14$</span>
                         </div>
 
@@ -78,10 +84,10 @@
                                 <div class="form-group">
                                     <select class="form-control" name="amount">
                                         <option value="">Select Amount</option>
-                                        <option value="1">1 {{i4.donvitinh}}</option>
-                                        <option value="2">2 {{i4.donvitinh}}</option>
-                                        <option value="3">3 {{i4.donvitinh}}</option>
-                                        <option value="4">4 {{i4.donvitinh}}</option>
+                                        <option value="1">1 {{i4.DonViTinh}}</option>
+                                        <option value="2">2 {{i4.DonViTinh}}</option>
+                                        <option value="3">3 {{i4.DonViTinh}}</option>
+                                        <option value="4">4 {{i4.DonViTinh}}</option>
                                     </select>
                                 </div>
                                
@@ -98,7 +104,7 @@
                             <li>
                                 <span>Loại sản phẩm: </span>
                                 <div class="andro_product-meta-item">
-                                    <a href="#">{{i4.tenloaisanpham}}</a>
+                                    <a href="#">{{i4.Tenloaisanpham}}</a>
                                 </div>
                             </li>
                             <li>
@@ -149,7 +155,7 @@
                         <div class="tab-content" id="bordered-tabContent">
                             <div class="tab-pane fade show active" id="tab-product-desc" role="tabpanel" aria-labelledby="tab-product-desc-tab">
                                 <h4>Mô Tả</h4>
-                               {{i4.mota}}
+                                {{i4.MoTa}}
                             </div>
                             <div class="tab-pane fade" id="tab-product-info" role="tabpanel" aria-labelledby="tab-product-info-tab">
                                 <h4>Additional Information</h4>
@@ -209,39 +215,30 @@
                                 <!-- Reviews Start -->
                                 <div class="comments-list">
                                     <ul>
-                                        <li class="comment-item">
-                                            <img src="~/assets/img/people/1.jpg" alt="comment author">
+                                        <li ng-repeat="i in fb" class="comment-item">
+                                            <img src="{{i.HinhAnhKh}}" alt="comment author">
                                             <div class="comment-body">
 
-                                                <h5>John Doe</h5>
-                                                <div class="andro_rating">
-                                                    <i class="fa fa-star active"></i>
-                                                    <i class="fa fa-star active"></i>
-                                                    <i class="fa fa-star active"></i>
-                                                    <i class="fa fa-star active"></i>
-                                                    <i class="fa fa-star"></i>
+                                                <h5>{{i.TenKhachHang}}</h5>
+                                                <div style="display:flex">
+                                                    <div class="andro_rating" ng-repeat="Stars in [1,2,3,4,5]">
+                                                        <div ng-switch="i.Stars >=Stars">
+                                                            <div ng-switch-when="true">
+                                                                <i class="fa fa-star active"></i>
+                                                            </div>
+                                                            <div ng-switch-when="false">
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
-                                                <span>Posted on: January 13 2020</span>
-                                                <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</p>
+                                                <span>Posted on: {{i.NgayBinhLuan | filterdate | date:'dd/MM/yyyy'}}</span>
+                                                <p>{{i.BinhLuan}}</p>
                                                 <a href="#" class="reply-link"> Reply </a>
                                             </div>
                                         </li>
-                                        <li class="comment-item">
-                                            <img src="~/assets/img/people/2.jpg" alt="comment author">
-                                            <div class="comment-body">
-                                                <h5>John Doe</h5>
-                                                <div class="andro_rating">
-                                                    <i class="fa fa-star active"></i>
-                                                    <i class="fa fa-star active"></i>
-                                                    <i class="fa fa-star active"></i>
-                                                    <i class="fa fa-star active"></i>
-                                                    <i class="fa fa-star active"></i>
-                                                </div>
-                                                <span>Posted on: January 13 2020</span>
-                                                <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches</p>
-                                                <a href="#" class="reply-link"> Reply </a>
-                                            </div>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                                 <!-- Reviews End -->

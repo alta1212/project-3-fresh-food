@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="ADMIN.cs" />
     <Compile Include="dashBroad.cs" />
+    <Compile Include="FeedBack-DTO.cs" />
     <Compile Include="SAN_PHAM.cs" />
     <Compile Include="KHACH_HANG.cs" />
     <Compile Include="LOAI_SAN_PHAM.cs" />

@@ -26,27 +26,33 @@
                 </div>
                 <!-- Product Count & Orderby End -->
                 <!-- Product Start -->
-                <div id="{{i.masanpham}}" ng-repeat="i in lisp" class="andro_product andro_product-list">
+                <div id="{{i.MaSanPham}}" ng-repeat="i in lisp" class="andro_product andro_product-list">
                     <div class="andro_product-thumb">
-                        <a href="/Product/Product_Details#!?masanpham={{i.masanpham}}"><img src="{{i.hinhanh}}" alt="product"></a>
+                        <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}"><img src="{{i.Hinhanh}}" alt="product"></a>
                     </div>
                     <div class="andro_product-body">
                         <div class="andro_rating-wrapper">
-                            <div class="andro_rating">
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star active"></i>
-                                <i class="fa fa-star"></i>
+                            <div style="display:flex">
+                                <div class="andro_rating" ng-repeat="Star in [1,2,3,4,5]">
+                                    <div ng-switch="i.Stars >=Star">
+                                        <div ng-switch-when="true">
+                                            <i class="fa fa-star active"></i>
+                                        </div>
+                                        <div ng-switch-when="false">
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                             <span>{{i.Stars}} Stars</span>
                         </div>
-                        <h5 class="andro_product-title"> <a href="/Product/Product_Details#!?masanpham={{i.masanpham}}">{{i.tensanpham}} </a> </h5>
-                        <p>{{i.mota}}</p>
+                        <h5 class="andro_product-title"> <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}">{{i.tensanpham}} </a> </h5>
+                        <p>{{i.MoTa}}</p>
                         <div class="andro_product-footer">
                             <div class="andro_product-price">
-                                <span>{{i.giamoi | number }} VNĐ</span>
-                                <span>{{i.giaban| number }} VNĐ</span>
+                                <span>{{i.Giaban | number }} VNĐ</span>
+                                <span>{{i.GiaMan| number }} VNĐ</span>
                             </div>
                             <div class="btn-group">
                                 <a href="product-single.html" class="andro_btn-custom btn-sm">Buy Now</a>

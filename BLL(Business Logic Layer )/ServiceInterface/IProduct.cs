@@ -24,5 +24,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         int getslsp(string maloai);
         object getthongtinsanpham(string masanpham);
         IList<SAN_PHAM> searchName(string name, int page, int pagesize);
+        IList<FeedBack_DTO> getListFeedBack(string masanpham);
     }
 }
