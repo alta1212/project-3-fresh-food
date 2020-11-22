@@ -14,7 +14,7 @@ namespace project_3_fresh_food
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            Application["online"] = 1;
+         
 
         }
         protected void Application_Error(object sender, EventArgs e)
@@ -36,13 +36,6 @@ namespace project_3_fresh_food
                 Response.Redirect("~/Index/Sorry");
             }
         }
-        protected void Session_Start()
-        {
-            Application["online"] = (int.Parse(Application["online"].ToString()) + 1);
-        }
-        protected void Application_End()
-        {
-            Application["online"] = (int.Parse(Application["online"].ToString()) - 1);
-        }
+       
     }
 }

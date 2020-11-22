@@ -31,7 +31,6 @@ namespace AdminPage.Controllers
         }
         public ActionResult Index()
         {
-            
             return View();
         }
         public void themlsp(LOAI_SAN_PHAM lsp)
