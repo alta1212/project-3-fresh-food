@@ -13,7 +13,10 @@ namespace project_3_fresh_food.Controllers
 {
     public class IndexController : Controller
     {
-
+        public string viewer()
+        {
+            return HttpContext.Application["online"].ToString();
+        }
         // GET: Index
         //xử lý trang chủ
         IProductType lsp = new LOAI_SAN_PHAM_BLL();

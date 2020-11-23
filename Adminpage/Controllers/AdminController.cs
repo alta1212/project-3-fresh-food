@@ -31,6 +31,10 @@ namespace AdminPage.Controllers
         }
         public ActionResult Index()
         {
+            project_3_fresh_food.Controllers.IndexController view = new project_3_fresh_food.Controllers.IndexController();
+            try { ViewBag.viewer = view.viewer(); }
+            catch { ViewBag.viewer = 0; }
+           
             return View();
         }
         public void themlsp(LOAI_SAN_PHAM lsp)

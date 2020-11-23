@@ -14,8 +14,13 @@ namespace project_3_fresh_food
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-         
 
+            Application["online"] = 0;
+        }
+        protected void Session_Start()
+        {
+            Application["online"] = (int.Parse(Application["online"].ToString()) + 1);
+            Session["giohang"] = null;
         }
         protected void Application_Error(object sender, EventArgs e)
         {
