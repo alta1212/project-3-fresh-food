@@ -163,12 +163,13 @@ myApp.controller('addLsp', function ($scope, $http) {
             method: 'post',
             url: '/Admin/themlsp',
             data: data
-        }).then(function ()
+        }).then(function (stringNotification)
         {
-            toastr.success('Thêm Loại sản phẩm thành công', 'Success Alert', { timeOut: 5000 })
-        }, function (response) {
-                toastr.error('Có lỗi xảy ra vui lòng thử lại', 'Inconceivable!', { timeOut: 5000 })
-            })
+            if (stringNotification.data == 1)
+                toastr.success('Thêm thành công', 'Success Alert', { timeOut: 5000 })
+            else
+                toastr.error('Thêm thất bại', 'Inconceivable!', { timeOut: 5000 })
+        })
     }
 
 })

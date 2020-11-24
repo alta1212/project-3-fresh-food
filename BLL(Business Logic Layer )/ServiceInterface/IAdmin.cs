@@ -12,7 +12,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
     {
         IList<ADMIN> login(string tk, string mk);
         IList<dashBroad> dashboard();
-        void themLsp(LOAI_SAN_PHAM lsp);
+        int themLsp(LOAI_SAN_PHAM lsp);
         void themsp(SAN_PHAM sp);
     }
 }

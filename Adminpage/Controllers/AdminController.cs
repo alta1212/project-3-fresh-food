@@ -37,9 +37,13 @@ namespace AdminPage.Controllers
            
             return View();
         }
-        public void themlsp(LOAI_SAN_PHAM lsp)
+        public int themlsp(LOAI_SAN_PHAM lsp)
         {
-            ad.themLsp(lsp);
+            if (ad.themLsp(lsp) == 0)
+                return 0;
+            else
+                return 1;
+                
         }
         public ActionResult addProduct()
         {

@@ -61,19 +61,28 @@ namespace DAO_Data_Access_Object_
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Insert_Into_Product", parm);
         }
 
-        public void themlsp(LOAI_SAN_PHAM lsp)
+        public int themlsp(LOAI_SAN_PHAM lsp)
         {
             SqlParameter[] parm = new SqlParameter[]
              {
-               
-                new SqlParameter("@TenLoaiSanPham",SqlDbType.NVarChar,50),
-                new SqlParameter("@MoTa",SqlDbType.NVarChar,50),
+                new SqlParameter("@MaLoaiSanPhams",SqlDbType.NVarChar,20),
+                new SqlParameter("@TenLoaiSanPham",SqlDbType.NVarChar,100),
+                new SqlParameter("@MoTa",SqlDbType.NVarChar,350),
 
              };
-    
-            parm[0].Value = lsp.tenloaisanpham;
-            parm[1].Value = lsp.MoTa;
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Insert_Auto_Product_Type", parm);
+            
+            parm[0].Value = lsp.MaLoaiSanPham ?? DBNull.Value.ToString();
+            parm[1].Value = lsp.tenloaisanpham;
+            parm[2].Value = lsp.MoTa;
+            try
+            {
+                DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Insert_Auto_Product_Type", parm);
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         public IList<dashBroad> dash()
