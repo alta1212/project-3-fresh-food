@@ -18,6 +18,11 @@ namespace BLL_Business_Logic_Layer__
             sp.addtocart(mkh,msp);
         }
 
+        public void postcomment(string masp, string mkh, string binhluan, string hinhanh, float stars)
+        {
+            sp.postComent( masp,  mkh,  binhluan,  hinhanh,  stars);
+        }
+
         public IList<SAN_PHAM> Getall()
         {
             return sp.getallsp();

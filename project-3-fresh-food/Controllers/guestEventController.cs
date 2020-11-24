@@ -16,5 +16,9 @@ namespace project_3_fresh_food.Controllers
         {
             sp.addtocart(mkh + "mkh", msp);
         }
+        public void postComment(string masp, string mkh, string binhluan, string hinhanh, float stars)
+        {
+            
+        }
     }
 }

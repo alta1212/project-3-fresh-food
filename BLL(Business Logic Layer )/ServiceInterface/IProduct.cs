@@ -20,6 +20,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<SAN_PHAM> getProductDiscount();
 
         IList<SAN_PHAM> getbyloaisp(string loai,string page);
+        void postcomment(string masp, string mkh, string binhluan, string hinhanh, float stars);
         void addtocart(string mkh, string msp);
         int getslsp(string maloai);
         object getthongtinsanpham(string masanpham);

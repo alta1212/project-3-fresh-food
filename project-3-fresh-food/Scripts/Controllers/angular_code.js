@@ -294,7 +294,17 @@ app.controller("featuredproducts", function ($scope, $http) {
         console.log($scope.featuredpro);
         console.log(response.data[0]);
     })
-    $scope.addtocart = function (msp) { alert("viết code thêm vào giỏ hàng ở dòng 295") }
+    $scope.addtocart = function (msp) {
+
+        $http({
+            method: 'POST',
+            url: '/guestEvent/addtocart',
+        }).then(function successCallback(response) {
+            $scope.featuredpro = response.data;
+            console.log($scope.featuredpro);
+            console.log(response.data[0]);
+        })
+    }
 })
 
 // Hiển thị sản phẩm bấn chạy
@@ -445,7 +455,7 @@ app.controller("quickviewbuy", function ($scope, $location, $http) {
     }
 })
 
-app.controller("productdetails", function ($scope, $location, $http, $window) {
+app.controller("productdetails", function ($rootScope,$scope, $location, $http, $window) {
     var masanpham = $location.search().masanpham;
     if (masanpham != null) {
 
@@ -471,7 +481,25 @@ app.controller("productdetails", function ($scope, $location, $http, $window) {
     else {
         $window.location.href = '/Index/Index';
     }
-    console.log()
+    $scope.postcoment = function () {
+        if (document.getElementById('customFile').files.length != 0) {
+            var image = document.getElementById('file').files[0];
+
+            var clientId = "5c31a53dda3c8e0";
+            imgurUpload.setClientId(clientId);
+            imgurUpload
+                .upload(image)
+                .then(function (a) {
+                    $rootScope.link = a.data.link;
+                })
+
+        }
+        else
+            $rootScope.link = '';
+        var data = {
+
+        }
+    }
 }).filter("filterdate", function () {
     var re = /\/Date\(([0-9]*)\)\//;
     return function (x) {

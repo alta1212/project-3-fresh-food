@@ -168,6 +168,27 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
+        public void postComent(string masp,string mkh,string binhluan,string hinhanh,float stars)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+           {
+                new SqlParameter("@MaFeedBack",SqlDbType.NVarChar,50),
+                new SqlParameter("@MaSanPham",SqlDbType.NVarChar,50),
+                new SqlParameter("@MaKhachHang",SqlDbType.NVarChar,50),
+                new SqlParameter("@BinhLuan",SqlDbType.NVarChar,200),
+                new SqlParameter("@HinhAnh",SqlDbType.NVarChar,100),
+                new SqlParameter("@Stars",SqlDbType.Int),
+
+           };
+           
+            parm[1].Value = masp;
+            parm[2].Value = mkh;
+            parm[3].Value = binhluan;
+            parm[4].Value = hinhanh;
+            parm[5].Value = stars;
+
+             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "PostComment", parm);
+        }
 
         //get sản phẩm by loai
         public IList<SAN_PHAM> getbyloai(string loai, string page)
