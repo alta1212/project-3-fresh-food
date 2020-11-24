@@ -18,7 +18,7 @@ namespace project_3_fresh_food.Controllers
         }
         public void postComment(string masp, string mkh, string binhluan, string hinhanh, float stars)
         {
-            
+            sp.postcomment(masp,mkh+"mkh",binhluan,hinhanh,stars);
         }
     }
 }

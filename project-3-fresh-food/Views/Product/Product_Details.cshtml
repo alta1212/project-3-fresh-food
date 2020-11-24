@@ -3,6 +3,13 @@
     ViewBag.Title = "Product_Details";
     Layout = "~/Views/Shared/MainLayOut.cshtml";
 }
+@section Scripts
+{
+
+   
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+}
 <div ng-controller="productdetails">
     <div class="section">
         <div class="container">
@@ -90,7 +97,7 @@
                                         <option value="4">4 {{i4.DonViTinh}}</option>
                                     </select>
                                 </div>
-                               
+
                             </div>
 
                             <div class="qty-outter">
@@ -195,14 +202,14 @@
 
                                 <!-- Review Form start -->
                                 <div class="comment-form">
-                                    <form method="post">
+                                    <form id="formcmt" method="post">
                                         <div class="row">
                                             <div class="col-md-6 form-group">
                                                 <input class="custom-file-input" type="file" id="customFile">
                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
                                             <div class="col-md-12 form-group">
-                                                <textarea class="form-control" placeholder="Type your comment..." name="comment" rows="7"></textarea>
+                                                <textarea class="form-control" ng-model="binhluan" placeholder="Type your comment..." name="comment" rows="7"></textarea>
                                             </div>
                                         </div>
 
@@ -212,7 +219,7 @@
                                 <!-- Review Form End -->
                                 <!-- Reviews Start -->
                                 <div class="comments-list">
-                                    <ul>
+                                    <ul id="cmt">
                                         <li ng-repeat="i in fb" class="comment-item">
                                             <img src="{{i.HinhAnhKh}}" alt="comment author">
                                             <div class="comment-body">
@@ -236,7 +243,7 @@
                                                 <a href="#" class="reply-link"> Reply </a>
                                             </div>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                                 <!-- Reviews End -->

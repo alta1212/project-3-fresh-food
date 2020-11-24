@@ -168,7 +168,8 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
-        public void postComent(string masp,string mkh,string binhluan,string hinhanh,float stars)
+        public void postComent(string masp,string mkh,string binhluan,string hinhanh,float stars
+            )
         {
             SqlParameter[] parm = new SqlParameter[]
            {
@@ -180,11 +181,11 @@ namespace DAO_Data_Access_Object_
                 new SqlParameter("@Stars",SqlDbType.Int),
 
            };
-           
+            parm[0].Value = ""??DBNull.Value.ToString();
             parm[1].Value = masp;
             parm[2].Value = mkh;
             parm[3].Value = binhluan;
-            parm[4].Value = hinhanh;
+            parm[4].Value = hinhanh??DBNull.Value.ToString();
             parm[5].Value = stars;
 
              DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "PostComment", parm);

@@ -482,6 +482,7 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
         $window.location.href = '/Index/Index';
     }
     $scope.postcoment = function () {
+        
         if (document.getElementById('customFile').files.length != 0) {
             var image = document.getElementById('file').files[0];
 
@@ -491,14 +492,33 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
                 .upload(image)
                 .then(function (a) {
                     $rootScope.link = a.data.link;
-                })
+            })
 
         }
         else
             $rootScope.link = '';
-        var data = {
+        if (localStorage.getItem("taikhoan") == null)
+            toastr.info('Vui lòng đăng nhập để bình luận', 'Information', { timeOut: 5000 })
+        else {
+            var data = {
+                masp: masanpham,
+                mkh: localStorage.getItem("taikhoan"),
+                binhluan: $scope.binhluan,
+                stars: 5
+            }
 
+            $http({
+                method: 'POST',
+                url: '/guestEvent/postComment',
+                data: data
+            }).then(function () {
+       
+                document.getElementById("formcmt").reset();
+                toastr.success('thêm bình luận thành công', 'Success Alert', { timeOut: 5000 });
+               
+            })
         }
+       
     }
 }).filter("filterdate", function () {
     var re = /\/Date\(([0-9]*)\)\//;
