@@ -151,17 +151,44 @@ myApp.controller("accAdminNav", function ($scope, $http, $window) {
 })
 
 myApp.controller('addLsp', function ($scope, $http) {
+   
     $scope.addlsp = function () {
         var data = {
             "lsp.MaLoaiSanPham": $scope.mlsp,
             "lsp.TenLoaiSanPham": $scope.tenlsp,
             "lsp.MoTa": $scope.mota
         }
+        
         $http({
             method: 'post',
             url: '/Admin/themlsp',
             data: data
-        })
+        }).then(function ()
+        {
+            toastr.success('Thêm Loại sản phẩm thành công', 'Success Alert', { timeOut: 5000 })
+        }, function (response) {
+                toastr.error('Có lỗi xảy ra vui lòng thử lại', 'Inconceivable!', { timeOut: 5000 })
+            })
     }
 
 })
+
+
+myApp.controller('addPro', function ($scope, $http) {
+    $scope.addProduct = function () {
+        var data = {
+            "sp.MaSanPham": $scope.MaSanPham,
+            "sp.tensanpham": $scope.tensanpham,
+            "sp.MaLoaiSanPham": $scope.Tenloaisanpham,
+            "sp.Hinhanh": $scope.DonViTinh,
+            "sp.DonViTinh": $scope.GiaBan,
+            "sp.MoTa": $scope.MoTa,
+        }
+        $http({
+            method: 'POST',
+            url: '/Admin/themsp',
+            data: data
+        })
+
+    }
+});

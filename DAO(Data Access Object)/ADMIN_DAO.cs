@@ -65,15 +65,15 @@ namespace DAO_Data_Access_Object_
         {
             SqlParameter[] parm = new SqlParameter[]
              {
-                new SqlParameter("@MaLoaiSanPham",SqlDbType.NVarChar,50),
+               
                 new SqlParameter("@TenLoaiSanPham",SqlDbType.NVarChar,50),
                 new SqlParameter("@MoTa",SqlDbType.NVarChar,50),
 
              };
-            parm[0].Value = lsp.maloaisanpham;
-            parm[1].Value = lsp.tenloaisanpham;
-            parm[2].Value = lsp.MoTa;
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Insert_To_Products_Type", parm);
+    
+            parm[0].Value = lsp.tenloaisanpham;
+            parm[1].Value = lsp.MoTa;
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Insert_Auto_Product_Type", parm);
         }
 
         public IList<dashBroad> dash()
