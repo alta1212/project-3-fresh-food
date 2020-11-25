@@ -84,7 +84,7 @@ namespace DAO_Data_Access_Object_
                 Select KH.TenKhachHang,KH.HinhAnh, FB.*
                     From dbo.KHACH_HANG KH Right Join dbo.FEED_BACK FB 
 	                    On KH.MaKhachHang = FB.MaKhachHang
-		                    Where FB.MaSanPham = '{0}'", masanpham);
+		                    Where FB.MaSanPham = '{0}' order by ngaybinhluan desc", masanpham);
             dt = DataAccessHelper.log(cmdtext);
 
             List<FeedBack_DTO> li = new List<FeedBack_DTO>();
