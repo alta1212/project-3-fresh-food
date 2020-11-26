@@ -55,7 +55,7 @@ app.controller("SignUp", function ($window, $scope, $http) {
     $scope.btntext = "Đăng ký";
     $scope.register = function () { //được gọi khi bấm nút đăng ký
 
-
+        
         var mail = document.getElementById('khmail').value;
         var tk = document.getElementById('khtk').value;
         var mk = document.getElementById('khmk').value;
@@ -78,6 +78,7 @@ app.controller("SignUp", function ($window, $scope, $http) {
             localStorage.setItem('taikhoan', $scope.KHACH_HANG.TaiKhoan); //lưu tên tài khoản
             localStorage.setItem('matkhau', $scope.KHACH_HANG.MatKhau); //lưu mật khẩu
             localStorage.setItem('mail', $scope.KHACH_HANG.Email);
+
             localStorage.setItem('reg', "1"); //kiểm tra trạng thái reg
             //điều hướng về trang send
             $window.location.href = '/Account/sent';
@@ -132,9 +133,6 @@ app.controller("active", function ($scope, $window) {
 
 // Hiện thị thông tin của tài khoản
 app.controller("fillinfo", function ($window, $scope, $http, imgurUpload) {
-
-
-
 
     var data = {
 
@@ -242,17 +240,18 @@ app.controller("acccontroller", function ($window, $scope, $http) {
             params: data
         }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
             console.log($window.location)
+            console.log(bool.data[0])
             if (bool.data[0].Active == "1" && $window.location.pathname != "/account/fillinfo") {
                 $scope.lin = false;
                 $scope.out = true;
                 $window.location.href = '/account/fillinfo';
+                
             }
             else if (bool.data[0].Active == "2" || bool.data[0].Active == "0") { //kiểm tra dữ liệu đăng nhập trả về
                 $scope.lin = false;
                 $scope.out = true;
                 $scope.ten = bool.data[0].TenKhachHang
                 $scope.anhdaidien = bool.data[0].AnhDaiDien;
-
                 if ($window.location.pathname == "/Account/Login")
                     $window.location.href = '/Index/Index';
 
@@ -285,7 +284,7 @@ app.controller("seach", function ($scope, $http) {
 })
 
 //Hiện thị sản phẩm ngẫu nhiễn của cửa hàng
-app.controller("featuredproducts", function ($scope, $http) {
+app.controller("featuredproducts", function ($scope, $http, $location) {
     $http({
         method: 'GET',
         url: '/Index/spHighlights',
@@ -294,15 +293,18 @@ app.controller("featuredproducts", function ($scope, $http) {
         console.log($scope.featuredpro);
         console.log(response.data[0]);
     })
-    $scope.addtocart = function (msp) {
-
+    $scope.AddToCart = function (msp, giaban) {
+        debugger
+        var chiTietGioHang = {
+            maKhachHang: localStorage.getItem("taikhoan"),
+            maSanPham:msp ,
+            donGia:giaban }
         $http({
             method: 'POST',
-            url: '/guestEvent/addtocart',
+            url: '/guestEvent/AddToCart',
+            data: chiTietGioHang
         }).then(function successCallback(response) {
-            $scope.featuredpro = response.data;
-            console.log($scope.featuredpro);
-            console.log(response.data[0]);
+            console.log(response);
         })
     }
 })
