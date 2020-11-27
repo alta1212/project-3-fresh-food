@@ -81,7 +81,7 @@ namespace DAO_Data_Access_Object_
             DataTable dt = new DataTable();
             //lấy về các sản phẩm theo pagesize
             string cmdtext = string.Format(@"
-                Select KH.TenKhachHang,KH.HinhAnh, FB.*
+                Select  KH.TenKhachHang,KH.HinhAnh, FB.*,COUNT(fb.MaFeedBack) OVER(PARTITION BY LEFT(fb.MaFeedBack,2) ORDER BY fb.MaFeedBack RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
                     From dbo.KHACH_HANG KH Right Join dbo.FEED_BACK FB 
 	                    On KH.MaKhachHang = FB.MaKhachHang
 		                    Where FB.MaSanPham = '{0}' order by ngaybinhluan desc", masanpham);
@@ -101,6 +101,7 @@ namespace DAO_Data_Access_Object_
                 fb.HinhAnh = dr[6].ToString();
                 fb.NgayBinhLuan = Convert.ToDateTime(dr[7].ToString());
                 fb.Stars = float.Parse( dr[8].ToString());
+                fb.SoLuong= int.Parse(dr[9].ToString());
                 li.Add(fb);
             }
             return li;

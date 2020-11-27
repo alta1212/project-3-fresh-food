@@ -106,5 +106,29 @@ namespace DAO_Data_Access_Object_
             return li;
             
         }
+        public IList<Order_DTO> getListOrder(string pagesize)
+        {
+            DataTable dt = new DataTable();
+            string cmdText = string.Format(@"
+                select dh.*,nv.TenNhanVien from DON_HANG dh ,NHAN_VIEN_ nv 
+                    where dh.MaNhanVien=nv.MaNhanVien
+                    order by dh.MaDonHang desc Offset 0 Rows Fetch next {0} rows only", pagesize);
+            dt = DataAccessHelper.log(cmdText);
+            List<Order_DTO> li = new List<Order_DTO>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                Order_DTO or = new Order_DTO();
+                or.MaDonHang = dr[0].ToString();
+                or.MaKhachhang = dr[1].ToString();
+                or.MaNhanVien = dr[2].ToString();
+                or.TrangThai = int.Parse(dr[3].ToString());
+                or.TongTien = int.Parse(dr[4].ToString());
+                or.NgayMua = DateTime.Parse(dr[5].ToString());
+                or.NgayXacThuc = DateTime.Parse(dr[6].ToString());
+                or.TenNhanVien = dr[7].ToString();
+                li.Add(or);
+            }
+            return li;
+        }
     }
 }

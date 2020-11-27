@@ -17,12 +17,14 @@ namespace DTO_Data_Transfer_Object_
         private float stars;
         private string tenKhachHang;
         private string hinhAnhKH;
+        private int sl;
         public FeedBack_DTO()
         {
 
         }
-        public FeedBack_DTO(string mAFeedBack, string mASanPham, string mAKhachHang, string bInhLuan, string hInhAnh, DateTime nGayBinhLuan,float Stars,string tENkhachhang,string HinhAnHkh)
+        public FeedBack_DTO(int solouong,string mAFeedBack, string mASanPham, string mAKhachHang, string bInhLuan, string hInhAnh, DateTime nGayBinhLuan,float Stars,string tENkhachhang,string HinhAnHkh)
         {
+            this.sl = solouong;
             this.maFeedBack = mAFeedBack;
             this.maSanPham = mASanPham;
             this.maKhachHang = mAFeedBack;
@@ -43,6 +45,11 @@ namespace DTO_Data_Transfer_Object_
         {
             get { return hinhAnhKH; }
             set { hinhAnhKH = value; }
+        }
+        public int SoLuong
+        {
+            get { return sl; }
+            set { sl = value; }
         }
         public float Stars
         {

@@ -19,6 +19,11 @@ namespace BLL_Business_Logic_Layer__
             return ad.dash();
         }
 
+        public IList<Order_DTO> getListOrder(string pagesize)
+        {
+            return ad.getListOrder(pagesize);
+        }
+
         public IList<ADMIN> login(string tk, string mk)
         {
             return ad.login(tk, mk);
@@ -33,5 +38,6 @@ namespace BLL_Business_Logic_Layer__
         {
             ad.themSp(sp);
         }
+      
     }
 }

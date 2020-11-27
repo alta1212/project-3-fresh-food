@@ -457,7 +457,7 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
             console.log($scope.i4)
         })//lấy về i4 sản phẩm
         $scope.addtocart = function () {
-            alert("")
+            alert("thêm vào dòng 460")
         }
         $http({
             method: 'GET',
@@ -465,6 +465,10 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
         }).then(function successCallback(response) {
             $scope.fb = response.data;
             console.log($scope.fb)
+            try {
+                $rootScope.SoLuong = $scope.fb[0].SoLuong;
+            }
+            catch { $rootScope.SoLuong = 0}
         })
     }
     else {

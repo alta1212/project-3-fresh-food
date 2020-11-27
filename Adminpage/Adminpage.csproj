@@ -362,6 +362,8 @@
     <Content Include="Views\LoaiSanPhamAdmin\GetAllProductType.cshtml" />
     <Content Include="Views\SanPhamAdmin\AddProductType.cshtml" />
     <Content Include="Views\Admin\addProduct.cshtml" />
+    <Content Include="Views\Admin\Order.cshtml" />
+    <Content Include="Views\Shared\_navbar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -3,13 +3,7 @@
     ViewBag.Title = "Product_Details";
     Layout = "~/Views/Shared/MainLayOut.cshtml";
 }
-@section Scripts
-{
 
-   
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-}
 <div ng-controller="productdetails">
     <div class="section">
         <div class="container">
@@ -153,7 +147,7 @@
                                 <a class="nav-link" id="tab-product-info-tab" data-toggle="pill" href="#tab-product-info" role="tab" aria-controls="tab-product-info" aria-selected="false">Additional Information</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-product-reviews-tab" data-toggle="pill" href="#tab-product-reviews" role="tab" aria-controls="tab-product-reviews" aria-selected="false">Reviews (25)</a>
+                                <a class="nav-link" id="tab-product-reviews-tab" data-toggle="pill" href="#tab-product-reviews" role="tab" aria-controls="tab-product-reviews" aria-selected="false">Reviews ({{SoLuong}})</a>
                             </li>
                         </ul>
                     </div>
