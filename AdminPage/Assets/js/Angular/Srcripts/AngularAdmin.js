@@ -233,3 +233,35 @@ myApp.controller('managerOrder', function ($scope, $http) {
     };
 });
 
+
+
+myApp.controller('Profile', function ($scope,$http) {
+    var i4 = {
+        email: localStorage.getItem("email"),
+        matkhau: localStorage.getItem("matkhau"),
+    }
+    $http({
+        method: "POST",
+        url: '/Admin/log',
+        data: i4
+    }).then(function (res) {
+        $scope.data = res.data[0];
+
+        console.log($scope.data)
+    })
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
+
+myApp.controller('addUser', function ($scope, $http) {
+    $scope.add = function () {
+        var i4 = {
+           
+        }
+    }
+})

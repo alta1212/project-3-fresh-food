@@ -20,5 +20,7 @@ namespace DTO_Data_Transfer_Object_
         public string email { get; set; }
         public string matkhau { get; set; }
         public string hinhanh { get; set; }
+
+      
     }
 }

@@ -14,10 +14,17 @@ namespace BLL_Business_Logic_Layer__
     {
         ADMIN_DAO ad = new ADMIN_DAO();
 
+        public int addnv(ADMIN adm)
+        {
+            return ad.add(adm);
+        }
+
         public IList<dashBroad> dashboard()
         {
             return ad.dash();
         }
+
+
 
         public IList<Order_DTO> getListOrder(string pagesize)
         {

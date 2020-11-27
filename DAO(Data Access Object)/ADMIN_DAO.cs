@@ -35,6 +35,11 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
+        public int add(ADMIN adm)
+        {
+            throw new NotImplementedException();
+        }
+
         public void themSp(SAN_PHAM sp)
         {
             SqlParameter[] parm = new SqlParameter[]

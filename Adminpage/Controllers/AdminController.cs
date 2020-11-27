@@ -20,6 +20,19 @@ namespace AdminPage.Controllers
 
             return View();
         }
+        public ActionResult profile()
+        {
+           return View();
+        }
+
+        public ActionResult addNv()
+        {
+            return View();
+        }
+        public int addNhanVien(ADMIN adm)
+        {
+          return  ad.addnv(adm);
+        }
         public JsonResult log(string email,string matkhau)
         {
             return Json(ad.login(email, matkhau), JsonRequestBehavior.AllowGet); ;
