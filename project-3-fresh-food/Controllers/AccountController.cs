@@ -41,14 +41,13 @@ namespace project_3_fresh_food.Controllers
            
             acc.fillinfo(tentk,mk, KHACH_HANG);
         }
-        public void DoRegister(KHACH_HANG KHACH_HANG)
+        public void DangKy(KHACH_HANG KHACH_HANG)
         {
 
 
             string code = Guid.NewGuid().ToString();
-            acc.DoRegister(KHACH_HANG, code);
-            // sendmail(KHACH_HANG.email,code);
-            to.RunAsync(KHACH_HANG.email, code).Wait();
+            acc.DoRegister(KHACH_HANG, code);       
+            to.SendSimpleMessage(KHACH_HANG.email, code);
 
 
         }
@@ -78,12 +77,9 @@ namespace project_3_fresh_food.Controllers
             return Json(acc.log(KHACH_HANG.taikhoan, KHACH_HANG.matkhau), JsonRequestBehavior.AllowGet);
         }
 
-        public void resendmail(string tk,string mail)
-        {   
-            string code = Guid.NewGuid().ToString();
-            acc.resend(tk,mail,code);
-            to.RunAsync(mail, code).Wait();
-        }    
-     
+      
+
+
     }
+
 }

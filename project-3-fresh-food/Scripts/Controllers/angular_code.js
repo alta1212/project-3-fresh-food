@@ -1,6 +1,42 @@
 ﻿var app = angular.module('project', ['imgurUpload']);
 
 //tài khoản
+//đăng  ký
+app.controller('dangKy', function ($http, $scope) {
+    $scope.tk = $scope.mail = true; //ẩn thông tin trung mail,tk sau này làm hamgf check
+    $scope.bnttext = "Đăng ký";
+    $scope.sign = function () { //được gọi khi bấm nút đăng ký
+
+
+        var mail = $scope.KHACH_HANG.Email;
+        var tk = $scope.KHACH_HANG.TaiKhoan;
+        var mk = $scope.KHACH_HANG.MatKhau;
+
+        if (mail.trim() != "" && tk.trim() != "" && mk.trim() != "") {
+            $scope.bnttext = "Vui lòng chờ";
+            $scope.btn = {
+                "background-color": "#999",
+                "cursor": "wait"
+            }
+            $scope.reg = true;
+            $http({
+                method: "POST", //method gửi dữ liệu
+                url: '/Account/DangKy', //gọi hàm 
+                data: $scope.KHACH_HANG //dữ liệu truyền vào user là tên biến đặt bên input
+            })
+
+           
+            localStorage.setItem('taikhoan', $scope.KHACH_HANG.TaiKhoan); //lưu tên tài khoản
+            localStorage.setItem('matkhau', $scope.KHACH_HANG.MatKhau); //lưu mật khẩu
+            localStorage.setItem('mail', $scope.KHACH_HANG.Email);
+
+
+            window.location.href = '/Account/sent';
+
+        }
+
+    }
+})
 // đăng nhập
 app.controller("login", function ($scope, $http, $window) {
 
@@ -29,7 +65,7 @@ app.controller("login", function ($scope, $http, $window) {
                     localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
 
                     $window.location.href = '/Account/FillInfo';
-                } else if (bool.data[0].Active == "0") { //nếu là 1 thì chưa điền thông tin cá nhận
+                } else if (bool.data[0].Active == "0") { //nếu là 0 thì chưa xác nhận
                     $scope.btntext = "Thành công!";
                     //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
                     //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
@@ -48,73 +84,24 @@ app.controller("login", function ($scope, $http, $window) {
 
 })
 
-// đăng kí
-app.controller("SignUp", function ($window, $scope, $http) {
-
-    $scope.tk = $scope.mail = true; //ẩn thông tin trung mail,tk sau này làm hamgf check
-    $scope.btntext = "Đăng ký";
-    $scope.register = function () { //được gọi khi bấm nút đăng ký
-
-        
-        var mail = document.getElementById('khmail').value;
-        var tk = document.getElementById('khtk').value;
-        var mk = document.getElementById('khmk').value;
-
-        if (mail.trim() != "" && tk.trim() != "" && mk.trim() != "") {
-            $scope.btntext = "Vui lòng chờ";
-            $scope.btn = {
-                "background-color": "#999",
-                "cursor": "wait"
-            }
-            $scope.reg = true;
-            $http({
-                method: "POST", //method gửi dữ liệu
-                url: '/Account/DoRegister', //gọi hàm 
-                data: $scope.KHACH_HANG //dữ liệu truyền vào user là tên biến đặt bên input
-            }).then(function () {
-                alert("ed");
-            });
-
-            localStorage.setItem('taikhoan', $scope.KHACH_HANG.TaiKhoan); //lưu tên tài khoản
-            localStorage.setItem('matkhau', $scope.KHACH_HANG.MatKhau); //lưu mật khẩu
-            localStorage.setItem('mail', $scope.KHACH_HANG.Email);
-
-            localStorage.setItem('reg', "1"); //kiểm tra trạng thái reg
-            //điều hướng về trang send
-            $window.location.href = '/Account/sent';
-
-
-        }
-
-    }
-
-})
 
 // chập nhận mail để tạo tài khoản
 app.controller("sender", function ($scope, $http, $window) {
-    if (localStorage.getItem('reg') == null) { //xoá tất cả cookie
-        localStorage.clear();
-        $window.location.href = '/Index/Index';
-    } else {
+
         var data = {
             tk: localStorage.getItem('taikhoan'),
             mail: localStorage.getItem('mail'),
         };
-        $scope.resend = function () {
-            $http({
-                method: "POST", //method gửi dữ liệu
-                url: '/Account/resendmail', //gọi hàm controller/account/Login
-                data: data //dữ liệu truyền vào user là tên biến đặt bên input
-            })
-            console.log("đã gửi")
+    $scope.resend = function () {
+        window.location.reload();
         }
 
-    }
+    
 })
 
 // Tài khoản cần active để đăng nhập
 app.controller("active", function ($scope, $window) {
-    localStorage.removeItem("reg");
+
     $scope.success = true;
     $scope.go = function () {
         $window.location.href = '/Account/FillInfo'
