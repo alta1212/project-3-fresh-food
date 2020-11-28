@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div ng-controller="Profile" id="content-page" class="content-page">
+    <div class="container-fluid">
+        <div class="row profile-content">
+            <div class="col-12 col-md-12 col-lg-4">
+                <div class="iq-card">
+                    <div class="iq-card-body profile-page">
+                        <div class="profile-header">
+                            <div class="cover-container text-center">
+                                <img style="height: 200px; width: 200px;" src="{{data.hinhanh}}" alt="profile-bg" class="rounded-circle img-fluid">
+                                <div class="profile-detail mt-3">
+                                    <h3>{{data.tennhanvien}}</h3>
+                                    <p class="text-primary">{{data.quyenhan}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-5">
+                <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between align-items-center mb-0">
+                        <div class="iq-header-title">
+                            <h4 class="card-title mb-0">Thông Tin Cá Nhân</h4>
+                        </div>
+                    </div>
+                    <div class="iq-card-body">
+                        <ul class="list-inline p-0 mb-0">
+                            <li>
+                                <div class="row align-items-center justify-content-between mb-3">
+                                    <div class="col-sm-6">
+                                        <h6>Ngày Sinh</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="mb-0">{{data.ngaysinh | filterdate | date:'dd/MM/yyyy'}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row align-items-center justify-content-between mb-3">
+                                    <div class="col-sm-6">
+                                        <h6>Ngày Vào Làm</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="mb-0">{{data.ngayvaolam | filterdate | date:'dd/MM/yyyy'}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row align-items-center justify-content-between mb-3">
+                                    <div class="col-sm-6">
+                                        <h6>Địa Chỉ</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="mb-0">{{data.diachi}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row align-items-center justify-content-between mb-3">
+                                    <div class="col-sm-6">
+                                        <h6>Số Điện Thoại</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="mb-0">{{data.sodienthoai}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row align-items-center justify-content-between mb-3">
+                                    <div class="col-sm-6">
+                                        <h6>Email</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="mb-0">{{data.email}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row align-items-center justify-content-between mb-3">
+                                    <div class="col-sm-6">
+                                        <h6>Giới tính</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="mb-0">{{data.gioitinh}}</p>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

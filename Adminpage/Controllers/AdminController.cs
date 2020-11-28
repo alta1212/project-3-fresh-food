@@ -20,10 +20,22 @@ namespace AdminPage.Controllers
 
             return View();
         }
+        public ActionResult profile()
+        {
+           return View();
+        }
+
+        public ActionResult addNv()
+        {
+            return View();
+        }
+        public int addNhanVien(ADMIN adm)
+        {
+          return  ad.addnv(adm);
+        }
         public JsonResult log(string email,string matkhau)
         {
-           
-            return Json(ad.login(email,matkhau),JsonRequestBehavior.AllowGet);
+            return Json(ad.login(email, matkhau), JsonRequestBehavior.AllowGet); ;
         }
         public JsonResult dash()
         {
@@ -31,10 +43,7 @@ namespace AdminPage.Controllers
         }
         public ActionResult Index()
         {
-            project_3_fresh_food.Controllers.IndexController view = new project_3_fresh_food.Controllers.IndexController();
-            try { ViewBag.viewer = view.viewer(); }
-            catch { ViewBag.viewer = 0; }
-           
+       
             return View();
         }
         public int themlsp(LOAI_SAN_PHAM lsp)
@@ -45,7 +54,15 @@ namespace AdminPage.Controllers
                 return 1;
                 
         }
+        public JsonResult getOrder(string pagesize)
+        {
+            return Json(ad.getListOrder(pagesize),JsonRequestBehavior.AllowGet);
+        }
         public ActionResult addProduct()
+        {
+            return View();
+        }
+        public ActionResult Order()
         {
             return View();
         }

@@ -74,8 +74,7 @@ myApp.controller('managerProductType', function ($scope, $http) {
 
 
 
-
-myApp.controller('loginAdmin', function ($scope, $http, $window) {
+myApp.controller('loginAdmin', function ($rootScope,$scope, $http, $window) {
     $scope.fail = { "display": "none" }
     $scope.login = function () {
 
@@ -86,7 +85,7 @@ myApp.controller('loginAdmin', function ($scope, $http, $window) {
         }).then(function (bool) {
             if (bool.data.length != 0) {
                 console.log(bool)
-
+                
                 localStorage.setItem("email", $scope.admin.email)
                 localStorage.setItem("matkhau", $scope.admin.matkhau)
                 $window.location.href = '/Admin/Index';
@@ -113,7 +112,9 @@ myApp.controller('adminIndex', function ($scope, $http) {//thống kê trên tra
     })
 })
 
-myApp.controller("accAdminNav", function ($scope, $http, $window) {
+
+
+myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
 
     if (localStorage.getItem("email") != null && localStorage.getItem("matkhau") != null) {
         var i4 = {
@@ -125,13 +126,16 @@ myApp.controller("accAdminNav", function ($scope, $http, $window) {
             url: '/Admin/log',
             data: i4
         }).then(function (call) {
-
+           
             if (call.data.length != 0) {
                 localStorage.setItem("hinhanh", call.data[0].hinhanh)
                 localStorage.setItem("ten", call.data[0].tennhanvien)
                 $scope.anh = localStorage.getItem("hinhanh");
                 $scope.ten = localStorage.getItem("ten");
+                $scope.role = call.data[0].quyenhan;
 
+                console.log($scope.role)
+               
             }
             else {
                 localStorage.clear();
@@ -149,8 +153,7 @@ myApp.controller("accAdminNav", function ($scope, $http, $window) {
         $window.location.href = '/Admin/login';
     }
 })
-
-myApp.controller('addLsp', function ($scope, $http) {
+ myApp.controller('addLsp', function ($scope, $http) {
    
     $scope.addlsp = function () {
         var data = {
@@ -174,7 +177,7 @@ myApp.controller('addLsp', function ($scope, $http) {
 
 })
 
-
+//thêm sản phẩm
 myApp.controller('addPro', function ($scope, $http) {
     $scope.addProduct = function () {
         var data = {
@@ -193,3 +196,72 @@ myApp.controller('addPro', function ($scope, $http) {
 
     }
 });
+
+//lấy về danh sách order
+myApp.controller('managerOrder', function ($scope, $http) {
+    $scope.size = 10;
+    $http({
+        method: 'GET',
+        url: '/Admin/getOrder?pagesize='+$scope.size
+    }).then(function (res) {
+        console.log(res.data)
+        $scope.getJsonResults = res.data;
+    })
+    $scope.changeview = function () {
+
+        $http({
+            method: 'GET',
+            url: '/Admin/getOrder?pagesize=' + $scope.pagesize
+        }).then(function (res) {
+            console.log(res.data);
+            $scope.getJsonResults = res.data;
+        })
+    }
+    $scope.veri = function () {
+        toastr.success('xác nhận dòng 218', 'Success Alert!', { timeOut: 5000 })
+    }
+    $scope.delete = function () {
+        toastr.success('xoá dòng 221', 'Success Alert!', { timeOut: 5000 })
+       
+    }
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
+
+
+
+myApp.controller('Profile', function ($scope,$http) {
+    var i4 = {
+        email: localStorage.getItem("email"),
+        matkhau: localStorage.getItem("matkhau"),
+    }
+    $http({
+        method: "POST",
+        url: '/Admin/log',
+        data: i4
+    }).then(function (res) {
+        $scope.data = res.data[0];
+
+        console.log($scope.data)
+    })
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
+
+myApp.controller('addUser', function ($scope, $http) {
+    $scope.add = function () {
+        var i4 = {
+           
+        }
+    }
+})

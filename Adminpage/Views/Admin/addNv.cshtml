@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "addNv";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div ng-controller="addUser"   ng-switch="role == 'Admin'" id="content-page" class="content-page">
+  <h1 ng-switch-when="false">Bạn Không Có Quyền Truy Cập Trang Này</h1>
+    <div ng-switch-when="true" class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Thêm Nhân Viên</h4>
+                        </div>
+                    </div>
+                    <div class="iq-card-body">
+                        <form>
+                            <div class="form-group">
+                                <div class="add-img-user profile-img-edit">
+                                    <img class="profile-pic img-fluid" style="height: 150px; width: 200px;" src="https://picsum.photos/360/360" alt="profile-pic">
+                                    <div class="p-image">
+                                        <a href="javascript:void();" class="upload-button btn iq-bg-primary">File Upload</a>
+                                        <input class="file-upload" type="file" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="img-extension mt-3">
+                                    <div class="d-inline-block align-items-center">
+                                        <span>Only</span>
+                                        <a href="javascript:void();">.jpg</a>
+                                        <a href="javascript:void();">.png</a>
+                                        <a href="javascript:void();">.jpeg</a>
+                                        <span>allowed</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>User Role:</label>
+                                <select ng-model="role" class="form-control" id="selectuserrole">
+                                    <option>Select</option>
+                                    <option>Admin</option>
+                                    <option>Nhân Viên</option>
+                                </select>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Thông Tin</h4>
+                        </div>
+                    </div>
+                    <div class="iq-card-body">
+                        <div class="new-user-info">
+                            <form>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="fname">Tên Nhân viên:</label>
+                                        <input type="text" class="form-control" id="fname" placeholder="Tên Nhân Viên">
+                                    </div>
+                                    <div class="form-group col-md-6">
+
+
+                                        <label>Giới Tính:</label>
+                                        <select ng-model="gioitinh" class="form-control" id="selectuserrole">
+                                            <option>Select</option>
+                                            <option>Nam</option>
+                                            <option>Nữ</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="add1">Địa Chỉ:</label>
+                                        <input type="text" class="form-control" id="add1" placeholder="Địa chỉ">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="mobno">Số Điện Thoại:</label>
+                                        <input type="text" class="form-control" id="mobno" placeholder="Số Điện Thoại">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="altconno">Ngày Sinh:</label>
+                                        <input type="text" class="form-control" id="mobno" placeholder="dd/mm/yyyy">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="email">Email:</label>
+                                        <input type="email" class="form-control" id="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <button ng-click="add()" type="submit" class="btn btn-primary">Add New User</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

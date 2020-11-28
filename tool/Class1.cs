@@ -1,24 +1,15 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.IO;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using System.Xml.Linq;
-using Mailjet.Client;
+﻿using Mailjet.Client;
 using Mailjet.Client.Resources;
 using Newtonsoft.Json.Linq;
+using RestSharp;
+using RestSharp.Authenticators;
+using System;
 namespace tool
 {
     public class Class1
     {
-    public async System.Threading.Tasks.Task RunAsync(string mail, string code)
+      
+        public  IRestResponse SendSimpleMessage(string mail, string code)
         {
             string body = @"<!DOCTYPE html>
                                 <body style=""width:100%; height:100%; margin:0; padding:32px; font: normal normal normal 14px/21px Arial,sans-serif; color:#333; background-color:#f1f1f1; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;"">
@@ -60,55 +51,22 @@ namespace tool
                                 </body>
                                 </html>";
             body = body.Replace("{{link}}", "https://tk16food.com/Account/Active?code=" + code);
-            MailjetClient client = new MailjetClient("eab093ad170fb96f2874dc2bdd25bf4b", "8b27607aa189e35d2993002d7c0d0200")
-            {
-                Version = ApiVersion.V3_1,
-            };
-            MailjetRequest request = new MailjetRequest
-            {
-                Resource = Send.Resource,
-            }
-               .Property(Send.Messages, new JArray {
-                new JObject {
-                 {"From", new JObject {
-                  {"Email", "thucphamtk16@gmail.com"},
-                  {"Name", "Fresh Food"}
-                  }},
-                 {"To", new JArray {
-                  new JObject {
-                   {"Email", mail},
-                   {"Name", "Khách"}
-                   }
-                  }},
-                 {"Subject", "Vui lòng xác nhận email của bạn !"},
-                 {"HTMLPart", body}
-                 }
-                   });
-            MailjetResponse response = await client.PostAsync(request);
-
+            RestClient client = new RestClient();
+            client.BaseUrl = new Uri("https://api.mailgun.net/v3");
+            client.Authenticator =
+                new HttpBasicAuthenticator("api",
+                    "140382be91ae3beab3c7b1969d670b07-360a0b2c-7cf8abe2");
+            RestRequest request = new RestRequest();
+            request.AddParameter("domain", "tk16food.com", ParameterType.UrlSegment);
+            request.Resource = "tk16food.com/messages";
+            request.AddParameter("from", "Thực Phẩm sạch Freshfood@tk16food.com");
+            request.AddParameter("to",mail);
+            request.AddParameter("subject", "Vui lòng xác nhận mail của bạn");
+            request.AddParameter("html", body);
+            request.Method = Method.POST;
+            return client.Execute(request);
         }
-        ////chèn ảnh
-        //public  Image GetImageFromUrl(string url)
-        //{
-        //    HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
-
-        //    using (HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse())
-        //    {
-        //        using (Stream stream = httpWebReponse.GetResponseStream())
-        //        {
-        //            return Image.FromStream(stream);
-        //        }
-        //    }
-        //}
-        //public byte[] ImageToByteArray(System.Drawing.Image imageIn)
-        //{
-        //    using (var ms = new MemoryStream())
-        //    {
-        //        imageIn.Save(ms, imageIn.RawFormat);
-        //        return ms.ToArray();
-        //    }
-        //}
-
     }
+   
 }
 

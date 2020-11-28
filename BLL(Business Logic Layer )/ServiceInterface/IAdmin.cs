@@ -14,5 +14,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<dashBroad> dashboard();
         int themLsp(LOAI_SAN_PHAM lsp);
         void themsp(SAN_PHAM sp);
+        IList<Order_DTO> getListOrder(string pagesize);
+        int addnv(ADMIN adm);
     }
 }
