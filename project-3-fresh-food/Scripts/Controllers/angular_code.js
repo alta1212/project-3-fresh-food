@@ -294,7 +294,6 @@ app.controller("featuredproducts", function ($scope, $http, $location) {
         console.log(response.data[0]);
     })
     $scope.AddToCart = function (msp, giaban) {
-        debugger
         var chiTietGioHang = {
             maKhachHang: localStorage.getItem("taikhoan"),
             maSanPham:msp ,
