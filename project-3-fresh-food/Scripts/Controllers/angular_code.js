@@ -283,7 +283,8 @@ app.controller("featuredproducts", function ($scope, $http, $location) {
     $scope.AddToCart = function (msp, giaban) {
         var chiTietGioHang = {
             maKhachHang: localStorage.getItem("taikhoan"),
-            maSanPham:msp ,
+            maSanPham: msp,
+            soLuong: 1,
             donGia:giaban }
         $http({
             method: 'POST',
@@ -306,18 +307,47 @@ app.controller("getBestSellProduct", function ($scope, $http) {
         console.log(response.data[0]);
 
     })
-    
+    $scope.AddToCart = function (msp, giaban) {
+        var chiTietGioHang = {
+            maKhachHang: localStorage.getItem("taikhoan"),
+            maSanPham: msp,
+            soLuong: 1,
+            donGia: giaban
+        }
+        $http({
+            method: 'POST',
+            url: '/guestEvent/AddToCart',
+            data: chiTietGioHang
+        }).then(function successCallback(response) {
+            console.log(response);
+        })
+    }
 })
 // Hiện thị sản phẩm được giảm giá
 app.controller("getProductDiscount", function ($scope, $http) {
     $http({
         method: 'GET',
-        url: '/Product/GetProductDiscount',
+        url: '/Product/GetProductDiscount'
     }).then(function successCallback(response) {
         $scope.GetProductDiscount = response.data;
         console.log($scope.bestSellProduct);
         console.log(response.data[0]);
     })
+    $scope.AddToCart = function (msp, giaban) {
+        var chiTietGioHang = {
+            maKhachHang: localStorage.getItem("taikhoan"),
+            maSanPham: msp,
+            soLuong: 1,
+            donGia: giaban
+        }
+        $http({
+            method: 'POST',
+            url: '/guestEvent/AddToCart',
+            data: chiTietGioHang
+        }).then(function successCallback(response) {
+            console.log(response);
+        })
+    }
 })
 // Hiện thị menu trái của cửa hàng
 app.controller("navmenu", function ($scope, $http, $window) {
@@ -430,7 +460,21 @@ app.controller("shop", function ($scope, $location, $http) {
         }
 
     }
-
+    $scope.AddToCart = function (msp, giaban) {
+        var chiTietGioHang = {
+            maKhachHang: localStorage.getItem("taikhoan"),
+            maSanPham: msp,
+            soLuong: 1,
+            donGia: giaban
+        }
+        $http({
+            method: 'POST',
+            url: '/guestEvent/AddToCart',
+            data: chiTietGioHang
+        }).then(function successCallback(response) {
+            console.log(response);
+        })
+    }
 
 })
 
@@ -455,8 +499,22 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
             $scope.i4 = response.data[0];
             console.log($scope.i4)
         })//lấy về i4 sản phẩm
-        $scope.addtocart = function () {
-            alert("thêm vào dòng 460")
+        $scope.AddToCart = function (msp, giaban, soluong) {
+            if (soluong == null)
+                soluong = 1;
+            var chiTietGioHang = {
+                maKhachHang: localStorage.getItem("taikhoan"),
+                maSanPham: msp,
+                soLuong: soluong,
+                donGia: giaban
+            }
+            $http({
+                method: 'POST',
+                url: '/guestEvent/AddToCart',
+                data: chiTietGioHang
+            }).then(function successCallback(response) {
+                console.log(response);
+            })
         }
         $http({
             method: 'GET',

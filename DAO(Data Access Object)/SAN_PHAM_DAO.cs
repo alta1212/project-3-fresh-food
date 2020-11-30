@@ -62,17 +62,19 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
-        public void AddToCart(string maKhacHang, string maSanPham,int donGia)
+        public void AddToCart(string maKhacHang, string maSanPham,int donGia,int soLuong)
         {
             SqlParameter[] parm = new SqlParameter[]
              {
                 new SqlParameter("@MaKhachHang",SqlDbType.NVarChar,50),
                 new SqlParameter("@MaSanPham",SqlDbType.NVarChar,50),
-                new SqlParameter("@DonGia",SqlDbType.Int)
+                new SqlParameter("@DonGia",SqlDbType.Int),
+                new SqlParameter("@SoLuong",SqlDbType.Int)
              };
             parm[0].Value = maKhacHang;
             parm[1].Value = maSanPham;
             parm[2].Value = donGia;
+            parm[3].Value = soLuong;
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Add_To_Cart", parm);
         }
 

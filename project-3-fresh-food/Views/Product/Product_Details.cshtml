@@ -83,7 +83,7 @@
 
                             <div class="andro_product-variation-wrapper">
                                 <div class="form-group">
-                                    <select class="form-control" name="amount">
+                                    <select class="form-control" name="amount" ng-model="soLuong">
                                         <option value="">Select Amount</option>
                                         <option value="1">1 {{i4.DonViTinh}}</option>
                                         <option value="2">2 {{i4.DonViTinh}}</option>
@@ -95,7 +95,7 @@
                             </div>
 
                             <div class="qty-outter">
-                                <span ng-click="addtocart()" class="andro_btn-custom">Buy Now</span>
+                                <span ng-click="AddToCart(i4.MaSanPham,i4.Giaban,soLuong)" class="andro_btn-custom">Buy Now</span>
 
                             </div>
 

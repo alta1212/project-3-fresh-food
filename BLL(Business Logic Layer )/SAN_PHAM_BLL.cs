@@ -13,9 +13,9 @@ namespace BLL_Business_Logic_Layer__
     {
         SAN_PHAM_DAO sp = new SAN_PHAM_DAO();
 
-        public void AddToCart(string mkh, string msp, int donGia)
+        public void AddToCart(string mkh, string msp, int donGia, int soLuong)
         {
-            sp.AddToCart(mkh,msp,donGia);
+            sp.AddToCart(mkh,msp,donGia,soLuong);
         }
 
         public void postcomment(string masp, string mkh, string binhluan, string hinhanh, float stars)

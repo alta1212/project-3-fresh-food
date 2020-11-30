@@ -12,9 +12,9 @@ namespace project_3_fresh_food.Controllers
     {
         IProduct sp = new SAN_PHAM_BLL();
         // GET: guestEvent
-        public void AddToCart(string maKhachHang, string maSanPham, int donGia)
+        public void AddToCart(string maKhachHang, string maSanPham, int donGia, int soLuong)
         {
-            sp.AddToCart(maKhachHang+"mkh", maSanPham, donGia);
+            sp.AddToCart(maKhachHang+"mkh", maSanPham, donGia,soLuong);
         }
         public void postComment(string masp, string mkh, string binhluan, string hinhanh, float stars)
         {
