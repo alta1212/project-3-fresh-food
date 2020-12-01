@@ -15,6 +15,7 @@
                         <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}"><img src="{{i.Hinhanh}}" alt="product"></a>
                     </div>
                     <div class="andro_product-body">
+                        <h6 class="andro_product-title"> <a href="product-single.html"> {{i.tensanpham}} </a> </h6>
                         <div class="andro_rating-wrapper">
                             <div style="display:flex">
                                 <div class="andro_rating" ng-repeat="Star in [1,2,3,4,5]">
@@ -26,7 +27,7 @@
                                             <i class="fa fa-star"></i>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                             <span>{{i.Stars}}</span>

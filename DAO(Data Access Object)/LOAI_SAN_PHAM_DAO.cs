@@ -14,11 +14,35 @@ namespace DAO_Data_Access_Object_
         private const string parm_MaLoaiSanPham = "@MaLoaiSanPham";
         private const string parm_TenLoaiSanPham = "@TenLoaiSanPham";
         private const string parm_Mota = "@MoTa";
-        public IList<LOAI_SAN_PHAM> GetAllLSP()
+        public IList<LOAI_SAN_PHAM> GetAllLSPInShop() // in admin in shoping left -->inner
+            // in shoping 
         {
             DataTable dt = new DataTable();
             string cmdText = string.Format(@"
-                Select LSP.*, Count(SP.MaLoaiSanPham) as 'Số lượng' From [dbo].[LOAI_SAN_PHAM] LSP Inner join [dbo].[SAN_PHAM] SP
+                Select LSP.*, Count(SP.MaLoaiSanPham) as 'Số lượng' From [dbo].[LOAI_SAN_PHAM] LSP
+                    inner join [dbo].[SAN_PHAM] SP
+                    On LSP.MaLoaiSanPham = SP.MaLoaiSanPham
+                        Group By LSP.MaLoaiSanPham, LSP.TenLoaiSanPham, LSP.MoTa");
+            dt = DataAccessHelper.log(cmdText);
+            List<LOAI_SAN_PHAM> li = new List<LOAI_SAN_PHAM>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                LOAI_SAN_PHAM lsp = new LOAI_SAN_PHAM();
+                lsp.maloaisanpham = dr[0].ToString();
+                lsp.tenloaisanpham = dr[1].ToString();
+                lsp.mota = dr[2].ToString();
+                lsp.soLuong = int.Parse(dr[3].ToString());
+                li.Add(lsp);
+            }
+            return li;
+        }
+        public IList<LOAI_SAN_PHAM> GetAllLSPInAdmin() // in admin in shoping left -->inner
+                                                // in shoping 
+        {
+            DataTable dt = new DataTable();
+            string cmdText = string.Format(@"
+                Select LSP.*, Count(SP.MaLoaiSanPham) as 'Số lượng' From [dbo].[LOAI_SAN_PHAM] LSP
+                    left join [dbo].[SAN_PHAM] SP
                     On LSP.MaLoaiSanPham = SP.MaLoaiSanPham
                         Group By LSP.MaLoaiSanPham, LSP.TenLoaiSanPham, LSP.MoTa");
             dt = DataAccessHelper.log(cmdText);

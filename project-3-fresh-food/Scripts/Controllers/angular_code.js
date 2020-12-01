@@ -201,7 +201,7 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload) {
     })
 })
 // Tài khoản
-app.controller("acccontroller", function ($window, $scope, $http) {
+app.controller("acccontroller", function ($window, $scope,$rootScope, $http) {
     $scope.lin = true;
 
     $scope.logout = function () {
@@ -228,6 +228,7 @@ app.controller("acccontroller", function ($window, $scope, $http) {
         }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
             console.log($window.location)
             console.log(bool.data[0])
+            
             if (bool.data[0].Active == "1" && $window.location.pathname != "/account/fillinfo") {
                 $scope.lin = false;
                 $scope.out = true;
@@ -247,7 +248,8 @@ app.controller("acccontroller", function ($window, $scope, $http) {
                 $scope.lin = true;
                 $scope.out = false;
             }
-
+            $rootScope.dataKhachHang = bool.data[0];
+            console.log($rootScope.dataKhachHang)
 
         });
 
@@ -579,7 +581,14 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
     };
 });
 
-app.controller('cart', function () { })
+app.controller('cart', function ($scope,$http) {
+    var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
+    //$http({
+    //    method: 'get',
+    //    url:
+    //})
+    console.log(scopeAcount);
+})
 
 
 

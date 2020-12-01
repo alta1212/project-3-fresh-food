@@ -50,9 +50,10 @@
                         <h5 class="andro_product-title"> <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}">{{i.tensanpham}} </a> </h5>
                         <p>{{i.MoTa}}</p>
                         <div class="andro_product-footer">
-                            <div class="andro_product-price">
+                            <div class="andro_product-price" ng-switch="i.Giamoi>0">
                                 <span>{{i.Giaban | number }} VNĐ</span>
-                                <span>{{i.GiaMan| number }} VNĐ</span>
+                                <span ng-switch-when="false" style="display:none;">{{i.Giamoi| number }} VNĐ</span>
+                                <span ng-switch-when="true" >{{i.Giamoi| number }} VNĐ</span>
                             </div>
                             <div class="btn-group">
                                 <a ng-click="AddToCart(i.MaSanPham,i.Giaban)" href="#" class="andro_btn-custom btn-sm">Buy Now</a>

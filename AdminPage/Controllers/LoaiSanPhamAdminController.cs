@@ -22,7 +22,7 @@ namespace AdminPage.Controllers
         IList<LOAI_SAN_PHAM> productType;
         public JsonResult GetAllProductTypeJS()
         {
-            productType = productTypeIterface.GetAllLSP();
+            productType = productTypeIterface.GetAllLSPInAdmin();
             return Json(productType, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetAllProductType()

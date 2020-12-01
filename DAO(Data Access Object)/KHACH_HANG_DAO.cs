@@ -41,7 +41,7 @@ namespace DAO_Data_Access_Object_
         {
 
             DataTable dt = new DataTable();
-            string cmdtext = string.Format("Select tenkhachhang,active, Hinhanh from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", tk, mk);
+            string cmdtext = string.Format("Select tenkhachhang,active, Hinhanh,makhachhang,magiohang from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", tk, mk);
             dt = DataAccessHelper.log(cmdtext);
             List<KHACH_HANG> li = new List<KHACH_HANG>();
             foreach (DataRow dr in dt.Rows)
@@ -50,6 +50,8 @@ namespace DAO_Data_Access_Object_
                 sp.tenkhachhang = dr[0].ToString();
                 sp.active = dr[1].ToString();
                 sp.anhdaidien = dr[2].ToString();
+                sp.magiohang = dr[4].ToString();
+                sp.makhachhang = dr[3].ToString();
                 li.Add(sp);
             }
             return li;
