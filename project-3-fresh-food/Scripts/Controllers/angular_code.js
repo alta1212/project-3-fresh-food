@@ -581,13 +581,32 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
     };
 });
 
-app.controller('cart', function ($scope,$http) {
-    var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
-    //$http({
-    //    method: 'get',
-    //    url:
-    //})
+app.controller('CartInHeader', function ($rootScope,$scope,$http) {
+    var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope();
     console.log(scopeAcount);
+    console.log(scopeAcount.$root.$root);
+    $scope.dataInCart = scopeAcount;
+    
+    var user = angular.forEach(scopeAcount.data.dataKhachHang, function (item) {
+
+    });
+    $http({
+        method: 'get',
+        url: '/Product/GetAllProductInCart?maKhachHang=' + scopeAcount.dataKhachHang.maKhachHang,
+    }).then(function successGetAll(response) {
+        $scope.listInCart = response.data;
+    })
+})
+app.controller('CartInDetail', function ($scope, $http) {
+    var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
+    console.log(scopeAcount);
+    $http({
+        method: 'get',
+        url: '/Product/GetAllProductInCart?maKhachHang=' + scopeAcount.dataKhachHang.maKhachHang
+    }).then(function successGetAll(response) {
+        $scope.listInCart = response.data;
+        console.log(listInCart)
+    })
 })
 
 

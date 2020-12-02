@@ -293,9 +293,11 @@ namespace DAO_Data_Access_Object_
             DataTable dt = new DataTable();
             //lấy về các sản phẩm theo pagesize
             string cmdtext = string.Format(@"
-                        Select PAAPT.*,PAAPDT.GiaBan - PAAPDT.GiaBan * PAAPDT.PhanTram / 100 N'Giá Khuyến Mại' From ProductAndAllPriceTest PAAPT Left Join ProductAndAllPriceDiscountTest PAAPDT 
-	                        On PAAPT.MaSanPham = PAAPDT.MaSanPham
-                        Order By PAAPT.MaSanPham Asc Offset {1}*({0}-1) Rows Fetch next {1} rows only", page,pagesize);
+                        Select PAAPT.*,PAAPDT.GiaBan - PAAPDT.GiaBan * PAAPDT.PhanTram / 100 N'Giá Khuyến Mại'
+                            From ProductAndAllPriceTest PAAPT
+                                 Left Join ProductAndAllPriceDiscountTest PAAPDT 
+	                                 On PAAPT.MaSanPham = PAAPDT.MaSanPham
+                                         Order By PAAPT.MaSanPham Asc Offset {1}*({0}-1) Rows Fetch next {1} rows only", page,pagesize);
             dt = DataAccessHelper.log(cmdtext);
             List<SAN_PHAM> li = new List<SAN_PHAM>();
             foreach (DataRow dr in dt.Rows)

@@ -5,7 +5,7 @@
 }
 
 <!--Cart Start -->
-<div class="section">
+<div class="section" ng-controller="CartInDetail">
     <div class="container">
 
         <!-- Cart Table Start -->
@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr ng-repeat="i in listInCart">
                     <td class="remove">
                         <button type="button" class="close-btn close-danger remove-from-cart">
                             <span></span>
@@ -29,63 +29,20 @@
                     </td>
                     <td data-title="Product">
                         <div class="andro_cart-product-wrapper">
-                            <img src="~/assets/img/products/1.png" alt="prod1">
+                            <img src="{{i.HinhAnh}}" alt="prod1">
                             <div class="andro_cart-product-body">
-                                <h6> <a href="#">Kiwi</a> </h6>
-                                <p>2 Kilos</p>
+                                <h6> <a href="#">{{i.TenSanPham}}</a> </h6>
+                                <p>2 {{i.DonViTinh}}</p>
                             </div>
                         </div>
                     </td>
-                    <td data-title="Price"> <strong>12.99$</strong> </td>
+                    <td data-title="Price"> <strong>{{i.GiaBan}}</strong> </td>
                     <td class="quantity" data-title="Quantity">
                         <input type="number" class="qty form-control" value="1">
                     </td>
-                    <td data-title="Total"> <strong>12.99$</strong> </td>
+                    <td data-title="Total"> <strong>{{i.GiaBan}}</strong> </td>
                 </tr>
-                <tr>
-                    <td class="remove">
-                        <button type="button" class="close-btn close-danger remove-from-cart">
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </td>
-                    <td data-title="Product">
-                        <div class="andro_cart-product-wrapper">
-                            <img src="~/assets/img/products/5.png" alt="prod1">
-                            <div class="andro_cart-product-body">
-                                <h6> <a href="#">Watermelons</a> </h6>
-                                <p>1 Piece</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td data-title="Price"> <strong>9.99$</strong> </td>
-                    <td class="quantity" data-title="Quantity">
-                        <input type="number" class="qty form-control" value="1">
-                    </td>
-                    <td data-title="Total"> <strong>9.99$</strong> </td>
-                </tr>
-                <tr>
-                    <td class="remove">
-                        <button type="button" class="close-btn close-danger remove-from-cart">
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </td>
-                    <td data-title="Product">
-                        <div class="andro_cart-product-wrapper">
-                            <img src="~/assets/img/products/4.png" alt="prod1">
-                            <div class="andro_cart-product-body">
-                                <h6> <a href="#">Cucumbers</a> </h6>
-                                <p>3 Kilos</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td data-title="Price"> <strong>13.99$</strong> </td>
-                    <td class="quantity" data-title="Quantity">
-                        <input type="number" class="qty form-control" value="1">
-                    </td>
-                    <td data-title="Total"> <strong>13.99$</strong> </td>
-                </tr>
+                
 
             </tbody>
         </table>
