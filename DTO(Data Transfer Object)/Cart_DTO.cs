@@ -42,8 +42,8 @@ namespace DTO_Data_Transfer_Object_
         }
         public string MaSanPham
         {
-            get { return maChiTietGioHang; }
-            set { maChiTietGioHang = value; }
+            get { return maSanPham; }
+            set { maSanPham = value; }
         }
         public string TenSanPham
         {

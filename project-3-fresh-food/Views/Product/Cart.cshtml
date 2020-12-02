@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="i in listInCart">
+                <tr ng-repeat="i in listInCart" ng-switch="i.GiaGiam > 0">
                     <td class="remove">
                         <button type="button" class="close-btn close-danger remove-from-cart">
                             <span></span>
@@ -32,15 +32,31 @@
                             <img src="{{i.HinhAnh}}" alt="prod1">
                             <div class="andro_cart-product-body">
                                 <h6> <a href="#">{{i.TenSanPham}}</a> </h6>
-                                <p>2 {{i.DonViTinh}}</p>
+                                <p> {{i.DonViTinh}}</p>
                             </div>
                         </div>
                     </td>
-                    <td data-title="Price"> <strong>{{i.GiaBan}}</strong> </td>
-                    <td class="quantity" data-title="Quantity">
-                        <input type="number" class="qty form-control" value="1">
+                    <td data-title="Price" >
+                        <div ng-switch-when="true">
+                            <strong >{{i.GiaGiam | number}} VNĐ</strong> <br />
+                            <strong style="text-decoration:line-through;color:#50bd4d">{{i.GiaBan | number}} VNĐ</strong>
+                           
+                        </div>
+                        <div ng-switch-when="false">
+                            <strong >{{i.GiaBan | number}} VNĐ</strong>
+                        </div>
                     </td>
-                    <td data-title="Total"> <strong>{{i.GiaBan}}</strong> </td>
+                    <td class="quantity" data-title="Quantity">
+                        <input type="number" class="qty form-control" value="{{i.SoLuong}}">
+                    </td>
+                    <td data-title="Total">
+                        <div ng-switch-when="true">
+                            <strong >{{i.GiaGiam * i.SoLuong | number}} VNĐ</strong> <br />
+                        </div>
+                        <div ng-switch-when="false">
+                            <strong >{{i.GiaBan * i.SoLuong| number}} VNĐ</strong>
+                        </div>
+                    </td>
                 </tr>
                 
 
@@ -66,7 +82,7 @@
 </div>
 <!-- Cart End -->
 <!-- Cart form Start -->
-<div class="section pt-0">
+<div class="section pt-0" ng-controller="CartInTotal">
     <div class="container">
 
         <div class="row andro_cart-form">
@@ -218,7 +234,7 @@
                     <tbody>
                         <tr>
                             <th>Subtotal</th>
-                            <td>90.99$</td>
+                            <td>{{ getTotal() |number }} VNĐ</td>
                         </tr>
                         <tr>
                             <th>Tax</th>

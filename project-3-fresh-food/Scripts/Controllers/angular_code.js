@@ -1,5 +1,6 @@
 ﻿var app = angular.module('project', ['imgurUpload']);
 
+
 //tài khoản
 //đăng  ký
 app.controller('dangKy', function ($http, $scope) {
@@ -221,6 +222,7 @@ app.controller("acccontroller", function ($window, $scope,$rootScope, $http) {
 
         };
         console.log(JSON.stringify(data));
+
         $http({
             method: "POST", //method gửi dữ liệu
             url: '/Account/DoLogin', //gọi hàm controller/account/Login
@@ -248,8 +250,7 @@ app.controller("acccontroller", function ($window, $scope,$rootScope, $http) {
                 $scope.lin = true;
                 $scope.out = false;
             }
-            $rootScope.dataKhachHang = bool.data[0];
-            console.log($rootScope.dataKhachHang)
+            $rootScope.$broadcast('dataKhachHang', bool.data[0]);
 
         });
 
@@ -581,32 +582,98 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
     };
 });
 
-app.controller('CartInHeader', function ($rootScope,$scope,$http) {
-    var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope();
-    console.log(scopeAcount);
-    console.log(scopeAcount.$root.$root);
-    $scope.dataInCart = scopeAcount;
+//Cart ---------------------------------------------------------------
+app.run(function ($rootScope) {
+    $rootScope.dataKhachHang = 0;
+});
+
+app.controller('CartInHeader', function ($rootScope, $scope, $http) {
+    var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
+    $rootScope.$on('dataKhachHang', function (event, data) {
+        console.log(data.MaGioHang)
+        $http({
+            method: 'get',
+            url: '/Product/GetAllProductInCart?maKhachHang=' + data.MaGioHang,
+        }).then(function successGetAll(response) {
+            $scope.listInCart = response.data;
+            console.log(response.data)
+            $scope.getTotal = function () {
+                var total = 0;
+                for (var i = 0; i < response.data.length; i++) {
+                    var giaBan = response.data[i].GiaBan;
+                    var giaGiam = response.data[i].GiaGiam;
+                    var soLuong = response.data[i].SoLuong;
+                    if (giaGiam > 0) {
+                        total += giaGiam * soLuong;
+                    }
+                    else {
+                        total += giaBan * soLuong;
+                    }
+                }
+                return total;
+            }});
+        
+    });
+})
+app.controller('CartInDetail', function ($scope,$rootScope, $http) {
     
-    var user = angular.forEach(scopeAcount.data.dataKhachHang, function (item) {
+    var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
+    $rootScope.$on('dataKhachHang', function (event, data) {
+        console.log(data.MaGioHang)
+        $http({
+            method: 'get',
+            url: '/Product/GetAllProductInCart?maKhachHang=' + data.MaGioHang,
+        }).then(function successGetAll(response) {
+            $scope.listInCart = response.data;
+            console.log(response.data)
+            $scope.getTotal = function () {
+                var total = 0;
+                for (var i = 0; i < response.data.length; i++) {
+                    var giaBan = response.data[i].GiaBan;
+                    var giaGiam = response.data[i].GiaGiam;
+                    var soLuong = response.data[i].SoLuong;
+                    if (giaGiam > 0) {
+                        total += giaGiam * soLuong;
+                    }
+                    else {
+                        total += giaBan * soLuong;
+                    }
+                }
+                return total;
+            }
+        });
 
     });
-    $http({
-        method: 'get',
-        url: '/Product/GetAllProductInCart?maKhachHang=' + scopeAcount.dataKhachHang.maKhachHang,
-    }).then(function successGetAll(response) {
-        $scope.listInCart = response.data;
-    })
+
 })
-app.controller('CartInDetail', function ($scope, $http) {
+app.controller('CartInTotal', function ($scope, $rootScope, $http) {
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
-    console.log(scopeAcount);
-    $http({
-        method: 'get',
-        url: '/Product/GetAllProductInCart?maKhachHang=' + scopeAcount.dataKhachHang.maKhachHang
-    }).then(function successGetAll(response) {
-        $scope.listInCart = response.data;
-        console.log(listInCart)
-    })
+    $rootScope.$on('dataKhachHang', function (event, data) {
+        console.log(data.MaGioHang)
+        $http({
+            method: 'get',
+            url: '/Product/GetAllProductInCart?maKhachHang=' + data.MaGioHang,
+        }).then(function successGetAll(response) {
+            $scope.listInCart = response.data;
+            console.log(response.data)
+            $scope.getTotal = function () {
+                var total = 0;
+                for (var i = 0; i < response.data.length; i++) {
+                    var giaBan = response.data[i].GiaBan;
+                    var giaGiam = response.data[i].GiaGiam;
+                    var soLuong = response.data[i].SoLuong;
+                    if (giaGiam > 0) {
+                        total += giaGiam * soLuong;
+                    }
+                    else {
+                        total += giaBan * soLuong;
+                    }
+                }
+                return total;
+            }
+        });
+
+    });
 })
 
 
