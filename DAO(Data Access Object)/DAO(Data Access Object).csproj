@@ -67,7 +67,7 @@
     <Compile Include="ADMIN_DAO.cs" />
     <Compile Include="Cart_DAO.cs" />
     <Compile Include="DataAccessHelper.cs" />
-    <Compile Include="discount_DAO.cs" />
+    <Compile Include="Discount_DAO.cs" />
     <Compile Include="KHACH_HANG_DAO.cs" />
     <Compile Include="LOAI_SAN_PHAM_DAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

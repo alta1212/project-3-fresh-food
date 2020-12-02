@@ -8,6 +8,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
 {
    public interface IDiscount
     {
-        IList<discount_DTO> getall();
+        IList<Discount_DTO> getall();
     }
 }

@@ -8,17 +8,20 @@ using DTO_Data_Transfer_Object_;
 
 namespace DAO_Data_Access_Object_
 {
-    public class discount_DAO
+    public class Discount_DAO
     {
-        public IList<discount_DTO> getall()
+        public IList<Discount_DTO> getall()
         {
             DataTable dt = new DataTable();
-            string cmdText = string.Format(@"select * from chiet_khau where getdate() between ngaybatdau and ngayketthuc");
+            string cmdText = string.Format(@"
+                    select * from chiet_khau 
+                        where getdate() between ngaybatdau and ngayketthuc
+                            order by SoTienToiDa ASC");
             dt = DataAccessHelper.log(cmdText);
-            List<discount_DTO> li = new List<discount_DTO>();
+            List<Discount_DTO> li = new List<Discount_DTO>();
             foreach (DataRow dr in dt.Rows)
             {
-                discount_DTO lsp = new discount_DTO();
+                Discount_DTO lsp = new Discount_DTO();
                 lsp.MaChietKhau = dr[0].ToString();
                 lsp.start = DateTime.Parse(dr[1].ToString());
                 lsp.end = DateTime.Parse( dr[2].ToString());

@@ -1,6 +1,11 @@
 ﻿var app = angular.module('project', ['imgurUpload']);
 
-
+// ------------ rootScope-----------
+app.run(function ($rootScope) {
+    $rootScope.dataKhachHang = "";
+    $rootScope.percent = 0;
+    $rootScope.khachHang = "";
+});
 //tài khoản
 //đăng  ký
 app.controller('dangKy', function ($http, $scope) {
@@ -230,7 +235,7 @@ app.controller("acccontroller", function ($window, $scope,$rootScope, $http) {
         }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
             console.log($window.location)
             console.log(bool.data[0])
-            
+            $rootScope.khachHang = bool.data[0];
             if (bool.data[0].Active == "1" && $window.location.pathname != "/account/fillinfo") {
                 $scope.lin = false;
                 $scope.out = true;
@@ -582,11 +587,8 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
     };
 });
 
-//Cart ---------------------------------------------------------------
-app.run(function ($rootScope) {
-    $rootScope.dataKhachHang = "";
-    $rootScope.tiensauchietkhau = 0;
-});
+
+
 
 app.controller('CartInHeader', function ($rootScope, $scope, $http) {
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
@@ -643,31 +645,27 @@ app.controller('CartInDetail', function ($scope,$rootScope, $http) {
                 }
                 return total;
             }
-            $http.get('/Product/getchietkhau').then(function (res) {
+            $http.get('/Product/getchietkhau').then(function (listDiscount) {
                
-                for (var i = 0; i < res.data.length; i++)
-                    if ($scope.getTotal() < res.data[i].TienToiDa && $scope.getTotal() > res.data[i].TienToiThieu) {
-                        $rootScope.tienchietkhau = ($scope.getTotal() * res.data[i].PhanTram) / 100;
-                        $rootScope.pt = res.data[i].PhanTram;
-
-                        $rootScope.FinalPrice = $scope.getTotal() - $rootScope.tienchietkhau;
-                        break;
+                for (var i = 0; i < listDiscount.data.length; i++) {
+                    if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiTieu) {
+                        $rootScope.percent = listDiscount.data[i].PhanTram;
                     }
+                }
+                if ($scope.getTotal() >= listDiscount.data[listDiscount.data.length - 1].TienToiDa) {
+                    $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
+                }
+                    
            
             })
            
         });
 
     });
-       $rootScope.$on('tienchietkhau', function (event, data) {
-            $scope.tienchietkhau = 0;
+    $rootScope.$on('percent', function (event, data) {
+        $scope.percent = 0;
        })
-        $rootScope.$on('FinalPrice', function (event, data) {
-            $scope.FinalPrice = 0;
-        })
-       $rootScope.$on('pt', function (event, data) {
-           $scope.pt = 0;
-       })
+        
 })
 app.controller('CartInTotal', function ($scope, $rootScope, $http) {
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
@@ -699,6 +697,55 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
     });
 })
 
+app.controller('CheckOut', function ($scope, $rootScope, $http) {
+    var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
+    $rootScope.$on('dataKhachHang', function (event, data) {
+        console.log(data.MaGioHang)
+        $scope.infoCustormer = data;
+        console.log($scope.infoCustormer)
+        $http({
+            method: 'get',
+            url: '/Product/GetAllProductInCart?maKhachHang=' + data.MaGioHang,
+        }).then(function successGetAll(response) {
+            $scope.listInCart = response.data;
+            console.log(response.data)
+
+            $scope.getTotal = function () {
+                var total = 0;
+                for (var i = 0; i < response.data.length; i++) {
+                    var giaBan = response.data[i].GiaBan;
+                    var giaGiam = response.data[i].GiaGiam;
+                    var soLuong = response.data[i].SoLuong;
+                    if (giaGiam > 0) {
+                        total += giaGiam * soLuong;
+                    }
+                    else {
+                        total += giaBan * soLuong;
+                    }
+                }
+                return total;
+            }
+            $http.get('/Product/getchietkhau').then(function (listDiscount) {
+
+                for (var i = 0; i < listDiscount.data.length; i++) {
+                    if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiTieu) {
+                        $rootScope.percent = listDiscount.data[i].PhanTram;
+                    }
+                }
+                if ($scope.getTotal() >= listDiscount.data[listDiscount.data.length - 1].TienToiDa) {
+                    $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
+                }
+
+
+            })
+
+        });
+
+    });
+    $rootScope.$on('percent', function (event, data) {
+        $scope.percent = 0;
+    })
+})
 
 
 app.controller('daylyDeal', function ($scope, $http) {

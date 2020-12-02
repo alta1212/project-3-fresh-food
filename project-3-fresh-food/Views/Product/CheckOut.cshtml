@@ -3,7 +3,7 @@
     ViewBag.Title = "CheckOut";
     Layout = "~/Views/Shared/MainLayOut.cshtml";
 }
-<div class="section">
+<div class="section" ng-controller="CheckOut">
     <div class="container">
 
         <form method="post">
@@ -353,48 +353,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr ng-repeat="i in listInCart">
                                 <td data-title="Product">
                                     <div class="andro_cart-product-wrapper">
                                         <div class="andro_cart-product-body">
-                                            <h6> <a href="#">Watermelon</a> </h6>
-                                            <p>1 Piece</p>
+                                            <h6> <a href="#">{{i.TenSanPham}}</a> </h6>
+                                            <p>{{i.SoLuong}} {{i.DonViTinh}}</p>
                                         </div>
                                     </div>
                                 </td>
-                                <td data-title="Quantity">x1</td>
-                                <td data-title="Total"> <strong>23.99$</strong> </td>
-                            </tr>
-                            <tr>
-                                <td data-title="Product">
-                                    <div class="andro_cart-product-wrapper">
-                                        <div class="andro_cart-product-body">
-                                            <h6> <a href="#">Ornages</a> </h6>
-                                            <p>2 Kilos</p>
-                                        </div>
-                                    </div>
+                                <td data-title="Quantity">{{i.SoLuong}}</td>
+                                <td data-title="Total" ng-switch="i.GiaGam > 0">
+                                            <strong ng-switch-when="true">{{i.GiaGiam * i.SoLuong | number}} VNĐ</strong> <br />
+                                            <strong ng-switch-when="false">{{i.GiaBan * i.SoLuong | number}} VNĐ</strong>
                                 </td>
-                                <td data-title="Quantity">x1</td>
-                                <td data-title="Total"> <strong>9.99$</strong> </td>
-                            </tr>
-                            <tr>
-                                <td data-title="Product">
-                                    <div class="andro_cart-product-wrapper">
-                                        <div class="andro_cart-product-body">
-                                            <h6> <a href="#">Cucumbers</a> </h6>
-                                            <p>3 Kilos</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td data-title="Quantity">x2</td>
-                                <td data-title="Total"> <strong>13.99$</strong> </td>
-                            </tr>
+                            </t>
+                            
                             <tr class="total">
                                 <td>
                                     <h6 class="mb-0">Grand Total</h6>
                                 </td>
                                 <td></td>
-                                <td> <strong>56.99$</strong> </td>
+                                <td> <strong>{{getTotal()-getTotal()*percent/100 | number}} VND</strong> </td>
                             </tr>
                         </tbody>
                     </table>

@@ -24,14 +24,14 @@
                     <td class="remove">
                         <button type="button" class="close-btn close-danger remove-from-cart">
                             <span></span>
-                            <span></span>
+                            <span></span> 
                         </button>
                     </td>
                     <td data-title="Product">
                         <div class="andro_cart-product-wrapper">
                             <img src="{{i.HinhAnh}}" alt="prod1">
                             <div class="andro_cart-product-body">
-                                <h6> <a href="#">{{i.TenSanPham}}</a> </h6>
+                                <h6> <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}">{{i.TenSanPham}}</a> </h6>
                                 <p> {{i.DonViTinh}}</p>
                             </div>
                         </div>
@@ -238,15 +238,15 @@
                         </tr>
                         <tr>
                             <th>Tax</th>
-                            <td> {{tienchietkhau}} VND <span class="small">({{pt}} %)</span> </td>
+                            <td> {{getTotal()*percent/100 | number}} VND <span class="small">({{percent}} %)</span> </td>
                         </tr>
                         <tr>
                             <th>Total</th>
-                            <td> <b>{{FinalPrice}} VND</b> </td>
+                            <td> <b>{{getTotal()-getTotal()*percent/100 | number}} VND</b> </td>
                         </tr>
                     </tbody>
                 </table>
-                <a href="#" class="andro_btn-custom primary btn-block">Proceeed to Checkout</a>
+                <a href="/Product/Checkout" class="andro_btn-custom primary btn-block">Proceeed to Checkout</a>
             </div>
         </div>
 

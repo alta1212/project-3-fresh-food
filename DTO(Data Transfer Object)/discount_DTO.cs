@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO_Data_Transfer_Object_
 {
-   public class discount_DTO
+   public class Discount_DTO
     {
         private string machietkhau;
         private DateTime ngaybatdau;
@@ -14,11 +14,11 @@ namespace DTO_Data_Transfer_Object_
         private int phantram;
         private int minmoney;
         private int maxmoney;
-        public discount_DTO()
+        public Discount_DTO()
         {
 
         }
-        public discount_DTO(string maChietkhau,DateTime batdau,DateTime ketthuc,int phantram,int min ,int max)
+        public Discount_DTO(string maChietkhau,DateTime batdau,DateTime ketthuc,int phantram,int min ,int max)
         {
             this.machietkhau = maChietkhau;
             this.ngaybatdau = batdau;

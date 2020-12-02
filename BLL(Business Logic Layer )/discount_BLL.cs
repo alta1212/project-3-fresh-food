@@ -10,8 +10,8 @@ namespace BLL_Business_Logic_Layer__
 {
     public class discount_BLL : IDiscount
     {
-        discount_DAO discount_DAO = new discount_DAO();
-        public IList<discount_DTO> getall()
+        Discount_DAO discount_DAO = new Discount_DAO();
+        public IList<Discount_DTO> getall()
         {
            return discount_DAO.getall();
         }
