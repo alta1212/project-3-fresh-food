@@ -584,7 +584,8 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
 
 //Cart ---------------------------------------------------------------
 app.run(function ($rootScope) {
-    $rootScope.dataKhachHang = 0;
+    $rootScope.dataKhachHang = "";
+    $rootScope.tiensauchietkhau = 0;
 });
 
 app.controller('CartInHeader', function ($rootScope, $scope, $http) {
@@ -626,6 +627,7 @@ app.controller('CartInDetail', function ($scope,$rootScope, $http) {
         }).then(function successGetAll(response) {
             $scope.listInCart = response.data;
             console.log(response.data)
+           
             $scope.getTotal = function () {
                 var total = 0;
                 for (var i = 0; i < response.data.length; i++) {
@@ -641,10 +643,31 @@ app.controller('CartInDetail', function ($scope,$rootScope, $http) {
                 }
                 return total;
             }
+            $http.get('/Product/getchietkhau').then(function (res) {
+               
+                for (var i = 0; i < res.data.length; i++)
+                    if ($scope.getTotal() < res.data[i].TienToiDa && $scope.getTotal() > res.data[i].TienToiThieu) {
+                        $rootScope.tienchietkhau = ($scope.getTotal() * res.data[i].PhanTram) / 100;
+                        $rootScope.pt = res.data[i].PhanTram;
+
+                        $rootScope.FinalPrice = $scope.getTotal() - $rootScope.tienchietkhau;
+                        break;
+                    }
+           
+            })
+           
         });
 
     });
-
+       $rootScope.$on('tienchietkhau', function (event, data) {
+            $scope.tienchietkhau = 0;
+       })
+        $rootScope.$on('FinalPrice', function (event, data) {
+            $scope.FinalPrice = 0;
+        })
+       $rootScope.$on('pt', function (event, data) {
+           $scope.pt = 0;
+       })
 })
 app.controller('CartInTotal', function ($scope, $rootScope, $http) {
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="Cart_BLL.cs" />
+    <Compile Include="discount_BLL.cs" />
     <Compile Include="KHACH_HANG_BLL.cs" />
     <Compile Include="LOAI_SAN_PHAM_BLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="ServiceInterface\IAccount.cs" />
     <Compile Include="ServiceInterface\IAdmin.cs" />
     <Compile Include="ServiceInterface\ICart.cs" />
+    <Compile Include="ServiceInterface\IDiscount.cs" />
     <Compile Include="ServiceInterface\IProduct.cs" />
     <Compile Include="ServiceInterface\IProductType.cs" />
   </ItemGroup>

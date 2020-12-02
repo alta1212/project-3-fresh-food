@@ -19,6 +19,7 @@ namespace project_3_fresh_food.Controllers
         IList<FeedBack_DTO> listfb;
         IList<Cart_DTO> listCart_DTOs;
         ICart cart = new Cart_BLL();
+        IDiscount discount = new discount_BLL();
         public ActionResult Shop()//shop toàn bộ sản phẩm
         {
             return View();
@@ -70,6 +71,10 @@ namespace project_3_fresh_food.Controllers
         public JsonResult GetAllProductInCart(string maKhachHang)
         {
             return Json(cart.GetAllProductInCart(maKhachHang), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getchietkhau()
+        {
+            return Json(discount.getall(),JsonRequestBehavior.AllowGet);
         }
     }
 }
