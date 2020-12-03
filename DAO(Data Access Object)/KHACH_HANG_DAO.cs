@@ -41,17 +41,29 @@ namespace DAO_Data_Access_Object_
         {
 
             DataTable dt = new DataTable();
-            string cmdtext = string.Format("Select tenkhachhang,active, Hinhanh,makhachhang,magiohang from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", tk, mk);
+            string cmdtext = string.Format("Select * from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", tk, mk);
             dt = DataAccessHelper.log(cmdtext);
             List<KHACH_HANG> li = new List<KHACH_HANG>();
             foreach (DataRow dr in dt.Rows)
             {
                 KHACH_HANG sp = new KHACH_HANG();
-                sp.tenkhachhang = dr[0].ToString();
-                sp.active = dr[1].ToString();
-                sp.anhdaidien = dr[2].ToString();
-                sp.magiohang = dr[4].ToString();
-                sp.makhachhang = dr[3].ToString();
+                sp.MaKhachhang = dr[0].ToString();
+                sp.TaiKhoan = dr[1].ToString();
+                sp.MatKhau = dr[2].ToString();
+                sp.ngayTao = DateTime.Parse(dr[3].ToString());
+                sp.TenKhachHang = dr[4].ToString();
+                sp.Email = dr[5].ToString();
+                sp.SoDienThoai = dr[6].ToString();
+                sp.DateOfBirth = DateTime.Parse(dr[7].ToString());
+                sp.Sex = int.Parse(dr[8].ToString());
+                sp.Adress = dr[9].ToString();
+                sp.IDFacebook = dr[10].ToString();
+                sp.MaGioHang = dr[11].ToString();
+                sp.MaFeedBack = dr[12].ToString();
+                sp.AnhDaiDien = dr[13].ToString();
+                sp.verificationcode = dr[14].ToString();
+                sp.active = dr[15].ToString();
+                
                 li.Add(sp);
             }
             return li;

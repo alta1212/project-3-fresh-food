@@ -43,6 +43,7 @@ app.controller('dangKy', function ($http, $scope) {
 
     }
 })
+
 // đăng nhập
 app.controller("login", function ($scope, $http, $window) {
 
@@ -140,6 +141,7 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload) {
         url: '/Account/DoLogin', //gọi hàm controller/account/Login
         params: data
     }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
+        console.log(bool.data)
         console.log(bool.data[0])
         if (bool.data[0].Active == "2") { //nếu là 2 thì tk đã hoàn tất chuyển về trang chủ
             $window.location.href = '/Index/Index';
@@ -206,6 +208,7 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload) {
         }
     })
 })
+
 // Tài khoản
 app.controller("acccontroller", function ($window, $scope,$rootScope, $http) {
     $scope.lin = true;
@@ -738,6 +741,7 @@ app.controller('CheckOut', function ($scope, $rootScope, $http) {
 
 
             })
+            
 
         });
 

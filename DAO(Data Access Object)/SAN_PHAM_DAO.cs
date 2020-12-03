@@ -287,6 +287,7 @@ namespace DAO_Data_Access_Object_
             return li;
         }
         // Lấy 
+        // phân trang sản phẩm theo hoàng
         //phân trang sản phẩm
         public IList<SAN_PHAM> getPageListProduct(int page,int pagesize)
         {
