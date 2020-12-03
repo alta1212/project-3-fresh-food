@@ -51,6 +51,7 @@ namespace DAO_Data_Access_Object_
             return listCart_DTOs;
         }
 
+       
         public int GetDiscount(DateTime dateTime)
         {
             int perCent = 0;

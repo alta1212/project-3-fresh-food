@@ -19,6 +19,7 @@ namespace project_3_fresh_food.Controllers
         IList<FeedBack_DTO> listfb;
         IList<Cart_DTO> listCart_DTOs;
         ICart cart = new Cart_BLL();
+        IOrder or = new Order_BLL();
         IDiscount discount = new discount_BLL();
         public ActionResult Shop()//shop toàn bộ sản phẩm
         {
@@ -68,13 +69,17 @@ namespace project_3_fresh_food.Controllers
         {   listfb = sp.getListFeedBack(masanpham);
             return Json(listfb, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetAllProductInCart(string maKhachHang)
+        public JsonResult GetAllProductInCart(string maGioHang)
         {
-            return Json(cart.GetAllProductInCart(maKhachHang), JsonRequestBehavior.AllowGet);
+            return Json(cart.GetAllProductInCart(maGioHang), JsonRequestBehavior.AllowGet);
         }
         public JsonResult getchietkhau()
         {
             return Json(discount.getall(),JsonRequestBehavior.AllowGet);
+        }
+        public void placeOrder(string maGioHang,string maKhachHang, string diaChi,string sdt,string tongtien)
+        {
+            or.placeOrder(cart.GetAllProductInCart(maGioHang), diaChi, sdt, maKhachHang, tongtien);
         }
     }
 }

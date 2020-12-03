@@ -703,16 +703,16 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
 app.controller('CheckOut', function ($scope, $rootScope, $http) {
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
     $rootScope.$on('dataKhachHang', function (event, data) {
-        console.log(data.MaGioHang)
+        console.log(data)
         $scope.infoCustormer = data;
         console.log($scope.infoCustormer)
         $http({
             method: 'get',
-            url: '/Product/GetAllProductInCart?maKhachHang=' + data.MaGioHang,
+            url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
         }).then(function successGetAll(response) {
             $scope.listInCart = response.data;
             console.log(response.data)
-
+          
             $scope.getTotal = function () {
                 var total = 0;
                 for (var i = 0; i < response.data.length; i++) {
@@ -742,13 +742,26 @@ app.controller('CheckOut', function ($scope, $rootScope, $http) {
 
             })
             
-
+            $scope.placeOrder = function () {
+                alert("here")
+                var datakh = {
+                    maGioHang:data.MaGioHang,
+                    maKhachHang: data.MaKhachhang,
+                    diaChi: $scope.diachi,
+                    sdt: $scope.sdt,
+                    tongtien: $scope.getTotal()
+                }
+                $http.post('/Product/placeOrder', datakh).then(function () { })
+                    , function (e) { console.log(e) }
+                  
+            }
         });
 
     });
     $rootScope.$on('percent', function (event, data) {
         $scope.percent = 0;
     })
+    
 })
 
 
