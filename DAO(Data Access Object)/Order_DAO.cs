@@ -11,34 +11,40 @@ namespace DAO_Data_Access_Object_
 {
    public class Order_DAO
     {
-        public void placeOrder(IList<Cart_DTO> lists,  string diaChi, string sdt,string maKhachHang,string tongtien)
+        public void placeOrder(IList<Cart_DTO> lists,  string diaChi, string sdt,string maKhachHang,string tongtien,string dongia)
         {
 
 
             SqlParameter[] parm = new SqlParameter[]
             {
                  new SqlParameter("@MaSanPham",SqlDbType.NVarChar,50),
-                 new SqlParameter("@SoLuong",SqlDbType.NVarChar,50),
-                 new SqlParameter("@DonGia",SqlDbType.NVarChar,50),
-                 new SqlParameter("@MaKhachHang",SqlDbType.NVarChar,50),
+                 new SqlParameter("@SoLuong",SqlDbType.Int),
+                 new SqlParameter("@DonGia",SqlDbType.Int),
+                 new SqlParameter("@TongTien",SqlDbType.Int),
+                 new SqlParameter("@MaDonHang",SqlDbType.NVarChar,100),
+            };
+            SqlParameter[] parmbill = new SqlParameter[]
+            {
+            
+                 new SqlParameter("@MaKhachHang",SqlDbType.NVarChar,100),
                  new SqlParameter("@DiaChi",SqlDbType.NVarChar,50),
                  new SqlParameter("@SoDienThoai",SqlDbType.NVarChar,50),
                  new SqlParameter("@TongTien",SqlDbType.NVarChar,50),
+                 //new SqlParameter("@MaDonHang",SqlDbType.NVarChar,100),
             };
-            parm[3].Value = maKhachHang;
-            parm[4].Value = diaChi;
-            parm[5].Value = sdt;
-            parm[6].Value = tongtien;
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Add_To_Bill", parm);
+            parmbill[0].Value = maKhachHang;
+            parmbill[1].Value = diaChi;
+            parmbill[2].Value = sdt;
+            parmbill[3].Value = tongtien;
+            //parmbill[4].Value = "";
+            var value=  DataAccessHelper.parnWithValue(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Add_To_Bill", parmbill);
             foreach (var item in lists)
             {
                 parm[0].Value = item.MaSanPham;
                 parm[1].Value = item.SoLuong;
-                parm[2].Value = item.TongTien;
-                parm[3].Value = maKhachHang;
-                parm[4].Value = diaChi;
-                parm[5].Value = sdt;
-
+                parm[2].Value = dongia;
+                parm[3].Value = tongtien;
+                parm[4].Value = value;
                 DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Add_To_Bill_Detail", parm);
             }
 

@@ -35,17 +35,19 @@ namespace DAO_Data_Access_Object_
                 cart.HinhAnh = Cart[2].ToString();
                 cart.DonViTinh = Cart[3].ToString();
                 cart.GiaBan = int.Parse(Cart[4].ToString());
+                cart.SoLuong = int.Parse(Cart[6].ToString());
                 try
                 { 
                     cart.GiaGiam = int.Parse(Cart[5].ToString());
-                  
+                    cart.ThanhTien = cart.GiaGiam;
                 }
                 catch
                 {
                     cart.GiaGiam = 0;
-                    
+                    cart.ThanhTien = cart.GiaBan;
                 }
-                cart.SoLuong = int.Parse(Cart[6].ToString());
+                
+                
                 listCart_DTOs.Add(cart);
             }
             return listCart_DTOs;

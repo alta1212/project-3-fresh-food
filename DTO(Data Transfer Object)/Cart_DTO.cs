@@ -18,12 +18,14 @@ namespace DTO_Data_Transfer_Object_
         private int giaGiam;
         private int tongTien;
         private string donViTinh;
+        private int giaTrongCart;
         public Cart_DTO()
         {
 
         }
-        public Cart_DTO(string maChiTietGioHang,string tenSanPham,string hinhAnh, string maSanPham, string maGioHang, int soLuong, int giaBan, int giaGiam, string donViTinh, int tongTien)
+        public Cart_DTO(int giacart,string maChiTietGioHang,string tenSanPham,string hinhAnh, string maSanPham, string maGioHang, int soLuong, int giaBan, int giaGiam, string donViTinh, int tongTien)
         {
+            this.giaTrongCart = giacart;
             this.maChiTietGioHang = maChiTietGioHang;
             this.maSanPham = maSanPham;
             this.maGioHang = maGioHang;
@@ -39,6 +41,11 @@ namespace DTO_Data_Transfer_Object_
         {
             get { return maChiTietGioHang; } 
             set {maChiTietGioHang = value; } 
+        }
+        public int ThanhTien
+        {
+            get { return giaTrongCart; }
+            set { giaTrongCart = value; }
         }
         public string MaSanPham
         {

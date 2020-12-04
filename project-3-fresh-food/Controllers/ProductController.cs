@@ -77,9 +77,9 @@ namespace project_3_fresh_food.Controllers
         {
             return Json(discount.getall(),JsonRequestBehavior.AllowGet);
         }
-        public void placeOrder(string maGioHang,string maKhachHang, string diaChi,string sdt,string tongtien)
+        public void placeOrder(string maGioHang,string maKhachHang, string diaChi,string sdt,string tongtien,string dongia)
         {
-            or.placeOrder(cart.GetAllProductInCart(maGioHang), diaChi, sdt, maKhachHang, tongtien);
+            or.placeOrder(cart.GetAllProductInCart(maGioHang), diaChi, sdt, maKhachHang, tongtien,dongia);
         }
     }
 }

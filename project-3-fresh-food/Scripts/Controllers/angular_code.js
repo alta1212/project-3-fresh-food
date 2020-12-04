@@ -599,7 +599,7 @@ app.controller('CartInHeader', function ($rootScope, $scope, $http) {
         console.log(data.MaGioHang)
         $http({
             method: 'get',
-            url: '/Product/GetAllProductInCart?maKhachHang=' + data.MaGioHang,
+            url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
         }).then(function successGetAll(response) {
             $scope.listInCart = response.data;
             console.log(response.data)
@@ -628,7 +628,7 @@ app.controller('CartInDetail', function ($scope,$rootScope, $http) {
         console.log(data.MaGioHang)
         $http({
             method: 'get',
-            url: '/Product/GetAllProductInCart?maKhachHang=' + data.MaGioHang,
+            url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
         }).then(function successGetAll(response) {
             $scope.listInCart = response.data;
             console.log(response.data)
@@ -676,7 +676,7 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
         console.log(data.MaGioHang)
         $http({
             method: 'get',
-            url: '/Product/GetAllProductInCart?maKhachHang=' + data.MaGioHang,
+            url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
         }).then(function successGetAll(response) {
             $scope.listInCart = response.data;
             console.log(response.data)
@@ -728,6 +728,10 @@ app.controller('CheckOut', function ($scope, $rootScope, $http) {
                 }
                 return total;
             }
+            $rootScope.$on('percent', function (event, data) {
+                debugger
+                $scope.percent = 0;
+            })
             $http.get('/Product/getchietkhau').then(function (listDiscount) {
 
                 for (var i = 0; i < listDiscount.data.length; i++) {
@@ -749,7 +753,8 @@ app.controller('CheckOut', function ($scope, $rootScope, $http) {
                     maKhachHang: data.MaKhachhang,
                     diaChi: $scope.diachi,
                     sdt: $scope.sdt,
-                    tongtien: $scope.getTotal()
+                    tongtien: $scope.getTotal(),
+                    dongia: $scope.listInCart[0].ThanhTien - (($scope.listInCart[0].ThanhTien * $scope.percent)/100)
                 }
                 $http.post('/Product/placeOrder', datakh).then(function () { })
                     , function (e) { console.log(e) }
@@ -758,9 +763,7 @@ app.controller('CheckOut', function ($scope, $rootScope, $http) {
         });
 
     });
-    $rootScope.$on('percent', function (event, data) {
-        $scope.percent = 0;
-    })
+ 
     
 })
 
