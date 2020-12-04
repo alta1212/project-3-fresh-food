@@ -8,16 +8,20 @@ namespace DTO_Data_Transfer_Object_
 {
     public class Order_DTO
     {
-        private string madonhang { get; set; }
-        private string makhachhang { get; set; }
-        private string manhanvien { get; set; }
-        private int trangthai { get; set; }
-        private int tongtien { get; set; }
-        private DateTime ngaymua { get; set; }
-        private DateTime ngayxacthuc { get; set; }
-        private string tennhanvien { get; set; }
-        public Order_DTO(string madh,string makh,string manv,int status,int tien,DateTime mua,DateTime xacthuc,string tennnv)
+        private string madonhang;
+        private string makhachhang;
+        private string manhanvien;
+        private int trangthai;
+        private int tongtien;
+        private DateTime ngaymua;
+        private DateTime ngayxacthuc;
+        private string tennhanvien;
+        private string sdt;
+        private string diachi;
+        public Order_DTO(string sdt,string diachi,string madh,string makh,string manv,int status,int tien,DateTime mua,DateTime xacthuc,string tennnv)
         {
+            this.sdt = sdt;
+            this.diachi = diachi;
             this.madonhang = madh;
             this.makhachhang = makh;
             this.manhanvien = manv;
@@ -32,6 +36,16 @@ namespace DTO_Data_Transfer_Object_
         {
             get { return madonhang; }
             set { madonhang = value; }
+        }
+        public string SoDienThoai
+        {
+            get { return sdt; }
+            set { sdt = value; }
+        }
+        public string DiaChi
+        {
+            get { return diachi; }
+            set { diachi = value; }
         }
         public string MaKhachhang
         {
