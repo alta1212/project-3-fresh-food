@@ -27,7 +27,7 @@
                             <div class="form-group">
                                 <label>Loại Sản Phẩm:</label>
                                 <select ng-model="Tenloaisanpham" class="form-control" id="exampleFormControlSelect1">
-                                    <option value="{{i.MaLoaiSanPham}}" ng-repeat="i in getJsonResults">{{i.TenLoaiSanPham}}</option>
+                                    <option  value="{{i.MaLoaiSanPham}}" ng-repeat="i in ProductCatetory">{{i.TenLoaiSanPham}}</option>
                                 </select>
                             </div>
 
@@ -52,8 +52,8 @@
                                 <label>Mô Tả:</label>
                                 <textarea ng-model="MoTa" class="form-control" rows="4"></textarea>
                             </div>
-                            <button ng-click="addProduct()" class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn btn-danger">Reset</button>
+                            <button ng-click="addProduct()" class="btn btn-primary">Thêm mới</button>
+                            <button type="reset" class="btn btn-danger">Làm mới</button>
                         </form>
                     </div>
                 </div>

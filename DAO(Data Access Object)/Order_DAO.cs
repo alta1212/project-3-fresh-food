@@ -47,8 +47,12 @@ namespace DAO_Data_Access_Object_
                 parm[4].Value = value;
                 DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Add_To_Bill_Detail", parm);
             }
-
-
+            SqlParameter[] parmDeleteCart = new SqlParameter[]
+            {
+                new SqlParameter("@MaKhachHang",SqlDbType.NVarChar,100),
+            };
+            parmDeleteCart[0].Value = maKhachHang;
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Delete_To_Cart", parmDeleteCart);
 
         }
 

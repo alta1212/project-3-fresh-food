@@ -178,6 +178,10 @@ myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
 
 //thêm sản phẩm
 myApp.controller('addPro', function ($scope, $http) {
+    $http.get('/LoaiSanPhamAdmin/GetAllProductTypeJS').then(function getListProductCatetory(response) {
+        console.log(response.data)
+        $scope.ProductCatetory = response.data;
+    })
     $scope.addProduct = function () {
         var data = {
             "sp.MaSanPham": $scope.MaSanPham,
@@ -187,12 +191,13 @@ myApp.controller('addPro', function ($scope, $http) {
             "sp.DonViTinh": $scope.GiaBan,
             "sp.MoTa": $scope.MoTa,
         }
+        
         $http({
             method: 'POST',
             url: '/Admin/themsp',
             data: data
         })
-
+        
     }
 });
 

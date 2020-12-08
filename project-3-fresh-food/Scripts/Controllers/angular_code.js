@@ -282,7 +282,7 @@ app.controller("seach", function ($scope, $http) {
 })
 
 //Hiện thị sản phẩm ngẫu nhiễn của cửa hàng
-app.controller("featuredproducts", function ($scope, $http, $location) {
+app.controller("featuredproducts", function ($rootScope, $scope, $http) {
     $http({
         method: 'GET',
         url: '/Index/spHighlights',
@@ -304,6 +304,7 @@ app.controller("featuredproducts", function ($scope, $http, $location) {
         }).then(function successCallback(response) {
             console.log(response);
         })
+       
     }
 })
 
@@ -700,7 +701,7 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
     });
 })
 
-app.controller('CheckOut', function ($scope, $rootScope, $http) {
+app.controller('CheckOut', function ($scope, $rootScope, $http, $location) {
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
     $rootScope.$on('dataKhachHang', function (event, data) {
         console.log(data)
@@ -729,7 +730,6 @@ app.controller('CheckOut', function ($scope, $rootScope, $http) {
                 return total;
             }
             $rootScope.$on('percent', function (event, data) {
-                debugger
                 $scope.percent = 0;
             })
             $http.get('/Product/getchietkhau').then(function (listDiscount) {
@@ -747,7 +747,6 @@ app.controller('CheckOut', function ($scope, $rootScope, $http) {
             })
             
             $scope.placeOrder = function () {
-                alert("here")
                 var datakh = {
                     maGioHang:data.MaGioHang,
                     maKhachHang: data.MaKhachhang,
@@ -758,8 +757,9 @@ app.controller('CheckOut', function ($scope, $rootScope, $http) {
                 }
                 $http.post('/Product/placeOrder', datakh).then(function () { })
                     , function (e) { console.log(e) }
-                  
+                window.location.reload(true); 
             }
+            
         });
 
     });
