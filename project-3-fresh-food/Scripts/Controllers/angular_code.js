@@ -133,8 +133,6 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload) {
         taikhoan: localStorage.getItem('taikhoan'),
 
         matkhau: localStorage.getItem('matkhau'),
-
-
     };
     $http({
         mmethod: "POST", //method gửi dữ liệu
@@ -282,7 +280,7 @@ app.controller("seach", function ($scope, $http) {
 })
 
 //Hiện thị sản phẩm ngẫu nhiễn của cửa hàng
-app.controller("featuredproducts", function ($rootScope, $scope, $http) {
+app.controller("featuredproducts", function ($rootScope, $scope, $http, $window) {
     $http({
         method: 'GET',
         url: '/Index/spHighlights',
@@ -292,18 +290,33 @@ app.controller("featuredproducts", function ($rootScope, $scope, $http) {
         console.log(response.data[0]);
     })
     $scope.AddToCart = function (msp, giaban) {
-        var chiTietGioHang = {
-            maKhachHang: localStorage.getItem("taikhoan"),
-            maSanPham: msp,
-            soLuong: 1,
-            donGia:giaban }
-        $http({
-            method: 'POST',
-            url: '/guestEvent/AddToCart',
-            data: chiTietGioHang
-        }).then(function successCallback(response) {
-            console.log(response);
-        })
+        var data = {
+
+            taikhoan: localStorage.getItem('taikhoan'),
+
+            matkhau: localStorage.getItem('matkhau'),
+
+
+        };
+        if (data.taikhoan === null || data.matkhau === null) {
+            $window.location.href = '/Account/Login';
+        }
+        else {
+            var chiTietGioHang = {
+                maKhachHang: localStorage.getItem("taikhoan"),
+                maSanPham: msp,
+                soLuong: 1,
+                donGia: giaban
+            }
+            $http({
+                method: 'POST',
+                url: '/guestEvent/AddToCart',
+                data: chiTietGioHang
+            }).then(function successCallback(response) {
+                console.log(response);
+            })
+        }
+        
        
     }
 })
@@ -320,19 +333,33 @@ app.controller("getBestSellProduct", function ($scope, $http) {
 
     })
     $scope.AddToCart = function (msp, giaban) {
-        var chiTietGioHang = {
-            maKhachHang: localStorage.getItem("taikhoan"),
-            maSanPham: msp,
-            soLuong: 1,
-            donGia: giaban
+        var data = {
+
+            taikhoan: localStorage.getItem('taikhoan'),
+
+            matkhau: localStorage.getItem('matkhau'),
+
+
+        };
+        
+        if (data.taikhoan === null || data.matkhau === null) {
+            $window.location.href = '/Account/Login';
         }
-        $http({
-            method: 'POST',
-            url: '/guestEvent/AddToCart',
-            data: chiTietGioHang
-        }).then(function successCallback(response) {
-            console.log(response);
-        })
+        else {
+            var chiTietGioHang = {
+                maKhachHang: localStorage.getItem("taikhoan"),
+                maSanPham: msp,
+                soLuong: 1,
+                donGia: giaban
+            }
+            $http({
+                method: 'POST',
+                url: '/guestEvent/AddToCart',
+                data: chiTietGioHang
+            }).then(function successCallback(response) {
+                console.log(response);
+            })
+        }
     }
 })
 // Hiện thị sản phẩm được giảm giá
@@ -346,19 +373,33 @@ app.controller("getProductDiscount", function ($scope, $http) {
         console.log(response.data[0]);
     })
     $scope.AddToCart = function (msp, giaban) {
-        var chiTietGioHang = {
-            maKhachHang: localStorage.getItem("taikhoan"),
-            maSanPham: msp,
-            soLuong: 1,
-            donGia: giaban
+        var data = {
+
+            taikhoan: localStorage.getItem('taikhoan'),
+
+            matkhau: localStorage.getItem('matkhau'),
+
+
+        };
+         
+        if (data.taikhoan === null || data.matkhau === null) {
+            $window.location.href = '/Account/Login';
         }
-        $http({
-            method: 'POST',
-            url: '/guestEvent/AddToCart',
-            data: chiTietGioHang
-        }).then(function successCallback(response) {
-            console.log(response);
-        })
+        else {
+            var chiTietGioHang = {
+                maKhachHang: localStorage.getItem("taikhoan"),
+                maSanPham: msp,
+                soLuong: 1,
+                donGia: giaban
+            }
+            $http({
+                method: 'POST',
+                url: '/guestEvent/AddToCart',
+                data: chiTietGioHang
+            }).then(function successCallback(response) {
+                console.log(response);
+            })
+        }
     }
 })
 // Hiện thị menu trái của cửa hàng
@@ -473,19 +514,33 @@ app.controller("shop", function ($scope, $location, $http) {
 
     }
     $scope.AddToCart = function (msp, giaban) {
-        var chiTietGioHang = {
-            maKhachHang: localStorage.getItem("taikhoan"),
-            maSanPham: msp,
-            soLuong: 1,
-            donGia: giaban
+        var data = {
+
+            taikhoan: localStorage.getItem('taikhoan'),
+
+            matkhau: localStorage.getItem('matkhau'),
+
+
+        };
+         
+        if (data.taikhoan === null || data.matkhau === null) {
+            $window.location.href = '/Account/Login';
         }
-        $http({
-            method: 'POST',
-            url: '/guestEvent/AddToCart',
-            data: chiTietGioHang
-        }).then(function successCallback(response) {
-            console.log(response);
-        })
+        else {
+            var chiTietGioHang = {
+                maKhachHang: localStorage.getItem("taikhoan"),
+                maSanPham: msp,
+                soLuong: 1,
+                donGia: giaban
+            }
+            $http({
+                method: 'POST',
+                url: '/guestEvent/AddToCart',
+                data: chiTietGioHang
+            }).then(function successCallback(response) {
+                console.log(response);
+            })
+        }
     }
 
 })
@@ -512,21 +567,37 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
             console.log($scope.i4)
         })//lấy về i4 sản phẩm
         $scope.AddToCart = function (msp, giaban, soluong) {
-            if (soluong == null)
-                soluong = 1;
-            var chiTietGioHang = {
-                maKhachHang: localStorage.getItem("taikhoan"),
-                maSanPham: msp,
-                soLuong: soluong,
-                donGia: giaban
+            var data = {
+
+                taikhoan: localStorage.getItem('taikhoan'),
+
+                matkhau: localStorage.getItem('matkhau'),
+
+
+            };
+            
+            if (data.taikhoan === null || data.matkhau === null) {
+                $window.location.href = '/Account/Login';
             }
-            $http({
-                method: 'POST',
-                url: '/guestEvent/AddToCart',
-                data: chiTietGioHang
-            }).then(function successCallback(response) {
-                console.log(response);
-            })
+            else {
+                if (soluong == null)
+                    soluong = 1;
+                var chiTietGioHang = {
+                    maKhachHang: localStorage.getItem("taikhoan"),
+                    maSanPham: msp,
+                    soLuong: 1,
+                    donGia: giaban
+                }
+                $http({
+                    method: 'POST',
+                    url: '/guestEvent/AddToCart',
+                    data: chiTietGioHang
+                }).then(function successCallback(response) {
+                    console.log(response);
+                })
+            }
+            
+            
         }
         $http({
             method: 'GET',
@@ -701,7 +772,19 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
     });
 })
 
-app.controller('CheckOut', function ($scope, $rootScope, $http, $location) {
+app.controller('CheckOut', function ($scope, $rootScope, $http, $location, $window) {
+    var data = {
+
+        taikhoan: localStorage.getItem('taikhoan'),
+
+        matkhau: localStorage.getItem('matkhau'),
+
+
+    };
+    if (data.taikhoan === null || data.matkhau === null) {
+        $window.location.href = '/Account/Login';
+    }
+    
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
     $rootScope.$on('dataKhachHang', function (event, data) {
         console.log(data)
@@ -747,6 +830,7 @@ app.controller('CheckOut', function ($scope, $rootScope, $http, $location) {
             })
             
             $scope.placeOrder = function () {
+
                 var datakh = {
                     maGioHang:data.MaGioHang,
                     maKhachHang: data.MaKhachhang,
