@@ -54,8 +54,11 @@ namespace DAO_Data_Access_Object_
                 sp.TenKhachHang = dr[4].ToString();
                 sp.Email = dr[5].ToString();
                 sp.SoDienThoai = dr[6].ToString();
-                sp.DateOfBirth = DateTime.Parse(dr[7].ToString());
-                sp.Sex = int.Parse(dr[8].ToString());
+                try {  
+                    sp.DateOfBirth = DateTime.Parse(dr[7].ToString());
+                    sp.Sex = int.Parse(dr[8].ToString()); 
+                } catch { }
+             
                 sp.Adress = dr[9].ToString();
                 sp.IDFacebook = dr[10].ToString();
                 sp.MaGioHang = dr[11].ToString();
