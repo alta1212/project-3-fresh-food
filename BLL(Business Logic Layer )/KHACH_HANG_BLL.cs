@@ -30,12 +30,8 @@ namespace BLL_Business_Logic_Layer__
             
         }
 
-      
 
-        public void resend(string tk,string mail, string code)
-        {
-             dao.resend(tk,mail,code);
-        }
+
 
         public void fillinfo(string tk, string mk,KHACH_HANG KHACH_HANG)
         {
@@ -46,6 +42,10 @@ namespace BLL_Business_Logic_Layer__
         {
             return dao.Log(tk, mk);
         }
-      
+        
+        public IList<KHACH_HANG> LoginFaceBook(KHACH_HANG kHACH_HANG)
+        {
+            return dao.LoginFaceBook(kHACH_HANG);
+        }
     }
 }

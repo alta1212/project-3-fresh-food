@@ -37,7 +37,7 @@ namespace DAO_Data_Access_Object_
             parmbill[2].Value = sdt;
             parmbill[3].Value = tongtien;
             //parmbill[4].Value = "";
-            var value=  DataAccessHelper.parnWithValue(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Add_To_Bill", parmbill);
+            var value=  DataAccessHelper.parnWithValue("@MaDonHang",DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Add_To_Bill", parmbill);
             foreach (var item in lists)
             {
                 parm[0].Value = item.MaSanPham;

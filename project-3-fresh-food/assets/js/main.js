@@ -435,7 +435,7 @@
 
 
 
-function s(elm) {
+function featureds(elm) {
     
     var all = elm.parentElement.parentElement.parentElement;
     var anh = all.children[0].children[0].children[0].src;
@@ -455,7 +455,7 @@ function s(elm) {
     
 
 }
-function a(elm) {
+function discounts(elm) {
     var all = elm.parentElement.parentElement.parentElement;
     var anh = all.children[0].children[0].children[0].src;
     var ten = all.children[1].children[1].children[0].innerHTML;
@@ -464,14 +464,13 @@ function a(elm) {
     var id = all.id;
     $("#quickViewModal img").attr("src", anh);
     $("#quickViewModal h3").html(ten);
-
     $("#quickViewModal #mota").html(mota);
     $("#giagiam").html(giaban);
     $("#quickViewModal #qvbuybnt").attr("href", "/Product/Product_Details#!?masanpham=" + id);
 }
 
 
-function c(elm) {
+function BestSell(elm) {
     var all = elm.parentElement.parentElement.parentElement.parentElement.parentElement;
     var anh = all.children[0].children[0].children[0].src;
     var ten = all.children[1].children[1].children[0].innerHTML;

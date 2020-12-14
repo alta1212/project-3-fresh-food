@@ -39,8 +39,24 @@
                     </div>
 
                     <div class="andro_social-login">
-                        <button onclick="alert('nút này cho vào cho vui chưa bấm được 👌')" type="button" class="andro_social-login-btn facebook"><i class="fab fa-facebook-f"></i> Continue with Facebook </button>
-                        <button  type="button" onclick="alert('nút này cho vào cho vui chưa bấm được 👌')"  class="andro_social-login-btn google"><i class="fab fa-google"></i> Continue with Google</button>
+                        @*<button type="button" class="andro_social-login-btn facebook" onload="document.getElementById('icon-login-facebook').click()">
+                            <fb:login-button size="icon"   style="display:none">
+                            </fb:login-button>
+                            <i class="fab fa-facebook-f"></i> Continue with Facebook
+
+                        </button>*@
+                        <div class="fb-login-button" scope="public_profile,email" 
+                                             onlogin="LoginFaceBook();" data-size="large" data-button-type="continue_with"
+                                data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false" data-width="">
+
+                        </div>
+                        @*<label for="login-facebook-button" class="andro_social-login-btn facebook">
+                            
+                        </label>*@
+                        <button type="button" onclick="LogOutFaceBook();">
+                            <i class="fab fa-facebook-f"></i> Logout with Facebook
+                        </button>
+                        <button type="button" onclick="alert('nút này cho vào cho vui chưa bấm được 👌')" class="andro_social-login-btn google"><i class="fab fa-google"></i> Continue with Google</button>
                     </div>
 
                     <p>Don't have an account? <a href="register">Create One</a> </p>

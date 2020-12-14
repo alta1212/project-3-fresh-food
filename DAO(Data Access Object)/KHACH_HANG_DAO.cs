@@ -24,6 +24,7 @@ namespace DAO_Data_Access_Object_
         private const string parm_GioiTinh = "@Sex";
         private const string parm_NgaySinh = "@DateOfBirth";
         private const string parm_AnhDaiDien = "@AnhDaiDien";
+        private const string parm_IdFaceBook = "@IdFaceBook";
         public int Active(string guild)
         {
 
@@ -36,7 +37,7 @@ namespace DAO_Data_Access_Object_
             return DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "activeacc", parm);
         }
 
-
+        // Lấy thông tin của khách hàng
         public IList<KHACH_HANG> Log(string tk, string mk)
         {
 
@@ -99,22 +100,57 @@ namespace DAO_Data_Access_Object_
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "fillinfo", parm);
         }
 
-        public void resend(string tk, string mail, string code)
+        public IList<KHACH_HANG> LoginFaceBook(KHACH_HANG kHACH_HANG)
         {
+
             SqlParameter[] parm = new SqlParameter[]
             {
-                new SqlParameter(parm_TaiKhoan,SqlDbType.NVarChar,50),
-                new SqlParameter(parm_Email,SqlDbType.NVarChar,50),
-                new SqlParameter(parm_VerificationCode,SqlDbType.NVarChar,50),
+                 new SqlParameter("@IDFaceBook",SqlDbType.NVarChar,100),
+                 new SqlParameter("@TenKhachHang",SqlDbType.NVarChar,100),
+                 new SqlParameter("@HinhAnh",SqlDbType.NVarChar,100),
             };
-            parm[0].Value = tk;
-            parm[1].Value = mail;
-            parm[2].Value = code;
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "resendmail", parm);
+            parm[0].Value = kHACH_HANG.idFacebook;
+            parm[1].Value = kHACH_HANG.TenKhachHang;
+            parm[2].Value = kHACH_HANG.AnhDaiDien; ;
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Login_FaceBook", parm);
+            DataTable dt = new DataTable();
+            string cmdtext = string.Format(@"Select  * From dbo.KHACH_HANG
+                                                        Where IDFaceBook ='{0}'
+                                                        ", parm[0].Value);
+            dt = DataAccessHelper.log(cmdtext);
+            List<KHACH_HANG> li = new List<KHACH_HANG>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                KHACH_HANG sp = new KHACH_HANG();
+                sp.MaKhachhang = dr[0].ToString();
+                sp.TaiKhoan = dr[1].ToString();
+                sp.MatKhau = dr[2].ToString();
+                sp.ngayTao = DateTime.Parse(dr[3].ToString());
+                sp.TenKhachHang = dr[4].ToString();
+                sp.Email = dr[5].ToString();
+                sp.SoDienThoai = dr[6].ToString();
+                try
+                {
+                    sp.DateOfBirth = DateTime.Parse(dr[7].ToString());
+                    sp.Sex = int.Parse(dr[8].ToString());
+                }
+                catch { }
+
+                sp.Adress = dr[9].ToString();
+                sp.IDFacebook = dr[10].ToString();
+                sp.MaGioHang = dr[11].ToString();
+                sp.MaFeedBack = dr[12].ToString();
+                sp.AnhDaiDien = dr[13].ToString();
+                sp.verificationcode = dr[14].ToString();
+                sp.active = dr[15].ToString();
+
+                li.Add(sp);
+            }
+            return li;
 
         }
 
-       
+
 
         public int register(KHACH_HANG kHACH_HANG, string code)
         {

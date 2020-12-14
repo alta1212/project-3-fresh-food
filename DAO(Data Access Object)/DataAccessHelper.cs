@@ -33,32 +33,21 @@ namespace DAO_Data_Access_Object_
             }
         }
 
-        public static object parnWithValue(string connectionString, CommandType cmdType, string cmdText, params SqlParameter[] commandParameters)
+        public static object parnWithValue(string paramterOutPut, string connectionString, CommandType cmdType, string cmdText, params SqlParameter[] commandParameters)
         {
 
             SqlCommand cmd = new SqlCommand();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
-            {   cmd.Parameters.Add("@MaDonHang", SqlDbType.VarChar, 100);
-                cmd.Parameters["@MaDonHang"].Direction = ParameterDirection.Output;
+            {   cmd.Parameters.Add(paramterOutPut, SqlDbType.VarChar, 100);
+                cmd.Parameters[paramterOutPut].Direction = ParameterDirection.Output;
                 PrepareCommand(cmd, conn, null, cmdType, cmdText, commandParameters);
              
                 cmd.ExecuteNonQuery(); // MISSING
-                string retunvalue = (string)cmd.Parameters["@MaDonHang"].Value;
+                string retunvalue = (string)cmd.Parameters[paramterOutPut].Value;
                 return retunvalue;
             }
-            //SqlCommand cmd = new SqlCommand();
-
-            //using (SqlConnection conn = new SqlConnection(connectionString))
-            //{
-            //    PrepareCommand(cmd, conn, null, cmdType, cmdText, commandParameters);
-            //    IDbDataParameter maDonHang = cmd.CreateParameter();
-            //    maDonHang.Direction = ParameterDirection.ReturnValue;
-            //    cmd.Parameters.Add(maDonHang);
-            //    cmd.ExecuteNonQuery();
-            //    var result = maDonHang.Value;
-            //    return result;
-            //}
+            
         }
 
         public static SqlDataReader getallLsp(string connectionString, string cmdtext ) 

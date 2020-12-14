@@ -5,6 +5,7 @@ app.run(function ($rootScope) {
     $rootScope.dataKhachHang = "";
     $rootScope.percent = 0;
     $rootScope.khachHang = "";
+    $rootScope.link = "";
 });
 //tài khoản
 //đăng  ký
@@ -88,7 +89,24 @@ app.controller("login", function ($scope, $http, $window) {
 
         });
     }
-
+    $scope.LoginFaceBook = function (respone) {
+        
+        var dataOfFB = {
+            'kHach_Hang.idFacebook': respone.id,
+            'kHach_Hang.TenKhachHang': respone.name,
+            'kHach_Hang.AnhDaiDien': respone.picture.data.url,
+        }
+        console.log(respone);
+        $http({
+            method: 'post',
+            url: '/Account/LoginWithFaceBook',
+            data: dataOfFB
+        }).then(function (response) {
+            console.log(respone);
+        });
+       
+    }
+    
 })
 
 
@@ -126,8 +144,9 @@ app.controller("active", function ($scope, $window) {
 })
 
 // Hiện thị thông tin của tài khoản
-app.controller("fillinfo", function ($window, $scope, $http, imgurUpload) {
-
+app.controller("fillinfo", function ($window, $scope, $http, imgurUpload,$rootScope) {
+    $rootScope.$on('link', function (event, data) {
+    })
     var data = {
 
         taikhoan: localStorage.getItem('taikhoan'),
@@ -148,55 +167,54 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload) {
             console.log("đúng tài khoản này rồi chưa điền thông tin");
 
             $scope.link = "placeholder";
-
+            
             $scope.fill = function () {
+               if (document.getElementById('file').files.length == 0) {
+                   $rootScope.link = document.getElementById('avt').src;
+                }
+               else {
 
-                if (document.getElementById('file').files.length == 0) {
-                    $scope.noimage = {
-                        "color": "red",
-                        "display": "block"
-                    }
+                    var image = document.getElementById('file').files[0];
+
+                    var clientId = "5c31a53dda3c8e0";
+                    imgurUpload.setClientId(clientId);
+                    imgurUpload
+                        .upload(image)
+                        .then(function (a) {
+                            $rootScope.link = a.data.link;
+                        })
+               }
+
+
+
+                var info = //lưu thông tin khách vào object
+                {
+
+                    tentk: localStorage.getItem('taikhoan'),
+                    mk: localStorage.getItem('matkhau'),
+                    "KHACH_HANG.SoDienThoai": document.getElementById('sdt').value,
+                    "KHACH_HANG.DateOfBirth": document.getElementById('date').value,
+                    "KHACH_HANG.Sex": document.getElementById('sex').value,
+                    "KHACH_HANG.TenKhachHang": document.getElementById('ten').value,
+                    "KHACH_HANG.AnhDaiDien": $rootScope.link,
+                    "KHACH_HANG.Adress": document.getElementById('address').value,
                 }
 
-                var image = document.getElementById('file').files[0];
 
-                var clientId = "5c31a53dda3c8e0";
-                imgurUpload.setClientId(clientId);
-                imgurUpload
-                    .upload(image)
-                    .then(function (a) {
-                        $scope.link = a.data.link
+                console.log(info)
 
-
-
-                        var info = //lưu thông tin khách vào object
-                        {
-
-                            tentk: localStorage.getItem('taikhoan'),
-                            mk: localStorage.getItem('matkhau'),
-                            "KHACH_HANG.SoDienThoai": document.getElementById('sdt').value,
-                            "KHACH_HANG.DateOfBirth": document.getElementById('date').value,
-                            "KHACH_HANG.Sex": document.getElementById('sex').value,
-                            "KHACH_HANG.TenKhachHang": document.getElementById('ten').value,
-                            "KHACH_HANG.AnhDaiDien": $scope.link,
-                            "KHACH_HANG.Adress": document.getElementById('address').value,
-                        }
+                $http({
+                    method: 'post',
+                    url: '/account/addinfo', //cập nhật i4 khách
+                    data: info
+                })
 
 
-                        console.log(info)
-
-                        $http({
-                            method: 'post',
-                            url: '/account/addinfo', //cập nhật i4 khách
-                            data: info
-                        })
-
-
-                        $window.location.href = '/Index/Index';
-                    })
+                $window.location.href = '/Index/Index';
             }
 
-        } else {
+        }
+         else {
 
             localStorage.clear();
             $window.location.href = '/Index/Index';

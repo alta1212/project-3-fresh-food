@@ -43,18 +43,10 @@ namespace project_3_fresh_food.Controllers
         }
         public void DangKy(KHACH_HANG KHACH_HANG)
         {
-
-
             string code = Guid.NewGuid().ToString();
             acc.DoRegister(KHACH_HANG, code);       
             to.SendSimpleMessage(KHACH_HANG.email, code);
-
-
         }
-
-          
-
-
         public ActionResult Active(string code)
         {
             try//nếu khách hàng vào trang active mà k có code xác nhận sẽ điều hướng về trang đăng nhập
@@ -68,17 +60,15 @@ namespace project_3_fresh_food.Controllers
 
 
             }
-
-
-
         }
         public JsonResult DoLogin(KHACH_HANG KHACH_HANG)
         {
             return Json(acc.log(KHACH_HANG.taikhoan, KHACH_HANG.matkhau), JsonRequestBehavior.AllowGet);
         }
-
-      
-
+        public JsonResult LoginWithFaceBook(KHACH_HANG kHACH_HANG)
+        {
+            return Json(acc.LoginFaceBook(kHACH_HANG), JsonRequestBehavior.AllowGet);
+        }
 
     }
 
