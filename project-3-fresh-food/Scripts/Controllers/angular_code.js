@@ -145,7 +145,8 @@ app.controller("active", function ($scope, $window) {
 })
 
 // Hiện thị thông tin của tài khoản
-app.controller("fillinfo", function ($window, $scope, $http, imgurUpload,$rootScope) {
+app.controller("fillinfo", function ($window, $scope, $http, imgurUpload, $rootScope) {
+    // link ảnh đại diện face
     $rootScope.$on('link', function (event, data) {
     })
     //nếu id fb và gg rỗng thì là đăng nhập thường
@@ -244,7 +245,7 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload,$rootSc
                 url: '/Account/LoginWithFaceBook', //gọi hàm controller/account/Login
                 params: data
             }).then(function (bool) {
-
+                debugger
                 $scope.src = bool.data[0].anhdaidien;
                 $scope.ten = bool.data[0].TenKhachHang;
                 $scope.gt = bool.data[0].sex;
@@ -286,7 +287,6 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload,$rootSc
                             "KHACH_HANG.Adress": document.getElementById('address').value,
                             "kHACH_HANG.idFacebook": localStorage.getItem("idFb"),
                         }
-                        debugger
 
 
                         console.log(info)
@@ -807,12 +807,11 @@ app.controller('CheckOut', function ($scope, $rootScope, $http, $location, $wind
 
         matkhau: localStorage.getItem('matkhau'),
 
-
+        idFb: localStorage.getItem('idFb')
     };
-    if (data.taikhoan === null || data.matkhau === null) {
+    if ((data.taikhoan === null && data.matkhau === null) && data.idFb === null) {
         $window.location.href = '/Account/Login';
     }
-    
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
     $rootScope.$on('dataKhachHang', function (event, data) {
         console.log(data)
@@ -824,7 +823,9 @@ app.controller('CheckOut', function ($scope, $rootScope, $http, $location, $wind
         }).then(function successGetAll(response) {
             $scope.listInCart = response.data;
             console.log(response.data)
-          
+            if ($scope.listInCart.length === 0) {
+                $window.location.href = '/Index/Index';
+            }
             $scope.getTotal = function () {
                 var total = 0;
                 for (var i = 0; i < response.data.length; i++) {
@@ -862,12 +863,12 @@ app.controller('CheckOut', function ($scope, $rootScope, $http, $location, $wind
                 var datakh = {
                     maGioHang:data.MaGioHang,
                     maKhachHang: data.MaKhachhang,
-                    diaChi: $scope.diachi,
-                    sdt: $scope.sdt,
+                    diaChi: data.adress,
+                    sdt: data.SoDienThoai,
                     tongtien: $scope.getTotal(),
                     dongia: $scope.listInCart[0].ThanhTien - (($scope.listInCart[0].ThanhTien * $scope.percent)/100)
                 }
-                $http.post('/Product/placeOrder', datakh).then(function () { })
+                $http.post('/Index/Index', datakh).then(function () { })
                     , function (e) { console.log(e) }
                 window.location.reload(true); 
             }
@@ -934,7 +935,7 @@ function addcart(msp, giaban,$http) {
     //trường hợp đăng nhập fb
     else if (data.idFb !== null) {
         var chiTietGioHang = {
-            maKhachHang: localStorage.getItem("idFb"),
+            maKhachHang: localStorage.getItem("idFb")+"mkh",
             maSanPham: msp,
             soLuong: 1,
             donGia: giaban
