@@ -14,11 +14,12 @@ namespace project_3_fresh_food.Controllers
         // GET: guestEvent
         public void AddToCart(string maKhachHang, string maSanPham, int donGia, int soLuong)
         {
-            sp.AddToCart(maKhachHang+"mkh", maSanPham, donGia,soLuong);
+           
+            sp.AddToCart(maKhachHang, maSanPham, donGia,soLuong);
         }
         public void postComment(string masp, string mkh, string binhluan, string hinhanh, float stars)
         {
-            sp.postcomment(masp,mkh+"mkh",binhluan,hinhanh,stars);
+            sp.postcomment(masp,mkh,binhluan,hinhanh,stars);
         }
     }
 }

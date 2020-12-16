@@ -35,8 +35,5 @@ function LoginFaceBook() {
 
 function LogOutFaceBook() {
     FB.logout();
-    FB.getLoginStatus(function (response) {
-    });
-    window.location.reload();
 }
 

@@ -37,86 +37,9 @@ namespace DAO_Data_Access_Object_
             return DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "activeacc", parm);
         }
 
-        // Lấy thông tin của khách hàng
-        public IList<KHACH_HANG> Log(string tk, string mk)
+        public IList<KHACH_HANG> list(string cmdtext)
         {
-
             DataTable dt = new DataTable();
-            string cmdtext = string.Format("Select * from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", tk, mk);
-            dt = DataAccessHelper.log(cmdtext);
-            List<KHACH_HANG> li = new List<KHACH_HANG>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                KHACH_HANG sp = new KHACH_HANG();
-                sp.MaKhachhang = dr[0].ToString();
-                sp.TaiKhoan = dr[1].ToString();
-                sp.MatKhau = dr[2].ToString();
-                sp.ngayTao = DateTime.Parse(dr[3].ToString());
-                sp.TenKhachHang = dr[4].ToString();
-                sp.Email = dr[5].ToString();
-                sp.SoDienThoai = dr[6].ToString();
-                try {  
-                    sp.DateOfBirth = DateTime.Parse(dr[7].ToString());
-                    sp.Sex = int.Parse(dr[8].ToString()); 
-                } catch { }
-             
-                sp.Adress = dr[9].ToString();
-                sp.IDFacebook = dr[10].ToString();
-                sp.MaGioHang = dr[11].ToString();
-                sp.MaFeedBack = dr[12].ToString();
-                sp.AnhDaiDien = dr[13].ToString();
-                sp.verificationcode = dr[14].ToString();
-                sp.active = dr[15].ToString();
-                
-                li.Add(sp);
-            }
-            return li;
-
-        }
-
-        public void fillinfo(string tk, string mk, KHACH_HANG kHACH_HANG)
-        {
-            SqlParameter[] parm = new SqlParameter[]
-            {
-                new SqlParameter(parm_TaiKhoan,SqlDbType.NVarChar,50),
-                new SqlParameter(parm_MatKhau,SqlDbType.NVarChar,50),
-                new SqlParameter(parm_HoVaten,SqlDbType.NVarChar,50),
-                new SqlParameter(parm_DiaChi,SqlDbType.NVarChar,50),
-                new SqlParameter(parm_SoDienThoai,SqlDbType.NVarChar,50),
-                new SqlParameter(parm_GioiTinh,SqlDbType.Bit),
-                new SqlParameter(parm_NgaySinh,SqlDbType.DateTime,50),
-                new SqlParameter(parm_AnhDaiDien,SqlDbType.NVarChar,50),
-            };
-            parm[0].Value = tk;
-            parm[1].Value = mk;
-            parm[2].Value = kHACH_HANG.tenkhachhang;
-            parm[3].Value = kHACH_HANG.adress;
-            parm[4].Value = kHACH_HANG.sodienthoai;
-            parm[5].Value = kHACH_HANG.Sex;
-            parm[6].Value = kHACH_HANG.dateofbirth;
-            parm[7].Value = kHACH_HANG.anhdaidien;
-
-            //  parm[7].Value = to.ImageToByteArray(to.GetImageFromUrl(string.Join(",", kHACH_HANG.anhdaidien)));
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "fillinfo", parm);
-        }
-
-        public IList<KHACH_HANG> LoginFaceBook(KHACH_HANG kHACH_HANG)
-        {
-
-            SqlParameter[] parm = new SqlParameter[]
-            {
-                 new SqlParameter("@IDFaceBook",SqlDbType.NVarChar,100),
-                 new SqlParameter("@TenKhachHang",SqlDbType.NVarChar,100),
-                 new SqlParameter("@HinhAnh",SqlDbType.NVarChar,100),
-            };
-            parm[0].Value = kHACH_HANG.idFacebook;
-            parm[1].Value = kHACH_HANG.TenKhachHang;
-            parm[2].Value = kHACH_HANG.AnhDaiDien; ;
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Login_FaceBook", parm);
-            DataTable dt = new DataTable();
-            string cmdtext = string.Format(@"Select  * From dbo.KHACH_HANG
-                                                        Where IDFaceBook ='{0}'
-                                                        ", parm[0].Value);
             dt = DataAccessHelper.log(cmdtext);
             List<KHACH_HANG> li = new List<KHACH_HANG>();
             foreach (DataRow dr in dt.Rows)
@@ -147,6 +70,80 @@ namespace DAO_Data_Access_Object_
                 li.Add(sp);
             }
             return li;
+        }
+
+        // Lấy thông tin của khách hàng
+        public IList<KHACH_HANG> Log(string tk, string mk)
+        {
+
+          
+            string cmdtext = string.Format("Select * from KHACH_HANG WHERE Taikhoan='{0}' and matkhau= '{1}'", tk, mk);
+           
+            return list(cmdtext);
+
+        }
+
+        public void fillinfo(string tk, string mk, KHACH_HANG kHACH_HANG)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+            {
+                new SqlParameter(parm_TaiKhoan,SqlDbType.NVarChar,50),
+                new SqlParameter(parm_MatKhau,SqlDbType.NVarChar,50),
+                new SqlParameter(parm_HoVaten,SqlDbType.NVarChar,50),
+                new SqlParameter(parm_DiaChi,SqlDbType.NVarChar,50),
+                new SqlParameter(parm_SoDienThoai,SqlDbType.NVarChar,50),
+                new SqlParameter(parm_GioiTinh,SqlDbType.Bit),
+                new SqlParameter(parm_NgaySinh,SqlDbType.DateTime,50),
+                new SqlParameter(parm_AnhDaiDien,SqlDbType.NVarChar,200),
+                new SqlParameter(parm_IdFaceBook,SqlDbType.NVarChar,50)
+            };
+            if(tk==null&& mk == null)
+            {
+                parm[0].Value = "đay là giữ chỗ cho khỏi null :) b làm cho nó có thể truyền vào null đi";
+                parm[1].Value = "hold";
+            }    
+            else
+            {
+                parm[0].Value = tk;
+                parm[1].Value = mk;
+            }    
+           
+            parm[2].Value = kHACH_HANG.tenkhachhang;
+            parm[3].Value = kHACH_HANG.adress;
+            parm[4].Value = kHACH_HANG.sodienthoai;
+            parm[5].Value = kHACH_HANG.Sex;
+            parm[6].Value = kHACH_HANG.dateofbirth;
+            parm[7].Value = kHACH_HANG.anhdaidien;
+            if(kHACH_HANG.idFacebook==null)
+            parm[8].Value = "hold";
+            else
+                parm[8].Value = kHACH_HANG.idFacebook;
+
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "fillinfo", parm);
+        }
+
+        public IList<KHACH_HANG> LoginFaceBook(KHACH_HANG kHACH_HANG)
+        {
+            if(kHACH_HANG.TenKhachHang!=null)
+            {
+                SqlParameter[] parm = new SqlParameter[]
+           {
+                 new SqlParameter("@IDFaceBook",SqlDbType.NVarChar,100),
+                 new SqlParameter("@TenKhachHang",SqlDbType.NVarChar,100),
+                 new SqlParameter("@HinhAnh",SqlDbType.NVarChar,200),
+           };
+                parm[0].Value = kHACH_HANG.idFacebook;
+                parm[1].Value = kHACH_HANG.TenKhachHang;
+                parm[2].Value = kHACH_HANG.AnhDaiDien; ;
+                DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Login_FaceBook", parm);
+
+            }
+
+            string cmdtext = string.Format(@"Select  * From dbo.KHACH_HANG
+                                                        Where IDFaceBook ='{0}'
+                                                        ", kHACH_HANG.idFacebook);
+            
+            return list(cmdtext);
 
         }
 

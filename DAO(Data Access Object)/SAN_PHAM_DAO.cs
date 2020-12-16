@@ -85,7 +85,7 @@ namespace DAO_Data_Access_Object_
             string cmdtext = string.Format(@"
                 Select  KH.TenKhachHang,KH.HinhAnh, FB.*,COUNT(fb.MaFeedBack) OVER(PARTITION BY LEFT(fb.MaFeedBack,2) ORDER BY fb.MaFeedBack RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
                     From dbo.KHACH_HANG KH Right Join dbo.FEED_BACK FB 
-	                    On KH.MaKhachHang = FB.MaKhachHang
+	                    On KH.MaKhachHang = FB.MaKhachHang  or kh.IDFaceBook=fb.MaKhachHang
 		                    Where FB.MaSanPham = '{0}' order by ngaybinhluan desc", masanpham);
             dt = DataAccessHelper.log(cmdtext);
 

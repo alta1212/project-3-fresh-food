@@ -21,7 +21,7 @@
         <div class="container-fluid d-flex align-items-center">
             <div class="row">
                 <div class="col-lg-7 col-md-10">
-                    <h1 class="display-2 text-white">Hello {{username}}</h1>
+                    <h1 class="display-2 text-white">Hello {{username}}{{ten}}</h1>
                     <p class="text-white mt-0 mb-5">Vui lòng hoàn tất thông tin của bạn</p>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
                                 <a href="#">
-                                    <img src="https://picsum.photos/360/360" id="avt" class="rounded-circle">
+                                    <img src="{{src}}" id="avt" class="rounded-circle">
                                 </a>
 
                             </div>
@@ -70,7 +70,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group focused">
                                             <label class="form-control-label" for="input-first-name">Họ và tên</label>
-                                            <input required type="text" id="ten" class="form-control form-control-alternative" placeholder="First name">
+                                            <input required value="{{ten}}" type="text" id="ten" class="form-control form-control-alternative" placeholder="First name">
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="select">
-                                            <select name="slct" id="sex">
+                                            <select  name="slct" id="sex">
                                                 <option value="1">Nam</option>
                                                 <option value="2">Nữ</option>
                                             </select>
