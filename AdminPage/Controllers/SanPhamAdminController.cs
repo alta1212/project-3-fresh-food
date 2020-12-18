@@ -25,6 +25,11 @@ namespace AdminPage.Controllers
             sanPham = product.getPageProduct(page, size);
             return Json(sanPham, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetProduct(string masanpham)
+        {
+            sanPham = product.getthongtinsanpham(masanpham);
+            return Json(sanPham, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult searchNameProduct(string name, int page, int size)
         {
             sanPham = product.searchName(name,  page, size);
@@ -33,6 +38,19 @@ namespace AdminPage.Controllers
         public ActionResult AddProductType()
         {
             return View();
+        }
+        public void deleteSp(string ma)
+        {
+            product.xoaSp(ma);
+        }
+        public ActionResult Editproduct()
+        {
+            return View();
+        }
+        public void EditProduct_(SAN_PHAM info)
+        {
+            product.editProcduct(info);
+
         }
     }
 }

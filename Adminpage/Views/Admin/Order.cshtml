@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "getOrder";
+    ViewBag.Title = "Đơn Hàng";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
@@ -84,7 +84,7 @@
                                                                 <a class="bg-primary" onclick="toastr.error('Không thể xoá đơn hàng đã xác nhận', 'Inconceivable!', { timeOut: 5000 })" data-toggle="tooltip" data-placement="top" title="Huỷ Bỏ Đơn Hàng" data-original-title="Delete" href="#"><i class="ri-delete-bin-7-line"></i></a>
                                                             </div>
                                                             <div ng-switch-when="false">
-                                                                <a ng-click="veri()" class="bg-primary" data-toggle="tooltip" data-placement="top" title="Xác Nhận Đơn Hàng" data-original-title="Edit" href="#"><i class="ri-check-line"></i></a>
+                                                                <a ng-click="veri(i.MaDonHang)" class="bg-primary" data-toggle="tooltip" data-placement="top" title="Xác Nhận Đơn Hàng" data-original-title="Edit" href="#"><i class="ri-check-line"></i></a>
                                                                 <a ng-click="delete()" class="bg-primary" data-toggle="tooltip" data-placement="top" title="Huỷ Bỏ Đơn Hàng" data-original-title="Delete" href="#"><i class="ri-delete-bin-7-line"></i></a>
                                                             </div>
                                                         </div>

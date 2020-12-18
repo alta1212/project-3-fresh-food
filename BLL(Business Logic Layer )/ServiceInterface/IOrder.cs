@@ -9,6 +9,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
 {
    public interface IOrder
     {
-        void placeOrder(IList<Cart_DTO> lists, string diaChi, string sdt, string maKhachHang,string tongtien,string dongia);
+        string placeOrder(IList<Cart_DTO> lists, string diaChi, string sdt, string maKhachHang,string tongtien,string dongia);
     }
 }

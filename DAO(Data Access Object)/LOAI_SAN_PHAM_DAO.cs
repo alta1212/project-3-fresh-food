@@ -36,6 +36,12 @@ namespace DAO_Data_Access_Object_
             }
             return li;
         }
+
+        public void XoaLsp(string ml)
+        {
+            DataAccessHelper.exec(string.Format("delete LOAI_SAN_PHAM where MaLoaiSanPham='{0}'",ml));
+        }
+
         public IList<LOAI_SAN_PHAM> GetAllLSPInAdmin() // in admin in shoping left -->inner
                                                 // in shoping 
         {

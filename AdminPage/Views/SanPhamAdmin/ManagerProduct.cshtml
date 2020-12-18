@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ManagerProduct";
+    ViewBag.Title = "Quản Lý Sản Phẩm";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
@@ -63,8 +63,8 @@
                                                     <td>{{i.Giaban}}</td>
                                                     <td>
                                                         <div class="flex align-items-center list-user-action">
-                                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-book.html"><i class="ri-pencil-line"></i></a>
-                                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="/SanPhamAdmin/Editproduct#!?masanpham={{i.MaSanPham}}"><i class="ri-pencil-line"></i></a>
+                                                            <a class="bg-primary"  data-placement="top" title="" ng-click="deleteProduct(i.MaSanPham)" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>

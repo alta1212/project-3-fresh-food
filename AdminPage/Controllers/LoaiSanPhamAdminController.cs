@@ -29,5 +29,9 @@ namespace AdminPage.Controllers
         {
             return View();
         }
+        public void deleteLsp(string key)
+        {
+            productTypeIterface.xoaLsp(key);
+        }
     }
 }

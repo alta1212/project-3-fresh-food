@@ -62,6 +62,37 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
+        public string confirmOrder(string madonhang)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+               {
+
+                new SqlParameter("@MaDonHang",SqlDbType.NVarChar,50),
+
+               };
+            parm[0].Value = madonhang;
+
+           return DataAccessHelper.parnWithValue("@affected", DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "confirmOrder", parm).ToString();
+        }
+
+        public void edit(SAN_PHAM info)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void xoaSp(string ma)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+              {
+
+                new SqlParameter("@MaSanPham",SqlDbType.NVarChar,50),
+
+              };
+            parm[0].Value = ma;
+
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "", parm);
+        }
+
         public void AddToCart(string maKhacHang, string maSanPham,int donGia,int soLuong)
         {
             SqlParameter[] parm = new SqlParameter[]
@@ -142,7 +173,7 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
-        public object getttsanpham(string masanpham)
+        public IList<SAN_PHAM> getttsanpham(string masanpham)
         {
              DataTable dt = new DataTable();
             

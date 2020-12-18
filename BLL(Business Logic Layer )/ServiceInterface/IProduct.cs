@@ -22,12 +22,14 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<SAN_PHAM> getbyloaisp(string loai,string page);
         void postcomment(string masp, string mkh, string binhluan, string hinhanh, float stars);
         void AddToCart(string mkh, string msp, int donGia, int soLuong);
+        string confirmOrder(string madonhang);
         int getslsp(string maloai);
-        object getthongtinsanpham(string masanpham);
+        IList<SAN_PHAM> getthongtinsanpham(string masanpham);
         IList<SAN_PHAM> searchName(string name, int page, int pagesize);
         IList<FeedBack_DTO> getListFeedBack(string masanpham);
         //lấy sản phẩm giảm giá trong ngày
         IList<SAN_PHAM> getdaylyDeal();
-
+        void xoaSp(string ma);
+        void editProcduct(SAN_PHAM info);
     }
 }

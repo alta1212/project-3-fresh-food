@@ -38,7 +38,7 @@ app.controller('dangKy', function ($http, $scope) {
             localStorage.setItem('mail', $scope.KHACH_HANG.Email);
 
 
-            window.location.href = '/Account/sent';
+            window.location.href = '/guestEvent/sent';
 
         }
 
@@ -128,20 +128,11 @@ app.controller("sender", function ($scope, $http, $window) {
 // Tài khoản cần active để đăng nhập
 app.controller("active", function ($scope, $window) {
 
-    $scope.success = true;
+   
     $scope.go = function () {
         $window.location.href = '/Account/FillInfo'
     }
-    $scope.init = function (status) {
-        if (status == "1") {
-            $scope.success = false;
-            $scope.fail = true;
-        }
-        if (status == "0") {
-            $scope.success = true;
-            $scope.fail = false;
-        }
-    }
+   
 })
 
 // Hiện thị thông tin của tài khoản
@@ -321,7 +312,7 @@ app.controller("acccontroller", function ($window, $scope,$rootScope, $http) {
     $scope.lin = true;
 
     $scope.logout = function () {
-       
+        LogOutFaceBook();
         localStorage.clear();
         $window.location.href = '/Account/Login';
     }
@@ -824,6 +815,7 @@ app.controller('CheckOut', function ($scope, $rootScope, $http, $location, $wind
         console.log(data)
         $scope.infoCustormer = data;
         console.log($scope.infoCustormer)
+       
         $http({
             method: 'get',
             url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
@@ -863,34 +855,25 @@ app.controller('CheckOut', function ($scope, $rootScope, $http, $location, $wind
                 }
 
             })
-            $scope.ChangeName = function (value) {
-                $scope.infoCustormer.TenKhachHang = value.TenKhachHang;
-            }
-            $scope.ChangeAddress = function (value) {
-                $scope.infoCustormer.Address = value.Address;
-            }
-            $scope.ChangeSoDienThoai = function (value) {
-                $scope.infoCustormer.SoDienThoai = value.SoDienThoai;
-            }
-            $scope.ChangeEmail = function (value) {
-                $scope.infoCustormer.Email = value.Email;
-            }
+          
             $scope.placeOrder = function () {
                 var datakh = {
                     maGioHang:data.MaGioHang,
                     maKhachHang: data.MaKhachhang,
-                    diaChi: $scope.infoCustormer.adress,
+                    diaChi: $scope.infoCustormer.Adress,
                     sdt: $scope.infoCustormer.SoDienThoai,
                     tongtien: $scope.getTotal(),
-                    dongia: $scope.listInCart[0].ThanhTien - (($scope.listInCart[0].ThanhTien * $scope.percent)/100)
+                    dongia: $scope.listInCart[0].ThanhTien - (($scope.listInCart[0].ThanhTien * $scope.percent) / 100),
+                    mail: $scope.infoCustormer.Email
                 }
-                $http.post('/Product/placeOrder', datakh).then(function () {
+           
+                $http.post('/guestEvent/placeOrder', datakh).then(function () {
 
                 })
                     , function (e) {
                         console.log(e)
                     }
-                window.location.reload(true); 
+                window.location ="/Account/sent"; 
             }
             
         });

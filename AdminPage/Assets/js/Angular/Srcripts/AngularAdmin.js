@@ -1,5 +1,11 @@
-﻿var myApp = angular.module('myApp', [])
+﻿var myApp = angular.module('myApp', ['imgurUpload']);
 
+
+// ------------ rootScope-----------
+myApp.run(function ($rootScope) {
+
+    $rootScope.link = "";
+});
 
 myApp.controller('managerProduct', function ($scope, $location, $window, $http) {
     $scope.pagesize = 10//khởi tạo giá trị hiển thị ban đầu
@@ -56,10 +62,23 @@ myApp.controller('managerProduct', function ($scope, $location, $window, $http) 
 
         })
     }
-
+    $scope.deleteProduct = function (e) {
+        data = {
+            ma: e
+        }
+        $http.post('/SanPhamAdmin/deleteSp', data)
+    }
 }
 );
 myApp.controller('managerProductType', function ($scope, $http) {
+
+    $scope.deleteProductType = function (e) {
+            data = {
+                key:e
+            }
+            $http.post('/LoaiSanPhamAdmin/deleteLsp',data)
+        }
+
     $http({
         method: 'get',
         url: '/LoaiSanPhamAdmin/GetAllProductTypeJS'
@@ -153,7 +172,7 @@ myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
     }
 })
  myApp.controller('addLsp', function ($scope, $http) {
-   
+
     $scope.addlsp = function () {
         var data = {
             "lsp.MaLoaiSanPham": $scope.mlsp,
@@ -177,21 +196,32 @@ myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
 })
 
 //thêm sản phẩm
-myApp.controller('addPro', function ($scope, $http) {
+myApp.controller('addPro', function (imgurUpload, $scope, $http, $rootScope) {
+    
     $http.get('/LoaiSanPhamAdmin/GetAllProductTypeJS').then(function getListProductCatetory(response) {
         console.log(response.data)
         $scope.ProductCatetory = response.data;
     })
     $scope.addProduct = function () {
+        var image = document.getElementById('file').files[0];
+
+        var clientId = "5c31a53dda3c8e0";
+        imgurUpload.setClientId(clientId);
+        imgurUpload
+            .upload(image)
+            .then(function (a) {
+                $rootScope.link = a.data.link;
+            })
         var data = {
             "sp.MaSanPham": $scope.MaSanPham,
             "sp.tensanpham": $scope.tensanpham,
             "sp.MaLoaiSanPham": $scope.Tenloaisanpham,
-            "sp.Hinhanh": $scope.DonViTinh,
-            "sp.DonViTinh": $scope.GiaBan,
+            "sp.Hinhanh": $rootScope.link,
+            "sp.DonViTinh": $scope.DonViTinh,
             "sp.MoTa": $scope.MoTa,
+            "sp.GiaBan": $scope.GiaBan
         }
-        
+        debugger
         $http({
             method: 'POST',
             url: '/Admin/themsp',
@@ -199,34 +229,30 @@ myApp.controller('addPro', function ($scope, $http) {
         })
         
     }
+  
 });
 
 //lấy về danh sách order
 myApp.controller('managerOrder', function ($scope, $http) {
     $scope.size = 10;
-    $http({
-        method: 'GET',
-        url: '/Admin/getOrder?pagesize='+$scope.size
-    }).then(function (res) {
-        console.log(res.data)
-        $scope.getJsonResults = res.data;
-    })
-    $scope.changeview = function () {
 
-        $http({
-            method: 'GET',
-            url: '/Admin/getOrder?pagesize=' + $scope.pagesize
-        }).then(function (res) {
-            console.log(res.data);
-            $scope.getJsonResults = res.data;
-        })
+    getoder($http, $scope.size, $scope)
+    $scope.changeview = function () {
+        getoder($http, $scope.pagesize, $scope)
     }
-    $scope.veri = function () {
-        toastr.success('xác nhận dòng 218', 'Success Alert!', { timeOut: 5000 })
+    $scope.veri = function (e) {
+        var data =
+        {
+            maorder:e
+        }
+      
+        $http.post('/Admin/confirmorder', data).then(function (s) { console.log(s) })
+        getoder($http, $scope.pagesize, $scope)
+        toastr.success('Xác nhận đơn hàng thành công', 'Success Alert!', { timeOut: 5000 })
     }
     $scope.delete = function () {
         toastr.success('xoá dòng 221', 'Success Alert!', { timeOut: 5000 })
-       
+        getoder($http, $scope.pagesize, $scope)
     }
 }).filter("filterdate", function () {
     var re = /\/Date\(([0-9]*)\)\//;
@@ -269,3 +295,33 @@ myApp.controller('addUser', function ($scope, $http) {
         }
     }
 })
+
+
+myApp.controller('editPro', function (imgurUpload, $scope, $http, $rootScope, $location) {
+    $http.get('/LoaiSanPhamAdmin/GetAllProductTypeJS').then(function getListProductCatetory(response) {
+        console.log(response.data)
+        $scope.ProductCatetory = response.data;
+    })
+    var key = $location.search().masanpham
+    $http.get('/SanPhamAdmin/GetProduct?masanpham=' + key).then(function (s) {
+        console.log(s)
+        $scope.info = s.data[0];
+    })
+    
+    $scope.edit = function () {
+        $scope.info;
+        $http.post('/SanPhamAdmin/EditProduct_', $scope.info).then(function (s) { console.log(s) })
+    }
+    }
+)
+
+
+function getoder($http, size, $scope) {
+    $http({
+        method: 'GET',
+        url: '/Admin/getOrder?pagesize=' + size
+    }).then(function (res) {
+        console.log(res.data);
+        $scope.getJsonResults = res.data;
+    })
+}

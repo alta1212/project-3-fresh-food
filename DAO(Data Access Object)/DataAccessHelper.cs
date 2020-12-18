@@ -43,7 +43,7 @@ namespace DAO_Data_Access_Object_
                 cmd.Parameters[paramterOutPut].Direction = ParameterDirection.Output;
                 PrepareCommand(cmd, conn, null, cmdType, cmdText, commandParameters);
              
-                cmd.ExecuteNonQuery(); // MISSING
+                cmd.ExecuteNonQuery();
                 string retunvalue = (string)cmd.Parameters[paramterOutPut].Value;
                 return retunvalue;
             }
@@ -60,7 +60,14 @@ namespace DAO_Data_Access_Object_
             return read;
 
         }
-       
+       public static void exec(string cmdtext)
+       {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(cmdtext, conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
 
         public static DataTable log(string cmdtxt)
         {

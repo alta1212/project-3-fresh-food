@@ -11,7 +11,7 @@ namespace DAO_Data_Access_Object_
 {
    public class Order_DAO
     {
-        public void placeOrder(IList<Cart_DTO> lists,  string diaChi, string sdt,string maKhachHang,string tongtien,string dongia)
+        public string placeOrder(IList<Cart_DTO> lists,  string diaChi, string sdt,string maKhachHang,string tongtien,string dongia)
         {
 
 
@@ -53,7 +53,7 @@ namespace DAO_Data_Access_Object_
             };
             parmDeleteCart[0].Value = maKhachHang;
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Delete_To_Cart", parmDeleteCart);
-
+            return value.ToString();
         }
 
     }

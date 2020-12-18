@@ -15,19 +15,19 @@
                     <div class="row">
                         <div class="form-group col-xl-6">
                             <label>Tên khách hàng<span class="text-danger">*</span></label>
-                            <input  type="text" placeholder="First Name" name="fname" class="form-control"value="{{infoCustormer.TenKhachHang}}"  required="">
+                            <input  type="text" placeholder="First Name" name="fname" class="form-control" ng-model="infoCustormer.TenKhachHang"  required>
                         </div>
                         <div class="form-group col-xl-6">
                             <label>Địa chỉ <span class="text-danger">*</span></label>
-                            <input  type="text" placeholder="Street Address One" name="addr-1" class="form-control"  value="{{infoCustormer.Adress}}" ng-change="AddressChange()"   required=""  >
+                            <input  type="text" placeholder="Street Address One" name="addr-1" class="form-control"  ng-model="infoCustormer.Adress"    >
                         </div>
                         <div class="form-group col-xl-6">
                             <label>Số điện thoại <span class="text-danger">*</span></label>
-                            <input  type="text" placeholder="Phone Number" name="phone" class="form-control"  value="{{infoCustormer.SoDienThoai}}" ng-change="SoDienThoaiChange()"  required="" >
+                            <input  type="text" placeholder="Phone Number" name="phone" class="form-control"  ng-model="infoCustormer.SoDienThoai"  >
                         </div>
                         <div class="form-group col-xl-6">
                             <label>Email <span class="text-danger">*</span></label>
-                            <input type="email" placeholder="Email Address" name="email" class="form-control"  value="{{infoCustormer.Email}}"  required="">
+                            <input type="email" placeholder="Email Address" name="email" class="form-control"  ng-model="infoCustormer.Email"  required>
                         </div>
                         
                     </div>

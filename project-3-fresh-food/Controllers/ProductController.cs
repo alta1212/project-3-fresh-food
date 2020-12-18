@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using BLL_Business_Logic_Layer__;
 using BLL_Business_Logic_Layer__.ServiceInterface;
 using DTO_Data_Transfer_Object_;
+using tool;
 
 namespace project_3_fresh_food.Controllers
 {
@@ -19,8 +20,9 @@ namespace project_3_fresh_food.Controllers
         IList<FeedBack_DTO> listfb;
         IList<Cart_DTO> listCart_DTOs;
         ICart cart = new Cart_BLL();
-        IOrder or = new Order_BLL();
+       
         IDiscount discount = new discount_BLL();
+        Class1 to = new Class1();
         public ActionResult Shop()//shop toàn bộ sản phẩm
         {
             return View();
@@ -77,9 +79,6 @@ namespace project_3_fresh_food.Controllers
         {
             return Json(discount.getall(),JsonRequestBehavior.AllowGet);
         }
-        public void placeOrder(string maGioHang,string maKhachHang, string diaChi,string sdt,string tongtien,string dongia)
-        {
-            or.placeOrder(cart.GetAllProductInCart(maGioHang), diaChi, sdt, maKhachHang, tongtien,dongia);
-        }
+       
     }
 }

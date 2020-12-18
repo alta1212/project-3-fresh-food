@@ -58,7 +58,7 @@ namespace BLL_Business_Logic_Layer__
             return sp.getslsp(maloai);
         }
 
-        public object getthongtinsanpham(string masanpham)
+        public IList<SAN_PHAM> getthongtinsanpham(string masanpham)
         {
             return sp.getttsanpham(masanpham);
         }
@@ -76,6 +76,21 @@ namespace BLL_Business_Logic_Layer__
         public IList<SAN_PHAM> getdaylyDeal()
         {
             return sp.getDaylydeal();
+        }
+
+        public void xoaSp(string ma)
+        {
+            sp.xoaSp(ma);
+        }
+
+        public void editProcduct(SAN_PHAM info)
+        {
+            sp.edit(info);
+        }
+
+        public string confirmOrder(string madonhang)
+        {
+          return  sp.confirmOrder(madonhang);
         }
     }
 }

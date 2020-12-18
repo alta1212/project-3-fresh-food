@@ -367,6 +367,7 @@
     <Content Include="Views\Admin\profile.cshtml" />
     <Content Include="Views\Admin\editprofile.cshtml" />
     <Content Include="Views\Admin\addNv.cshtml" />
+    <Content Include="Views\SanPhamAdmin\Editproduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

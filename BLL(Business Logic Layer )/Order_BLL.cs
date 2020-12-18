@@ -12,9 +12,9 @@ namespace BLL_Business_Logic_Layer__
     public class Order_BLL : IOrder
     {
         Order_DAO Order_DAO = new Order_DAO();
-        public void placeOrder(IList<Cart_DTO> lists, string diaChi, string sdt, string maKhachHang,string tongtien,string dongia)
+        public string placeOrder(IList<Cart_DTO> lists, string diaChi, string sdt, string maKhachHang,string tongtien,string dongia)
         {
-            Order_DAO.placeOrder(lists,diaChi,sdt, maKhachHang, tongtien,dongia);
+           return Order_DAO.placeOrder(lists,diaChi,sdt, maKhachHang, tongtien,dongia);
         }
     }
 }

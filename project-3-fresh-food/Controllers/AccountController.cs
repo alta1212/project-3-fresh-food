@@ -45,7 +45,7 @@ namespace project_3_fresh_food.Controllers
         {
             string code = Guid.NewGuid().ToString();
             acc.DoRegister(KHACH_HANG, code);       
-            to.SendSimpleMessage(KHACH_HANG.email, code);
+            to.confirm(KHACH_HANG.email, code);
         }
         public ActionResult Active(string code)
         {

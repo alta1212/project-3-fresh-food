@@ -285,6 +285,8 @@
     <Content Include="Views\Shared\_ProductDiscount.cshtml" />
     <Content Include="Views\Shared\_sidebarSale.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\guestEvent\Sent.cshtml" />
+    <Content Include="Views\guestEvent\confirmOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -294,7 +296,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\guestEvent\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL%28Business Logic Layer %29\BLL%28Business Logic Layer %29.csproj">

@@ -1,11 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Active";
+    ViewBag.Title = "confirmOrder";
     Layout = "~/Views/Shared/MainLayOut.cshtml";
 }
 
 <div ng-controller="active" ng-switch="@ViewBag.status===1">
-    <div ng-switch-when="true" class="section">
+    <div ng-switch-when="true"  class="section">
         <div class="container">
             <div class="andro_404-container">
                 <svg class="ft-green-tick" xmlns="http://www.w3.org/2000/svg" height="100" width="100" viewBox="0 0 48 48" aria-hidden="true">
@@ -18,8 +18,8 @@
             </div>
         </div>
     </div>
-  
-    <div ng-switch-when="false" class="section">
+   
+    <div ng-switch-when="false"  class="section">
         <div class="container">
             <div class="andro_404-container">
 
@@ -31,4 +31,3 @@
         </div>
     </div>
 </div>
-

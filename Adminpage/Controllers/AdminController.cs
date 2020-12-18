@@ -13,7 +13,7 @@ namespace AdminPage.Controllers
     public class AdminController : Controller
     {
         IAdmin ad = new Admin();
-       
+        IProduct sp = new SAN_PHAM_BLL();
         // GET: accountsAdmin
         public ActionResult login()
         {
@@ -22,7 +22,7 @@ namespace AdminPage.Controllers
         }
         public ActionResult profile()
         {
-           return View();
+            return View();
         }
 
         public ActionResult addNv()
@@ -31,9 +31,9 @@ namespace AdminPage.Controllers
         }
         public int addNhanVien(ADMIN adm)
         {
-          return  ad.addnv(adm);
+            return ad.addnv(adm);
         }
-        public JsonResult log(string email,string matkhau)
+        public JsonResult log(string email, string matkhau)
         {
             return Json(ad.login(email, matkhau), JsonRequestBehavior.AllowGet); ;
         }
@@ -43,7 +43,7 @@ namespace AdminPage.Controllers
         }
         public ActionResult Index()
         {
-       
+
             return View();
         }
         public int themlsp(LOAI_SAN_PHAM lsp)
@@ -52,8 +52,13 @@ namespace AdminPage.Controllers
                 return 0;
             else
                 return 1;
-                
+
         }
+        public void confirmorder(string maorder)
+        {
+            sp.confirmOrder(maorder);
+        }
+
         public JsonResult getOrder(string pagesize)
         {
             return Json(ad.getListOrder(pagesize),JsonRequestBehavior.AllowGet);

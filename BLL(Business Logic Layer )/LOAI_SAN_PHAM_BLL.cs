@@ -20,5 +20,10 @@ namespace BLL_Business_Logic_Layer__
         {
             return LSP.GetAllLSPInAdmin();
         }
+
+        public void xoaLsp(string ml)
+        {
+            LSP.XoaLsp(ml);
+        }
     }
 }
