@@ -17,36 +17,39 @@
                     <div class="iq-card-body">
                         <form>
                             <div class="form-group">
-                                <label>Mã sản phẩm:</label>
-                                <input ng-model="MaSanPham" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <label>Tên sản phẩm:</label>
                                 <input ng-model="tensanpham" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Loại Sản Phẩm:</label>
                                 <select ng-model="Tenloaisanpham" class="form-control" id="exampleFormControlSelect1">
-                                    <option  value="{{i.MaLoaiSanPham}}" ng-repeat="i in ProductCatetory">{{i.TenLoaiSanPham}}</option>
+                                    <option value="{{i.MaLoaiSanPham}}" ng-repeat="i in ProductCatetory">{{i.TenLoaiSanPham}}</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
+
                                 <label>Hình Ảnh:</label>
                                 <div class="custom-file">
-                                    <input type="file" id="file" class="custom-file-input" accept="image/png, image/jpeg">
+                                    <input type="file" id="file" class="custom-file-input" accept="image/png, image/jpeg" onchange="ChangeFileImageForProduct(this)">
                                     <label class="custom-file-label">Choose file</label>
+
                                 </div>
+                                <img class="img-fluid" style="width:200px;height:auto;margin-top:2%" id="loadSource" src="{{i.HinhAnh}}" alt="Ảnh sản phẩm">
                             </div>
                             <div class="form-group">
                                 <label>Đơn vị tính:</label>
                                 <div class="custom-file">
-                                    <input  ng-model="DonViTinh" type="text" class="form-control">
+                                    <input ng-model="DonViTinh" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Giá bán :</label>
                                 <input ng-model="GiaBan" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Số lượng :</label>
+                                <input ng-model="SoLuongNhap" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Mô Tả:</label>

@@ -216,13 +216,13 @@ myApp.controller('addPro', function (imgurUpload, $scope, $http, $rootScope) {
                 $rootScope.link = a.data.link;
             })
         var data = {
-            "sp.MaSanPham": $scope.MaSanPham,
             "sp.tensanpham": $scope.tensanpham,
             "sp.MaLoaiSanPham": $scope.Tenloaisanpham,
             "sp.Hinhanh": $rootScope.link,
             "sp.DonViTinh": $scope.DonViTinh,
             "sp.MoTa": $scope.MoTa,
-            "sp.GiaBan": $scope.GiaBan
+            "sp.GiaBan": $scope.GiaBan,
+            "sp.SoLuongNhap": $scope.SoLuongNhap
         }
         debugger
         $http({
@@ -328,4 +328,18 @@ function getoder($http, size, $scope) {
         console.log(res.data);
         $scope.getJsonResults = res.data;
     })
+}
+
+// Hiện thị ảnh bằng input file
+function ChangeFileImageForProduct(elements) {
+    readImgUrlAndPreview(elements);
+    function readImgUrlAndPreview(input) {
+        if (input.files) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("loadSource").src = e.target.result;
+            }
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
 }
