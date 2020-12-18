@@ -32,7 +32,7 @@
                             <img src="{{i.HinhAnh}}" alt="prod1">
                             <div class="andro_cart-product-body">
                                 <h6> <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}">{{i.TenSanPham}}</a> </h6>
-                                <p> {{i.DonViTinh}}</p>
+                                <p> {{i.DonViTinh}} {{$index}}</p>
                             </div>
                         </div>
                     </td>
@@ -40,14 +40,13 @@
                         <div ng-switch-when="true">
                             <strong >{{i.GiaGiam | number}} VNĐ</strong> <br />
                             <strong style="text-decoration:line-through;color:#50bd4d">{{i.GiaBan | number}} VNĐ</strong>
-                           
                         </div>
                         <div ng-switch-when="false">
                             <strong >{{i.GiaBan | number}} VNĐ</strong>
                         </div>
                     </td>
                     <td class="quantity" data-title="Quantity">
-                        <input type="number" class="qty form-control" value="{{i.SoLuong}}">
+                        <input type="number" class="qty form-control" value="{{i.SoLuong}}" ng-model="SoLuongChange" ng-change="Hay({{$index}},this)" min="1" >
                     </td>
                     <td data-title="Total">
                         <div ng-switch-when="true">

@@ -49,7 +49,7 @@ namespace DAO_Data_Access_Object_
             }
             SqlParameter[] parmDeleteCart = new SqlParameter[]
             {
-                new SqlParameter("@MaKhachHang",SqlDbType.NVarChar,100),
+                new SqlParameter("@MaKhachHang",SqlDbType.NVarChar,200),
             };
             parmDeleteCart[0].Value = maKhachHang;
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Delete_To_Cart", parmDeleteCart);

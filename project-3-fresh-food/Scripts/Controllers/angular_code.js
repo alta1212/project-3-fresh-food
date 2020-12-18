@@ -732,7 +732,13 @@ app.controller('CartInDetail', function ($scope,$rootScope, $http) {
         }).then(function successGetAll(response) {
             $scope.listInCart = response.data;
             console.log(response.data)
-           
+            console.log($scope.listInCart[0].SoLuong)
+            $scope.Hay = function (idCartDetails, value) {
+                console.log(value)
+                $scope.listInCart[idCartDetails].SoLuong = value.SoLuongChange;
+                console.log(response.data[idCartDetails].SoLuong)
+                console.log($scope.listInCart);
+            }
             $scope.getTotal = function () {
                 var total = 0;
                 for (var i = 0; i < response.data.length; i++) {
@@ -765,6 +771,7 @@ app.controller('CartInDetail', function ($scope,$rootScope, $http) {
         });
 
     });
+    
     $rootScope.$on('percent', function (event, data) {
         $scope.percent = 0;
        })
@@ -855,21 +862,34 @@ app.controller('CheckOut', function ($scope, $rootScope, $http, $location, $wind
                     $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
                 }
 
-
             })
-            
+            $scope.ChangeName = function (value) {
+                $scope.infoCustormer.TenKhachHang = value.TenKhachHang;
+            }
+            $scope.ChangeAddress = function (value) {
+                $scope.infoCustormer.Address = value.Address;
+            }
+            $scope.ChangeSoDienThoai = function (value) {
+                $scope.infoCustormer.SoDienThoai = value.SoDienThoai;
+            }
+            $scope.ChangeEmail = function (value) {
+                $scope.infoCustormer.Email = value.Email;
+            }
             $scope.placeOrder = function () {
-
                 var datakh = {
                     maGioHang:data.MaGioHang,
                     maKhachHang: data.MaKhachhang,
-                    diaChi: data.adress,
-                    sdt: data.SoDienThoai,
+                    diaChi: $scope.infoCustormer.adress,
+                    sdt: $scope.infoCustormer.SoDienThoai,
                     tongtien: $scope.getTotal(),
                     dongia: $scope.listInCart[0].ThanhTien - (($scope.listInCart[0].ThanhTien * $scope.percent)/100)
                 }
-                $http.post('/Index/Index', datakh).then(function () { })
-                    , function (e) { console.log(e) }
+                $http.post('/Product/placeOrder', datakh).then(function () {
+
+                })
+                    , function (e) {
+                        console.log(e)
+                    }
                 window.location.reload(true); 
             }
             
