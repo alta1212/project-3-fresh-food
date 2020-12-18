@@ -114,10 +114,9 @@ namespace DAO_Data_Access_Object_
         public IList<Order_DTO> getListOrder(string pagesize)
         {
             DataTable dt = new DataTable();
-            string cmdText = string.Format(@"
-                select dh.*,nv.TenNhanVien from DON_HANG dh ,NHAN_VIEN_ nv 
-              
-                    order by dh.MaDonHang desc Offset 0 Rows Fetch next {0} rows only", pagesize);
+            string cmdText = string.Format(@"Select DH.*,NV.TenNhanVien From dbo.DON_HANG  DH Left Join dbo.Nhan_Vien_ NV
+	On DH.MaNhanVien = NV.MaNhanVien 
+		Order By MaDonHang Desc Offset 0 Rows Fetch Next {0} Rows Only", pagesize);
             dt = DataAccessHelper.log(cmdText);
             List<Order_DTO> li = new List<Order_DTO>();
             foreach (DataRow dr in dt.Rows)

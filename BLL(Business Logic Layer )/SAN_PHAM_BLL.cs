@@ -88,9 +88,9 @@ namespace BLL_Business_Logic_Layer__
             sp.edit(info);
         }
 
-        public string confirmOrder(string madonhang)
+        public string confirmOrder(string madonhang,string manv)
         {
-          return  sp.confirmOrder(madonhang);
+          return  sp.confirmOrder(madonhang,manv);
         }
     }
 }

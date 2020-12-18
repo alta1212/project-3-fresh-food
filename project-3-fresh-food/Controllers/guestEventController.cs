@@ -27,7 +27,7 @@ namespace project_3_fresh_food.Controllers
         }
         public ActionResult confirmOrder(string madonhang)
         {
-            ViewBag.status = sp.confirmOrder(madonhang);
+            ViewBag.status = sp.confirmOrder(madonhang,"");
             return View();
                 
         }

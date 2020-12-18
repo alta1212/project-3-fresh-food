@@ -62,17 +62,19 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
-        public string confirmOrder(string madonhang)
+        public string confirmOrder(string madonhang, string manv)
         {
+            if (manv == null)
+                manv = "";
             SqlParameter[] parm = new SqlParameter[]
                {
 
                 new SqlParameter("@MaDonHang",SqlDbType.NVarChar,50),
-
+                new SqlParameter("@MaNhanVien",SqlDbType.NVarChar,50),
                };
             parm[0].Value = madonhang;
-
-           return DataAccessHelper.parnWithValue("@affected", DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "confirmOrder", parm).ToString();
+            parm[1].Value = manv;
+            return DataAccessHelper.parnWithValue("@affected", DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "confirmOrder", parm).ToString();
         }
 
         public void edit(SAN_PHAM info)

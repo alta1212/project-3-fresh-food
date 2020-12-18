@@ -107,7 +107,19 @@ app.controller("login", function ($scope, $http, $window) {
         });
         $window.location.href = '/Index/Index';
     }
-    
+    $scope.loginGoole = function (respone) {
+        console.log(respone)
+        var info = {
+            "kh.TenKhachHang": respone.Ad,
+            "kh.MaKhachhang": respone.NT,
+            "kh.AnhDaiDien": respone.hK,
+            "kh.Email": respone.cu
+        }
+        $http.post('/Account/LoginWithGoogle', info).then(function (response) {
+            console.log(respone);
+            localStorage.setItem('idGg', respone.id)
+        });
+    }
 })
 
 
@@ -289,7 +301,7 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload, $rootS
                         })
 
 
-                     //   $window.location.href = '/Index/Index';
+                        $window.location.href = '/Index/Index';
                     }
 
                 }
@@ -312,7 +324,8 @@ app.controller("acccontroller", function ($window, $scope,$rootScope, $http) {
     $scope.lin = true;
 
     $scope.logout = function () {
-        LogOutFaceBook();
+        
+        signOut()
         localStorage.clear();
         $window.location.href = '/Account/Login';
     }
@@ -952,3 +965,4 @@ function addcart(msp, giaban,$http) {
         })
     }
 }
+

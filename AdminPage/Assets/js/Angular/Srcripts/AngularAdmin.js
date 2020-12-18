@@ -5,6 +5,7 @@
 myApp.run(function ($rootScope) {
 
     $rootScope.link = "";
+    $rootScope.manv = "";
 });
 
 myApp.controller('managerProduct', function ($scope, $location, $window, $http) {
@@ -148,6 +149,7 @@ myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
             if (call.data.length != 0) {
                 localStorage.setItem("hinhanh", call.data[0].hinhanh)
                 localStorage.setItem("ten", call.data[0].tennhanvien)
+                $rootScope.manv = call.data[0].manhanvien;
                 $scope.anh = localStorage.getItem("hinhanh");
                 $scope.ten = localStorage.getItem("ten");
                 $scope.role = call.data[0].maloainhanvien ;
@@ -167,6 +169,7 @@ myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
         $window.location.href = '/Admin/login';
     }
     $scope.signout = function () {
+      
         localStorage.clear();
         $window.location.href = '/Admin/login';
     }
@@ -233,7 +236,7 @@ myApp.controller('addPro', function (imgurUpload, $scope, $http, $rootScope) {
 });
 
 //lấy về danh sách order
-myApp.controller('managerOrder', function ($scope, $http) {
+myApp.controller('managerOrder', function ($rootScope,$scope, $http) {
     $scope.size = 10;
 
     getoder($http, $scope.size, $scope)
@@ -243,11 +246,12 @@ myApp.controller('managerOrder', function ($scope, $http) {
     $scope.veri = function (e) {
         var data =
         {
-            maorder:e
+            maorder: e,
+            manv: $rootScope.manv
         }
       
         $http.post('/Admin/confirmorder', data).then(function (s) { console.log(s) })
-        getoder($http, $scope.pagesize, $scope)
+        getoder($http, $scope.size, $scope)
         toastr.success('Xác nhận đơn hàng thành công', 'Success Alert!', { timeOut: 5000 })
     }
     $scope.delete = function () {

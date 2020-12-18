@@ -16,6 +16,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<KHACH_HANG> log(string tk, string mk);
 
         IList<KHACH_HANG> LoginFaceBook(KHACH_HANG kHACH_HANG);
-
+        object LoginGoogle(KHACH_HANG kh);
     }
 }

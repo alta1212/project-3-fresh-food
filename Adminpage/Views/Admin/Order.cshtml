@@ -58,11 +58,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="i in getJsonResults">
+                                                <tr ng-repeat="i in getJsonResults" ng-switch="i.TenNhanVien===''&&i.TrangThai == '1'">
                                                     <td>{{$index + 1}}</td>
                                                     <td>{{i.MaDonHang}}</td>
                                                     <td>{{i.MaKhachhang}}</td>
-                                                    <td>{{i.TenNhanVien}}</td>
+                                                    <td ng-switch-when="false">{{i.TenNhanVien}}</td>
+                                                    <td ng-switch-when="true">(Đã Xác Nhận Qua Mail)</td>
                                                     <td>
                                                         <div ng-switch="i.TrangThai == '1'" class="flex align-items-center list-user-action">
                                                             <div ng-switch-when="true">

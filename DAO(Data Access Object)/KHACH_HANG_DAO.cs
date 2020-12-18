@@ -37,6 +37,25 @@ namespace DAO_Data_Access_Object_
             return DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "activeacc", parm);
         }
 
+        public object LoginGoogle(KHACH_HANG kh)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+                {
+                 new SqlParameter("@IDGoogle",SqlDbType.NVarChar,100),
+                 new SqlParameter("@TenKhachHang",SqlDbType.NVarChar,100),
+                 new SqlParameter("@HinhAnh",SqlDbType.NVarChar,200),
+                 new SqlParameter("@mail",SqlDbType.NVarChar,200),
+                };
+            parm[0].Value = kh.makhachhang;
+            parm[1].Value = kh.TenKhachHang;
+            parm[2].Value = kh.AnhDaiDien; ;
+            parm[3].Value = kh.email;
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "login_google", parm);
+            string cmdtext = string.Format(@"select * from KHACH_HANG where MaKhachHang='{0}' or Email='{1}'",kh.makhachhang,kh.email);
+
+            return list(cmdtext);
+        }
+
         public IList<KHACH_HANG> list(string cmdtext)
         {
             DataTable dt = new DataTable();
@@ -127,11 +146,11 @@ namespace DAO_Data_Access_Object_
             if(kHACH_HANG.TenKhachHang!=null)
             {
                 SqlParameter[] parm = new SqlParameter[]
-           {
+                {
                  new SqlParameter("@IDFaceBook",SqlDbType.NVarChar,100),
                  new SqlParameter("@TenKhachHang",SqlDbType.NVarChar,100),
                  new SqlParameter("@HinhAnh",SqlDbType.NVarChar,200),
-           };
+                };
                 parm[0].Value = kHACH_HANG.idFacebook;
                 parm[1].Value = kHACH_HANG.TenKhachHang;
                 parm[2].Value = kHACH_HANG.AnhDaiDien; ;

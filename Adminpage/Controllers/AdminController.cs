@@ -54,9 +54,9 @@ namespace AdminPage.Controllers
                 return 1;
 
         }
-        public void confirmorder(string maorder)
+        public void confirmorder(string maorder,string manv)
         {
-            sp.confirmOrder(maorder);
+            sp.confirmOrder(maorder,manv);
         }
 
         public JsonResult getOrder(string pagesize)

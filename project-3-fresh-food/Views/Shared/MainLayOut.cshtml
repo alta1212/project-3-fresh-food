@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.titel</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     <!-- Vendor Stylesheets -->
     <link rel="stylesheet" href="~/assets/css/plugins/bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/css/plugins/animate.min.css">
@@ -26,13 +26,16 @@
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular-cookies.js"></script>
     <script src="~/Scripts/angular-imgur-upload.js"></script>
-    <script src="~/Scripts/Controllers/codeFacebookLogin.js"></script>
-    <meta name="google-signin-client_id" content="521600559558-h5fulc75393r5e0ctbksnbnm76rksoph.apps.googleusercontent.com">
+
+    <script src="~/Scripts/Controllers/SocialLogin.js"></script>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="633358256716-salpmlmgck9ms4060hhalb2vjr8elvb3.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     @* <script src="~/Scripts/Controllers/product.js"></script>*@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/favicon.ico">
     <link href="~/assets/css/css.css" rel="stylesheet" />
-    
+
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=344461403569583&autoLogAppEvents=1" nonce="euTlI8fH"></script>
 </head>
 

@@ -47,5 +47,10 @@ namespace BLL_Business_Logic_Layer__
         {
             return dao.LoginFaceBook(kHACH_HANG);
         }
+
+        public object LoginGoogle(KHACH_HANG kh)
+        {
+            return dao.LoginGoogle(kh);
+        }
     }
 }

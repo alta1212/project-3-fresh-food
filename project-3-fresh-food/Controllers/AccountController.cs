@@ -69,7 +69,11 @@ namespace project_3_fresh_food.Controllers
         {
             return Json(acc.LoginFaceBook(kHACH_HANG), JsonRequestBehavior.AllowGet);
         }
-
+        public JsonResult LoginWithGoogle(KHACH_HANG kh)
+        {
+            return Json(acc.LoginGoogle(kh), JsonRequestBehavior.AllowGet);
+        }
+        
     }
 
 }
