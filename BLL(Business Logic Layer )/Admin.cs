@@ -24,11 +24,29 @@ namespace BLL_Business_Logic_Layer__
             return ad.dash();
         }
 
+        public void deltePrice(string ma)
+        {
+            ad.deltePrice(ma);
+        }
 
+        public void editPrice(Price_DTO getJsonResults)
+        {
+            ad.editPrice(getJsonResults);
+        }
+
+        public object getInfoPrice(string magia)
+        {
+            return ad.getInfoPrice(magia);
+        }
 
         public IList<Order_DTO> getListOrder(string pagesize)
         {
             return ad.getListOrder(pagesize);
+        }
+
+        public object getPrice()
+        {
+            return ad.getPrice();
         }
 
         public IList<ADMIN> login(string tk, string mk)

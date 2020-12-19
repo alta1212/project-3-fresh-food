@@ -16,5 +16,9 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         void themsp(SAN_PHAM sp);
         IList<Order_DTO> getListOrder(string pagesize);
         int addnv(ADMIN adm);
+        object getPrice();
+        object getInfoPrice(string magia);
+        void editPrice(Price_DTO getJsonResults);
+        void deltePrice(string ma);
     }
 }

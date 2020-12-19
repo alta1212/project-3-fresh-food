@@ -95,7 +95,7 @@ myApp.controller('managerProductType', function ($scope, $http) {
 
 
 myApp.controller('loginAdmin', function ($rootScope,$scope, $http, $window) {
-    $scope.fail = { "display": "none" }
+   
     $scope.login = function () {
 
         $http({
@@ -108,10 +108,12 @@ myApp.controller('loginAdmin', function ($rootScope,$scope, $http, $window) {
                 
                 localStorage.setItem("email", $scope.admin.email)
                 localStorage.setItem("matkhau", $scope.admin.matkhau)
+                toastr.success('Đăng nhập thành công', 'Success Alert', { timeOut: 5000 })
+
                 $window.location.href = '/Admin/Index';
             }
             else {
-                $scope.fail = { "display": "block" }
+                toastr.error('Thông tin đăng nhập không chính xác', 'Inconceivable!', { timeOut: 5000 })
             }
         });
     }
@@ -224,13 +226,17 @@ myApp.controller('addPro', function (imgurUpload, $scope, $http, $rootScope) {
             "sp.GiaBan": $scope.GiaBan,
             "sp.SoLuongNhap": $scope.SoLuongNhap
         }
-        debugger
+        
         $http({
             method: 'POST',
             url: '/Admin/themsp',
             data: data
+        }).then(function () {
+            toastr.success('Thêm sản phẩm thành công', 'Success Alert', { timeOut: 5000 }), function () { toastr.error('Có lỗi xảy ra vui long thử lại', 'Inconceivable!', { timeOut: 5000 }) }
+            document.getElementById("addsp").reset()
+            document.getElementById("loadSource").src = ""
         })
-        
+      
     }
   
 });
@@ -343,3 +349,81 @@ function ChangeFileImageForProduct(elements) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+
+
+myApp.controller("managerPrice", function ($http, $scope) {
+    $http.get('/Admin/getPrice').then(function (res) {
+        $scope.getJsonResults = res.data;
+        console.log($scope.getJsonResults)
+    })
+    $scope.xoa = function (e,date) {
+        if (date === '/Date(-62135596800000)/') {
+            toastr.error('Không thể xoá giá mặc định', 'Inconceivable!', { timeOut: 5000 })
+           
+        }
+        else {
+            var data = {
+                "ma":e
+            }
+            $http.post("/Admin/deltePrice",data).then(function () {
+                toastr.success('Xoá thông tin thành công', 'Success Alert', { timeOut: 5000 })
+                $http.get('/Admin/getPrice').then(function (res) {
+                    $scope.getJsonResults = res.data;
+                    console.log($scope.getJsonResults)
+                })
+            })
+            
+        }
+    }   
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
+
+myApp.controller("editPrice", function ($filter,$http, $scope, $location) {
+    var key = $location.search().magia
+    $http.get('/Admin/getInfoPrice?magia='+key).then(function (res) {
+        $scope.getJsonResults = res.data[0];
+        console.log($scope.getJsonResults)
+    })
+    $http({
+        method: 'get',
+        url: '/SanPhamAdmin/GetAllProduct?page=1&&size=1000'
+
+    }).then(function (s) {
+        $scope.ProductCatetory = s.data;
+        console.log(s.data)
+    })
+    $scope.editbd = function (s) {
+        $scope.getJsonResults.ngayBatDau =s.ngaybd
+    }
+    $scope.editkt = function (s) {
+        $scope.getJsonResults.ngayKetThuc = s.ngaykt
+    }
+    
+    $scope.Edit = function () {
+
+        
+        console.log($filter('filterdate')($scope.getJsonResults.ngayBatDau, 'dd/MM/yyyy'))
+        console.log($filter('filterdate')($scope.getJsonResults.ngayKetThuc, 'dd/MM/yyyy'))
+        //$scope.getJsonResults.ngayBatDau = $filter('filterdate')($scope.getJsonResults.ngayBatDau, 'dd/MM/yyyy')
+        //$scope.getJsonResults.ngayKetThuc = $filter('filterdate')($scope.getJsonResults.ngayKetThuc, 'dd/MM/yyyy')
+        console.log($scope.getJsonResults)
+        $http.post('/Admin/EditPrice', $scope.getJsonResults).then(function () {
+            toastr.success('Sửa thông tín thành công', 'Success Alert', { timeOut: 5000 })
+        })
+
+    }
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});

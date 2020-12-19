@@ -433,6 +433,22 @@ app.controller("seach", function ($scope, $http) {
         console.log($scope.lsp);
         console.log(response.data[0].TenLoaiSanPham);
     })
+    $scope.searchProduct = function () {
+        window.location.href = "/Product/search#!?tensanpham=" + $scope.keySearch
+        window.location.reload()
+    }
+})
+
+app.controller("searchByName", function ($location, $scope, $http) {
+    var key = $location.search().tensanpham;
+    $http({
+        method: 'GET',
+        url: '/Product/searchName?tensanpham='+key,
+    }).then(function successCallback(response) {
+        $scope.lisp = response.data;
+        console.log($scope.lisp);
+        
+    })
 })
 
 //Hiện thị sản phẩm ngẫu nhiễn của cửa hàng

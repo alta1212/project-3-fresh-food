@@ -18,12 +18,16 @@ namespace project_3_fresh_food.Controllers
         IList<SAN_PHAM> lis;
         IProduct sp = new SAN_PHAM_BLL();
         IList<FeedBack_DTO> listfb;
-        IList<Cart_DTO> listCart_DTOs;
+       
         ICart cart = new Cart_BLL();
        
         IDiscount discount = new discount_BLL();
         Class1 to = new Class1();
         public ActionResult Shop()//shop toàn bộ sản phẩm
+        {
+            return View();
+        }
+        public ActionResult search()
         {
             return View();
         }
@@ -80,5 +84,10 @@ namespace project_3_fresh_food.Controllers
             return Json(discount.getall(),JsonRequestBehavior.AllowGet);
         }
        
+       public JsonResult searchName(string tensanpham)
+        {
+            return Json(sp.searchName(tensanpham, 1, 100),JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

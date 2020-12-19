@@ -75,5 +75,30 @@ namespace AdminPage.Controllers
         {
             ad.themsp(sp);
         }
+        public ActionResult Price()
+        {
+            return View();
+        }
+        public ActionResult PriceEdit()
+        {
+            return View();
+        }
+        public void EditPrice(Price_DTO getJsonResults)
+        {
+            ad.editPrice(getJsonResults);
+        }
+        public void deltePrice(string ma)
+        {
+            ad.deltePrice(ma);
+        }
+        public JsonResult getPrice()
+        {
+            return Json(ad.getPrice(), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getInfoPrice( string magia)
+        {
+            return Json(ad.getInfoPrice(magia), JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }

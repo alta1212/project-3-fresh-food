@@ -31,5 +31,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<SAN_PHAM> getdaylyDeal();
         void xoaSp(string ma);
         void editProcduct(SAN_PHAM info);
+        
     }
 }

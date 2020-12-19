@@ -18,7 +18,7 @@ namespace DAO_Data_Access_Object_
             foreach (DataRow dr in dt.Rows)
             {
                 ADMIN ad = new ADMIN();
-                ad.manhanvien =dr[0].ToString();
+                ad.manhanvien = dr[0].ToString();
                 ad.tennhanvien = dr[1].ToString();
                 ad.maloainhanvien = dr[2].ToString();
                 ad.gioitinh = dr[3].ToString();
@@ -29,10 +29,57 @@ namespace DAO_Data_Access_Object_
                 ad.sodienthoai = dr[8].ToString();
                 ad.email = dr[9].ToString();
                 ad.matkhau = dr[10].ToString();
-                ad.hinhanh= dr[11].ToString();
+                ad.hinhanh = dr[11].ToString();
                 li.Add(ad);
             }
             return li;
+        }
+
+        public void deltePrice(string ma)
+        {
+            DataAccessHelper.exec(string.Format("delete gia_ban where magiaban='{0}'", ma));
+        }
+
+        public void editPrice(Price_DTO pr)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+             {
+                new SqlParameter("@maGiaBan",SqlDbType.NVarChar,50),
+                new SqlParameter("@maSanPham",SqlDbType.NVarChar,50),
+                new SqlParameter("@giaBan",SqlDbType.Int),
+                new SqlParameter("@ngayApDung",SqlDbType.DateTime),
+                new SqlParameter("@ngayKetThuc",SqlDbType.DateTime),
+               
+             };
+            parm[0].Value = pr.maGiaBan;
+            parm[1].Value = pr.maSanPham;
+            parm[2].Value = pr.gia;
+            parm[3].Value = DateTime.Parse(pr.ngayBatDau.ToString());
+            parm[4].Value = DateTime.Parse(pr.ngayKetThuc.ToString());
+
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "EdirPrice", parm);
+        }
+
+        public object getInfoPrice(string magia)
+        {
+            DataTable dt = new DataTable();
+            string cmdtext = string.Format(@"Select gb.*,sp.tensanpham From dbo.gia_ban  gb Left Join dbo.san_pham sp
+                                                On gb.MaSanPham = sp.MaSanPham
+												where magiaban='{0}'
+                                                Order By magiaban",magia);
+            dt = DataAccessHelper.log(cmdtext);
+            return listgia(dt);
+        }
+
+        public IList<Price_DTO> getPrice()
+        {
+            DataTable dt = new DataTable();
+            string cmdtext = string.Format(@"Select gb.*,sp.tensanpham From dbo.gia_ban  gb Left Join dbo.san_pham sp
+                                                On gb.MaSanPham = sp.MaSanPham
+                                                Order By magiaban");
+            dt = DataAccessHelper.log(cmdtext);
+            return listgia(dt);
+
         }
 
         public int add(ADMIN adm)
@@ -46,7 +93,7 @@ namespace DAO_Data_Access_Object_
              {
                 new SqlParameter("@MaLoaiSanPham",SqlDbType.NVarChar,50),
                 new SqlParameter("@TenSanPham",SqlDbType.NVarChar,50),
-                new SqlParameter("@SoluongNhap",SqlDbType.Int), 
+                new SqlParameter("@SoluongNhap",SqlDbType.Int),
                 new SqlParameter("@HinhAnh",SqlDbType.NVarChar,50),
                 new SqlParameter("@DonViTinh",SqlDbType.NVarChar,50),
                 new SqlParameter("@MoTa",SqlDbType.NVarChar,500),
@@ -71,7 +118,7 @@ namespace DAO_Data_Access_Object_
                 new SqlParameter("@MoTa",SqlDbType.NVarChar,350),
 
              };
-            
+
             parm[0].Value = lsp.MaLoaiSanPham ?? DBNull.Value.ToString();
             parm[1].Value = lsp.tenloaisanpham;
             parm[2].Value = lsp.MoTa;
@@ -101,11 +148,11 @@ namespace DAO_Data_Access_Object_
                 ad.user = dr[0].ToString();
                 ad.product = dr[1].ToString();
                 ad.order = dr[2].ToString();
-                
+
                 li.Add(ad);
             }
             return li;
-            
+
         }
         public IList<Order_DTO> getListOrder(string pagesize)
         {
@@ -126,11 +173,28 @@ namespace DAO_Data_Access_Object_
                 or.NgayMua = DateTime.Parse(dr[5].ToString());
                 try { or.NgayXacThuc = DateTime.Parse(dr[6].ToString()); }
                 catch { }
-               
+
                 or.SoDienThoai = dr[7].ToString();
                 or.DiaChi = dr[8].ToString();
                 or.TenNhanVien = dr[9].ToString();
                 li.Add(or);
+            }
+            return li;
+        }
+        public IList<Price_DTO> listgia(DataTable dt)
+        {
+            List<Price_DTO> li = new List<Price_DTO>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                Price_DTO pr = new Price_DTO();
+                pr.maGiaBan = dr[0].ToString();
+                pr.maSanPham = dr[1].ToString();
+                pr.gia = int.Parse(dr[2].ToString());
+                pr.ngayBatDau = DateTime.Parse(dr[3].ToString());
+                try { pr.ngayKetThuc = DateTime.Parse(dr[4].ToString()); }
+                catch { }
+                pr.tenSanPham = dr[5].ToString();
+                li.Add(pr);
             }
             return li;
         }

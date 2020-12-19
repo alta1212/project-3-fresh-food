@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "Tìm Kiếm";
+    Layout = "~/Views/Shared/MainLayOut.cshtml";
+}
+
+
+<div ng-controller="searchByName" class="section">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-8">
+
+                <!-- Product Count & Orderby Start -->
+                <div class="andro_shop-global">
+                    <p>Showing <b>{{lisp.length}}</b> of <b>{{lisp.length}}</b> products </p>
+                    <form method="post">
+                        <select class="form-control" name="orderby">
+                            <option value="default">Default sorting</option>
+                            <option value="latest">Latest release</option>
+                            <option value="price-down">Price: High - Low</option>
+                            <option value="price-up">Price: Low - High</option>
+                            <option value="popularity">Popularity Sorting</option>
+                        </select>
+                    </form>
+                </div>
+                <!-- Product Count & Orderby End -->
+                <!-- Product Start -->
+                <div id="{{i.MaSanPham}}" ng-repeat="i in lisp" class="andro_product andro_product-list">
+                    <div class="andro_product-thumb">
+                        <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}"><img src="{{i.Hinhanh}}" alt="product"></a>
+                    </div>
+                    <div class="andro_product-body">
+                        <div class="andro_rating-wrapper">
+                            <div style="display:flex">
+                                <div class="andro_rating" ng-repeat="Star in [1,2,3,4,5]">
+                                    <div ng-switch="i.Stars >=Star">
+                                        <div ng-switch-when="true">
+                                            <i class="fa fa-star active"></i>
+                                        </div>
+                                        <div ng-switch-when="false">
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <span>{{i.Stars}} Stars</span>
+                        </div>
+                        <h5 class="andro_product-title"> <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}">{{i.tensanpham}} </a> </h5>
+                        <p>{{i.MoTa}}</p>
+                        <div class="andro_product-footer">
+                            <div class="andro_product-price" ng-switch="i.Giamoi>0">
+                                <span>{{i.Giaban | number }} VNĐ</span>
+                                <span ng-switch-when="false" style="display:none;">{{i.Giamoi| number }} VNĐ</span>
+                                <span ng-switch-when="true">{{i.Giamoi| number }} VNĐ</span>
+                            </div>
+                            <div class="btn-group">
+                                <a ng-click="AddToCart(i.MaSanPham,i.Giaban)" href="#" class="andro_btn-custom btn-sm">Buy Now</a>
+                                <button type="button" class="andro_btn-custom dropdown-toggle dropdown-toggle-split btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" onclick="c(this)" href="#" data-toggle="modal" data-target="#quickViewModal"> <i class="fa fa-eye"></i> Quick View</a>
+                                    <a class="dropdown-item" href="#"> <i class="fa fa-sync"></i> Compare</a>
+                                    <a class="dropdown-item" href="#"> <i class="fa fa-heart"></i> Add To Wishlist</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+
+            </div>
+
+            <!-- Sidebar Start -->
+            <div class="col-lg-4">
+                <div class="sidebar">
+
+                    <!-- Search Start -->
+                    <div class="sidebar-widget widget-search">
+                        <form method="post">
+                            <div class="andro_search-adv-input">
+                                <input type="text" class="form-control" placeholder="Look for Fruits, Vegetables" name="search" value="">
+                                <button type="submit" name="button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Search End -->
+                    <!-- Filter: Categories Start -->
+                    <div ng-controller="navmenu" class="sidebar-widget">
+                        <h5 class="widget-title"> Category </h5>
+                        <ul class="sidebar-widget-list">
+                            <li ng-repeat="i in lsp">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="{{i.maloaisanpham}}">
+                                    <label class="custom-control-label" for="{{i.maloaisanpham}}">{{i.tenloaisanpham}}</label>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <!-- Filter: Categories End -->
+                    <!-- Filter: Condition Start -->
+                    <div class="sidebar-widget">
+                        <h5 class="widget-title"> Condition </h5>
+                        <ul class="sidebar-widget-list">
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck7">
+                                    <label class="custom-control-label" for="customCheck7">Daily Deal</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck8">
+                                    <label class="custom-control-label" for="customCheck8">On Sale</label>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- Filter: Condition End -->
+                    <!-- Filter: State Start -->
+                    <div class="sidebar-widget">
+                        <h5 class="widget-title"> Brand </h5>
+                        <ul class="sidebar-widget-list">
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck9">
+                                    <label class="custom-control-label" for="customCheck9">Green Life</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck10">
+                                    <label class="custom-control-label" for="customCheck10">Whole Foods</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck11">
+                                    <label class="custom-control-label" for="customCheck11">Shrubbery co.</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck12">
+                                    <label class="custom-control-label" for="customCheck12">Better Life</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck13">
+                                    <label class="custom-control-label" for="customCheck13">Organica</label>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- Filter: State End -->
+                    <!-- Filter: Freshness Start -->
+                    <div class="sidebar-widget">
+                        <h5 class="widget-title"> Freshness </h5>
+                        <span class="irs irs--flat js-irs-0 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min" style="visibility: visible;">0 days</span><span class="irs-max" style="visibility: visible;">10 days</span><span class="irs-from" style="visibility: visible; left: 34.8179%;">4 days</span><span class="irs-to" style="visibility: visible; left: 53.9036%;">6 days</span><span class="irs-single" style="visibility: hidden; left: 37.9304%;">4 days — 6 days</span></span><span class="irs-grid" style="width: 95.4286%; left: 2.18571%;"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%; margin-left: -1.57321%;">0</span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 15%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol small" style="left: 5%"></span><span class="irs-grid-pol" style="left: 25%"></span><span class="irs-grid-text js-grid-text-1" style="left: 25%; visibility: visible; margin-left: -1.57321%;">3</span><span class="irs-grid-pol small" style="left: 45%"></span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 35%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-2" style="left: 50%; visibility: visible; margin-left: -1.57321%;">5</span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 65%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol small" style="left: 55%"></span><span class="irs-grid-pol" style="left: 75%"></span><span class="irs-grid-text js-grid-text-3" style="left: 75%; visibility: visible; margin-left: -1.57321%;">8</span><span class="irs-grid-pol small" style="left: 95%"></span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 85%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-4" style="left: 100%; margin-left: -2.2875%;">10</span></span><span class="irs-bar" style="left: 40.4571%; width: 19.0857%;"></span><span class="irs-shadow shadow-from" style="display: none;"></span><span class="irs-shadow shadow-to" style="display: none;"></span><span class="irs-handle from" style="left: 38.1714%;"><i></i><i></i><i></i></span><span class="irs-handle to type_last" style="left: 57.2571%;"><i></i><i></i><i></i></span></span><input type="text" class="js-range-slider irs-hidden-input" name="freshness_range" value="" data-type="double" data-min="0" data-max="10" data-from="4" data-to="6" data-grid="true" data-postfix=" days" tabindex="-1" readonly="">
+                    </div>
+                    <!-- Filter: Freshness End -->
+                    <!-- Filter: Price Start -->
+                    <div class="sidebar-widget">
+                        <h5 class="widget-title"> Price </h5>
+                        <span class="irs irs--flat js-irs-1 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="0"></span><span class="irs-min" style="visibility: hidden;">0 $</span><span class="irs-max" style="visibility: visible;">500 $</span><span class="irs-from" style="visibility: visible; left: -0.0164286%;">10 $</span><span class="irs-to" style="visibility: visible; left: 16.3679%;">100 $</span><span class="irs-single" style="visibility: hidden; left: 3.17214%;">10 $ — 100 $</span></span><span class="irs-grid" style="width: 95.4286%; left: 2.18571%;"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%; margin-left: -1.57321%;">0</span><span class="irs-grid-pol small" style="left: 20%"></span><span class="irs-grid-pol small" style="left: 15%"></span><span class="irs-grid-pol small" style="left: 10%"></span><span class="irs-grid-pol small" style="left: 5%"></span><span class="irs-grid-pol" style="left: 25%"></span><span class="irs-grid-text js-grid-text-1" style="left: 25%; visibility: visible; margin-left: -3.00357%;">125</span><span class="irs-grid-pol small" style="left: 45%"></span><span class="irs-grid-pol small" style="left: 40%"></span><span class="irs-grid-pol small" style="left: 35%"></span><span class="irs-grid-pol small" style="left: 30%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-2" style="left: 50%; visibility: visible; margin-left: -3.00357%;">250</span><span class="irs-grid-pol small" style="left: 70%"></span><span class="irs-grid-pol small" style="left: 65%"></span><span class="irs-grid-pol small" style="left: 60%"></span><span class="irs-grid-pol small" style="left: 55%"></span><span class="irs-grid-pol" style="left: 75%"></span><span class="irs-grid-text js-grid-text-3" style="left: 75%; visibility: visible; margin-left: -3.00357%;">375</span><span class="irs-grid-pol small" style="left: 95%"></span><span class="irs-grid-pol small" style="left: 90%"></span><span class="irs-grid-pol small" style="left: 85%"></span><span class="irs-grid-pol small" style="left: 80%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-4" style="left: 100%; margin-left: -3.00357%;">500</span></span><span class="irs-bar" style="left: 4.19429%; width: 17.1771%;"></span><span class="irs-shadow shadow-from" style="display: none;"></span><span class="irs-shadow shadow-to" style="display: none;"></span><span class="irs-handle from" style="left: 1.90857%;"><i></i><i></i><i></i></span><span class="irs-handle to type_last" style="left: 19.0857%;"><i></i><i></i><i></i></span></span><input type="text" class="js-range-slider irs-hidden-input" name="freshness_range" value="" data-type="double" data-min="0" data-max="500" data-from="10" data-to="100" data-grid="true" data-postfix=" $" tabindex="-1" readonly="">
+                    </div>
+                    <!-- Filter: Price End -->
+                    <!-- Tags Start -->
+                    <div class="sidebar-widget">
+                        <h5 class="widget-title"> Popular Tags </h5>
+                        <div class="tagcloud">
+                            <a href="#">Health</a>
+                            <a href="#">Live Stock</a>
+                            <a href="#">Harvest</a>
+                            <a href="#">Better Life</a>
+                            <a href="#">Life style</a>
+                        </div>
+                    </div>
+                    <!-- Tags End -->
+                    <!-- Newsletter Start -->
+                    <div class="sidebar-widget">
+                        <div class="andro_newsletter-form">
+                            <h5>Join our newsletter</h5>
+                            <p>Get exclusive weekly deals with our newsletter subscription</p>
+                            <form method="post">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="newsletter_email" placeholder="Email Address" value="">
+                                </div>
+                                <button type="submit" class="andro_btn-custom secondary btn-block shadow-none" name="button">Join Newsletter</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Newsletter End -->
+
+                </div>
+            </div>
+            <!-- Sidebar End -->
+
+        </div>
+
+    </div>
+</div>

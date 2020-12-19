@@ -21,8 +21,8 @@
 
         </div>
         <div class="andro_search-adv-input">
-            <input type="text" class="form-control" placeholder="Look for Fruits, Vegetables" name="search" value="">
-            <button type="submit" name="button"><i class="fa fa-search"></i></button>
+            <input ng-model="keySearch" type="text" class="form-control" placeholder="Look for Fruits, Vegetables" name="search" value="">
+            <button ng-click="searchProduct()" name="button"><i class="fa fa-search"></i></button>
         </div>
     </form>
 </div>
