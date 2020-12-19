@@ -108,12 +108,12 @@ myApp.controller('loginAdmin', function ($rootScope,$scope, $http, $window) {
                 
                 localStorage.setItem("email", $scope.admin.email)
                 localStorage.setItem("matkhau", $scope.admin.matkhau)
-                toastr.success('Đăng nhập thành công', 'Success Alert', { timeOut: 5000 })
+                toastr.success('Đăng nhập thành công', 'Thành công!', { timeOut: 5000 })
 
                 $window.location.href = '/Admin/Index';
             }
             else {
-                toastr.error('Thông tin đăng nhập không chính xác', 'Inconceivable!', { timeOut: 5000 })
+                toastr.error('Thông tin đăng nhập không chính xác', 'Lỗi!!', { timeOut: 5000 })
             }
         });
     }
@@ -192,9 +192,9 @@ myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
         }).then(function (stringNotification)
         {
             if (stringNotification.data == 1)
-                toastr.success('Thêm thành công', 'Success Alert', { timeOut: 5000 })
+                toastr.success('Thêm thành công', 'Thành công!', { timeOut: 5000 })
             else
-                toastr.error('Thêm thất bại', 'Inconceivable!', { timeOut: 5000 })
+                toastr.error('Thêm thất bại', 'Lỗi!!', { timeOut: 5000 })
         })
     }
 
@@ -232,7 +232,7 @@ myApp.controller('addPro', function (imgurUpload, $scope, $http, $rootScope) {
             url: '/Admin/themsp',
             data: data
         }).then(function () {
-            toastr.success('Thêm sản phẩm thành công', 'Success Alert', { timeOut: 5000 }), function () { toastr.error('Có lỗi xảy ra vui long thử lại', 'Inconceivable!', { timeOut: 5000 }) }
+            toastr.success('Thêm sản phẩm thành công', 'Thành công!', { timeOut: 5000 }), function () { toastr.error('Có lỗi xảy ra vui long thử lại', 'Lỗi!!', { timeOut: 5000 }) }
             document.getElementById("addsp").reset()
             document.getElementById("loadSource").src = ""
         })
@@ -258,10 +258,10 @@ myApp.controller('managerOrder', function ($rootScope,$scope, $http) {
       
         $http.post('/Admin/confirmorder', data).then(function (s) { console.log(s) })
         getoder($http, $scope.size, $scope)
-        toastr.success('Xác nhận đơn hàng thành công', 'Success Alert!', { timeOut: 5000 })
+        toastr.success('Xác nhận đơn hàng thành công', 'Thành công!!', { timeOut: 5000 })
     }
     $scope.delete = function () {
-        toastr.success('xoá dòng 221', 'Success Alert!', { timeOut: 5000 })
+        toastr.success('xoá dòng 221', 'Thành công!!', { timeOut: 5000 })
         getoder($http, $scope.pagesize, $scope)
     }
 }).filter("filterdate", function () {
@@ -359,7 +359,7 @@ myApp.controller("managerPrice", function ($http, $scope) {
     })
     $scope.xoa = function (e,date) {
         if (date === '/Date(-62135596800000)/') {
-            toastr.error('Không thể xoá giá mặc định', 'Inconceivable!', { timeOut: 5000 })
+            toastr.error('Không thể xoá giá mặc định', 'Lỗi!!', { timeOut: 5000 })
            
         }
         else {
@@ -367,7 +367,7 @@ myApp.controller("managerPrice", function ($http, $scope) {
                 "ma":e
             }
             $http.post("/Admin/deltePrice",data).then(function () {
-                toastr.success('Xoá thông tin thành công', 'Success Alert', { timeOut: 5000 })
+                toastr.success('Xoá thông tin thành công', 'Thành công!', { timeOut: 5000 })
                 $http.get('/Admin/getPrice').then(function (res) {
                     $scope.getJsonResults = res.data;
                     console.log($scope.getJsonResults)
@@ -390,6 +390,14 @@ myApp.controller("editPrice", function ($filter,$http, $scope, $location) {
     $http.get('/Admin/getInfoPrice?magia='+key).then(function (res) {
         $scope.getJsonResults = res.data[0];
         console.log($scope.getJsonResults)
+        $scope.NgayBatDau = new Date(ConvertDate($filter('filterdate')($scope.getJsonResults.ngayBatDau, 'dd/mm/yyyy')))
+        $scope.NgayKetThuc = new Date(ConvertDate($filter('filterdate')($scope.getJsonResults.ngayKetThuc, 'dd/mm/yyyy')))
+        $scope.MinDate = ConvertDate($filter('filterdate')($scope.getJsonResults.ngayKetThuc, 'dd/mm/yyyy'))
+        $scope.MinDateNew = new Date(ConvertDate($filter('filterdate')($scope.getJsonResults.ngayKetThuc, 'dd/mm/yyyy')))
+        $scope.MinDateNew2nd = $scope.MinDateNew.setDate($scope.MinDateNew.getDate() + 10)
+        console.log($scope.MinDateNew2nd)
+        $scope.getJsonResults.ngayBatDau = $scope.NgayBatDau
+        $scope.getJsonResults.ngayKetThuc = $scope.NgayKetThuc
     })
     $http({
         method: 'get',
@@ -398,26 +406,28 @@ myApp.controller("editPrice", function ($filter,$http, $scope, $location) {
     }).then(function (s) {
         $scope.ProductCatetory = s.data;
         console.log(s.data)
+        
     })
-    $scope.editbd = function (s) {
-        $scope.getJsonResults.ngayBatDau =s.ngaybd
-    }
-    $scope.editkt = function (s) {
-        $scope.getJsonResults.ngayKetThuc = s.ngaykt
-    }
     
     $scope.Edit = function () {
+        debugger
+        if ($scope.getJsonResults.ngayBatDau === undefined && $scope.getJsonResults.ngayKetThuc ) {
+            
+            toastr.error('Thời gian sử dụng giá sản phẩm đã tồn tại trong cơ sở dữ liệu \nVui lòng chọn ngày khác', 'Lỗi!', { timeOut: 5000 })
+        }
+        else {
 
-        
-        console.log($filter('filterdate')($scope.getJsonResults.ngayBatDau, 'dd/MM/yyyy'))
-        console.log($filter('filterdate')($scope.getJsonResults.ngayKetThuc, 'dd/MM/yyyy'))
-        //$scope.getJsonResults.ngayBatDau = $filter('filterdate')($scope.getJsonResults.ngayBatDau, 'dd/MM/yyyy')
-        //$scope.getJsonResults.ngayKetThuc = $filter('filterdate')($scope.getJsonResults.ngayKetThuc, 'dd/MM/yyyy')
-        console.log($scope.getJsonResults)
-        $http.post('/Admin/EditPrice', $scope.getJsonResults).then(function () {
-            toastr.success('Sửa thông tín thành công', 'Success Alert', { timeOut: 5000 })
-        })
+            $http.post('/Admin/EditPrice', $scope.getJsonResults).then(function () {
+                toastr.success('Sửa thông tín thành công', 'Thành công!', { timeOut: 5000 })
+            })
+        }
 
+        }
+    function ConvertDate(str) {
+        var date = new Date(str),
+            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+            day = ("0" + date.getDate()).slice(-2);
+        return [date.getFullYear(), mnth, day ].join("-");
     }
 }).filter("filterdate", function () {
     var re = /\/Date\(([0-9]*)\)\//;

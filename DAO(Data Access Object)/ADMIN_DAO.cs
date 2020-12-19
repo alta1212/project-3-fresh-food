@@ -49,7 +49,7 @@ namespace DAO_Data_Access_Object_
                 new SqlParameter("@giaBan",SqlDbType.Int),
                 new SqlParameter("@ngayApDung",SqlDbType.DateTime),
                 new SqlParameter("@ngayKetThuc",SqlDbType.DateTime),
-               
+
              };
             parm[0].Value = pr.maGiaBan;
             parm[1].Value = pr.maSanPham;
@@ -57,7 +57,7 @@ namespace DAO_Data_Access_Object_
             parm[3].Value = DateTime.Parse(pr.ngayBatDau.ToString());
             parm[4].Value = DateTime.Parse(pr.ngayKetThuc.ToString());
 
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "EdirPrice", parm);
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "EditPrice", parm);
         }
 
         public object getInfoPrice(string magia)
