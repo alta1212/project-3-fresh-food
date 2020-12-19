@@ -18,7 +18,7 @@ namespace DAO_Data_Access_Object_
 
      //   public static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
 
-        public static readonly string ConnectionString = @"Server=tcp:tk16-1.dataThe conversion of a nvarchar data type to a datetime data type resulted in an out-of-range value.'base.windows.net,1433;Initial Catalog=SHOPFRESHFOOD;Persist Security Info=False;User ID=admintk16;Password=Anhlatuananh1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        public static readonly string ConnectionString = @"Server=tcp:tk16-1.database.windows.net,1433;Initial Catalog=SHOPFRESHFOOD;Persist Security Info=False;User ID=admintk16;Password=Anhlatuananh1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public static int ExecuteNonQuery(string connectionString, CommandType cmdType, string cmdText, params SqlParameter[] commandParameters)
         {
 
