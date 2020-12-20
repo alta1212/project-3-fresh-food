@@ -74,11 +74,11 @@ myApp.controller('managerProduct', function ($scope, $location, $window, $http) 
 myApp.controller('managerProductType', function ($scope, $http) {
 
     $scope.deleteProductType = function (e) {
-            data = {
-                key:e
-            }
-            $http.post('/LoaiSanPhamAdmin/deleteLsp',data)
+        data = {
+            key: e
         }
+        $http.post('/LoaiSanPhamAdmin/deleteLsp', data)
+    }
 
     $http({
         method: 'get',
@@ -106,7 +106,7 @@ myApp.controller('loginAdmin', function ($location, $scope, $http, $window) {
         }).then(function (bool) {
             if (bool.data.length != 0) {
                 console.log(bool)
-                
+
                 localStorage.setItem("email", $scope.admin.email)
                 localStorage.setItem("matkhau", $scope.admin.matkhau)
                 toastr.success('Đăng nhập thành công', 'Thành công!', { timeOut: 5000 })
@@ -139,7 +139,7 @@ myApp.controller('adminIndex', function ($scope, $http) {//thống kê trên tra
 
 
 
-myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
+myApp.controller("accAdminNav", function ($rootScope, $scope, $http, $window) {
 
     if (localStorage.getItem("email") != null && localStorage.getItem("matkhau") != null) {
         var i4 = {
@@ -157,15 +157,15 @@ myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
                 $rootScope.manv = call.data[0].manhanvien;
                 $scope.anh = localStorage.getItem("hinhanh");
                 $scope.ten = localStorage.getItem("ten");
-                $scope.role = call.data[0].maloainhanvien ;
+                $scope.role = call.data[0].maloainhanvien;
 
                 console.log($scope.role)
-               
+
             }
             else {
-               
+
                 localStorage.clear();
-                $window.location.href = '/Admin/login#!?next='+window.location.href;
+                $window.location.href = '/Admin/login#!?next=' + window.location.href;
             }
         })
 
@@ -175,12 +175,12 @@ myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
         $window.location.href = '/Admin/login#!?next=' + window.location.href;
     }
     $scope.signout = function () {
-      
+
         localStorage.clear();
         $window.location.href = '/Admin/login';
     }
 })
- myApp.controller('addLsp', function ($scope, $http) {
+myApp.controller('addLsp', function ($scope, $http) {
 
     $scope.addlsp = function () {
         var data = {
@@ -188,13 +188,12 @@ myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
             "lsp.TenLoaiSanPham": $scope.tenlsp,
             "lsp.MoTa": $scope.mota
         }
-        
+
         $http({
             method: 'post',
             url: '/Admin/themlsp',
             data: data
-        }).then(function (stringNotification)
-        {
+        }).then(function (stringNotification) {
             if (stringNotification.data == 1)
                 toastr.success('Thêm thành công', 'Thành công!', { timeOut: 5000 })
             else
@@ -206,7 +205,7 @@ myApp.controller("accAdminNav", function ($rootScope,$scope, $http, $window) {
 
 //thêm sản phẩm
 myApp.controller('addPro', function (imgurUpload, $scope, $http, $rootScope) {
-    
+
     $http.get('/LoaiSanPhamAdmin/GetAllProductTypeJS').then(function getListProductCatetory(response) {
         console.log(response.data)
         $scope.ProductCatetory = response.data;
@@ -220,33 +219,33 @@ myApp.controller('addPro', function (imgurUpload, $scope, $http, $rootScope) {
             .upload(image)
             .then(function (a) {
                 $rootScope.link = a.data.link;
+                var data = {
+                    "sp.tensanpham": $scope.tensanpham,
+                    "sp.MaLoaiSanPham": $scope.Tenloaisanpham,
+                    "sp.Hinhanh": $rootScope.link,
+                    "sp.DonViTinh": $scope.DonViTinh,
+                    "sp.MoTa": $scope.MoTa,
+                    "sp.GiaBan": $scope.GiaBan,
+                    "sp.SoLuongNhap": $scope.SoLuongNhap
+                }
+
+                $http({
+                    method: 'POST',
+                    url: '/Admin/themsp',
+                    data: data
+                }).then(function () {
+                    toastr.success('Thêm sản phẩm thành công', 'Thành công!', { timeOut: 5000 }), function () { toastr.error('Có lỗi xảy ra vui long thử lại', 'Lỗi!!', { timeOut: 5000 }) }
+                    document.getElementById("addsp").reset()
+                    document.getElementById("loadSource").src = ""
+                })
             })
-        var data = {
-            "sp.tensanpham": $scope.tensanpham,
-            "sp.MaLoaiSanPham": $scope.Tenloaisanpham,
-            "sp.Hinhanh": $rootScope.link,
-            "sp.DonViTinh": $scope.DonViTinh,
-            "sp.MoTa": $scope.MoTa,
-            "sp.GiaBan": $scope.GiaBan,
-            "sp.SoLuongNhap": $scope.SoLuongNhap
-        }
-        
-        $http({
-            method: 'POST',
-            url: '/Admin/themsp',
-            data: data
-        }).then(function () {
-            toastr.success('Thêm sản phẩm thành công', 'Thành công!', { timeOut: 5000 }), function () { toastr.error('Có lỗi xảy ra vui long thử lại', 'Lỗi!!', { timeOut: 5000 }) }
-            document.getElementById("addsp").reset()
-            document.getElementById("loadSource").src = ""
-        })
-      
+
     }
-  
+
 });
 
 //lấy về danh sách order
-myApp.controller('managerOrder', function ($rootScope,$scope, $http) {
+myApp.controller('managerOrder', function ($rootScope, $scope, $http) {
     $scope.size = 10;
 
     getoder($http, $scope.size, $scope)
@@ -259,7 +258,7 @@ myApp.controller('managerOrder', function ($rootScope,$scope, $http) {
             maorder: e,
             manv: $rootScope.manv
         }
-      
+
         $http.post('/Admin/confirmorder', data).then(function (s) { console.log(s) })
         getoder($http, $scope.size, $scope)
         toastr.success('Xác nhận đơn hàng thành công', 'Thành công!!', { timeOut: 5000 })
@@ -279,7 +278,7 @@ myApp.controller('managerOrder', function ($rootScope,$scope, $http) {
 
 
 
-myApp.controller('Profile', function ($scope,$http) {
+myApp.controller('Profile', function ($scope, $http) {
     var i4 = {
         email: localStorage.getItem("email"),
         matkhau: localStorage.getItem("matkhau"),
@@ -305,29 +304,39 @@ myApp.controller('Profile', function ($scope,$http) {
 myApp.controller('addUser', function ($rootScope, $scope, $http, imgurUpload) {
     $http.get('/Admin/getAdminType').then(function (e) {
         $scope.AdminType = e.data;
+        $scope.nv = {};
+        console.log(e.data)
+        $scope.max = new Date().toJSON().slice(0, 10)
+        $scope.add = function () {
+            $rootScope.link = "123456";
+            console.log($rootScope.link)
+            console.log($scope.nv)
+            var image = document.getElementById('file').files[0];
+            var clientId = "5c31a53dda3c8e0";
+            imgurUpload.setClientId(clientId);
+            imgurUpload
+                .upload(image)
+                .then(function (a) {
+                    $scope.nv.hinhanh = a.data.link;
+                    console.log(a)
+                    console.log($scope.nv.hinhanh)
+                    $http.post('/Admin/add_NhanVien', $scope.nv).then(
+                        function () {
+                            toastr.success('Thêm thành thành công', 'Thành công!', { timeOut: 5000 })
+
+                            document.getElementById("info-user").reset()
+                        },
+                        function (e, q) {
+                            toastr.error('Xem lại thông tin người dùng - Vui lòng điền tất cả thông tin', 'Lỗi!!', { timeOut: 5000 })
+                        })
+                    console.log($scope.nv.hinhanh)
+                })
+
+
+        }
     })
-   
-    $scope.max = new Date().toJSON().slice(0, 10)
-    $scope.add = function () {
-        var image = document.getElementById('file').files[0];
 
-        var clientId = "5c31a53dda3c8e0";
-        imgurUpload.setClientId(clientId);
-        imgurUpload
-            .upload(image)
-            .then(function (a) {
-                $rootScope.link = a.data.link;
-            })
 
-        console.log($scope.nv)
-        $http.post('/Admin/add_NhanVien', $scope.nv).then(
-            function () {
-                
-            },
-            function (e, q) {
-            console.log(e)
-        })
-    }
 })
 
 
@@ -341,12 +350,12 @@ myApp.controller('editPro', function (imgurUpload, $scope, $http, $rootScope, $l
         console.log(s)
         $scope.info = s.data[0];
     })
-    
+
     $scope.edit = function () {
         $scope.info;
         $http.post('/SanPhamAdmin/EditProduct_', $scope.info).then(function (s) { console.log(s) })
     }
-    }
+}
 )
 
 
@@ -381,25 +390,25 @@ myApp.controller("managerPrice", function ($http, $scope) {
         $scope.getJsonResults = res.data;
         console.log($scope.getJsonResults)
     })
-    $scope.xoa = function (e,date) {
+    $scope.xoa = function (e, date) {
         if (date === '/Date(-62135596800000)/') {
             toastr.error('Không thể xoá giá mặc định', 'Lỗi!!', { timeOut: 5000 })
-           
+
         }
         else {
             var data = {
-                "ma":e
+                "ma": e
             }
-            $http.post("/Admin/deltePrice",data).then(function () {
+            $http.post("/Admin/deltePrice", data).then(function () {
                 toastr.success('Xoá thông tin thành công', 'Thành công!', { timeOut: 5000 })
                 $http.get('/Admin/getPrice').then(function (res) {
                     $scope.getJsonResults = res.data;
                     console.log($scope.getJsonResults)
                 })
             })
-            
+
         }
-    }   
+    }
 }).filter("filterdate", function () {
     var re = /\/Date\(([0-9]*)\)\//;
     return function (x) {
@@ -409,9 +418,9 @@ myApp.controller("managerPrice", function ($http, $scope) {
     };
 });
 
-myApp.controller("editPrice", function ($filter,$http, $scope, $location) {
+myApp.controller("editPrice", function ($filter, $http, $scope, $location) {
     var key = $location.search().magia
-    $http.get('/Admin/getInfoPrice?magia='+key).then(function (res) {
+    $http.get('/Admin/getInfoPrice?magia=' + key).then(function (res) {
         $scope.getJsonResults = res.data[0];
         console.log($scope.getJsonResults)
         $scope.NgayBatDau = new Date(ConvertDate($filter('filterdate')($scope.getJsonResults.ngayBatDau, 'dd/mm/yyyy')))
@@ -423,12 +432,12 @@ myApp.controller("editPrice", function ($filter,$http, $scope, $location) {
         $scope.getJsonResults.ngayBatDau = $scope.NgayBatDau
         $scope.getJsonResults.ngayKetThuc = $scope.NgayKetThuc
     })
-   
-    
+
+
     $scope.Edit = function () {
-       
-        if ($scope.getJsonResults.ngayBatDau === undefined && $scope.getJsonResults.ngayKetThuc ) {
-            
+
+        if ($scope.getJsonResults.ngayBatDau === undefined && $scope.getJsonResults.ngayKetThuc) {
+
             toastr.error('Thời gian sử dụng giá sản phẩm đã tồn tại trong cơ sở dữ liệu \nVui lòng chọn ngày khác', 'Lỗi!', { timeOut: 5000 })
         }
         else {
@@ -438,12 +447,12 @@ myApp.controller("editPrice", function ($filter,$http, $scope, $location) {
             })
         }
 
-        }
+    }
     function ConvertDate(str) {
         var date = new Date(str),
             mnth = ("0" + (date.getMonth() + 1)).slice(-2),
             day = ("0" + date.getDate()).slice(-2);
-        return [date.getFullYear(), mnth, day ].join("-");
+        return [date.getFullYear(), mnth, day].join("-");
     }
 }).filter("filterdate", function () {
     var re = /\/Date\(([0-9]*)\)\//;
@@ -464,7 +473,7 @@ myApp.controller("addPrice", function ($filter, $http, $scope, $location) {
         console.log(s.data)
 
     })
-   
+
     $scope.MinDateBatDau = new Date().toJSON().slice(0, 10)
     $scope.MinDateKetThuc = new Date().addDays(1).toJSON().slice(0, 10)
     console.log($scope.MinDateKetThuc)
@@ -472,8 +481,8 @@ myApp.controller("addPrice", function ($filter, $http, $scope, $location) {
         console.log($scope.getJsonResults);
         $http.post('/Admin/add_Price', $scope.getJsonResults).then(function () {
             toastr.success('Thêm giá thành công', 'Thành công!', { timeOut: 5000 })
-        },function () {
-                toastr.error('Thêm giá thất bại vui lòng điền đẩy đủ thông tin', 'Lỗi', { timeOut: 5000 })
+        }, function () {
+            toastr.error('Thêm giá thất bại vui lòng điền đẩy đủ thông tin', 'Lỗi', { timeOut: 5000 })
         })
     }
 })

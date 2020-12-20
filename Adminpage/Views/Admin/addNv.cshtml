@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<div ng-controller="addUser"   ng-switch="role == 'LNV001'" id="content-page" class="content-page">
+<div ng-controller="addUser"   ng-switch="role == 'LNV001'" ng-model="nv" id="content-page" class="content-page">
   <h1 ng-switch-when="false">Bạn Không Có Quyền Truy Cập Trang Này</h1>
     <div ng-switch-when="true" class="container-fluid">
         <div class="row">
@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="iq-card-body">
-                        <form>
+                        <form >
                             <div class="form-group">
                                 <div class="add-img-user profile-img-edit">
                                     <img class="profile-pic img-fluid" id="loadSource" style="height: 150px; width: 200px;" src="https://picsum.photos/360/360" alt="profile-pic">
@@ -31,18 +31,17 @@
                                         <a href="javascript:void();">.jpg</a>
                                         <a href="javascript:void();">.png</a>
                                         <a href="javascript:void();">.jpeg</a>
-                                        <span>allowed</span>
+                                        <span>Allowed</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>User Role:</label>
-                                <select ng-model="nv.quyenhan" class="form-control" required id="selectuserrole">
+                                <select ng-model="nv.maloainhanvien" class="form-control" required id="selectuserrole">
                                     <option ng-repeat="i in AdminType" value="{{i.maLoaiNhanVien}}">{{i.tenLoaiNhanVien}}</option>
                                    
                                 </select>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -56,7 +55,7 @@
                     </div>
                     <div class="iq-card-body">
                         <div class="new-user-info">
-                            <form>
+                            <form id="info-user">
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="fname">Tên Nhân viên:</label>
@@ -79,7 +78,7 @@
 
                                     <div class="form-group col-md-6">
                                         <label for="mobno">Số Điện Thoại:</label>
-                                        <input type="text" ng-model="nv.sodienthoai" required class="form-control" id="mobno" placeholder="Số Điện Thoại">
+                                        <input type="text" ng-model="nv.sodienthoai" required class="form-control" id="mobno" placeholder="Số Điện Thoại" maxlength="10">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="exampleInputdate1">Ngày Sinh</label>
@@ -91,7 +90,7 @@
                                         <input ng-model="nv.email" required type="email" class="form-control" id="email" placeholder="Email">
                                     </div>
                                 </div>
-                                <button ng-click="add()" type="submit" class="btn btn-primary">Thêm Nhân Viên</button>
+                                <button ng-click="add()" type="submit" formnovalidate class="btn btn-primary">Thêm Nhân Viên</button>
                             </form>
                         </div>
                     </div>

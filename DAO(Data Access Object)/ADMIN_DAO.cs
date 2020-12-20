@@ -25,11 +25,10 @@ namespace DAO_Data_Access_Object_
                 ad.ngaysinh = DateTime.Parse(dr[4].ToString());
                 ad.ngayvaolam = DateTime.Parse(dr[5].ToString());
                 ad.diachi = dr[6].ToString();
-                ad.quyenhan = dr[7].ToString();
-                ad.sodienthoai = dr[8].ToString();
-                ad.email = dr[9].ToString();
-                ad.matkhau = dr[10].ToString();
-                ad.hinhanh = dr[11].ToString();
+                ad.sodienthoai = dr[7].ToString();
+                ad.email = dr[8].ToString();
+                ad.matkhau = dr[9].ToString();
+                ad.hinhanh = dr[10].ToString();
                 li.Add(ad);
             }
             return li;
@@ -54,7 +53,28 @@ namespace DAO_Data_Access_Object_
 
         public void add_NhanVien(ADMIN nv)
         {
-            throw new NotImplementedException();
+            SqlParameter[] parm = new SqlParameter[]
+             {
+
+                new SqlParameter("@TenNhanVien",SqlDbType.NVarChar,100),
+                new SqlParameter("@GioiTinh",SqlDbType.NVarChar,5),
+                new SqlParameter("@NgaySinh",SqlDbType.Date),
+                new SqlParameter("@DiaChi",SqlDbType.NVarChar,200),
+                new SqlParameter("@Email",SqlDbType.NVarChar,100),
+                new SqlParameter("@MaLoaiNhanVien",SqlDbType.NVarChar,20),
+                new SqlParameter("@HinhAnh",SqlDbType.NVarChar,50),
+                new SqlParameter("@SDT",SqlDbType.NVarChar,14),
+             };
+            parm[0].Value = nv.tennhanvien;
+            parm[1].Value = nv.gioitinh;
+            parm[2].Value = DateTime.Parse(nv.ngaysinh.ToString());
+            parm[3].Value = nv.diachi;
+            parm[4].Value = nv.email;
+            parm[5].Value = nv.maloainhanvien;
+            parm[6].Value = nv.hinhanh;
+            parm[7].Value = nv.sodienthoai;
+
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Add_User", parm);
         }
 
         public void addPrice(Price_DTO pr)
