@@ -20,5 +20,8 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         object getInfoPrice(string magia);
         void editPrice(Price_DTO getJsonResults);
         void deltePrice(string ma);
+        void addPrice(Price_DTO getJsonResults);
+        void add_NhanVien(ADMIN nv);
+        object adType();
     }
 }

@@ -19,6 +19,21 @@ namespace BLL_Business_Logic_Layer__
             return ad.add(adm);
         }
 
+        public void addPrice(Price_DTO getJsonResults)
+        {
+            
+        }
+
+        public void add_NhanVien(ADMIN nv)
+        {
+            ad.add_NhanVien(nv);      
+        }
+
+        public object adType()
+        {
+            return ad.adType();
+        }
+
         public IList<dashBroad> dashboard()
         {
             return ad.dash();

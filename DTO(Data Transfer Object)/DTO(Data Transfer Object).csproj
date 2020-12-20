@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ADMIN.cs" />
+    <Compile Include="AdminType.cs" />
     <Compile Include="Bill_DTO.cs" />
     <Compile Include="Cart_DTO.cs" />
     <Compile Include="dashBroad.cs" />

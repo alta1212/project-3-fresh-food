@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<div ng-controller="addUser"   ng-switch="role == 'Admin'" id="content-page" class="content-page">
+<div ng-controller="addUser"   ng-switch="role == 'LNV001'" id="content-page" class="content-page">
   <h1 ng-switch-when="false">Bạn Không Có Quyền Truy Cập Trang Này</h1>
     <div ng-switch-when="true" class="container-fluid">
         <div class="row">
@@ -19,10 +19,10 @@
                         <form>
                             <div class="form-group">
                                 <div class="add-img-user profile-img-edit">
-                                    <img class="profile-pic img-fluid" style="height: 150px; width: 200px;" src="https://picsum.photos/360/360" alt="profile-pic">
+                                    <img class="profile-pic img-fluid" id="loadSource" style="height: 150px; width: 200px;" src="https://picsum.photos/360/360" alt="profile-pic">
                                     <div class="p-image">
-                                        <a href="javascript:void();" class="upload-button btn iq-bg-primary">File Upload</a>
-                                        <input class="file-upload" type="file" accept="image/*">
+                                        <label href="javascript:void();" for="file" class="upload-button btn iq-bg-primary">File Upload</label>
+                                        <input class="file-upload" id="file" required onchange="ChangeFileImageForProduct(this)" type="file" accept="image/*">
                                     </div>
                                 </div>
                                 <div class="img-extension mt-3">
@@ -37,10 +37,9 @@
                             </div>
                             <div class="form-group">
                                 <label>User Role:</label>
-                                <select ng-model="role" class="form-control" id="selectuserrole">
-                                    <option>Select</option>
-                                    <option>Admin</option>
-                                    <option>Nhân Viên</option>
+                                <select ng-model="nv.quyenhan" class="form-control" required id="selectuserrole">
+                                    <option ng-repeat="i in AdminType" value="{{i.maLoaiNhanVien}}">{{i.tenLoaiNhanVien}}</option>
+                                   
                                 </select>
                             </div>
 
@@ -61,38 +60,38 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="fname">Tên Nhân viên:</label>
-                                        <input type="text" class="form-control" id="fname" placeholder="Tên Nhân Viên">
+                                        <input ng-model="nv.tennhanvien" required type="text" class="form-control" id="fname" placeholder="Tên Nhân Viên">
                                     </div>
                                     <div class="form-group col-md-6">
 
 
                                         <label>Giới Tính:</label>
-                                        <select ng-model="gioitinh" class="form-control" id="selectuserrole">
-                                            <option>Select</option>
-                                            <option>Nam</option>
-                                            <option>Nữ</option>
+                                        <select ng-model="nv.gioitinh" required class="form-control" id="selectuserrole">
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nữ">Nữ</option>
                                         </select>
 
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="add1">Địa Chỉ:</label>
-                                        <input type="text" class="form-control" id="add1" placeholder="Địa chỉ">
+                                        <input type="text" ng-model="nv.diachi" required class="form-control" id="add1" placeholder="Địa chỉ">
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="mobno">Số Điện Thoại:</label>
-                                        <input type="text" class="form-control" id="mobno" placeholder="Số Điện Thoại">
+                                        <input type="text" ng-model="nv.sodienthoai" required class="form-control" id="mobno" placeholder="Số Điện Thoại">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="altconno">Ngày Sinh:</label>
-                                        <input type="text" class="form-control" id="mobno" placeholder="dd/mm/yyyy">
+                                        <label for="exampleInputdate1">Ngày Sinh</label>
+                                        <input required max="{{max}}" type="date" ng-model="nv.ngaysinh"  class="form-control" id="exampleInputdate1">
                                     </div>
+                                    
                                     <div class="form-group col-md-6">
                                         <label for="email">Email:</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Email">
+                                        <input ng-model="nv.email" required type="email" class="form-control" id="email" placeholder="Email">
                                     </div>
                                 </div>
-                                <button ng-click="add()" type="submit" class="btn btn-primary">Add New User</button>
+                                <button ng-click="add()" type="submit" class="btn btn-primary">Thêm Nhân Viên</button>
                             </form>
                         </div>
                     </div>

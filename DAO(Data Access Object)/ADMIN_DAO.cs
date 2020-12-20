@@ -35,6 +35,48 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
+        public object adType()
+        {
+            DataTable dt = new DataTable();
+            string cmdtext = string.Format("select * from LOAI_NHAN_VIEN_");
+            dt = DataAccessHelper.log(cmdtext);
+            List<AdminType> li = new List<AdminType>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                AdminType ad = new AdminType();
+                ad.maLoaiNhanVien = dr[0].ToString();
+                ad.tenLoaiNhanVien = dr[1].ToString();
+                ad.mota = dr[2].ToString();
+                li.Add(ad);
+            }
+            return li;
+        }
+
+        public void add_NhanVien(ADMIN nv)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void addPrice(Price_DTO pr)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+             {
+
+                new SqlParameter("@maSanPham",SqlDbType.NVarChar,50),
+                new SqlParameter("@giaBan",SqlDbType.Int),
+                new SqlParameter("@ngayApDung",SqlDbType.DateTime),
+                new SqlParameter("@ngayKetThuc",SqlDbType.DateTime),
+
+             };
+      
+            parm[0].Value = pr.maSanPham;
+            parm[1].Value = pr.gia;
+            parm[2].Value = DateTime.Parse(pr.ngayBatDau.ToString());
+            parm[3].Value = DateTime.Parse(pr.ngayKetThuc.ToString());
+
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "addPrice", parm);
+        }
+
         public void deltePrice(string ma)
         {
             DataAccessHelper.exec(string.Format("delete gia_ban where magiaban='{0}'", ma));

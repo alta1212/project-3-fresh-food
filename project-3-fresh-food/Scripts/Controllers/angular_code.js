@@ -46,7 +46,7 @@ app.controller('dangKy', function ($http, $scope) {
 })
 
 // đăng nhập
-app.controller("login", function ($scope, $http, $window) {
+app.controller("login", function ($scope, $http, $window, $location) {
 
     $scope.btntext = "Đăng Nhập"; //giá trị nút đăng nhập
     $scope.DangNhap = function () { //được gọi khi bấm nút đăng nhập
@@ -57,6 +57,7 @@ app.controller("login", function ($scope, $http, $window) {
             data: $scope.KHACH_HANG //dữ liệu truyền vào user là tên biến đặt bên input
         }).then(function (bool) { //gọi  khi thành công và lấy giá trị hàm trên trả vê
             console.log(bool)
+            var next = $location.search().next;
             try {
                 if (bool.data[0].Active == "2") { //kiểm tra dữ liệu đăng nhập trả về nếu là 2 thì đã hoàn tát đăng ký
                     $scope.btntext = "Thành công!";
@@ -64,7 +65,11 @@ app.controller("login", function ($scope, $http, $window) {
                     //$cookies.put('matkhau', $scope.KHACH_HANG.matkhau);
                     localStorage.setItem('taikhoan', $scope.KHACH_HANG.taikhoan);
                     localStorage.setItem('matkhau', $scope.KHACH_HANG.matkhau);
-                    $window.location.href = '/Index/Index';
+                    if (next === undefined)
+                        $window.location.href = '/Index/Index';
+                    else
+                        $window.location.href = next;
+                    
                 } else if (bool.data[0].Active == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
                     $scope.btntext = "Thành công!";
                     //$cookies.put('taikhoan', $scope.KHACH_HANG.taikhoan); //lưu tên tài khoản và mật khẩu vào cookie để tự động đăng nhập lần sau
@@ -452,7 +457,7 @@ app.controller("searchByName", function ($location, $scope, $http) {
 })
 
 //Hiện thị sản phẩm ngẫu nhiễn của cửa hàng
-app.controller("featuredproducts", function ($rootScope, $scope, $http, $window) {
+app.controller("featuredproducts", function ($rootScope, $scope, $http, $location, $window) {
     $http({
         method: 'GET',
         url: '/Index/spHighlights',
@@ -462,12 +467,12 @@ app.controller("featuredproducts", function ($rootScope, $scope, $http, $window)
         console.log(response.data[0]);
     })
     $scope.AddToCart = function (msp, giaban) {
-        addcart(msp, giaban,$http);
+        addcart($location,msp, giaban,$http);
     }
 })
 
 // Hiển thị sản phẩm bấn chạy
-app.controller("getBestSellProduct", function ($scope, $http) {
+app.controller("getBestSellProduct", function ($scope, $http, $location) {
     $http({
         method: 'GET',
         url: '/Index/getBestSell',
@@ -477,10 +482,10 @@ app.controller("getBestSellProduct", function ($scope, $http) {
         console.log(response.data[0]);
 
     })
-    $scope.AddToCart = function (msp, giaban) { addcart(msp, giaban,$http);}
+    $scope.AddToCart = function (msp, giaban) { addcart($location,msp, giaban,$http);}
 })
 // Hiện thị sản phẩm được giảm giá
-app.controller("getProductDiscount", function ($scope, $http) {
+app.controller("getProductDiscount", function ($scope, $http, $location) {
     $http({
         method: 'GET',
         url: '/Product/GetProductDiscount'
@@ -489,7 +494,7 @@ app.controller("getProductDiscount", function ($scope, $http) {
         console.log($scope.bestSellProduct);
         console.log(response.data[0]);
     })
-    $scope.AddToCart = function (msp, giaban) { addcart(msp, giaban,$http); }
+    $scope.AddToCart = function (msp, giaban) { addcart($location,msp, giaban,$http); }
 })
 // Hiện thị menu trái của cửa hàng
 app.controller("navmenu", function ($scope, $http, $window) {
@@ -602,7 +607,7 @@ app.controller("shop", function ($scope, $location, $http) {
         }
 
     }
-    $scope.AddToCart = function (msp, giaban) { addcart(msp, giaban,$http); }
+    $scope.AddToCart = function (msp, giaban) { addcart($location,msp, giaban,$http); }
 
 })
 
@@ -627,7 +632,7 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
             $scope.i4 = response.data[0];
             console.log($scope.i4)
         })//lấy về i4 sản phẩm
-        $scope.AddToCart = function (msp, giaban, soluong) { addcart(msp, giaban,$http); }
+        $scope.AddToCart = function (msp, giaban, soluong) { addcart($location,msp, giaban,$http); }
         $http({
             method: 'GET',
             url: '/Product/getFb?masanpham=' + masanpham,
@@ -932,7 +937,7 @@ app.controller('daylyDeal', function ($scope, $http) {
 });
 
 
-function addcart(msp, giaban,$http) {
+function addcart($location,msp, giaban,$http) {
     var data = {
 
         taikhoan: localStorage.getItem('taikhoan'),
@@ -944,9 +949,10 @@ function addcart(msp, giaban,$http) {
         idGg: localStorage.getItem('idGg'),
 
     };
+    
     //chưa đăng nhập
     if (data.taikhoan === null && data.matkhau === null && data.idFb === null && data.idGg === null) {
-        window.location.href = '/Account/Login';
+        window.location.href = '/Account/Login#!?next=' + window.location.href;
     }
     //trường hợp đăng nhập thường
     else if (data.idFb === null && data.idGg === null) {

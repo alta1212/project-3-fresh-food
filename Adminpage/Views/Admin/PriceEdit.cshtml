@@ -19,7 +19,7 @@
                             <div ng-switch-when="false">
                                 <label for="exampleInputdate"><a style="color:red">*</a>Giá Mặc Định</label><br>
                             </div>
-                            <div ng-switch-when="false">
+                            <div >
                                 <label for="exampleInputdate"><a style="color:red">*</a>Tên Sản Phẩm : {{getJsonResults.tenSanPham}}</label><br>
                             </div>
                             <div class="form-group">
@@ -37,13 +37,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group" ng-switch-when="true">
-                                <label>Tên Sản Phẩm:</label>
-                                <select ng-model="getJsonResults.tenSanPham" required class="form-control" id="exampleFormControlSelect1">
-
-                                    <option value="{{getJsonResults.tenSanPham}}" ng-repeat="i in ProductCatetory"  >{{i.tensanpham}}</option>
-                                </select>
-                            </div>
+                           
                             <div class="form-group">
                                 <label>Giá bán :</label>
                                 <input ng-model="getJsonResults.gia" required type="number" min="10000" class="form-control">

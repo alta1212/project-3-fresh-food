@@ -29,6 +29,7 @@ namespace AdminPage.Controllers
         {
             return View();
         }
+
         public int addNhanVien(ADMIN adm)
         {
             return ad.addnv(adm);
@@ -83,6 +84,10 @@ namespace AdminPage.Controllers
         {
             return View();
         }
+        public ActionResult AddPrice()
+        {
+            return View();
+        }
         public void EditPrice(Price_DTO getJsonResults)
         {
             ad.editPrice(getJsonResults);
@@ -99,6 +104,17 @@ namespace AdminPage.Controllers
         {
             return Json(ad.getInfoPrice(magia), JsonRequestBehavior.AllowGet);
         }
-        
+       public void add_Price(Price_DTO getJsonResults)
+       {
+            ad.addPrice(getJsonResults);
+       }
+       public void add_NhanVien(ADMIN nv)
+       {
+           ad.add_NhanVien(nv);
+       }
+        public JsonResult getAdminType()
+        {
+            return Json(ad.adType(), JsonRequestBehavior.AllowGet);
+        }
     }
 }
