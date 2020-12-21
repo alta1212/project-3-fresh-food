@@ -34,6 +34,57 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
+        public void ComfimforgetPass(string confirmationCode, string pass)
+        {
+            DataAccessHelper.exec(string.Format("update NHAN_VIEN_ set matKhau='{0}' where confirmationCode='{1}'", confirmationCode, pass));
+        }
+
+        public void addConfirmCode(string manv, string confirmationCode)
+        {
+            DataAccessHelper.exec(string.Format("update NHAN_VIEN_ set confirmationCode='{0}' where MaNhanVien='{1}'",confirmationCode,manv));
+        }
+
+        public int changPassWord(ADMIN nv, string newPass)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+               {
+
+                new SqlParameter("@maNhanVien",SqlDbType.NVarChar,20),
+                new SqlParameter("@matKhauCu",SqlDbType.NVarChar,100),
+                new SqlParameter("@matKhau",SqlDbType.NVarChar,100)
+               };
+            parm[0].Value = nv.manhanvien;
+            parm[1].Value = nv.matkhau;
+            parm[2].Value = newPass;
+            return int.Parse(DataAccessHelper.parnWithValue("@rowEffect", DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "ChangePass", parm).ToString());
+        }
+
+        public void editProFile(ADMIN nv)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+            {
+
+                new SqlParameter("@maNhanVien",SqlDbType.NVarChar,20),
+                new SqlParameter("@tenNhanVien",SqlDbType.NVarChar,100),
+                new SqlParameter("@gioiTinh",SqlDbType.NVarChar,5),
+                new SqlParameter("@ngaySinh",SqlDbType.Date),
+                new SqlParameter("@diaChi",SqlDbType.NVarChar,200),
+                new SqlParameter("@SodienThoai",SqlDbType.NVarChar,14),
+                new SqlParameter("@Email",SqlDbType.NVarChar,50),
+                new SqlParameter("@HinhAnh",SqlDbType.NVarChar,50),
+            };
+            parm[0].Value = nv.manhanvien;
+            parm[1].Value = nv.tennhanvien;
+            parm[2].Value = nv.gioitinh;
+            parm[3].Value = DateTime.Parse(nv.ngaysinh.ToString());
+            parm[4].Value = nv.diachi;
+            parm[6].Value = nv.email;
+            parm[7].Value = nv.hinhanh;
+            parm[5].Value = nv.sodienthoai;
+
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Edit_Profile", parm);
+        }
+
         public object adType()
         {
             DataTable dt = new DataTable();

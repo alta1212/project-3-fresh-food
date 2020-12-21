@@ -47,6 +47,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -395,6 +398,10 @@
     <ProjectReference Include="..\project-3-fresh-food\project-3-fresh-food.csproj">
       <Project>{4b3e9a9a-bd81-46fd-843f-4822766c2627}</Project>
       <Name>project-3-fresh-food</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\tool\tool.csproj">
+      <Project>{05b19f10-c691-4223-a15a-ba3a3117f9fd}</Project>
+      <Name>tool</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

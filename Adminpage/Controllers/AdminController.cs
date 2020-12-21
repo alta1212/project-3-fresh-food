@@ -2,18 +2,15 @@
 using BLL_Business_Logic_Layer__.ServiceInterface;
 using DTO_Data_Transfer_Object_;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using project_3_fresh_food;
-
+using tool;
 namespace AdminPage.Controllers
 {
     public class AdminController : Controller
     {
         IAdmin ad = new Admin();
         IProduct sp = new SAN_PHAM_BLL();
+        Class1 to = new Class1();
         // GET: accountsAdmin
         public ActionResult login()
         {
@@ -46,6 +43,15 @@ namespace AdminPage.Controllers
         {
 
             return View();
+        }
+        public ActionResult editprofile()
+        {
+
+            return View();
+        }
+        public void Edit_Profile(ADMIN nv)
+        {
+            ad.editProfile(nv);
         }
         public int themlsp(LOAI_SAN_PHAM lsp)
         {
@@ -115,6 +121,33 @@ namespace AdminPage.Controllers
         public JsonResult getAdminType()
         {
             return Json(ad.adType(), JsonRequestBehavior.AllowGet);
+        }
+        public int changPassWord(ADMIN nv,string newPass)
+        {
+            return ad.changPassWord(nv,newPass);
+        }
+        public ActionResult ComfimforgetPass(string confirmationCode,string newPass)
+        {
+            ad.ComfimforgetPass(confirmationCode, newPass);
+            return View("login");
+        }
+        public void forgetPass(string mail,string manv)
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[10];
+            var confirmationCode = new char[10];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+                confirmationCode[i] = chars[random.Next(chars.Length)];
+            }
+
+            var newpass = new String(stringChars);
+            var confirmCode = new String(stringChars);
+            ad.addConfirmCode(manv,confirmCode);
+            to.forgotPassAdmin(mail,newpass,confirmCode);
         }
     }
 }

@@ -6,6 +6,7 @@ myApp.run(function ($rootScope) {
 
     $rootScope.link = "";
     $rootScope.manv = "";
+    $rootScope.data = {}
 });
 
 myApp.controller('managerProduct', function ($scope, $location, $window, $http) {
@@ -102,13 +103,13 @@ myApp.controller('loginAdmin', function ($location, $scope, $http, $window) {
         $http({
             method: "POST", //method gửi dữ liệu
             url: '/Admin/log', //gọi hàm controller/account/Login
-            data: $scope.admin
+            data: $scope.nv
         }).then(function (bool) {
             if (bool.data.length != 0) {
                 console.log(bool)
 
-                localStorage.setItem("email", $scope.admin.email)
-                localStorage.setItem("matkhau", $scope.admin.matkhau)
+                localStorage.setItem("email", $scope.nv.email)
+                localStorage.setItem("matkhau", $scope.nv.matkhau)
                 toastr.success('Đăng nhập thành công', 'Thành công!', { timeOut: 5000 })
                 if (next === undefined)
                     $window.location.href = '/Admin/Index';
@@ -158,8 +159,8 @@ myApp.controller("accAdminNav", function ($rootScope, $scope, $http, $window) {
                 $scope.anh = localStorage.getItem("hinhanh");
                 $scope.ten = localStorage.getItem("ten");
                 $scope.role = call.data[0].maloainhanvien;
-
-                console.log($scope.role)
+                console.log($rootScope.manv)
+              
 
             }
             else {
@@ -278,7 +279,7 @@ myApp.controller('managerOrder', function ($rootScope, $scope, $http) {
 
 
 
-myApp.controller('Profile', function ($scope, $http) {
+myApp.controller('Profile', function ($scope, $rootScope, $http) {
     var i4 = {
         email: localStorage.getItem("email"),
         matkhau: localStorage.getItem("matkhau"),
@@ -288,9 +289,9 @@ myApp.controller('Profile', function ($scope, $http) {
         url: '/Admin/log',
         data: i4
     }).then(function (res) {
-        $scope.data = res.data[0];
+        $rootScope.data = res.data[0];
 
-        console.log($scope.data)
+        console.log($rootScope.data)
     })
 }).filter("filterdate", function () {
     var re = /\/Date\(([0-9]*)\)\//;
@@ -448,12 +449,7 @@ myApp.controller("editPrice", function ($filter, $http, $scope, $location) {
         }
 
     }
-    function ConvertDate(str) {
-        var date = new Date(str),
-            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-            day = ("0" + date.getDate()).slice(-2);
-        return [date.getFullYear(), mnth, day].join("-");
-    }
+  
 }).filter("filterdate", function () {
     var re = /\/Date\(([0-9]*)\)\//;
     return function (x) {
@@ -497,4 +493,124 @@ Date.prototype.minusDays = function (days) {
     var date = new Date(this.valueOf());
     date.setDate(date.getDate() - days);
     return date;
+}
+
+myApp.controller("editinfo", function ($scope, $http, imgurUpload, $filter, $rootScope) {
+    var i4 = {
+        email: localStorage.getItem("email"),
+        matkhau: localStorage.getItem("matkhau"),
+    }
+    $http({
+        method: "POST",
+        url: '/Admin/log',
+        data: i4
+    }).then(function (s) {
+        console.log(s);
+        $scope.nv = s.data[0]
+        $scope.nv.ngaysinh=  new Date(ConvertDate($filter('filterdate')($scope.nv.ngaysinh, 'dd/mm/yyyy')))
+     
+    })
+    $scope.MinDateNgaysinh = new Date().minusDays(6570).toJSON().slice(0, 10)
+    $scope.editinfo = function () {
+
+        var image = document.getElementById('avtadmin');
+        if (image.files.length !== 0) {
+            var clientId = "5c31a53dda3c8e0";
+            imgurUpload.setClientId(clientId);
+            imgurUpload
+                .upload(image.files[0])
+                .then(function (a) {
+                    $scope.nv.hinhanh = a.data.link
+                    $http.post('/Admin/Edit_Profile', $scope.nv).then(
+                        function () {
+
+                        },
+                        function () {
+                        })
+                }
+            )
+        }
+        else {
+            $http.post('/Admin/Edit_Profile', $scope.nv).then(
+                function () {
+                    toastr.success('Sửa thông tin thành công', 'Thành công!', { timeOut: 5000 })
+                }, 
+                function () {
+                    toastr.error('Sửa thông tin thất bại vui lòng điền đẩy đủ thông tin', 'Lỗi', { timeOut: 5000 })
+
+                }
+            )
+        }
+
+
+        
+    }
+    $scope.changePass = function () {
+        console.log($scope.nv);
+        if ($scope.newPass !== $scope.reNewPass) {
+            toastr.error('Mật khẩu xác nhận không trung khớp', 'Lỗi', { timeOut: 5000 })
+        }
+        else {
+            var i4 = {
+                "nv.matkhau": $scope.matkhau,
+                newPass: $scope.newPass,
+                "nv.manhanvien": $scope.nv.manhanvien
+            }
+            $http.post('/Admin/changPassWord', i4).then(function (f) {
+                if (f.data === "0") {
+                    toastr.error('Mật khẩu cũ không đúng', 'Lỗi', { timeOut: 5000 })
+                }
+                else if ($scope.newPass.length<4) {
+                    toastr.error('Mật khẩu phải dài hơn 4 ký tự', 'Lỗi', { timeOut: 5000 })
+                }
+                else {
+                     toastr.success('Đổi mật khẩu thành công', 'Thành công!', { timeOut: 5000 })
+                     document.getElementById("pass").reset();
+                     localStorage.setItem("matkhau", $scope.newPass)
+                }
+               
+            },
+                function (f) {
+                    console.log(f)
+                    toastr.error('Mật khẩu cũ không đúng', 'Lỗi', { timeOut: 5000 })
+            })
+        }
+    }
+    $scope.forgetpass = function ()
+    {
+        forgetPass($scope.nv.email, $scope, $http)
+       
+    }
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
+
+function forgetPass(mail, $scope, $http) {
+    if (mail === undefined) {
+        toastr.error('Vui lòng nhập mail của bạn ', 'Lỗi', { timeOut: 5000 })
+    }
+    else {
+        var i4 = {
+            mail: mail,
+            manv: $scope.nv.manhanvien
+        }
+        $http.post('/Admin/forgetPass', i4).then(function ()
+        {
+            toastr.success('Chúng tôi đã gửi email và mật khẩu mới cho bạn,vui lòng xác nhận tại mail ' + mail, 'Thành công!', { timeOut: 10000 })
+        })
+        
+    }
+   
+}
+
+function ConvertDate(str) {
+    var date = new Date(str),
+        mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+        day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
 }

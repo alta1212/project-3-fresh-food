@@ -14,6 +14,11 @@ namespace BLL_Business_Logic_Layer__
     {
         ADMIN_DAO ad = new ADMIN_DAO();
 
+        public void addConfirmCode(string manv,string confirmationCode)
+        {
+            ad.addConfirmCode(manv,confirmationCode);
+        }
+
         public int addnv(ADMIN adm)
         {
             return ad.add(adm);
@@ -21,7 +26,7 @@ namespace BLL_Business_Logic_Layer__
 
         public void addPrice(Price_DTO getJsonResults)
         {
-            
+            ad.addPrice(getJsonResults);
         }
 
         public void add_NhanVien(ADMIN nv)
@@ -32,6 +37,16 @@ namespace BLL_Business_Logic_Layer__
         public object adType()
         {
             return ad.adType();
+        }
+
+        public int changPassWord(ADMIN nv,string newPass)
+        {
+            return ad.changPassWord(nv,newPass);
+        }
+
+        public void ComfimforgetPass(string confirmationCode, string newPass)
+        {
+            ad.ComfimforgetPass(confirmationCode, newPass);
         }
 
         public IList<dashBroad> dashboard()
@@ -47,6 +62,11 @@ namespace BLL_Business_Logic_Layer__
         public void editPrice(Price_DTO getJsonResults)
         {
             ad.editPrice(getJsonResults);
+        }
+
+        public void editProfile(ADMIN nv)
+        {
+            ad.editProFile(nv);
         }
 
         public object getInfoPrice(string magia)

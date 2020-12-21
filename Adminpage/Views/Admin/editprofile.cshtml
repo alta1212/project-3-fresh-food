@@ -40,7 +40,7 @@
                             <div class="iq-card">
                                 <div class="iq-card-header d-flex justify-content-between">
                                     <div class="iq-header-title">
-                                        <h4 class="card-title">Personal Information</h4>
+                                        <h4 class="card-title">Thông tin cá nhân</h4>
                                     </div>
                                 </div>
                                 <div class="iq-card-body">
@@ -48,10 +48,10 @@
                                         <div class="form-group row align-items-center">
                                             <div class="col-md-12">
                                                 <div class="profile-img-edit">
-                                                    <img style="height: 150px; width: 200px;" class="profile-pic" src="{{data.hinhanh}}" alt="profile-pic">
+                                                    <img style="height: 150px; width: 200px;" class="profile-pic" src="{{nv.hinhanh}}" alt="profile-pic">
                                                     <div class="p-image">
                                                         <i class="ri-pencil-line upload-button"></i>
-                                                        <input class="file-upload" id="avtadmin" type="file" accept="image/*">
+                                                        <input required class="file-upload" id="avtadmin" type="file" accept="image/*">
                                                     </div>
                                                 </div>
                                             </div>
@@ -59,35 +59,33 @@
                                         <div class=" row align-items-center">
                                             <div class="form-group col-sm-6">
                                                 <label for="fname">Tên :</label>
-                                                <input type="text" class="form-control" ng-model="tennv" id="fname" placeholder="{{data.tennhanvien}}">
+                                                <input required type="text" class="form-control" ng-model="nv.tennhanvien" id="fname">
                                             </div>
                                             <div class="form-group col-sm-6">
                                                 <label for="lname">Email:</label>
-                                                <input  disabled type="text" class="form-control" id="lname" value="{{data.email}}">
+                                                <input required  disabled type="text" class="form-control" id="lname" ng-model="nv.email">
                                             </div>
 
                                             <div class="form-group col-sm-6">
-                                                <label class="d-block">Gender:</label>
+                                                <label class="d-block">Giới Tính:</label>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input ng-model="gioitinh" ng-value="Nam" type="radio" id="customRadio6" name="customRadio1" class="custom-control-input" checked="checked">
-                                                    <label class="custom-control-label" for="customRadio6"> Male </label>
+                                                    <input required  ng-model="nv.gioitinh" value="Nam" type="radio" id="customRadio6" name="customRadio1" class="custom-control-input required" checked="checked">
+                                                    <label class="custom-control-label" for="customRadio6"> Nam </label>
                                                 </div>
                                                 <div class="custom-control custom-radio custom-control-inline">
-                                                    <input ng-model="gioitinh" ng-value="Nu" type="radio" id="customRadio7" name="customRadio1" class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio7"> Female </label>
+                                                    <input required ng-model="nv.gioitinh" value="Nữ" type="radio" id="customRadio7" name="customRadio1" class="custom-control-input required">
+                                                    <label class="custom-control-label" for="customRadio7"> Nữ </label>
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-6">
-                                                <label for="dob">Date Of Birth:</label>
-                                                <input class="form-control" id="dob" value="{{data.ngaysinh | filterdate | date:'dd/MM/yyyy'}}">
+                                                <label for="exampleinput requireddate2">Ngày Sinh</label>
+                                                <input required max="{{MinDateNgaysinh}}" ng-model="nv.ngaysinh" type="date" class="form-control" id="exampleinput requireddate2" >
                                             </div>
                                            
                                           
                                             <div class="form-group col-sm-12">
-                                                <label>Address:</label>
-                                                <textarea ng-model="diachi" placeholder="{{data.diachi}}" class="form-control" name="address" rows="5" style="line-height: 22px;">
-                                
-                                          </textarea>
+                                                <label>Địa Chỉ:</label>
+                                                <textarea ng-model="nv.diachi"  class="form-control" name="address" rows="5" style="line-height: 22px;"></textarea>
                                             </div>
                                         </div>
                                         <button ng-click="editinfo()" type="submit" class="btn btn-primary mr-2">Submit</button>
@@ -100,26 +98,26 @@
                             <div class="iq-card">
                                 <div class="iq-card-header d-flex justify-content-between">
                                     <div class="iq-header-title">
-                                        <h4 class="card-title">Change Password</h4>
+                                        <h4 class="card-title">Đổi Mật Khẩu</h4>
                                     </div>
                                 </div>
                                 <div class="iq-card-body">
-                                    <form>
+                                    <form id="pass">
                                         <div class="form-group">
-                                            <label for="cpass">Current Password:</label>
-                                            <a href="javascripe:void();" class="float-right">Forgot Password</a>
-                                            <input type="Password" class="form-control" id="cpass" value="">
+                                            <label for="cpass">Mật khẩu Hiện Tại:</label>
+                                            <a ng-click="forgetpass()"  class="float-right">Quên Mật Khẩu</a>
+                                            <input ng-model="matkhau" required type="Password" class="form-control" id="cpass" value="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="npass">New Password:</label>
-                                            <input type="Password" class="form-control" id="npass" value="">
+                                            <label for="npass">Mật Khẩu Mới:</label>
+                                            <input required type="Password" ng-model="newPass" class="form-control" id="npass" value="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="vpass">Verify Password:</label>
-                                            <input type="Password" class="form-control" id="vpass" value="">
+                                            <label for="vpass">Xác Nhận Mật Khẩu Mới:</label>
+                                            <input required type="Password" ng-model="reNewPass" class="form-control" id="vpass" value="">
                                         </div>
-                                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                        <button type="reset" class="btn iq-bg-danger">Cancel</button>
+                                        <button ng-click="changePass()" class="btn btn-primary mr-2">Xong</button>
+                                        <button type="reset" class="btn iq-bg-danger">Huỷ</button>
                                     </form>
                                 </div>
                             </div>
@@ -136,17 +134,13 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="cno">Contact Number:</label>
-                                            <input type="text" class="form-control" id="cno" value="001 2536 123 458">
+                                            <input required type="text" class="form-control" id="cno" ng-model="nv.sodienthoai">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email:</label>
-                                            <input type="text" class="form-control" id="email" value="Barryjone@demo.com">
+                                            <input required type="text" class="form-control" id="email" ng-model="nv.email">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="url">Url:</label>
-                                            <input type="text" class="form-control" id="url" value="https://getbootstrap.com/">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                        <button ng-click="editinfo()" class="btn btn-primary mr-2">Hoàn Thành</button>
                                         <button type="reset" class="btn iq-bg-danger">Cancel</button>
                                     </form>
                                 </div>

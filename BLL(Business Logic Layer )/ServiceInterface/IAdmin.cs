@@ -23,5 +23,9 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         void addPrice(Price_DTO getJsonResults);
         void add_NhanVien(ADMIN nv);
         object adType();
+        void editProfile(ADMIN nv);
+        int changPassWord(ADMIN nv,string newPass);
+        void addConfirmCode(string manv, string confirmationCode);
+        void ComfimforgetPass(string confirmationCode, string newPass);
     }
 }
