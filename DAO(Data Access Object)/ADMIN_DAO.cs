@@ -128,6 +128,62 @@ namespace DAO_Data_Access_Object_
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Add_User", parm);
         }
 
+        public void UpdateProfileUser(ADMIN user)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+            {
+
+                new SqlParameter("@TenNhanVien",SqlDbType.NVarChar,100),
+                new SqlParameter("@GioiTinh",SqlDbType.NVarChar,5),
+                new SqlParameter("@NgaySinh",SqlDbType.Date),
+                new SqlParameter("@DiaChi",SqlDbType.NVarChar,200),
+                new SqlParameter("@Email",SqlDbType.NVarChar,100),
+                new SqlParameter("@MaLoaiNhanVien",SqlDbType.NVarChar,20),
+                new SqlParameter("@HinhAnh",SqlDbType.NVarChar,50),
+                new SqlParameter("@SodienThoai",SqlDbType.NVarChar,14),
+                new SqlParameter("@MaNhanVien",SqlDbType.NVarChar,20),
+            };
+            parm[0].Value = user.tennhanvien;
+            parm[1].Value = user.gioitinh;
+            parm[2].Value = DateTime.Parse(user.ngaysinh.ToString());
+            parm[3].Value = user.diachi;
+            parm[4].Value = user.email;
+            parm[5].Value = user.maloainhanvien;
+            parm[6].Value = user.hinhanh;
+            parm[7].Value = user.sodienthoai;
+            parm[8].Value = user.manhanvien;
+
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Update_Profile_User", parm);
+        }
+
+        public object GetInfoUserByID(string maNhanVien)
+        {
+            DataTable dt = new DataTable();
+            string cmdText = string.Format(@"
+            Select TenNhanVien,NV.MaLoaiNhanVien,GioiTinh,NgaySinh,DiaChi,SoDienThoai,Email,HinhAnh,TenLoaiNhanVien,NV.MaNhanVien 
+                From dbo.NHAN_VIEN_ NV  Inner Join dbo.LOAI_NHAN_VIEN_ LNV
+	                On NV.MaLoaiNhanVien = LNV.MaLoaiNhanVien 
+                        Where NV.MaNhanVien = '{0}'", maNhanVien);
+            dt = DataAccessHelper.log(cmdText);
+            List<ADMIN> li = new List<ADMIN>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                ADMIN user = new ADMIN();
+                user.tennhanvien = dr[0].ToString();
+                user.maloainhanvien = dr[1].ToString();
+                user.gioitinh = dr[2].ToString();
+                user.ngaysinh = DateTime.Parse(dr[3].ToString());
+                user.diachi = dr[4].ToString();
+                user.sodienthoai = dr[5].ToString();
+                user.email = dr[6].ToString();
+                user.hinhanh = dr[7].ToString();
+                user.tenloainhanvien = dr[8].ToString();
+                user.manhanvien = dr[9].ToString();
+                li.Add(user);
+            }
+            return li;
+        }
+
         public void addPrice(Price_DTO pr)
         {
             SqlParameter[] parm = new SqlParameter[]
@@ -152,7 +208,10 @@ namespace DAO_Data_Access_Object_
         {
             DataAccessHelper.exec(string.Format("delete gia_ban where magiaban='{0}'", ma));
         }
-
+        public void deleteUser(string maNhanVien)
+        {
+            DataAccessHelper.exec(string.Format("Delete NHAN_VIEN_ Where MaNhanVien = '{0}'", maNhanVien));
+        }
         public void editPrice(Price_DTO pr)
         {
             SqlParameter[] parm = new SqlParameter[]
@@ -193,6 +252,34 @@ namespace DAO_Data_Access_Object_
             dt = DataAccessHelper.log(cmdtext);
             return listgia(dt);
 
+        }
+
+        public IList<ADMIN> getListUser(string pagesize)
+        {
+            DataTable dt = new DataTable();
+            string cmdText = string.Format(@"
+            Select TenNhanVien,NV.MaLoaiNhanVien,GioiTinh,NgaySinh,DiaChi,SoDienThoai,Email,HinhAnh,TenLoaiNhanVien,NV.MaNhanVien 
+                From dbo.NHAN_VIEN_ NV  Inner Join dbo.LOAI_NHAN_VIEN_ LNV
+	                On NV.MaLoaiNhanVien = LNV.MaLoaiNhanVien 
+                        Order By MaNhanVien Desc Offset 0 Rows Fetch Next {0} Rows Only", pagesize);
+            dt = DataAccessHelper.log(cmdText);
+            List<ADMIN> li = new List<ADMIN>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                ADMIN user = new ADMIN();
+                user.tennhanvien = dr[0].ToString();
+                user.maloainhanvien = dr[1].ToString();
+                user.gioitinh = dr[2].ToString();
+                user.ngaysinh = DateTime.Parse(dr[3].ToString());
+                user.diachi = dr[4].ToString();
+                user.sodienthoai = dr[5].ToString();
+                user.email = dr[6].ToString();
+                user.hinhanh = dr[7].ToString();
+                user.tenloainhanvien = dr[8].ToString();
+                user.manhanvien = dr[9].ToString();
+                li.Add(user);
+            }
+            return li;
         }
 
         public int add(ADMIN adm)

@@ -374,6 +374,8 @@
     <Content Include="Views\Admin\Price.cshtml" />
     <Content Include="Views\Admin\PriceEdit.cshtml" />
     <Content Include="Views\Admin\AddPrice.cshtml" />
+    <Content Include="Views\Admin\ListUser.cshtml" />
+    <Content Include="Views\Admin\UpdateProfileUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

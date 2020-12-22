@@ -48,7 +48,7 @@
                                                    
                                                     <td>
                                                         <div class="flex align-items-center list-user-action">
-                                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" target="_blank" href="/Admin/PriceEdit#!?magia={{i.maGiaBan}}"><i class="ri-pencil-line"></i></a>
+                                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"  ng-click="EditProductLink('/Admin/PriceEdit#!?magia='+i.maGiaBan)"><i class="ri-pencil-line"></i></a>
                                                             <a class="bg-primary" ng-click="xoa(i.maGiaBan,i.ngayKetThuc)" data-placement="top" title=""  data-original-title="Delete" ><i class="ri-delete-bin-line"></i></a>
                                                         </div>
                                                     </td>

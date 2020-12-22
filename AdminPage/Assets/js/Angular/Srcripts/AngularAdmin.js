@@ -160,8 +160,6 @@ myApp.controller("accAdminNav", function ($rootScope, $scope, $http, $window) {
                 $scope.ten = localStorage.getItem("ten");
                 $scope.role = call.data[0].maloainhanvien;
                 console.log($rootScope.manv)
-              
-
             }
             else {
 
@@ -301,6 +299,96 @@ myApp.controller('Profile', function ($scope, $rootScope, $http) {
         else return null;
     };
 });
+myApp.controller('getListUser', function ($rootScope, $scope, $http, imgurUpload) {
+    $http.get('/Admin/GetListUser?pagesize=10').then(function (e){
+        $scope.UserInfo = e.data;
+        console.log(e.data);
+    })
+    $scope.changeview = function () {
+        $http.get('/Admin/GetListUser?pagesize=' + $scope.pagesize).then(function (e) {
+            $scope.UserInfo = e.data;
+        })
+    }
+    $scope.DeleteUser = function (e) {
+        var answer = window.confirm("Xóa nhân viên ra cửa hàng");
+        if (answer) {
+            var data = {
+                "manhanvien": e
+            }
+            $http.post("/Admin/DeleteUser", data).then(function () {
+                toastr.success('Xoá thông tin thành công', 'Thành công!', { timeOut: 5000 })
+                $http.get('/Admin/GetListUser?pagesize=10').then(function (e) {
+                    $scope.UserInfo = e.data;
+                    console.log(e.data);
+                })
+            })
+        }
+        else {
+            //some code
+        }
+    }
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
+
+myApp.controller('UpdateProfileUser', function ($scope, $http, $location, $filter,imgurUpload) {
+    var maNhanVien = $location.search().manhanvien;
+    
+    $http.get('/Admin/GetInfoUserByID?maNhanVien=' + maNhanVien).then(function (e) {
+        $scope.UserInfo = e.data[0];
+        $scope.UserInfo.manhanvien = maNhanVien;
+        console.log(e.data);
+        console.log($scope.UserInfo);
+        $scope.UserInfo.ngaysinh = new Date(ConvertDate($filter('filterdate')($scope.UserInfo.ngaysinh, 'dd/mm/yyyy')))
+    })
+    $http.get('/Admin/getAdminType').then(function (e) {
+        $scope.AdminType = e.data;
+    })
+    $scope.update = function () {
+        var image = document.getElementById('file').files;
+        if (image.length !== 0) {
+            var clientId = "5c31a53dda3c8e0";
+            imgurUpload.setClientId(clientId);
+            imgurUpload
+                .upload(image[0])
+                .then(function (a) {
+                    $scope.UserInfo.hinhanh = a.data.link
+                    $http.post('/Admin/UpdateProfileUserVoid', $scope.UserInfo).then(
+                        function () {
+                            toastr.success('Sửa thông tin thành công', 'Thành công!', { timeOut: 5000 })
+                        },
+                        function () {
+                            toastr.error('Sửa thông tin thất bại vui lòng điền đẩy đủ thông tin', 'Lỗi', { timeOut: 5000 })
+
+                        })
+                }
+                )
+        }
+        else {
+            $http.post('/Admin/UpdateProfileUserVoid', $scope.UserInfo).then(
+                function () {
+                    toastr.success('Sửa thông tin thành công', 'Thành công!', { timeOut: 5000 })
+                },
+                function () {
+                    toastr.error('Sửa thông tin thất bại vui lòng điền đẩy đủ thông tin', 'Lỗi', { timeOut: 5000 })
+
+                }
+            )
+        }
+    }
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
 
 myApp.controller('addUser', function ($rootScope, $scope, $http, imgurUpload) {
     $http.get('/Admin/getAdminType').then(function (e) {
@@ -391,6 +479,9 @@ myApp.controller("managerPrice", function ($http, $scope) {
         $scope.getJsonResults = res.data;
         console.log($scope.getJsonResults)
     })
+    $scope.EditProductLink = function (e) {
+        window.open(e, '', 'width=1000,height=800');
+    }
     $scope.xoa = function (e, date) {
         if (date === '/Date(-62135596800000)/') {
             toastr.error('Không thể xoá giá mặc định', 'Lỗi!!', { timeOut: 5000 })

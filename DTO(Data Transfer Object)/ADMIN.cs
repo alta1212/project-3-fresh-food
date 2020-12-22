@@ -11,6 +11,7 @@ namespace DTO_Data_Transfer_Object_
         public string manhanvien { get; set; }
         public string tennhanvien { get; set; }
         public string  maloainhanvien { get; set; }
+        public string tenloainhanvien { get; set; }
         public string gioitinh { get; set; }
         public DateTime ngaysinh { get; set; }
         public DateTime ngayvaolam { get; set; }

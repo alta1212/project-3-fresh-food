@@ -18,17 +18,30 @@ namespace BLL_Business_Logic_Layer__
         {
             ad.addConfirmCode(manv,confirmationCode);
         }
-
+        public void DeleteUser (string maNhanVien)
+        {
+            ad.deleteUser(maNhanVien);
+        }
+        public void UpdateProfileUser (ADMIN user)
+        {
+            ad.UpdateProfileUser(user);
+        }
         public int addnv(ADMIN adm)
         {
             return ad.add(adm);
         }
-
+        public IList<ADMIN> GetListUser(string pagesize)
+        {
+            return ad.getListUser(pagesize);
+        }
         public void addPrice(Price_DTO getJsonResults)
         {
             ad.addPrice(getJsonResults);
         }
-
+        public object GetInfoUserByID(string maNhanVien)
+        {
+            return ad.GetInfoUserByID(maNhanVien);
+        }
         public void add_NhanVien(ADMIN nv)
         {
             ad.add_NhanVien(nv);      

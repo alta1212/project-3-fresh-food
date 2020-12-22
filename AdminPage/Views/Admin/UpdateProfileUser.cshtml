@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "UpdateProfileUser";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<div ng-controller="UpdateProfileUser" ng-switch="role == 'LNV001'" id="content-page" class="content-page">
+    <h1 ng-switch-when="false">Bạn Không Có Quyền Truy Cập Trang Này</h1>
+    <div ng-switch-when="true" class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Cập nhật thông tin nhân viên</h4>
+                        </div>
+                    </div>
+                    <div class="iq-card-body">
+                        <form>
+                            <div class="form-group">
+                                <div class="add-img-user profile-img-edit">
+                                    <img class="profile-pic img-fluid" id="loadSource" style="height: 150px; width: 200px;" src="{{UserInfo.hinhanh}}" alt="profile-pic">
+                                    <div class="p-image">
+                                        <label href="javascript:void();" for="file" class="upload-button btn iq-bg-primary">File Upload</label>
+                                        <input class="file-upload" id="file" required onchange="ChangeFileImageForProduct(this)" type="file" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="img-extension mt-3">
+                                    <div class="d-inline-block align-items-center">
+                                        <span>Only</span>
+                                        <a href="javascript:void();">.jpg</a>
+                                        <a href="javascript:void();">.png</a>
+                                        <a href="javascript:void();">.jpeg</a>
+                                        <span>Allowed</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Chức vụ:</label>
+                                <select ng-model="UserInfo.maloainhanvien" class="form-control" required id="selectuserrole">
+                                    <option ng-repeat="i in AdminType" value="{{i.maLoaiNhanVien}}">{{i.tenLoaiNhanVien}}</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Thông Tin</h4>
+                        </div>
+                    </div>
+                    <div class="iq-card-body">
+                        <div class="new-user-info">
+                            <form id="info-user">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="fname">Tên Nhân viên:</label>
+                                        <input ng-model="UserInfo.tennhanvien" required type="text" class="form-control" id="fname" placeholder="Tên Nhân Viên">
+                                    </div>
+                                    <div class="form-group col-md-6">
+
+
+                                        <label>Giới Tính:</label>
+                                        <select ng-model="UserInfo.gioitinh" required class="form-control" id="selectuserrole">
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nữ">Nữ</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="add1">Địa Chỉ:</label>
+                                        <input type="text" ng-model="UserInfo.diachi" required class="form-control" id="add1" placeholder="Địa chỉ">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="mobno">Số Điện Thoại:</label>
+                                        <input type="text" ng-model="UserInfo.sodienthoai" required class="form-control" id="mobno" placeholder="Số Điện Thoại" maxlength="10">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputdate1">Ngày Sinh</label>
+                                        <input required max="{{max}}" type="date" ng-model="UserInfo.ngaysinh" class="form-control" id="exampleInputdate1">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="email">Email:</label>
+                                        <input ng-model="UserInfo.email" required type="email" class="form-control" id="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <button ng-click="update()" type="submit" formnovalidate class="btn btn-primary">Cập nhật thông tin</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
