@@ -1,52 +1,48 @@
 ﻿
 <div ng-controller="discount" class="slider">
     <div ng-repeat="i in listDiscount"  class="slider__slide slider__slide--active" data-slide="{{$index+1}}">
-        <img src="https://unsplash.it/1600/800/?image=93" style="width:100%;height:100%"/>
-        <div class="slider__wrap">
-            <div class="slider__back"></div>
-        </div>
-        <div class="slider__inner">
-            <div class="slider__content">
-                <h1>Slide <br> {{$index}}</h1><a class="go-to-next">next</a>
-            </div>
-        </div>
+        <img src="{{i.HinhAnh}}" style="width:100%;height:100%"/>
+        
     </div>
 
     <div class="slider__indicators"></div>
 </div>
 
 <script>
-
-    //đoạn script này nó k chạy b  copy rồi dán vài console nhé =))
-    //ảnh thì minh nhờ người des rồi b sửa cái js dưới vs for mat cái style đi
-    //mình mát cả buổi chiều để tìm được cái slider dùng đc vs ângular js mà k bị lỗi css đó =))
-    //giờ minh đi làm 
-    //ok  bạn
-    $(document).ready(function(){
-          for (var i=1; i <= $('.slider__slide').length; i++){
-            $('.slider__indicators').append('<div class="slider__indicator" data-slide="'+i+'"></div>')
-          }
-          setTimeout(function(){
-            $('.slider__wrap').addClass('slider__wrap--hacked');
-          }, 1000);
-        })
-
-        function goToSlide(number){
-          $('.slider__slide').removeClass('slider__slide--active');
-          $('.slider__slide[data-slide='+number+']').addClass('slider__slide--active');
+    $(document).ready(function ()
+    {
+        
+              for (var i=1; i <= $('.slider__slide').length; i++){
+                $('.slider__indicators').append('<div class="slider__indicator" data-slide="'+i+'"></div>')
         }
+     //   set()
+    })
 
-        $('.slider__next, .go-to-next').on('click', function(){
-          var currentSlide = Number($('.slider__slide--active').data('slide'));
-          var totalSlides = $('.slider__slide').length;
-          currentSlide++
-          if (currentSlide > totalSlides){
-            currentSlide = 1;
-          }
-          goToSlide(currentSlide);
-        })
+        //function set() {
+            setInterval(function () {
+                console.log("s")
+                var currentSlide = Number($('.slider__slide--active').data('slide'));
+                var totalSlides = $('.slider__slide').length;
+                currentSlide++
+                if (currentSlide > totalSlides) {
+                    currentSlide = 1;
+                }
+                $('.slider__wrap').addClass('slider__wrap--hacked');
+                goToSlide(currentSlide);
+            }, 3000);
+
+            function goToSlide(number) {
+                $('.slider__slide').removeClass('slider__slide--active');
+                $('.slider__slide[data-slide=' + number + ']').addClass('slider__slide--active');
+            }
+        //    set()     
+        //}
+
+        
+
+
 </script>
-      <style>
+<style>
 
 .slider {
   position: relative;

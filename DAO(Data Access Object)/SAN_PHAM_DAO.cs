@@ -62,29 +62,7 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
-        public IList<Discount_DTO> Discount()
-        {
-            DataTable dt = new DataTable();
-            //lấy về các sản phẩm theo pagesize
-            string cmdtext = string.Format(@"select * from CHIET_KHAU");
-            dt = DataAccessHelper.log(cmdtext);
-
-            List<Discount_DTO> li = new List<Discount_DTO>();
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                Discount_DTO sp = new Discount_DTO();
-                sp.MaChietKhau = dr[0].ToString();
-                sp.start =DateTime.Parse( dr[1].ToString());
-                sp.end = DateTime.Parse(dr[2].ToString());
-                sp.PhanTram = int.Parse(dr[3].ToString());
-                sp.TienToiThieu = int.Parse(dr[4].ToString());
-                sp.TienToiDa = int.Parse(dr[5].ToString());
-                sp.HinhAnh = dr[6].ToString();
-                li.Add(sp);
-            }
-            return li;
-        }
+       
 
         public string confirmOrder(string madonhang, string manv)
         {

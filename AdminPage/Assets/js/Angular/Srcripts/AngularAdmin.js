@@ -1,4 +1,4 @@
-﻿var myApp = angular.module('myApp', ['imgurUpload']);
+﻿var myApp = angular.module('myApp', ['imgurUpload', 'ngAnimate']);
 
 
 // ------------ rootScope-----------
@@ -11,7 +11,45 @@ myApp.run(function ($rootScope) {
 
 myApp.controller('managerProduct', function ($scope, $location, $window, $http) {
     $scope.pagesize = 10//khởi tạo giá trị hiển thị ban đầu
+    $scope.list = [];
+    $http.get('/Admin/dash').then(function (s) {
+        console.log(s)
+        $http({
+            method: 'get',
+            url: '/SanPhamAdmin/GetAllProduct?page=1&&size=10'
 
+        })
+            .then(function (jsonResults) {
+                for (var i = 1; i <= s.data[0].product / $scope.pagesize; i++) {
+                    $scope.list.push(i);
+                    console.log($scope.list[i - 1])
+                }
+                $scope.getJsonResults = jsonResults.data;
+                $scope.changePage = function (a) {
+                    $http.get('/SanPhamAdmin/GetAllProduct?page='+a+'&&size=10').then(function (get) {
+                        $scope.getJsonResults = get.data;
+                    })
+                }
+                $scope.changeview = function () {
+
+                    var pageselect = {
+                        page: 1,
+                        size: $scope.pagesize
+                    }
+
+                    $http({
+                        method: 'GET',
+                        url: '/SanPhamAdmin/GetAllProduct',
+                        params: pageselect
+                    }).then(function successCallback(response) {
+                        $scope.getJsonResults = response.data;
+                        console.log(response.data)
+
+                    })
+                }
+            }
+            )
+    })
     var input = document.getElementById("searchname");
     input.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
@@ -19,32 +57,7 @@ myApp.controller('managerProduct', function ($scope, $location, $window, $http) 
         }
     });
 
-    $http({
-        method: 'get',
-        url: '/SanPhamAdmin/GetAllProduct?page=1&&size=10'
-
-    })
-        .then(function (jsonResults) {
-            $scope.getJsonResults = jsonResults.data;
-            $scope.changeview = function () {
-
-                var pageselect = {
-                    page: 1,
-                    size: $scope.pagesize
-                }
-
-                $http({
-                    method: 'GET',
-                    url: '/SanPhamAdmin/GetAllProduct',
-                    params: pageselect
-                }).then(function successCallback(response) {
-                    $scope.getJsonResults = response.data;
-                    console.log(response.data)
-
-                })
-            }
-        }
-        )
+    
 
     $scope.searchname = function (name) {
 

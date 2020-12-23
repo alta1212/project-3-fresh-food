@@ -213,9 +213,14 @@
     <Content Include="assets\js\plugins\popper.min.js" />
     <Content Include="assets\js\plugins\slick.min.js" />
     <Content Include="assets\js\plugins\waypoint.js" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-cookies.js" />
     <Content Include="Scripts\angular-imgur-upload.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\Controllers\angular_code.js" />
     <Content Include="Scripts\Controllers\SocialLogin.js" />

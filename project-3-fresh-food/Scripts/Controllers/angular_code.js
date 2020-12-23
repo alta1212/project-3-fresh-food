@@ -9,7 +9,7 @@ app.run(function ($rootScope) {
 });
 
 app.controller("discount", function ($http, $scope) {
-    $http.get('/Index/Discount').then(function (e) {
+    $http.get('/Product/getchietkhau').then(function (e) {
         console.log(e);
         $scope.listDiscount = e.data;
     })

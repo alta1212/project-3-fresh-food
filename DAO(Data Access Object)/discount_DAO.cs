@@ -21,14 +21,15 @@ namespace DAO_Data_Access_Object_
             List<Discount_DTO> li = new List<Discount_DTO>();
             foreach (DataRow dr in dt.Rows)
             {
-                Discount_DTO lsp = new Discount_DTO();
-                lsp.MaChietKhau = dr[0].ToString();
-                lsp.start = DateTime.Parse(dr[1].ToString());
-                lsp.end = DateTime.Parse( dr[2].ToString());
-                lsp.PhanTram = int.Parse(dr[3].ToString());
-                lsp.TienToiThieu = int.Parse(dr[4].ToString());
-                lsp.TienToiDa = int.Parse(dr[5].ToString());
-                li.Add(lsp);
+                Discount_DTO sp = new Discount_DTO();
+                sp.MaChietKhau = dr[0].ToString();
+                sp.start = DateTime.Parse(dr[1].ToString());
+                sp.end = DateTime.Parse(dr[2].ToString());
+                sp.PhanTram = int.Parse(dr[3].ToString());
+                sp.TienToiThieu = int.Parse(dr[4].ToString());
+                sp.TienToiDa = int.Parse(dr[5].ToString());
+                sp.HinhAnh = dr[6].ToString();
+                li.Add(sp);
             }
             return li;
         }

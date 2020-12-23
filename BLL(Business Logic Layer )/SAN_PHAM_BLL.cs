@@ -93,9 +93,6 @@ namespace BLL_Business_Logic_Layer__
           return  sp.confirmOrder(madonhang,manv);
         }
 
-        public IList<Discount_DTO> Discount()
-        {
-            return sp.Discount();
-        }
+     
     }
 }
