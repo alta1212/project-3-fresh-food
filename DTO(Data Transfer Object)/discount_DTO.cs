@@ -14,11 +14,12 @@ namespace DTO_Data_Transfer_Object_
         private int phantram;
         private int minmoney;
         private int maxmoney;
+        private string hinhanh;
         public Discount_DTO()
         {
 
         }
-        public Discount_DTO(string maChietkhau,DateTime batdau,DateTime ketthuc,int phantram,int min ,int max)
+        public Discount_DTO(string hinhAnh, string maChietkhau,DateTime batdau,DateTime ketthuc,int phantram,int min ,int max)
         {
             this.machietkhau = maChietkhau;
             this.ngaybatdau = batdau;
@@ -26,11 +27,17 @@ namespace DTO_Data_Transfer_Object_
             this.phantram = phantram;
             this.minmoney = min;
             this.maxmoney = max;
+            this.hinhanh = hinhAnh;
         }
         public string MaChietKhau
         {
             get { return machietkhau; }
             set { machietkhau = value; }
+        }
+        public string HinhAnh
+        {
+            get { return hinhanh; }
+            set { hinhanh = value; }
         }
         public DateTime start
         {

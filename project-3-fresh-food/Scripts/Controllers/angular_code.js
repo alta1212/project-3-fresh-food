@@ -7,6 +7,14 @@ app.run(function ($rootScope) {
     $rootScope.khachHang = "";
     $rootScope.link = "";
 });
+
+app.controller("discount", function ($http, $scope) {
+    $http.get('/Index/Discount').then(function (e) {
+        console.log(e);
+        $scope.listDiscount = e.data;
+    })
+})
+
 //tài khoản
 //đăng  ký
 app.controller('dangKy', function ($http, $scope) {

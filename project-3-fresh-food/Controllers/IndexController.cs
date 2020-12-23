@@ -30,6 +30,10 @@ namespace project_3_fresh_food.Controllers
 
             return View();
         }
+        public JsonResult Discount()
+        {
+            return Json(sp.Discount(), JsonRequestBehavior.AllowGet);
+        }
         // Sản phẩm theo loại
         public JsonResult getLsP()
         {

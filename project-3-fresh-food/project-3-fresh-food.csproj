@@ -288,6 +288,7 @@
     <Content Include="Views\guestEvent\Sent.cshtml" />
     <Content Include="Views\guestEvent\confirmOrder.cshtml" />
     <Content Include="Views\Product\search.cshtml" />
+    <Content Include="Views\Shared\_discount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

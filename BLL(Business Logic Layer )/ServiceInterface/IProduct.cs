@@ -23,6 +23,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         void postcomment(string masp, string mkh, string binhluan, string hinhanh, float stars);
         void AddToCart(string mkh, string msp, int donGia, int soLuong);
         string confirmOrder(string madonhang, string manv);
+        IList<Discount_DTO> Discount();
         int getslsp(string maloai);
         IList<SAN_PHAM> getthongtinsanpham(string masanpham);
         IList<SAN_PHAM> searchName(string name, int page, int pagesize);

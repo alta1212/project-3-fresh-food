@@ -1,0 +1,327 @@
+﻿
+<div ng-controller="discount" class="slider">
+    <div ng-repeat="i in listDiscount"  class="slider__slide slider__slide--active" data-slide="{{$index+1}}">
+        <img src="https://unsplash.it/1600/800/?image=93" style="width:100%;height:100%"/>
+        <div class="slider__wrap">
+            <div class="slider__back"></div>
+        </div>
+        <div class="slider__inner">
+            <div class="slider__content">
+                <h1>Slide <br> {{$index}}</h1><a class="go-to-next">next</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="slider__indicators"></div>
+</div>
+
+<script>
+
+    //đoạn script này nó k chạy b  copy rồi dán vài console nhé =))
+    //ảnh thì minh nhờ người des rồi b sửa cái js dưới vs for mat cái style đi
+    //mình mát cả buổi chiều để tìm được cái slider dùng đc vs ângular js mà k bị lỗi css đó =))
+    //giờ minh đi làm 
+    //ok  bạn
+    $(document).ready(function(){
+          for (var i=1; i <= $('.slider__slide').length; i++){
+            $('.slider__indicators').append('<div class="slider__indicator" data-slide="'+i+'"></div>')
+          }
+          setTimeout(function(){
+            $('.slider__wrap').addClass('slider__wrap--hacked');
+          }, 1000);
+        })
+
+        function goToSlide(number){
+          $('.slider__slide').removeClass('slider__slide--active');
+          $('.slider__slide[data-slide='+number+']').addClass('slider__slide--active');
+        }
+
+        $('.slider__next, .go-to-next').on('click', function(){
+          var currentSlide = Number($('.slider__slide--active').data('slide'));
+          var totalSlides = $('.slider__slide').length;
+          currentSlide++
+          if (currentSlide > totalSlides){
+            currentSlide = 1;
+          }
+          goToSlide(currentSlide);
+        })
+</script>
+      <style>
+
+.slider {
+  position: relative;
+  height: 50vh;
+  width: 50vw;
+  background: #777;
+  overflow: hidden;
+}
+.slider__wrap {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  -webkit-transform: translateX(100vw);
+          transform: translateX(100vw);
+  top: 0%;
+  left: 0;
+  right: auto;
+  overflow: hidden;
+  -webkit-transition: -webkit-transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: -webkit-transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86), -webkit-transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  -webkit-transform-origin: 0% 50%;
+          transform-origin: 0% 50%;
+  -webkit-transition-delay: 450ms;
+          transition-delay: 450ms;
+  opacity: 0;
+}
+.slider__wrap--hacked {
+  opacity: 1;
+}
+.slider__back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: none;
+  -webkit-transition: -webkit-filter 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: -webkit-filter 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: filter 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: filter 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86), -webkit-filter 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.slider__inner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0%;
+  background-size: auto 133.3333%;
+  background-position: center;
+  background-repeat: none;
+  -webkit-transform: scale(0.75);
+          transform: scale(0.75);
+  -webkit-transition: box-shadow 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 450ms step-end, -webkit-transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: box-shadow 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 450ms step-end, -webkit-transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86), box-shadow 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 450ms step-end;
+  transition: transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86), box-shadow 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 450ms step-end, -webkit-transform 450ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  opacity: 0;
+  box-shadow: 0 3vh 3vh rgba(0, 0, 0, 0);
+  padding: 15vh;
+  box-sizing: border-box;
+}
+.slider__content {
+  position: relative;
+  top: 50%;
+  width: auto;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  color: white;
+  font-family: "Heebo", sans-serif;
+  opacity: 0;
+  -webkit-transition: opacity 450ms;
+  transition: opacity 450ms;
+}
+.slider__content h1 {
+  font-weight: 900;
+  font-size: 9vh;
+  line-height: 0.85;
+  margin-bottom: 0.75vh;
+  pointer-events: none;
+  text-shadow: 0 0.375vh 0.75vh rgba(0, 0, 0, 0.1);
+}
+.slider__content a {
+  cursor: pointer;
+  font-size: 2.4vh;
+  letter-spacing: 0.3vh;
+  font-weight: 100;
+  position: relative;
+}
+.slider__content a:after {
+  content: '';
+  display: block;
+  width: 9vh;
+  background: white;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  left: 6vh;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transform-origin: 0% 50%;
+          transform-origin: 0% 50%;
+  -webkit-transition: -webkit-transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: -webkit-transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), -webkit-transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.slider__content a:before {
+  content: '';
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  display: block;
+  width: 1vh;
+  height: 1vh;
+  -webkit-transform: translateX(0) translateY(-50%) rotate(45deg);
+          transform: translateX(0) translateY(-50%) rotate(45deg);
+  position: absolute;
+  font-family: "Heebo", sans-serif;
+  font-weight: 100;
+  top: 50%;
+  left: 15vh;
+  -webkit-transition: -webkit-transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: -webkit-transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), -webkit-transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.slider__content a:hover:after {
+  -webkit-transform: scaleX(1.5);
+          transform: scaleX(1.5);
+  -webkit-transition: -webkit-transform 1200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: -webkit-transform 1200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 1200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 1200ms cubic-bezier(0.785, 0.135, 0.15, 0.86), -webkit-transform 1200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.slider__content a:hover:before {
+  -webkit-transform: translateX(6vh) translateY(-50%) rotate(45deg);
+          transform: translateX(6vh) translateY(-50%) rotate(45deg);
+  -webkit-transition: -webkit-transform 1200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: -webkit-transform 1200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 1200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 1200ms cubic-bezier(0.785, 0.135, 0.15, 0.86), -webkit-transform 1200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.slider__slide {
+  position: absolute;
+  left: 0;
+  height: 50vh;
+  width: 50vw;
+  -webkit-transition: -webkit-transform 600ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: -webkit-transform 600ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 600ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 600ms cubic-bezier(0.785, 0.135, 0.15, 0.86), -webkit-transform 600ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  -webkit-transition-delay: 600ms;
+          transition-delay: 600ms;
+  pointer-events: none;
+  z-index: 0;
+}
+.slider__slide--active {
+  -webkit-transform: translatex(0%);
+          transform: translatex(0%);
+  z-index: 2;
+}
+.slider__slide--active .slider__wrap {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transform-origin: 100% 50%;
+          transform-origin: 100% 50%;
+  opacity: 1;
+  -webkit-animation: none;
+          animation: none;
+}
+.slider__slide--active .slider__back {
+  -webkit-filter: blur(1.5vh);
+          filter: blur(1.5vh);
+  -webkit-transition: -webkit-filter 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: -webkit-filter 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: filter 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: filter 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), -webkit-filter 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  -webkit-transition-delay: 900ms !important;
+          transition-delay: 900ms !important;
+}
+.slider__slide--active .slider__inner {
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  box-shadow: 0 1vh 6vh rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+  opacity: 1;
+  -webkit-transition: box-shadow 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 1ms step-end, -webkit-transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: box-shadow 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 1ms step-end, -webkit-transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), box-shadow 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 1ms step-end;
+  transition: transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), box-shadow 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 1ms step-end, -webkit-transform 900ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  -webkit-transition-delay: 900ms;
+          transition-delay: 900ms;
+}
+.slider__slide--active .slider__content {
+  opacity: 1;
+  -webkit-transition-delay: 1350ms;
+          transition-delay: 1350ms;
+}
+.slider__slide:not(.slider__slide--active) .slider__wrap {
+  -webkit-animation-name: hack;
+          animation-name: hack;
+  -webkit-animation-duration: 900ms;
+          animation-duration: 900ms;
+  -webkit-animation-delay: 450ms;
+          animation-delay: 450ms;
+  -webkit-animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+          animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+@@-webkit-keyframes hack {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+    opacity: 1;
+  }
+  51% {
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+    opacity: 0;
+  }
+  52% {
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
+    opacity: 1;
+  }
+}
+@@keyframes hack {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+    opacity: 1;
+  }
+  51% {
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+    opacity: 0;
+  }
+  52% {
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
+    opacity: 1;
+  }
+}
+
+.sig {
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 100;
+  font-family: sans-serif;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
+  z-index: 9999;
+}
+
+      </style>
