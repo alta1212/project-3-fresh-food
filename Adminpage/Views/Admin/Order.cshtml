@@ -46,14 +46,15 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 3%;">No</th>
-                                                    <th style="width: 12%;">Mã Đơn Hàng</th>
-                                                    <th style="width: 15%;">Mã Khách Hàng</th>
-                                                    <th style="width: 15%;">Tên Nhân viên Xác Nhận</th>
+                                                    <th style="width: 10%;">Mã Đơn Hàng</th>
+                                                    <th style="width: 10%;">Tên Khách Hàng</th>
+                                                    <th style="width: 15%;">Nhân Viên</th>
                                                     <th style="width: 10%;">Trạng Thái</th>
                                                     <th style="width: 15%;">Ngày Mua</th>
                                                     <th style="width: 10%;">Ngày Xác Thực</th>
                                                     <th style="width: 10%;">Địa chỉ</th>
                                                     <th style="width: 10%;">Số Điện Thoại</th>
+                                                    <th style="width: 8%;">Tổng Tiền</th>
                                                     <th style="width: 10%;">Hành động</th>
                                                 </tr>
                                             </thead>
@@ -61,7 +62,7 @@
                                                 <tr ng-repeat="i in getJsonResults" ng-switch="i.TenNhanVien===''&&i.TrangThai == '1'">
                                                     <td>{{$index + 1}}</td>
                                                     <td>{{i.MaDonHang}}</td>
-                                                    <td>{{i.MaKhachhang}}</td>
+                                                    <td>{{i.TenKhachHang}}</td>
                                                     <td ng-switch-when="false">{{i.TenNhanVien}}</td>
                                                     <td ng-switch-when="true">(Đã Xác Nhận Qua Mail)</td>
                                                     <td>
@@ -78,6 +79,7 @@
                                                     <td>{{i.NgayXacThuc | filterdate | date:'dd/MM/yyyy'}}</td>
                                                     <td>{{i.DiaChi}}</td>
                                                     <td>{{i.SoDienThoai}}</td>
+                                                    <td>{{i.TongTien|number}} VNĐ</td>
                                                     <td>
                                                         <div ng-switch="i.TrangThai == '1'" class="flex align-items-center list-user-action">
                                                             <div ng-switch-when="true">

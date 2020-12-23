@@ -357,9 +357,11 @@ namespace DAO_Data_Access_Object_
         public IList<Order_DTO> getListOrder(string pagesize)
         {
             DataTable dt = new DataTable();
-            string cmdText = string.Format(@"Select DH.*,NV.TenNhanVien From dbo.DON_HANG  DH Left Join dbo.Nhan_Vien_ NV
-	On DH.MaNhanVien = NV.MaNhanVien 
-		Order By MaDonHang Desc Offset 0 Rows Fetch Next {0} Rows Only", pagesize);
+            string cmdText = string.Format(@"Select DH.*,NV.TenNhanVien, KH.TenKhachHang
+	                    From dbo.DON_HANG  DH Left Join dbo.Nhan_Vien_ NV
+		                    On DH.MaNhanVien = NV.MaNhanVien Inner Join dbo.Khach_Hang  KH
+			                    On KH.MaKhachHang = DH.MaKhachHang
+		            Order By MaDonHang Desc Offset 0 Rows Fetch Next {0} Rows Only", pagesize);
             dt = DataAccessHelper.log(cmdText);
             List<Order_DTO> li = new List<Order_DTO>();
             foreach (DataRow dr in dt.Rows)
@@ -373,10 +375,10 @@ namespace DAO_Data_Access_Object_
                 or.NgayMua = DateTime.Parse(dr[5].ToString());
                 try { or.NgayXacThuc = DateTime.Parse(dr[6].ToString()); }
                 catch { }
-
                 or.SoDienThoai = dr[7].ToString();
                 or.DiaChi = dr[8].ToString();
                 or.TenNhanVien = dr[9].ToString();
+                or.TenKhachHang = dr[10].ToString();
                 li.Add(or);
             }
             return li;

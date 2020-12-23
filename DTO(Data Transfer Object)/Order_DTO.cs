@@ -18,7 +18,8 @@ namespace DTO_Data_Transfer_Object_
         private string tennhanvien;
         private string sdt;
         private string diachi;
-        public Order_DTO(string sdt,string diachi,string madh,string makh,string manv,int status,int tien,DateTime mua,DateTime xacthuc,string tennnv)
+        private string tenkhachhang;
+        public Order_DTO(string sdt,string diachi,string madh,string makh,string manv,int status,int tien,DateTime mua,DateTime xacthuc,string tennnv,string tenkhachhang)
         {
             this.sdt = sdt;
             this.diachi = diachi;
@@ -30,6 +31,7 @@ namespace DTO_Data_Transfer_Object_
             this.ngaymua = mua;
             this.ngayxacthuc = xacthuc;
             this.tennhanvien = tennnv;
+            this.tenkhachhang = tenkhachhang;
         }
         public Order_DTO() { }
         public string MaDonHang
@@ -82,6 +84,11 @@ namespace DTO_Data_Transfer_Object_
         {
             get { return tennhanvien; }
             set { tennhanvien = value; }
+        }
+        public string TenKhachHang
+        {
+            get { return tenkhachhang; }
+            set { tenkhachhang = value; }
         }
     }
 }

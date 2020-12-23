@@ -1,0 +1,450 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.9.10\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.9.10\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A3273FE4-90D7-4B59-8F4A-63E41827835B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdminPage</RootNamespace>
+    <AssemblyName>AdminPage</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44351</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerLaunchUrl>http://{ServiceIPAddress}</DockerLaunchUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\css\ajax-loader.gif" />
+    <Content Include="Assets\css\animate.css" />
+    <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\Chart.min.css" />
+    <Content Include="Assets\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Assets\css\dripicons.css" />
+    <Content Include="Assets\css\fontawesome.css" />
+    <Content Include="Assets\css\ionicons.min.css" />
+    <Content Include="Assets\css\line-awesome.min.css" />
+    <Content Include="Assets\css\magnific-popup.css" />
+    <Content Include="Assets\css\owl.carousel.min.css" />
+    <Content Include="Assets\css\owl.video.play.png" />
+    <Content Include="Assets\css\remixicon.css" />
+    <Content Include="Assets\css\responsive.css" />
+    <Content Include="Assets\css\select2.min.css" />
+    <Content Include="Assets\css\slick-theme.css" />
+    <Content Include="Assets\css\slick.css" />
+    <Content Include="Assets\css\style-customizer.css" />
+    <Content Include="Assets\css\style.css" />
+    <Content Include="Assets\css\typography.css" />
+    <Content Include="Assets\css\variable.css" />
+    <Content Include="Assets\fonts\dripicons-v2.svg" />
+    <Content Include="Assets\fonts\fontawesome-webfont3e6e.html" />
+    <Content Include="Assets\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="Assets\fonts\ionicons28b5.svg" />
+    <Content Include="Assets\fonts\la-brands-400.html" />
+    <Content Include="Assets\fonts\la-brands-400.svg" />
+    <Content Include="Assets\fonts\la-regular-400.html" />
+    <Content Include="Assets\fonts\la-regular-400.svg" />
+    <Content Include="Assets\fonts\la-solid-900.html" />
+    <Content Include="Assets\fonts\la-solid-900.svg" />
+    <Content Include="Assets\fonts\remixicon4d30.html" />
+    <Content Include="Assets\fonts\remixicon4d30.svg" />
+    <Content Include="Assets\fonts\slick.svg" />
+    <Content Include="Assets\images\bg-03.jpg" />
+    <Content Include="Assets\images\book-dec\01.jpg" />
+    <Content Include="Assets\images\book-dec\02.jpg" />
+    <Content Include="Assets\images\book-dec\03.jpg" />
+    <Content Include="Assets\images\book-dec\04.jpg" />
+    <Content Include="Assets\images\book-dec\05.jpg" />
+    <Content Include="Assets\images\book-dec\06.jpg" />
+    <Content Include="Assets\images\booking\cart.png" />
+    <Content Include="Assets\images\browse-books\01.jpg" />
+    <Content Include="Assets\images\browse-books\02.jpg" />
+    <Content Include="Assets\images\browse-books\03.jpg" />
+    <Content Include="Assets\images\browse-books\04.jpg" />
+    <Content Include="Assets\images\browse-books\05.jpg" />
+    <Content Include="Assets\images\browse-books\06.jpg" />
+    <Content Include="Assets\images\browse-books\07.jpg" />
+    <Content Include="Assets\images\browse-books\08.jpg" />
+    <Content Include="Assets\images\browse-books\09.jpg" />
+    <Content Include="Assets\images\browse-books\10.jpg" />
+    <Content Include="Assets\images\browse-books\11.jpg" />
+    <Content Include="Assets\images\browse-books\12.jpg" />
+    <Content Include="Assets\images\cart\01.jpg" />
+    <Content Include="Assets\images\cart\02.jpg" />
+    <Content Include="Assets\images\cart\03.jpg" />
+    <Content Include="Assets\images\cart\04.jpg" />
+    <Content Include="Assets\images\checkout\01.jpg" />
+    <Content Include="Assets\images\checkout\02.jpg" />
+    <Content Include="Assets\images\checkout\03.jpg" />
+    <Content Include="Assets\images\error\02.png" />
+    <Content Include="Assets\images\error\404.png" />
+    <Content Include="Assets\images\error\500.png" />
+    <Content Include="Assets\images\favicon.ico" />
+    <Content Include="Assets\images\favorite\01.jpg" />
+    <Content Include="Assets\images\favorite\02.jpg" />
+    <Content Include="Assets\images\favorite\03.jpg" />
+    <Content Include="Assets\images\favorite\04.jpg" />
+    <Content Include="Assets\images\favorite\05.jpg" />
+    <Content Include="Assets\images\favorite\06.jpg" />
+    <Content Include="Assets\images\favorite\07.jpg" />
+    <Content Include="Assets\images\favorite\08.jpg" />
+    <Content Include="Assets\images\loader.gif" />
+    <Content Include="Assets\images\login\mail.png" />
+    <Content Include="Assets\images\logo-full2.png" />
+    <Content Include="Assets\images\logo.png" />
+    <Content Include="Assets\images\new_realeases\01.jpg" />
+    <Content Include="Assets\images\new_realeases\02.jpg" />
+    <Content Include="Assets\images\new_realeases\03.jpg" />
+    <Content Include="Assets\images\new_realeases\04.jpg" />
+    <Content Include="Assets\images\new_realeases\05.jpg" />
+    <Content Include="Assets\images\new_realeases\06.jpg" />
+    <Content Include="Assets\images\new_realeases\07.jpg" />
+    <Content Include="Assets\images\new_realeases\08.jpg" />
+    <Content Include="Assets\images\new_realeases\09.jpg" />
+    <Content Include="Assets\images\page-img\07.jpg" />
+    <Content Include="Assets\images\page-img\08.jpg" />
+    <Content Include="Assets\images\page-img\09.jpg" />
+    <Content Include="Assets\images\page-img\10.jpg" />
+    <Content Include="Assets\images\page-img\100.jpg" />
+    <Content Include="Assets\images\page-img\11.jpg" />
+    <Content Include="Assets\images\page-img\12.jpg" />
+    <Content Include="Assets\images\page-img\13.jpg" />
+    <Content Include="Assets\images\page-img\14.jpg" />
+    <Content Include="Assets\images\page-img\15.jpg" />
+    <Content Include="Assets\images\page-img\16.jpg" />
+    <Content Include="Assets\images\page-img\17.jpg" />
+    <Content Include="Assets\images\page-img\18.jpg" />
+    <Content Include="Assets\images\page-img\19.jpg" />
+    <Content Include="Assets\images\page-img\20.jpg" />
+    <Content Include="Assets\images\page-img\21.jpg" />
+    <Content Include="Assets\images\page-img\22.jpg" />
+    <Content Include="Assets\images\page-img\23.jpg" />
+    <Content Include="Assets\images\page-img\24.jpg" />
+    <Content Include="Assets\images\page-img\25.jpg" />
+    <Content Include="Assets\images\page-img\26.jpg" />
+    <Content Include="Assets\images\page-img\27.jpg" />
+    <Content Include="Assets\images\page-img\28.jpg" />
+    <Content Include="Assets\images\page-img\featured-book.png" />
+    <Content Include="Assets\images\page-img\img-success.png" />
+    <Content Include="Assets\images\page-img\side-bkg.png" />
+    <Content Include="Assets\images\search-book\01.jpg" />
+    <Content Include="Assets\images\search-book\02.jpg" />
+    <Content Include="Assets\images\search-book\03.jpg" />
+    <Content Include="Assets\images\search-book\04.jpg" />
+    <Content Include="Assets\images\search-book\05.jpg" />
+    <Content Include="Assets\images\search-book\06.jpg" />
+    <Content Include="Assets\images\search-book\07.jpg" />
+    <Content Include="Assets\images\search-book\08.jpg" />
+    <Content Include="Assets\images\search-book\09.jpg" />
+    <Content Include="Assets\images\search-book\10.jpg" />
+    <Content Include="Assets\images\search-book\11.jpg" />
+    <Content Include="Assets\images\search-book\12.jpg" />
+    <Content Include="Assets\images\similar-books\01.jpg" />
+    <Content Include="Assets\images\similar-books\02.jpg" />
+    <Content Include="Assets\images\similar-books\03.jpg" />
+    <Content Include="Assets\images\similar-books\04.jpg" />
+    <Content Include="Assets\images\similar-books\05.jpg" />
+    <Content Include="Assets\images\similar-books\06.jpg" />
+    <Content Include="Assets\images\small\img-1.jpg" />
+    <Content Include="Assets\images\trendy-books\01.jpg" />
+    <Content Include="Assets\images\trendy-books\02.jpg" />
+    <Content Include="Assets\images\trendy-books\03.jpg" />
+    <Content Include="Assets\images\trendy-books\04.jpg" />
+    <Content Include="Assets\images\trendy-books\05.jpg" />
+    <Content Include="Assets\images\trendy-books\06.jpg" />
+    <Content Include="Assets\images\user\01.jpg" />
+    <Content Include="Assets\images\user\02.jpg" />
+    <Content Include="Assets\images\user\03.jpg" />
+    <Content Include="Assets\images\user\04.jpg" />
+    <Content Include="Assets\images\user\05.jpg" />
+    <Content Include="Assets\images\user\06.jpg" />
+    <Content Include="Assets\images\user\07.jpg" />
+    <Content Include="Assets\images\user\08.jpg" />
+    <Content Include="Assets\images\user\09.jpg" />
+    <Content Include="Assets\images\user\1.jpg" />
+    <Content Include="Assets\images\user\10.jpg" />
+    <Content Include="Assets\images\user\11.jpg" />
+    <Content Include="Assets\images\user\11.png" />
+    <Content Include="Assets\js\Angular\angular-imgur-upload.js" />
+    <Content Include="Assets\js\Angular\angular.min.js" />
+    <Content Include="Assets\js\Angular\Srcripts\AngularAdmin.js" />
+    <Content Include="Assets\js\animated.js" />
+    <Content Include="Assets\js\apexcharts.js" />
+    <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\chart-custom.js" />
+    <Content Include="Assets\js\charts.js" />
+    <Content Include="Assets\js\core.js" />
+    <Content Include="Assets\js\countdown.min.js" />
+    <Content Include="Assets\js\custom.js" />
+    <Content Include="Assets\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Assets\js\flatpickr.js" />
+    <Content Include="Assets\js\highcharts-3d.js" />
+    <Content Include="Assets\js\highcharts-more.js" />
+    <Content Include="Assets\js\highcharts.js" />
+    <Content Include="Assets\js\jquery.appear.js" />
+    <Content Include="Assets\js\jquery.counterup.min.js" />
+    <Content Include="Assets\js\jquery.dataTables.min.js" />
+    <Content Include="Assets\js\jquery.magnific-popup.min.js" />
+    <Content Include="Assets\js\jquery.min.js" />
+    <Content Include="Assets\js\kelly.js" />
+    <Content Include="Assets\js\lottie.js" />
+    <Content Include="Assets\js\maps.js" />
+    <Content Include="Assets\js\morris.js" />
+    <Content Include="Assets\js\morris.min.js" />
+    <Content Include="Assets\js\owl.carousel.min.js" />
+    <Content Include="Assets\js\popper.min.js" />
+    <Content Include="Assets\js\raphael-min.js" />
+    <Content Include="Assets\js\select2.min.js" />
+    <Content Include="Assets\js\slick.min.js" />
+    <Content Include="Assets\js\smooth-scrollbar.js" />
+    <Content Include="Assets\js\style-customizer.js" />
+    <Content Include="Assets\js\waypoints.min.js" />
+    <Content Include="Assets\js\worldLow.js" />
+    <Content Include="Assets\js\wow.min.js" />
+    <Content Include="Assets\res\css\main.css" />
+    <Content Include="Assets\res\css\util.css" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="Assets\res\images\icons\favicon.ico" />
+    <Content Include="Assets\res\images\img-01.png" />
+    <Content Include="Assets\res\js\main.js" />
+    <Content Include="Assets\res\vendor\animate\animate.css" />
+    <Content Include="Assets\res\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Assets\res\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Assets\res\vendor\bootstrap\js\popper.js" />
+    <Content Include="Assets\res\vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="Assets\res\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="Assets\res\vendor\select2\select2.min.css" />
+    <Content Include="Assets\res\vendor\select2\select2.min.js" />
+    <Content Include="Assets\res\vendor\tilt\tilt.jquery.min.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\LoaiSanPhamAdminController.cs" />
+    <Compile Include="Controllers\SanPhamAdminController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Assets\fonts\dripicons-v2.eot" />
+    <Content Include="Assets\fonts\dripicons-v2.ttf" />
+    <Content Include="Assets\fonts\dripicons-v2.woff" />
+    <Content Include="Assets\fonts\dripicons-v2d41d.eot" />
+    <Content Include="Assets\fonts\fontawesome-webfont3e6e.eot" />
+    <Content Include="Assets\fonts\fontawesome-webfont3e6e.ttf" />
+    <Content Include="Assets\fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="Assets\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="Assets\fonts\ionicons28b5.eot" />
+    <Content Include="Assets\fonts\ionicons28b5.ttf" />
+    <Content Include="Assets\fonts\ionicons28b5.woff" />
+    <Content Include="Assets\fonts\la-brands-400.eot" />
+    <Content Include="Assets\fonts\la-brands-400.ttf" />
+    <Content Include="Assets\fonts\la-brands-400.woff" />
+    <Content Include="Assets\fonts\la-brands-400d41d.eot" />
+    <Content Include="Assets\fonts\la-regular-400.eot" />
+    <Content Include="Assets\fonts\la-regular-400.ttf" />
+    <Content Include="Assets\fonts\la-regular-400.woff" />
+    <Content Include="Assets\fonts\la-regular-400d41d.eot" />
+    <Content Include="Assets\fonts\la-solid-900.eot" />
+    <Content Include="Assets\fonts\la-solid-900.ttf" />
+    <Content Include="Assets\fonts\la-solid-900.woff" />
+    <Content Include="Assets\fonts\la-solid-900d41d.eot" />
+    <Content Include="Assets\fonts\remixicon4d30.eot" />
+    <Content Include="Assets\fonts\remixicon4d30.ttf" />
+    <Content Include="Assets\fonts\remixicon4d30.woff" />
+    <Content Include="Assets\fonts\slick.eot" />
+    <Content Include="Assets\fonts\slick.ttf" />
+    <Content Include="Assets\fonts\slick.woff" />
+    <Content Include="Assets\fonts\slickd41d.eot" />
+    <Content Include="Assets\images\book\book.pdf" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.eot" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.ttf" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont3e6e.woff2" />
+    <Content Include="Assets\res\fonts\font-awesome-4.7.0\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="Assets\res\fonts\montserrat\Montserrat-Bold.ttf" />
+    <Content Include="Assets\res\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="Assets\res\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="Assets\res\fonts\poppins\Poppins-Regular.ttf" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Views\SanPhamAdmin\ManagerProduct.cshtml" />
+    <Content Include="Views\Shared\_TitelPage.cshtml" />
+    <Content Include="Views\Admin\login.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminAcc.cshtml" />
+    <Content Include="Views\LoaiSanPhamAdmin\GetAllProductType.cshtml" />
+    <Content Include="Views\SanPhamAdmin\AddProductType.cshtml" />
+    <Content Include="Views\Admin\addProduct.cshtml" />
+    <Content Include="Views\Admin\Order.cshtml" />
+    <Content Include="Views\Shared\_navbar.cshtml" />
+    <Content Include="Views\Admin\profile.cshtml" />
+    <Content Include="Views\Admin\editprofile.cshtml" />
+    <Content Include="Views\Admin\addNv.cshtml" />
+    <Content Include="Views\SanPhamAdmin\Editproduct.cshtml" />
+    <Content Include="Views\Admin\Price.cshtml" />
+    <Content Include="Views\Admin\PriceEdit.cshtml" />
+    <Content Include="Views\Admin\AddPrice.cshtml" />
+    <Content Include="Views\Admin\ListUser.cshtml" />
+    <Content Include="Views\Admin\UpdateProfileUser.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\guestEvent\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL%28Business Logic Layer %29\BLL%28Business Logic Layer %29.csproj">
+      <Project>{a48ce1ca-ce18-4dba-9122-4aabd686702b}</Project>
+      <Name>BLL%28Business Logic Layer %29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO%28Data Transfer Object%29\DTO%28Data Transfer Object%29.csproj">
+      <Project>{2baed398-2677-4344-a468-fb7ea509a1aa}</Project>
+      <Name>DTO%28Data Transfer Object%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\project-3-fresh-food\project-3-fresh-food.csproj">
+      <Project>{4b3e9a9a-bd81-46fd-843f-4822766c2627}</Project>
+      <Name>project-3-fresh-food</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\tool\tool.csproj">
+      <Project>{05b19f10-c691-4223-a15a-ba3a3117f9fd}</Project>
+      <Name>tool</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61023</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44351/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.9.10\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.9.10\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.9.10\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.9.10\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.9.10\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.9.10\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
