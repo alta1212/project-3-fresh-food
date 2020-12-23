@@ -37,6 +37,9 @@ namespace DTO_Data_Transfer_Object_
             this.donViTinh = donViTinh;
             this.hinhAnh = hinhAnh;
         }
+
+        
+
         public string MaChiTietGioHang
         {
             get { return maChiTietGioHang; } 

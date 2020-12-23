@@ -53,7 +53,21 @@ namespace DAO_Data_Access_Object_
             return listCart_DTOs;
         }
 
-       
+        public void UpdateAmountInCartDetails(Cart_DTO cart_DTO)
+        {
+            SqlParameter [] parm = new SqlParameter[] 
+            {
+                 new SqlParameter("@MaGioHang",SqlDbType.NVarChar,100),
+                 new SqlParameter("@MaSanPham",SqlDbType.NVarChar,100),
+                 new SqlParameter("@SoLuong",SqlDbType.NVarChar,200),
+            };
+            parm[0].Value = cart_DTO.MaGioHang;
+            parm[1].Value = cart_DTO.MaSanPham;
+            parm[2].Value = cart_DTO.SoLuong;
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Update_Amount_In_Cart_Details", parm);
+
+        }
+
         public int GetDiscount(DateTime dateTime)
         {
             int perCent = 0;

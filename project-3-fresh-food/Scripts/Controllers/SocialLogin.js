@@ -34,10 +34,11 @@ function LoginFaceBook() {
 }(document, 'script', 'facebook-jssdk'));
 
 function LogOutFaceBook() {
-   
     FB.logout();
 }
 
+
+// Google
 function onSignIn(googleUser) {
     var scopeGetAPI = angular.element(document.getElementById('logdiv')).scope();
     // Useful data for your client-side scripts:

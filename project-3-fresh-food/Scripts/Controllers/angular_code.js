@@ -253,7 +253,6 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload, $rootS
                 url: '/Account/LoginWithFaceBook', //gọi hàm controller/account/Login
                 params: data
             }).then(function (bool) {
-                debugger
                 $scope.src = bool.data[0].anhdaidien;
                 $scope.ten = bool.data[0].TenKhachHang;
                 $scope.gt = bool.data[0].sex;
@@ -327,15 +326,11 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload, $rootS
 // Tài khoản
 app.controller("acccontroller", function ($window, $scope,$rootScope, $http) {
     $scope.lin = true;
-
-    $scope.logout = function () {
-        
-        signOut()
-        localStorage.clear();
-        $window.location.href = '/Account/Login';
-    }
-
     if (localStorage.getItem('taikhoan') != null && localStorage.getItem('matkhau') != null) { //kiểm tra người dùng đã từng đăng nhập chưa nếu rồi thì chuyển sang trang chủ
+        $scope.logout = function () {
+            localStorage.clear();
+            $window.location.href = '/Account/Login';
+        }
 
         var data = {
 
@@ -381,11 +376,19 @@ app.controller("acccontroller", function ($window, $scope,$rootScope, $http) {
     }
     //dn bằng gg
     else if (localStorage.getItem("idFb") === null) {
-
+        $scope.logout = function () {
+            signOut()
+            localStorage.clear();
+            $window.location.href = '/Account/Login';
+        }
     }
     //đăng nhập = facebook
     else {
-    
+        $scope.logout = function () {
+            LogOutFaceBook();
+            localStorage.clear();
+            $window.location.href = '/Account/Login';
+        }
             var data = {
                 "kHACH_HANG.IDFacebook": localStorage.getItem("idFb")
             }
@@ -396,7 +399,6 @@ app.controller("acccontroller", function ($window, $scope,$rootScope, $http) {
                 params: data
             }).then(function (bool) {
                 console.log(bool)
-                
                 $rootScope.khachHang = bool.data[0];
                 if (bool.data[0].Active == "1" && $window.location.pathname != "/account/fillinfo") {
                     $scope.lin = false;
@@ -746,8 +748,7 @@ app.controller('CartInHeader', function ($rootScope, $scope, $http) {
         
     });
 })
-app.controller('CartInDetail', function ($scope,$rootScope, $http) {
-    
+app.controller('CartInDetail', function ($scope, $rootScope, $http) {
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
     $rootScope.$on('dataKhachHang', function (event, data) {
         console.log(data.MaGioHang)
@@ -758,12 +759,6 @@ app.controller('CartInDetail', function ($scope,$rootScope, $http) {
             $scope.listInCart = response.data;
             console.log(response.data)
             console.log($scope.listInCart[0].SoLuong)
-            $scope.Hay = function (idCartDetails, value) {
-                console.log(value)
-                $scope.listInCart[idCartDetails].SoLuong = value.SoLuongChange;
-                console.log(response.data[idCartDetails].SoLuong)
-                console.log($scope.listInCart);
-            }
             $scope.getTotal = function () {
                 var total = 0;
                 for (var i = 0; i < response.data.length; i++) {
@@ -780,7 +775,7 @@ app.controller('CartInDetail', function ($scope,$rootScope, $http) {
                 return total;
             }
             $http.get('/Product/getchietkhau').then(function (listDiscount) {
-               
+
                 for (var i = 0; i < listDiscount.data.length; i++) {
                     if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiTieu) {
                         $rootScope.percent = listDiscount.data[i].PhanTram;
@@ -789,10 +784,60 @@ app.controller('CartInDetail', function ($scope,$rootScope, $http) {
                 if ($scope.getTotal() >= listDiscount.data[listDiscount.data.length - 1].TienToiDa) {
                     $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
                 }
-                    
-           
+
+
             })
-           
+            $scope.Hay = function (idCartDetails, value) {
+                console.log(idCartDetails)
+                console.log(value)
+                console.log(value.i.MaSanPham)
+                $scope.listInCart[idCartDetails].SoLuong = value.SoLuongChange;
+                console.log(response.data[idCartDetails].SoLuong)
+                console.log($scope.listInCart);
+                var cartDetailsChange = {
+                    "cart_DTO.MaGioHang": data.MaGioHang,
+                    "cart_DTO.MaSanPham": value.i.MaSanPham,
+                    "cart_DTO.SoLuong": value.SoLuongChange
+                }
+                console.log(cartDetailsChange);
+                $http.post('/guestEvent/UpdateAmountInCartDetails', cartDetailsChange).then(function (e) {
+                    $http({
+                        method: 'get',
+                        url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
+                    }).then(function successGetAll(response) {
+                        $scope.listInCart = response.data;
+                        console.log(response.data)
+                        console.log($scope.listInCart[0].SoLuong)
+                        $scope.getTotal = function () {
+                            var total = 0;
+                            for (var i = 0; i < response.data.length; i++) {
+                                var giaBan = response.data[i].GiaBan;
+                                var giaGiam = response.data[i].GiaGiam;
+                                var soLuong = response.data[i].SoLuong;
+                                if (giaGiam > 0) {
+                                    total += giaGiam * soLuong;
+                                }
+                                else {
+                                    total += giaBan * soLuong;
+                                }
+                            }
+                            return total;
+                        }
+                        $http.get('/Product/getchietkhau').then(function (listDiscount) {
+
+                            for (var i = 0; i < listDiscount.data.length; i++) {
+                                if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiTieu) {
+                                    $rootScope.percent = listDiscount.data[i].PhanTram;
+                                }
+                            }
+                            if ($scope.getTotal() >= listDiscount.data[listDiscount.data.length - 1].TienToiDa) {
+                                $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
+                            }
+                        })
+                    });
+                })
+                
+            }
         });
 
     });
@@ -803,6 +848,7 @@ app.controller('CartInDetail', function ($scope,$rootScope, $http) {
         
 })
 app.controller('CartInTotal', function ($scope, $rootScope, $http) {
+    
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
     $rootScope.$on('dataKhachHang', function (event, data) {
         console.log(data.MaGioHang)
@@ -987,4 +1033,3 @@ function addcart($location,msp, giaban,$http) {
         })
     }
 }
-

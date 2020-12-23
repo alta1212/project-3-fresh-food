@@ -1,5 +1,6 @@
 ﻿using BLL_Business_Logic_Layer__;
 using BLL_Business_Logic_Layer__.ServiceInterface;
+using DTO_Data_Transfer_Object_;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,10 @@ namespace project_3_fresh_food.Controllers
         public void postComment(string masp, string mkh, string binhluan, string hinhanh, float stars)
         {
             sp.postcomment(masp,mkh,binhluan,hinhanh,stars);
+        }
+        public void UpdateAmountInCartDetails(Cart_DTO cart_DTO)
+        {
+            cart.UpdateAmountInCartDetails(cart_DTO);
         }
         public ActionResult confirmOrder(string madonhang)
         {

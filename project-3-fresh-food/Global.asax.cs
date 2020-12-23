@@ -20,25 +20,25 @@ namespace project_3_fresh_food
         {
            
         }
-        protected void Application_Error(object sender, EventArgs e)
-        {
-            Exception lastErrorInfo = Server.GetLastError();
-            Exception errorInfo = null;
+        //protected void Application_Error(object sender, EventArgs e)
+        //{
+        //    Exception lastErrorInfo = Server.GetLastError();
+        //    Exception errorInfo = null;
 
-            bool isNotFound = false;
-            if (lastErrorInfo != null)
-            {
-                errorInfo = lastErrorInfo.GetBaseException();
-                var error = errorInfo as HttpException;
-                if (error != null)
-                    isNotFound = error.GetHttpCode() == (int)HttpStatusCode.NotFound;
-            }
-            if (isNotFound)
-            {
-                Server.ClearError();
-                Response.Redirect("~/Index/Sorry");
-            }
-        }
+        //    bool isNotFound = false;
+        //    if (lastErrorInfo != null)
+        //    {
+        //        errorInfo = lastErrorInfo.GetBaseException();
+        //        var error = errorInfo as HttpException;
+        //        if (error != null)
+        //            isNotFound = error.GetHttpCode() == (int)HttpStatusCode.NotFound;
+        //    }
+        //    if (isNotFound)
+        //    {
+        //        Server.ClearError();
+        //        Response.Redirect("~/Index/Sorry");
+        //    }
+        //}
        
     }
 }
