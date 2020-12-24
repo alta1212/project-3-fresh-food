@@ -730,31 +730,39 @@ app.controller("productdetails", function ($rootScope,$scope, $location, $http, 
 
 app.controller('CartInHeader', function ($rootScope, $scope, $http) {
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
-    $rootScope.$on('dataKhachHang', function (event, data) {
-        console.log(data.MaGioHang)
-        $http({
-            method: 'get',
-            url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
-        }).then(function successGetAll(response) {
-            $scope.listInCart = response.data;
-            console.log(response.data)
-            $scope.getTotal = function () {
-                var total = 0;
-                for (var i = 0; i < response.data.length; i++) {
-                    var giaBan = response.data[i].GiaBan;
-                    var giaGiam = response.data[i].GiaGiam;
-                    var soLuong = response.data[i].SoLuong;
-                    if (giaGiam > 0) {
-                        total += giaGiam * soLuong;
+   
+        $rootScope.$on('dataKhachHang', function (event, data) {
+            console.log(data.MaGioHang)
+            console.log("here")
+            $scope.getCart = function () {
+                $http({
+                    method: 'get',
+                    url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
+                }).then(function successGetAll(response) {
+                    $scope.listInCart = response.data;
+                    $scope.length = $scope.listInCart.length;
+
+                    console.log(response.data)
+                    $scope.getTotal = function () {
+                        var total = 0;
+                        for (var i = 0; i < response.data.length; i++) {
+                            var giaBan = response.data[i].GiaBan;
+                            var giaGiam = response.data[i].GiaGiam;
+                            var soLuong = response.data[i].SoLuong;
+                            if (giaGiam > 0) {
+                                total += giaGiam * soLuong;
+                            }
+                            else {
+                                total += giaBan * soLuong;
+                            }
+                        }
+                        return total;
                     }
-                    else {
-                        total += giaBan * soLuong;
-                    }
-                }
-                return total;
-            }});
-        
-    });
+                });
+            }
+            $scope.getCart()
+        });
+    
 })
 app.controller('CartInDetail', function ($scope, $rootScope, $http) {
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
@@ -1022,6 +1030,8 @@ function addcart($location,msp, giaban,$http) {
             data: chiTietGioHang
         }).then(function successCallback(response) {
             console.log(response);
+            angular.element(document.getElementById('cart-in-header')).scope().getCart()
+            toastr.info("thêm vào giỏ hàng thành công", "", 3000)
         })
     }
     //trường hợp đăng nhập fb
@@ -1038,6 +1048,8 @@ function addcart($location,msp, giaban,$http) {
             data: chiTietGioHang
         }).then(function successCallback(response) {
             console.log(response);
+            angular.element(document.getElementById('cart-in-header')).scope().getCart()
+            toastr.info("thêm vào giỏ hàng thành công", "", 3000)
         })
     }
 }
