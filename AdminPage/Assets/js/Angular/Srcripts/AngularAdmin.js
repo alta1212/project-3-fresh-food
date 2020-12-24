@@ -248,6 +248,31 @@ myApp.controller('addPro', function (imgurUpload, $scope, $http, $rootScope) {
 
 });
 
+//lấy về order chi tiết
+myApp.controller('orderDetail', function ($scope, $http, $location) {
+    var key = $location.search().madonhang
+     
+        $http.get('/Admin/getOrderDetails?maHoaDon='+ key).then(function (s) {
+            $scope.getJsonResults = s.data;
+        }).then(function () {
+            tongtien = 0;
+            $scope.total = function () {
+                for (var i = 0; i < getJsonResults.data.length; i++) {
+                    tongtien += getJsonResults.data.thanhTien[i];
+                }
+                return tongtien;
+            }
+        })
+  
+
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
 //lấy về danh sách order
 myApp.controller('managerOrder', function ($rootScope, $scope, $http) {
     $scope.size = 10;
@@ -255,6 +280,9 @@ myApp.controller('managerOrder', function ($rootScope, $scope, $http) {
     getoder($http, $scope.size, $scope)
     $scope.changeview = function () {
         getoder($http, $scope.pagesize, $scope)
+    }
+    $scope.ViewOrderdetail = function (e) {
+        window.open(e, '', 'width=1000,height=800');
     }
     $scope.veri = function (e) {
         var data =
@@ -268,7 +296,7 @@ myApp.controller('managerOrder', function ($rootScope, $scope, $http) {
         toastr.success('Xác nhận đơn hàng thành công', 'Thành công!!', { timeOut: 5000 })
     }
     $scope.delete = function () {
-        toastr.success('xoá dòng 221', 'Thành công!!', { timeOut: 5000 })
+        toastr.success('xoá dòng 284', 'Thành công!!', { timeOut: 5000 })
         getoder($http, $scope.pagesize, $scope)
     }
 }).filter("filterdate", function () {

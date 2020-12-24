@@ -31,6 +31,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         int changPassWord(ADMIN nv,string newPass);
         void addConfirmCode(string manv, string confirmationCode);
         void ComfimforgetPass(string confirmationCode, string newPass);
-        object getListOrderDetails(string page, string pagesize, string maHoaDon);
+        object getListOrderDetails(string maHoaDon);
     }
 }

@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Chi Tiết Đơn Hàng";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div ng-controller="orderDetail" id="content-page" class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Chi tiết đơn hàng</h4>
+                        </div>
+                        <div class="iq-card-header-toolbar d-flex align-items-center">
+                            <a href="/Admin/addProduct" class="btn btn-primary">Thêm sản phẩm</a>
+                        </div>
+                    </div>
+                    <div class="iq-card-body">
+                        <div class="table-responsive">
+                            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="data-tables table table-striped table-bordered dataTable no-footer" style="width:100%" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 3%;">No</th>
+                                                    <th style="width: 12%;">Tên Sản Phẩm</th>
+                                                    <th style="width: 7%;">Số Lượng</th>
+                                                    <th style="width: 15%;">Giá Bán</th>
+                                                    <th style="width: 15%;">Ngày Mua</th>
+                                                    <th style="width: 15%;">Thành tiền</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="i in getJsonResults">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{i.tenSanPham}}</td>
+                                                    <td>{{i.soLuong}}</td>
+                                                    <td>{{i.giaBan | number}} VNĐ</td>
+                                                    <td>{{i.thanhTien | number}} VNĐ</td>
+                                                    <td>{{i.NgayMua | filterdate | date:'dd/MM/yyyy'}}</td>
+                                                </tr>
+
+                                            </tbody>
+                                           
+                                        </table>
+                                        <h4 style="float:right;margin-right:3%" >Tổng Tiền : {{total()}}</h4>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-7">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                        <ul class="pagination">
+                                            <li class="paginate_button page-item active" ng-repeat="item in list">
+                                                <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="{{item}}" tabindex="0" ng-class="{'active-task': count == $index + 1}" ng-click="changePage(item)" class="page-link">{{item}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

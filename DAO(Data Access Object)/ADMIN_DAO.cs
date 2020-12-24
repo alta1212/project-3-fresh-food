@@ -85,6 +85,26 @@ namespace DAO_Data_Access_Object_
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Edit_Profile", parm);
         }
 
+        public object getListOrderDetails( string maHoaDon)
+        {
+            DataTable dt = new DataTable();
+            string cmdtext = string.Format("");
+            dt = DataAccessHelper.log(cmdtext);
+            List<orderDetail> li = new List<orderDetail>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                orderDetail or = new orderDetail();
+                // tên số lượng giá bán thành tiền ngày mua
+                or.tenSanPham = dr[0].ToString();
+                or.soLuong = int.Parse(dr[0].ToString());
+                or.giaBan = int.Parse(dr[0].ToString());
+                or.thanhTien = int.Parse(dr[0].ToString());
+                or.NgayMua = DateTime.Parse(dr[0].ToString());
+                li.Add(or);
+            }
+            return li;
+        }
+
         public object adType()
         {
             DataTable dt = new DataTable();

@@ -111,6 +111,10 @@ namespace BLL_Business_Logic_Layer__
         {
             ad.themSp(sp);
         }
-      
+
+        public object getListOrderDetails( string maHoaDon)
+        {
+            return ad.getListOrderDetails(maHoaDon);
+        }
     }
 }

@@ -90,9 +90,9 @@ namespace AdminPage.Controllers
             return Json(ad.getListOrder(pagesize),JsonRequestBehavior.AllowGet);
         }
        
-        public JsonResult getOrderDetails(string page,string pagesize, string maHoaDon)
+        public JsonResult getOrderDetails(string maHoaDon)
         {
-            return Json(ad.getListOrderDetails(page, pagesize, maHoaDon), JsonRequestBehavior.AllowGet);
+            return Json(ad.getListOrderDetails(maHoaDon), JsonRequestBehavior.AllowGet);
         }
         public JsonResult getPrice(string page, string pagesize)
         {

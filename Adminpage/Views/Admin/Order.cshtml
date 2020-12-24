@@ -82,13 +82,13 @@
                                                     <td>{{i.TongTien|number}} VNĐ</td>
                                                     <td>
                                                         <div ng-switch="i.TrangThai == '1'" class="flex align-items-center list-user-action">
+                                                            <a class="bg-primary" ng-click="ViewOrderdetail('/Admin/OrderDetails#!?madonhang='+i.MaDonHang)" data-toggle="tooltip" data-placement="top" data-original-title="Edit" href="#"><i class="ion-eye"></i></a>
                                                             <div ng-switch-when="true">
-                                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" data-original-title="Edit" href="#"><i class="ion-eye"></i></a>
                                                                 <a onclick="toastr.error('Không thể xác nhận đơn hàng đã xác nhận', 'Inconceivable!', { timeOut: 5000 })" class="bg-primary" data-toggle="tooltip" data-placement="top" disabled="disabled" title="Không Thể Xác Nhận Đơn Hàng Đã Xác Thực" data-original-title="Edit" href="#"><i class="ri-check-line"></i></a>
                                                                 <a class="bg-primary" onclick="toastr.error('Không thể xoá đơn hàng đã xác nhận', 'Inconceivable!', { timeOut: 5000 })" data-toggle="tooltip" data-placement="top" title="Huỷ Bỏ Đơn Hàng" data-original-title="Delete" href="#"><i class="ri-delete-bin-7-line"></i></a>
                                                             </div>
                                                             <div ng-switch-when="false">
-                                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" data-original-title="Edit" href="#"><i class="ion-eye"></i></a>
+
                                                                 <a ng-click="veri(i.MaDonHang)" class="bg-primary" data-toggle="tooltip" data-placement="top" title="Xác Nhận Đơn Hàng" data-original-title="Edit" href="#"><i class="ri-check-line"></i></a>
                                                                 <a ng-click="delete()" class="bg-primary" data-toggle="tooltip" data-placement="top" title="Huỷ Bỏ Đơn Hàng" data-original-title="Delete" href="#"><i class="ri-delete-bin-7-line"></i></a>
                                                             </div>
