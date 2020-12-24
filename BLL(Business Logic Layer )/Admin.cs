@@ -30,9 +30,9 @@ namespace BLL_Business_Logic_Layer__
         {
             return ad.add(adm);
         }
-        public IList<ADMIN> GetListUser(string pagesize)
+        public IList<ADMIN> GetListUser(string page,string pagesize)
         {
-            return ad.getListUser(pagesize);
+            return ad.getListUser(page,pagesize);
         }
         public void addPrice(Price_DTO getJsonResults)
         {
@@ -92,9 +92,9 @@ namespace BLL_Business_Logic_Layer__
             return ad.getListOrder(pagesize);
         }
 
-        public object getPrice()
+        public object getPrice(string page, string pagesize)
         {
-            return ad.getPrice();
+            return ad.getPrice(page,pagesize);
         }
 
         public IList<ADMIN> login(string tk, string mk)

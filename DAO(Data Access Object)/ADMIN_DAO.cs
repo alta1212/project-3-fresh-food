@@ -243,25 +243,25 @@ namespace DAO_Data_Access_Object_
             return listgia(dt);
         }
 
-        public IList<Price_DTO> getPrice()
+        public IList<Price_DTO> getPrice(string page, string pagesize)
         {
             DataTable dt = new DataTable();
             string cmdtext = string.Format(@"Select gb.*,sp.tensanpham From dbo.gia_ban  gb Left Join dbo.san_pham sp
                                                 On gb.MaSanPham = sp.MaSanPham
-                                                Order By magiaban");
+                                                Order By magiaban  Offset {1}*({0}-1) Rows Fetch next {1} rows only", page, pagesize);
             dt = DataAccessHelper.log(cmdtext);
             return listgia(dt);
 
         }
 
-        public IList<ADMIN> getListUser(string pagesize)
+        public IList<ADMIN> getListUser(string page,string pagesize)
         {
             DataTable dt = new DataTable();
             string cmdText = string.Format(@"
             Select TenNhanVien,NV.MaLoaiNhanVien,GioiTinh,NgaySinh,DiaChi,SoDienThoai,Email,HinhAnh,TenLoaiNhanVien,NV.MaNhanVien 
                 From dbo.NHAN_VIEN_ NV  Inner Join dbo.LOAI_NHAN_VIEN_ LNV
 	                On NV.MaLoaiNhanVien = LNV.MaLoaiNhanVien 
-                        Order By MaNhanVien Desc Offset 0 Rows Fetch Next {0} Rows Only", pagesize);
+                        Order By MaNhanVien Offset {1}*({0}-1) Rows Fetch next {1} rows only",page, pagesize);
             dt = DataAccessHelper.log(cmdText);
             List<ADMIN> li = new List<ADMIN>();
             foreach (DataRow dr in dt.Rows)
@@ -336,19 +336,38 @@ namespace DAO_Data_Access_Object_
         public IList<dashBroad> dash()
         {
             DataTable dt = new DataTable();
-            string cmdtext = string.Format(@"select count(distinct KHACH_HANG.MaKhachHang) ,
-       count(distinct SAN_PHAM.MaSanPham),
-       COUNT(distinct DON_HANG.MaDonHang)
-       from SAN_PHAM, KHACH_HANG, DON_HANG");
+            string cmdtext = string.Format(@"
+            SELECT  (
+        SELECT COUNT(*)
+        FROM   SAN_PHAM
+        ) AS count1,
+        (
+        SELECT COUNT(*)
+        FROM   KHACH_HANG
+        ) AS count2,
+		(
+        SELECT COUNT(*)
+        FROM   Nhan_Vien_
+        ) AS count2,
+		(
+        SELECT COUNT(*)
+        FROM   Gia_Ban
+        ) AS count2,
+		(
+        SELECT COUNT(*)
+        FROM   DON_HANG
+        ) AS count2
+");
             dt = DataAccessHelper.log(cmdtext);
             List<dashBroad> li = new List<dashBroad>();
             foreach (DataRow dr in dt.Rows)
             {
                 dashBroad ad = new dashBroad();
-                ad.user = dr[0].ToString();
-                ad.product = dr[1].ToString();
-                ad.order = dr[2].ToString();
-
+                ad.user = dr[1].ToString();
+                ad.product = dr[0].ToString();
+                ad.order = dr[4].ToString();
+                ad.admin = dr[2].ToString();
+                ad.price = dr[3].ToString();
                 li.Add(ad);
             }
             return li;

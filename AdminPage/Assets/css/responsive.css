@@ -313,3 +313,7 @@ NOTE: This file contains the styling for responsive Template.
 	.iq-search-bar .searchbox { width: 160px; }
 	.navbar-list li.nav-item.nav-icon > a { margin-top: 20px; margin-bottom: 20px; }
 }
+.active-task {
+	background-color: white !important;
+	color: #0dd6b8 !important
+}

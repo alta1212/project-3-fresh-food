@@ -14,10 +14,10 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<dashBroad> dashboard();
         int themLsp(LOAI_SAN_PHAM lsp);
         void themsp(SAN_PHAM sp);
-        IList<ADMIN> GetListUser(string pagesize);
+        IList<ADMIN> GetListUser(string page,string pagesize);
         IList<Order_DTO> getListOrder(string pagesize);
         int addnv(ADMIN adm);
-        object getPrice();
+        object getPrice(string page, string pagesize);
         object getInfoPrice(string magia);
         void editPrice(Price_DTO getJsonResults);
         void deltePrice(string ma);
@@ -31,5 +31,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         int changPassWord(ADMIN nv,string newPass);
         void addConfirmCode(string manv, string confirmationCode);
         void ComfimforgetPass(string confirmationCode, string newPass);
+        object getListOrderDetails(string page, string pagesize, string maHoaDon);
     }
 }

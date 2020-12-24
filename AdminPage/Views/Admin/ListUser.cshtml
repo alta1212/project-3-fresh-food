@@ -88,14 +88,8 @@
                                 <div class="col-sm-12 col-md-7">
                                     <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
                                         <ul class="pagination">
-                                            <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
-                                                <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                            </li>
-                                            <li class="paginate_button page-item active">
-                                                <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                                            </li>
-                                            <li class="paginate_button page-item next disabled" id="DataTables_Table_0_next">
-                                                <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link">Next</a>
+                                            <li class="paginate_button page-item active" ng-repeat="item in list">
+                                                <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="{{item}}" tabindex="0" ng-class="{'active-task': count == $index + 1}" ng-click="changePage(item)" class="page-link">{{item}}</a>
                                             </li>
                                         </ul>
                                     </div>

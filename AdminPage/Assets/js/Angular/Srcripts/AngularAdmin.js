@@ -11,41 +11,33 @@ myApp.run(function ($rootScope) {
 
 myApp.controller('managerProduct', function ($scope, $location, $window, $http) {
     $scope.pagesize = 10//khởi tạo giá trị hiển thị ban đầu
+    // Tạo mảng lưu các sản phẩm để phân trang
     $scope.list = [];
     $http.get('/Admin/dash').then(function (s) {
         console.log(s)
         $http({
             method: 'get',
-            url: '/SanPhamAdmin/GetAllProduct?page=1&&size=10'
-
+            url: '/SanPhamAdmin/GetAllProduct?page=1&&size=10' // lấy về 10 sản phẩm đầu tiên
         })
             .then(function (jsonResults) {
-                for (var i = 1; i <= s.data[0].product / $scope.pagesize; i++) {
+                var quotient = s.data[0].product / $scope.pagesize;
+                if (quotient % 10 !== 0) {
+                    quotient += 1;
+                }
+                for (var i = 1; i <= quotient; i++) {
                     $scope.list.push(i);
                     console.log($scope.list[i - 1])
                 }
                 $scope.getJsonResults = jsonResults.data;
+                $scope.count = 1;
+                var changeStyle = 1;
                 $scope.changePage = function (a) {
+                    
                     $http.get('/SanPhamAdmin/GetAllProduct?page='+a+'&&size=10').then(function (get) {
                         $scope.getJsonResults = get.data;
                     })
-                }
-                $scope.changeview = function () {
-
-                    var pageselect = {
-                        page: 1,
-                        size: $scope.pagesize
-                    }
-
-                    $http({
-                        method: 'GET',
-                        url: '/SanPhamAdmin/GetAllProduct',
-                        params: pageselect
-                    }).then(function successCallback(response) {
-                        $scope.getJsonResults = response.data;
-                        console.log(response.data)
-
-                    })
+                    $scope.count = a;
+                    changeStyle = a - 1;
                 }
             }
             )
@@ -313,15 +305,34 @@ myApp.controller('Profile', function ($scope, $rootScope, $http) {
     };
 });
 myApp.controller('getListUser', function ($rootScope, $scope, $http, imgurUpload) {
-    $http.get('/Admin/GetListUser?pagesize=10').then(function (e){
-        $scope.UserInfo = e.data;
-        console.log(e.data);
-    })
-    $scope.changeview = function () {
-        $http.get('/Admin/GetListUser?pagesize=' + $scope.pagesize).then(function (e) {
-            $scope.UserInfo = e.data;
+    $scope.pagesize = 10;
+    $scope.list = [];
+    $http.get('/Admin/dash').then(function (data) {
+        // Lấy về danh sách số lượng về khách hàng, user, sản phẩm, đơn hàng
+        console.log(data);
+        $http.get('/Admin/GetListUser?page=1&&pagesize=10').then(function (listUser) {
+            // Lấy về 10 user đầu tiên truyền vào biến UserInfo
+            $scope.UserInfo = listUser.data;
+            console.log(listUser.data);
+            // Lấy số lượng trang cần chia
+            var quotient = data.data[0].admin / $scope.pagesize; 
+            if (quotient % 10 !== 0) {
+                quotient += 1;
+            }
+            for (var i = 1; i <= quotient; i++) {
+                $scope.list.push(i);
+            }
+            $scope.count = 1;
+            var changeStyle = 1;
+            $scope.changePage = function (a) {
+                $http.get('/Admin/GetListUser?page=' + a + '&&pagesize=10').then(function (getlistUser) {
+                    $scope.UserInfo = getlistUser.data;
+                })
+                $scope.count = a;
+                changeStyle = a - 1;
+            }
         })
-    }
+    })
     $scope.DeleteUser = function (e) {
         var answer = window.confirm("Xóa nhân viên ra cửa hàng");
         if (answer) {
@@ -488,10 +499,33 @@ function ChangeFileImageForProduct(elements) {
 
 
 myApp.controller("managerPrice", function ($http, $scope) {
-    $http.get('/Admin/getPrice').then(function (res) {
-        $scope.getJsonResults = res.data;
-        console.log($scope.getJsonResults)
+    $scope.pagesize = 10;
+    $scope.list = [];
+    $http.get('/Admin/dash').then(function (data) {
+        // Lấy về danh sách số lượng về khách hàng, user, sản phẩm, đơn hàng,giá bán
+        console.log(data);
+        $http.get('/Admin/getPrice?page=1&&pagesize=10').then(function (res) {
+            $scope.getJsonResults = res.data;
+            console.log($scope.getJsonResults)
+            var quotient = data.data[0].price / $scope.pagesize;
+            if (quotient % 10 !== 0) {
+                quotient += 1;
+            }
+            for (var i = 1; i <= quotient; i++) {
+                $scope.list.push(i);
+            }
+            $scope.count = 1;
+            var changeStyle = 1;
+            $scope.changePage = function (a) {
+                $http.get('/Admin/getPrice?page=' + a + '&&pagesize=10').then(function (getListPrice) {
+                    $scope.getJsonResults = getListPrice.data;
+                })
+                $scope.count = a;
+                changeStyle = a - 1;
+            }
+        })
     })
+    
     $scope.EditProductLink = function (e) {
         window.open(e, '', 'width=1000,height=800');
     }
@@ -718,3 +752,4 @@ function ConvertDate(str) {
         day = ("0" + date.getDate()).slice(-2);
     return [date.getFullYear(), mnth, day].join("-");
 }
+

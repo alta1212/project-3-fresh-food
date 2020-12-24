@@ -39,7 +39,10 @@ namespace AdminPage.Controllers
         {
             return View();
         }
-
+        public ActionResult OrderDetails()
+        {
+            return View();
+        }
         public ActionResult Price()
         {
             return View();
@@ -87,10 +90,13 @@ namespace AdminPage.Controllers
             return Json(ad.getListOrder(pagesize),JsonRequestBehavior.AllowGet);
         }
        
-        
-        public JsonResult getPrice()
+        public JsonResult getOrderDetails(string page,string pagesize, string maHoaDon)
         {
-            return Json(ad.getPrice(), JsonRequestBehavior.AllowGet);
+            return Json(ad.getListOrderDetails(page, pagesize, maHoaDon), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getPrice(string page, string pagesize)
+        {
+            return Json(ad.getPrice(page,pagesize), JsonRequestBehavior.AllowGet);
         }
         public JsonResult getInfoPrice( string magia)
         {
@@ -101,9 +107,9 @@ namespace AdminPage.Controllers
         {
             return Json(ad.adType(), JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetListUser(string pagesize)
+        public JsonResult GetListUser(string page, string pagesize)
         {
-            return Json(ad.GetListUser(pagesize), JsonRequestBehavior.AllowGet);
+            return Json(ad.GetListUser(page,pagesize), JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetInfoUserByID(string maNhanVien)
         {
