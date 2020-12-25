@@ -85,11 +85,31 @@ namespace DAO_Data_Access_Object_
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Edit_Profile", parm);
         }
 
+        public void add_Discount(promotion_dto getJsonResults)
+        {
+            SqlParameter[] parm = new SqlParameter[]
+             {
+
+                new SqlParameter("@maSanPham",SqlDbType.NVarChar,50),
+                new SqlParameter("@phantram",SqlDbType.Int),
+                new SqlParameter("@ngayApDung",SqlDbType.DateTime),
+                new SqlParameter("@ngayKetThuc",SqlDbType.DateTime),
+
+             };
+
+            parm[0].Value = getJsonResults.maSanPham;
+            parm[1].Value = getJsonResults.percent;
+            parm[2].Value = DateTime.Parse(getJsonResults.batDau.ToString());
+            parm[3].Value = DateTime.Parse(getJsonResults.ketThuc.ToString());
+
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "addDiscount", parm);
+        }
+
         public object getDiscount(string page)
         {
             DataTable dt = new DataTable();
             string sql= string.Format(@"select gg.*,sp.tensanpham from gia_giam gg,san_pham sp  where
-			getdate() between ngaybatdau and ngayketthuc and gg.masanpham=sp.MaSanPham
+			 gg.masanpham=sp.MaSanPham
                             order by magiagiam ASC Offset 10 * ({0} - 1) Rows Fetch next 10 rows only", page);
             dt = DataAccessHelper.log(sql);
             IList<promotion_dto> li = new List<promotion_dto>();

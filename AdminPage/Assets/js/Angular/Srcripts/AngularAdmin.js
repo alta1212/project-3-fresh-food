@@ -792,7 +792,30 @@ myApp.controller("addPrice", function ($filter, $http, $scope, $location) {
         })
     }
 })
+myApp.controller("addDiscount", function ($filter, $http, $scope, $location) {
+    $http({
+        method: 'get',
+        url: '/SanPhamAdmin/GetAllProduct?page=1&&size=1000'
 
+    }).then(function (s) {
+        $scope.ProductCatetory = s.data;
+        console.log(s.data)
+
+    })
+
+    $scope.MinDateBatDau = new Date().toJSON().slice(0, 10)
+    $scope.MinDateKetThuc = new Date().addDays(1).toJSON().slice(0, 10)
+
+    $scope.add = function () {
+        console.log($scope.getJsonResults);
+        $http.post('/Admin/add_Discount', $scope.getJsonResults).then(function () {
+            toastr.success('Thêm giá khuyến mại thành công', 'Thành công!', { timeOut: 5000 })
+            document.getElementById("add").reset();
+        }, function () {
+                toastr.error('Thêm giá khuyến mại  vui lòng điền đẩy đủ thông tin', 'Lỗi', { timeOut: 5000 })
+        })
+    }
+})
 Date.prototype.addDays = function (days) {
     var date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);

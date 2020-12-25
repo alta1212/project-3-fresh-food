@@ -33,5 +33,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         void ComfimforgetPass(string confirmationCode, string newPass);
         object getListOrderDetails(string maHoaDon);
         object getDiscount(string size);
+        void add_Discount(promotion_dto getJsonResults);
     }
 }

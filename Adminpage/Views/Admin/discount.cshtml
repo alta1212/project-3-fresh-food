@@ -1,21 +1,21 @@
 ﻿
 @{
-    ViewBag.Title = "Giá Khuyến Mại";
+    ViewBag.Title = "Thêm Giá Khuyến Mại";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<div ng-controller="addPrice" id="content-page" class="content-page">
+<div ng-controller="addDiscount" id="content-page" class="content-page">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="iq-card">
                     <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
-                            <h4 class="card-title">Thêm giá sản Phẩm</h4>
+                            <h4 class="card-title">Thêm giá khuyến mại</h4>
                         </div>
                     </div>
                     <div class="iq-card-body">
-                        <form id="addsp">
+                        <form id="add">
                             <div class="form-group">
                                 <label>Tên Sản Phẩm:</label>
                                 <select ng-model="getJsonResults.maSanPham" required class="form-control" >
@@ -26,17 +26,17 @@
                             <div>
                                 <div class="form-group">
                                     <label for="exampleInputdate1">Ngày bắt đầu</label>
-                                    <input required type="date" ng-model="getJsonResults.ngayBatDau" class="form-control" id="exampleInputdate1"  min="{{MinDateBatDau}}">
+                                    <input required type="date" ng-model="getJsonResults.batDau" class="form-control" id="exampleInputdate1"  min="{{MinDateBatDau}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputdate2">Ngày kết Thúc</label>
-                                    <input required ng-model="getJsonResults.ngayKetThuc" type="date" class="form-control" id="exampleInputdate2" min="{{MinDateKetThuc}}">
+                                    <input required ng-model="getJsonResults.ketThuc" type="date" class="form-control" id="exampleInputdate2" min="{{MinDateKetThuc}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label>Giá bán :</label>
-                                <input ng-model="getJsonResults.gia" required type="number" min="10000" class="form-control">
+                                <label>Phần Trăm Giảm :</label>
+                                <input ng-model="getJsonResults.percent" required type="number" min="1" max="100" class="form-control">
                             </div>
 
                             <button formnovalidate ng-click="add()" class="btn btn-primary">Thêm</button>

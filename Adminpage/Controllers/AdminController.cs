@@ -74,6 +74,10 @@ namespace AdminPage.Controllers
         {
             return Json(ad.getDiscount(page),JsonRequestBehavior.AllowGet);
         }
+        public void add_Discount(promotion_dto getJsonResults)
+        {
+            ad.add_Discount(getJsonResults);
+        }
         public ActionResult discountList()
         {
 

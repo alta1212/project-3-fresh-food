@@ -121,5 +121,10 @@ namespace BLL_Business_Logic_Layer__
         {
             return ad.getDiscount(size);
         }
+
+        public void add_Discount(promotion_dto getJsonResults)
+        {
+            ad.add_Discount(getJsonResults);
+        }
     }
 }
