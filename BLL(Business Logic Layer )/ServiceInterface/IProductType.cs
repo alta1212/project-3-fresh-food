@@ -11,7 +11,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
     {
         IList<LOAI_SAN_PHAM> GetAllLSPInShop();
 
-        IList<LOAI_SAN_PHAM> GetAllLSPInAdmin(string page);
+        IList<LOAI_SAN_PHAM> GetAllLSPInAdmin(string page,string size);
         void xoaLsp(string ml);
     }
 }

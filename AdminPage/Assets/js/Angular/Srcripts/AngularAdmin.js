@@ -99,7 +99,7 @@ myApp.controller('managerProductType', function ($scope, $http) {
             document.getElementById('work').style.display = "block"
             $http({
                 method: 'get',
-                url: '/LoaiSanPhamAdmin/GetAllProductTypeJS?page='+a
+                url: '/LoaiSanPhamAdmin/GetAllProductTypeJS?page='+a+'&&size=10'
 
             }).then(function (jsonResults) {
                 $scope.getJsonResults = jsonResults.data;
@@ -240,7 +240,7 @@ myApp.controller('addLsp', function ($scope, $http) {
 //thêm sản phẩm
 myApp.controller('addPro', function (imgurUpload, $scope, $http, $rootScope) {
 
-    $http.get('/LoaiSanPhamAdmin/GetAllProductTypeJS').then(function getListProductCatetory(response) {
+    $http.get('/LoaiSanPhamAdmin/GetAllProductTypeJS?page=1').then(function getListProductCatetory(response) {
         console.log(response.data)
         $scope.ProductCatetory = response.data;
     })
@@ -533,7 +533,7 @@ myApp.controller('addUser', function ($rootScope, $scope, $http, imgurUpload) {
 
 
 myApp.controller('editPro', function (imgurUpload, $scope, $http, $rootScope, $location) {
-    $http.get('/LoaiSanPhamAdmin/GetAllProductTypeJS').then(function getListProductCatetory(response) {
+    $http.get('/LoaiSanPhamAdmin/GetAllProductTypeJS?page=1').then(function getListProductCatetory(response) {
         console.log(response.data)
         $scope.ProductCatetory = response.data;
     })
@@ -544,8 +544,38 @@ myApp.controller('editPro', function (imgurUpload, $scope, $http, $rootScope, $l
     })
 
     $scope.edit = function () {
-        $scope.info;
-        $http.post('/SanPhamAdmin/EditProduct_', $scope.info).then(function (s) { console.log(s) })
+        var image = document.getElementById('file');
+        if (image.files.length !== 0) {
+            var clientId = "5c31a53dda3c8e0";
+            imgurUpload.setClientId(clientId);
+            imgurUpload
+                .upload(image.files[0])
+                .then(function (a) {
+                    $scope.nv.Hinhanh = a.data.link
+
+                    $http.post('/SanPhamAdmin/EditProduct_', $scope.info).then(
+                        function () {
+                            Toast.success("Sửa sản phẩm thành công","Thành công")
+                        },
+                        function () {
+                            Toast.success("Vui lòng nhập đầy đủ thông tin", "Thất bại")
+                        }
+                    )
+                }
+            )
+        }
+        else {
+            $http.post('/SanPhamAdmin/EditProduct_', $scope.info).then(
+                function () {
+
+                    Toast.success("Sửa sản phẩm thành công", "Thành công")
+                },
+                function () {
+                    Toast.success("Vui lòng nhập đầy đủ thông tin", "Thất bại")
+                }
+            )
+        }
+       
     }
 }
 )

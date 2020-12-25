@@ -113,7 +113,22 @@ namespace DAO_Data_Access_Object_
 
         public void edit(SAN_PHAM info)
         {
-            throw new NotImplementedException();
+               SqlParameter[] parm = new SqlParameter[]
+               {
+                    new SqlParameter("@masanpham",SqlDbType.NVarChar,10),
+                    new SqlParameter("@tensanpham",SqlDbType.NVarChar,50),
+                    new SqlParameter("@hinhanh",SqlDbType.NVarChar,50),
+                    new SqlParameter("@donvitinh",SqlDbType.NVarChar,10),
+                    new SqlParameter("@mota",SqlDbType.NVarChar,500),
+                    new SqlParameter("@giamoi",SqlDbType.Int),
+               };
+            parm[0].Value = info.MaSanPham;
+            parm[1].Value = info.tensanpham;
+            parm[0].Value = info.Hinhanh;
+            parm[1].Value = info.DonViTinh;
+            parm[0].Value = info.MoTa;
+            parm[1].Value = info.Giaban;
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "UpdateProduct", parm);
         }
 
         public void xoaSp(string ma)
@@ -126,7 +141,7 @@ namespace DAO_Data_Access_Object_
               };
             parm[0].Value = ma;
 
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "", parm);
+            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "deleteProduct", parm);
         }
 
         public void AddToCart(string maKhacHang, string maSanPham,int donGia,int soLuong)

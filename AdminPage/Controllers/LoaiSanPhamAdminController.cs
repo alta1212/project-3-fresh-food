@@ -20,9 +20,11 @@ namespace AdminPage.Controllers
 
         IProductType productTypeIterface = new LOAI_SAN_PHAM_BLL();
         IList<LOAI_SAN_PHAM> productType;
-        public JsonResult GetAllProductTypeJS(string page)
+        public JsonResult GetAllProductTypeJS(string page,string size)
         {
-            productType = productTypeIterface.GetAllLSPInAdmin(page);
+            if (size == null)
+                size = int.MaxValue.ToString();
+            productType = productTypeIterface.GetAllLSPInAdmin(page,size);
             return Json(productType, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetAllProductType()
