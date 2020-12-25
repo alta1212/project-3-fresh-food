@@ -114,9 +114,9 @@ app.controller("login", function ($scope, $http, $window, $location) {
             method: 'post',
             url: '/Account/LoginWithFaceBook',
             data: dataOfFB
-        }).then(function (response) {
-            console.log(response);
-            localStorage.setItem('idFb', response.id)
+        }).then(function (infoFB) {
+            console.log(infoFB);
+            localStorage.setItem('idFb', respone.id)
         });
         $window.location.href = '/Index/Index';
     }
@@ -820,6 +820,9 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
                 toastr.info("", "Xoá khỏi giỏ hàng thành công", 1000)
                 $scope.load(data);
             })
+            angular.element(document.getElementById('cart-in-header')).scope().getCart()
+            angular.element(document.getElementById('cart-in-total')).scope().GetTotalChange()
+            toastr.info("cập nhật giỏ hàng thành công", "", 3000)
         }
         $scope.load(data);
         });
@@ -859,7 +862,6 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
 
 
             })
-
             $scope.Hay = function (idCartDetails, value) {
                 console.log(idCartDetails)
                 console.log(value)
@@ -907,6 +909,9 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
                                 $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
                             }
                         })
+                        angular.element(document.getElementById('cart-in-header')).scope().getCart()
+                        angular.element(document.getElementById('cart-in-total')).scope().GetTotalChange()
+                        toastr.info("cập nhật giỏ hàng thành công", "", 3000)
                     });
                 })
 
@@ -925,30 +930,33 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
     $rootScope.$on('dataKhachHang', function (event, data) {
         console.log(data.MaGioHang)
-        $http({
-            method: 'get',
-            url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
-        }).then(function successGetAll(response) {
-            $scope.listInCart = response.data;
-            console.log(response.data)
-            $scope.getTotal = function () {
-                var total = 0;
-                for (var i = 0; i < response.data.length; i++) {
-                    var giaBan = response.data[i].GiaBan;
-                    var giaGiam = response.data[i].GiaGiam;
-                    var soLuong = response.data[i].SoLuong;
-                    if (giaGiam > 0) {
-                        total += giaGiam * soLuong;
+        $scope.GetTotalChange = function () {
+            $http({
+                method: 'get',
+                url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
+            }).then(function successGetAll(response) {
+                $scope.listInCart = response.data;
+                console.log(response.data)
+                $scope.getTotal = function () {
+                    var total = 0;
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giaBan = response.data[i].GiaBan;
+                        var giaGiam = response.data[i].GiaGiam;
+                        var soLuong = response.data[i].SoLuong;
+                        if (giaGiam > 0) {
+                            total += giaGiam * soLuong;
+                        }
+                        else {
+                            total += giaBan * soLuong;
+                        }
                     }
-                    else {
-                        total += giaBan * soLuong;
-                    }
+                    return total;
                 }
-                return total;
-            }
-           
-        });
 
+
+            });
+        }
+        $scope.GetTotalChange();
     });
     
 })

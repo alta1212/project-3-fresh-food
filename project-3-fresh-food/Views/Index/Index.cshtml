@@ -15,24 +15,16 @@
 
                 <div class="andro_flex-menu d-none d-md-block">
                     <ul>
-                        <li class="menu-item"> <a href="Index">Daily Deals</a> </li>
+                        <li class="menu-item"> <a href="Index">Sản phẩm ngẫu nhiên</a> </li>
                         <li class="menu-item menu-item-has-children">
-                            <a href="#">Top Sellers</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item"> <a href="#">Food</a> </li>
-                                <li class="menu-item"> <a href="#">Baskets</a> </li>
-                                <li class="menu-item"> <a href="#">Keto</a> </li>
-                            </ul>
+                            <a href="#">Sản phẩm bán chạy</a>
                         </li>
-                        <li class="menu-item"> <a href="/Product/Shop">Fresh Arrivals</a> </li>
+                        <li class="menu-item"> <a href="/Product/Shop">Sản phẩm giảm giá</a> </li>
                         <li class="menu-item menu-item-has-children">
-                            <a href="#">Gift Carts</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item"> <a href="#">Loyalty System</a> </li>
-                                <li class="menu-item"> <a href="#">Redemption Coupons</a> </li>
-                            </ul>
+                            <a href="#">Chương trình khuyến mại</a>
+                            
                         </li>
-                        <li class="menu-item"> <a href="#">Wishlist</a> </li>
+                        @*<li class="menu-item"> <a href="#">Wishlist</a> </li>*@
                     </ul>
                 </div>
 
@@ -46,46 +38,7 @@
 </div>
 <!-- Category Megamenu & Banner end -->
 <!-- Icons Start -->
-<div class="section section-padding pt-0">
-    <div class="container">
-        <div class="row">
 
-            <div class="col-lg-4">
-                <div class="andro_icon-block">
-                    <i class="flaticon-diet"></i>
-                    <h5>Guaranteed Organic</h5>
-                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <svg xmlns="http://www.w3.org/2000/svg">
-                        <rect height="500" width="500" class="andro_svg-stroke-shape-anim"></rect>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="andro_icon-block">
-                    <i class="flaticon-harvest"></i>
-                    <h5>Daily Harvesting</h5>
-                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <svg xmlns="http://www.w3.org/2000/svg">
-                        <rect height="500" width="500" class="andro_svg-stroke-shape-anim"></rect>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="andro_icon-block">
-                    <i class="flaticon-tag"></i>
-                    <h5>Cheap & Healthy</h5>
-                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <svg xmlns="http://www.w3.org/2000/svg">
-                        <rect height="500" width="500" class="andro_svg-stroke-shape-anim"></rect>
-                    </svg>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
 <!-- Icons End -->
 
 <!-- Featured Products Start -->
@@ -96,7 +49,7 @@
             <div class="col-lg-8">
 
                 <div class="section-title">
-                    <h4 class="title">Featured Products</h4>
+                    <h4 class="title">Sản phẩm ngẫu nhiên</h4>
                 </div>
 
                 <div ng-controller="featuredproducts" class="row">
@@ -179,180 +132,4 @@
 @Html.Partial("_BestSellProduct")
 @Html.Partial("_ProductDiscount")
 <!-- Blog Posts Start -->
-<div class="section pt-0">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-8">
-
-                <div class="section-title">
-                    <h4 class="title">From Our Blog</h4>
-                </div>
-
-                <div class="row">
-
-                    <!-- Article Start -->
-                    <div class="col-md-6">
-                        <article class="andro_post">
-                            <div class="andro_post-thumb">
-                                <a href="/Blog/Blog_Details">
-                                    <img src="~/assets/img/blog/1.jpg" alt="post">
-                                </a>
-                            </div>
-                            <div class="andro_post-body">
-                                <div class="andro_post-categories">
-                                    <a href="#">Food</a>
-                                    <a href="#">Veg</a>
-                                </div>
-                                <div class="andro_post-desc">
-                                    <h5> <a href="/Blog/Blog_Details">Difference Is In the Soil</a> </h5>
-                                    <span> <span class="fw-600">Posted On</span> <a href="/Blog/Blog_Details" class="andro_post-date">May 20, 2021</a> </span>
-                                    <p>Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
-                                </div>
-                                <a class="andro_btn-custom btn-block" href="/Blog/Blog_Details"> Read More </a>
-                            </div>
-                        </article>
-                    </div>
-                    <!-- Article End -->
-                    <!-- Article Start -->
-                    <div class="col-md-6">
-                        <article class="andro_post">
-                            <div class="andro_post-thumb">
-                                <a href="/Blog/Blog_Details">
-                                    <img src="~/assets/img/blog/2.jpg" alt="post">
-                                </a>
-                            </div>
-                            <div class="andro_post-body">
-                                <div class="andro_post-categories">
-                                    <a href="#">Health</a>
-                                </div>
-                                <div class="andro_post-desc">
-                                    <h5> <a href="/Blog/Blog_Details">Planting Season Begins</a> </h5>
-                                    <span> <span class="fw-600">Posted On</span> <a href="/Blog/Blog_Details" class="andro_post-date">May 20, 2021</a> </span>
-                                    <p>Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
-                                </div>
-                                <a class="andro_btn-custom btn-block" href="/Blog/Blog_Details"> Read More </a>
-                            </div>
-                        </article>
-                    </div>
-                    <!-- Article End -->
-                    <!-- Article Start -->
-                    <div class="col-md-6">
-                        <article class="andro_post">
-                            <div class="andro_post-thumb">
-                                <a href="/Blog/Blog_Details">
-                                    <img src="~/assets/img/blog/3.jpg" alt="post">
-                                </a>
-                            </div>
-                            <div class="andro_post-body">
-                                <div class="andro_post-categories">
-                                    <a href="#">Food</a>
-                                    <a href="#">Dishes</a>
-                                </div>
-                                <div class="andro_post-desc">
-                                    <h5> <a href="/Blog/Blog_Details">Freshly Picked Organics</a> </h5>
-                                    <span> <span class="fw-600">Posted On</span> <a href="/Blog/Blog_Details" class="andro_post-date">May 20, 2021</a> </span>
-                                    <p>Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
-                                </div>
-                                <a class="andro_btn-custom btn-block" href="/Blog/Blog_Details"> Read More </a>
-                            </div>
-                        </article>
-                    </div>
-                    <!-- Article End -->
-                    <!-- Article Start -->
-                    <div class="col-md-6">
-                        <article class="andro_post">
-                            <div class="andro_post-thumb">
-                                <a href="/Blog/Blog_Details">
-                                    <img src="~/assets/img/blog/4.jpg" alt="post">
-                                </a>
-                            </div>
-                            <div class="andro_post-body">
-                                <div class="andro_post-categories">
-                                    <a href="#">Food</a>
-                                </div>
-                                <div class="andro_post-desc">
-                                    <h5> <a href="/Blog/Blog_Details">Make the Perfect Basket</a> </h5>
-                                    <span> <span class="fw-600">Posted On</span> <a href="/Blog/Blog_Details" class="andro_post-date">May 20, 2021</a> </span>
-                                    <p>Cras ultricies ligula sed magna dictum porta. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
-                                </div>
-                                <a class="andro_btn-custom btn-block" href="/Blog/Blog_Details"> Read More </a>
-                            </div>
-                        </article>
-                    </div>
-                    <!-- Article End -->
-
-                </div>
-
-            </div>
-
-            <!-- Sidebar Start -->
-            <div class="col-lg-4">
-                <div class="sidebar">
-
-                    <!-- Testimonials Start -->
-                    <div class="sidebar-widget">
-
-                        <div class="section-title">
-                            <h4 class="title">Testomonials</h4>
-                        </div>
-
-                        <div class="andro_testimonials">
-                            <div class="andro_testimonial-item">
-                                <div class="andro_testimonials-inner">
-                                    <img src="~/assets/img/people/4.jpg" alt="author">
-                                    <h5>Jina Flock</h5>
-                                    <span>Farmer</span>
-                                    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
-                                </div>
-                                <ul class="andro_sm">
-                                    <li> <a href="#"> <i class="fab fa-facebook-f"></i> </a> </li>
-                                    <li> <a href="#"> <i class="fab fa-twitter"></i> </a> </li>
-                                    <li> <a href="#"> <i class="fab fa-linkedin-in"></i> </a> </li>
-                                    <li> <a href="#"> <i class="fab fa-youtube"></i> </a> </li>
-                                </ul>
-                            </div>
-                            <div class="andro_testimonial-item">
-                                <div class="andro_testimonials-inner">
-                                    <img src="~/assets/img/people/3.jpg" alt="author">
-                                    <h5>Miranda Blue</h5>
-                                    <span>Chemist</span>
-                                    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
-                                </div>
-                                <ul class="andro_sm">
-                                    <li> <a href="#"> <i class="fab fa-facebook-f"></i> </a> </li>
-                                    <li> <a href="#"> <i class="fab fa-twitter"></i> </a> </li>
-                                    <li> <a href="#"> <i class="fab fa-linkedin-in"></i> </a> </li>
-                                    <li> <a href="#"> <i class="fab fa-youtube"></i> </a> </li>
-                                </ul>
-                            </div>
-                            <div class="andro_testimonial-item">
-                                <div class="andro_testimonials-inner">
-                                    <img src="~/assets/img/people/2.jpg" alt="author">
-                                    <h5>Feleciti Rolling</h5>
-                                    <span>Farmer</span>
-                                    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
-                                </div>
-                                <ul class="andro_sm">
-                                    <li> <a href="#"> <i class="fab fa-facebook-f"></i> </a> </li>
-                                    <li> <a href="#"> <i class="fab fa-twitter"></i> </a> </li>
-                                    <li> <a href="#"> <i class="fab fa-linkedin-in"></i> </a> </li>
-                                    <li> <a href="#"> <i class="fab fa-youtube"></i> </a> </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- Testimonials End -->
-                    <!-- Image Start -->
-                
-                    <!-- Image End -->
-
-                </div>
-            </div>
-            <!-- Sidebar End -->
-
-        </div>
-    </div>
-</div>
 <!-- Blog Posts End -->
