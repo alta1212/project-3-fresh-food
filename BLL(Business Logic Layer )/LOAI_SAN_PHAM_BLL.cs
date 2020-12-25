@@ -16,9 +16,9 @@ namespace BLL_Business_Logic_Layer__
         {
             return LSP.GetAllLSPInShop();
         }
-        public IList<LOAI_SAN_PHAM> GetAllLSPInAdmin()
+        public IList<LOAI_SAN_PHAM> GetAllLSPInAdmin(string page)
         {
-            return LSP.GetAllLSPInAdmin();
+            return LSP.GetAllLSPInAdmin(page);
         }
 
         public void xoaLsp(string ml)

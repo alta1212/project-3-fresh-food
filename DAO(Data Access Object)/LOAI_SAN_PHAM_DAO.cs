@@ -42,15 +42,15 @@ namespace DAO_Data_Access_Object_
             DataAccessHelper.exec(string.Format("delete LOAI_SAN_PHAM where MaLoaiSanPham='{0}'",ml));
         }
 
-        public IList<LOAI_SAN_PHAM> GetAllLSPInAdmin() // in admin in shoping left -->inner
+        public IList<LOAI_SAN_PHAM> GetAllLSPInAdmin(string page) // in admin in shoping left -->inner
                                                 // in shoping 
         {
             DataTable dt = new DataTable();
-            string cmdText = string.Format(@"
-                Select LSP.*, Count(SP.MaLoaiSanPham) as 'Số lượng' From [dbo].[LOAI_SAN_PHAM] LSP
+            string cmdText = string.Format(@"Select LSP.*, Count(SP.MaLoaiSanPham) as 'Số lượng' From [dbo].[LOAI_SAN_PHAM] LSP
                     left join [dbo].[SAN_PHAM] SP
                     On LSP.MaLoaiSanPham = SP.MaLoaiSanPham
-                        Group By LSP.MaLoaiSanPham, LSP.TenLoaiSanPham, LSP.MoTa");
+                        Group By LSP.MaLoaiSanPham, LSP.TenLoaiSanPham, LSP.MoTa
+							order by LSP.MaLoaiSanPham Desc Offset 10*({0}-1) Rows Fetch Next 10 Rows Only",page);
             dt = DataAccessHelper.log(cmdText);
             List<LOAI_SAN_PHAM> li = new List<LOAI_SAN_PHAM>();
             foreach (DataRow dr in dt.Rows)

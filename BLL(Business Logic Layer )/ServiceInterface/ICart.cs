@@ -11,5 +11,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
     {
         IList<Cart_DTO> GetAllProductInCart(string maKhachHang);
         void UpdateAmountInCartDetails(Cart_DTO cart_DTO);
+        void deleteCart(string maChiTietcart);
     }
 }

@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "odertList";
+    Layout = "~/Views/Shared/MainLayOut.cshtml";
+}
+
+<!--Cart Start -->
+<div class="section" ng-controller="ListOrder">
+    <div class="container">
+
+        <!-- Cart Table Start -->
+        <table class="andro_responsive-table">
+            <thead>
+                <tr>
+                    
+                    <th>No</th>
+                    <th>Ngày Mua</th>
+                    <th>Tổng Tiền</th>
+                    <th>Ngày Xác Thực</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in listInCart" ng-switch="i.TrangThai == 0">
+
+                  
+                    <td ng-switch-when="true" class="remove">
+                        <button ng-click="delete(i.MaDonHang)" type="button" class="close-btn close-danger remove-from-cart">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </td>
+                    <td>
+                        {{$index+1}}
+                    </td>
+                    <td>
+                        {{i.NgayMua | filterdate | date:'dd/MM/yyyy'}}
+                    </td>
+                    <td data-title="Price">
+                        {{i.TongTien|number}}
+                    </td>
+                    <td data-title="Total">
+                        <div ng-switch-when="true">
+                            <strong>Chưa Xác Thực <br>Vui lòng kiểm tra mail</strong> <br />
+                        </div>
+                        <div ng-switch-when="false">
+                            {{i.NgayXacThuc| filterdate | date:'dd/MM/yyyy'}}
+                        </div>
+                    </td>
+                    <td style="text-align:center"><a href="/Product/detail#!?madonhang={{i.MaDonHang}}" style="cursor:pointer" class="fa fa-eye"></a></td>
+                </tr>
+
+
+            </tbody>
+        </table>
+        <!-- Cart Table End -->
+        <!-- Coupon Code Start -->
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="form-group mb-0">
+                    <div class="input-group mb-0">
+
+
+                        <a class="andro_btn-custom primary btn-block" onclick="window.history.back()" href="#">Quay Lại</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Coupon Code End -->
+
+    </div>
+</div>
+<!-- Cart End -->

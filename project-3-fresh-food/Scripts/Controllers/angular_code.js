@@ -763,10 +763,66 @@ app.controller('CartInHeader', function ($rootScope, $scope, $http) {
     });
 
 })
-app.controller('CartInDetail', function ($scope, $rootScope, $http) {
-    var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
+app.controller('ListOrder', function ($scope, $rootScope, $http) {
     $rootScope.$on('dataKhachHang', function (event, data) {
-        console.log(data.MaGioHang)
+        $http.get('/Product/listOrder?makhachhang?=' + data.MaKhachhang).then(function (e) {
+            console.log(e)
+            $scope.listInCart = e.data
+        })
+        $scope.delete = function (s) {
+            $http.post('/Product/deleteOrder?madonhang?='+s).then(function () {
+                $http.get('/Product/listOrder?makhachhang?=' + data.MaKhachhang).then(function (e) {
+                    console.log(e)
+                    $scope.listInCart = e.data
+                })
+            })
+        }
+    })
+    
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
+app.controller('ListOrderDetail', function ($scope, $location, $http) {
+    var key = $location.search().madonhang
+
+    $http.get('/Product/getOrderDetails?maHoaDon=' + key).then(function (s) {
+        $scope.getJsonResults = s.data;
+    }).then(function () {
+        tongtien = 0;
+        $scope.total = function () {
+            for (var i = 0; i < getJsonResults.data.length; i++) {
+                tongtien += getJsonResults.data.thanhTien[i];
+            }
+            return tongtien;
+        }
+    })
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
+app.controller('CartInDetail', function ($scope, $rootScope, $http) {
+
+    var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
+   
+    $rootScope.$on('dataKhachHang', function (event, data) {
+        $scope.delete = function (s) {
+            $http.post('/guestEvent/deleteCart?maChiTietCart=' + s).then(function () {
+                toastr.info("", "Xoá khỏi giỏ hàng thành công", 1000)
+                $scope.load(data);
+            })
+        }
+        $scope.load(data);
+        });
+    $scope.load = function (data) {
         $http({
             method: 'get',
             url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
@@ -802,6 +858,7 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
 
 
             })
+
             $scope.Hay = function (idCartDetails, value) {
                 console.log(idCartDetails)
                 console.log(value)
@@ -854,8 +911,8 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
 
             }
         });
-
-    });
+    }
+   
 
     $rootScope.$on('percent', function (event, data) {
         $scope.percent = 0;
@@ -863,7 +920,7 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
 
 })
 app.controller('CartInTotal', function ($scope, $rootScope, $http) {
-
+   
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
     $rootScope.$on('dataKhachHang', function (event, data) {
         console.log(data.MaGioHang)
@@ -888,9 +945,11 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
                 }
                 return total;
             }
+           
         });
 
     });
+    
 })
 
 app.controller('CheckOut', function ($scope, $rootScope, $http, $location, $window) {

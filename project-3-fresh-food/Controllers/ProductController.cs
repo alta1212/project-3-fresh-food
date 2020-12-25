@@ -20,11 +20,24 @@ namespace project_3_fresh_food.Controllers
         IList<FeedBack_DTO> listfb;
        
         ICart cart = new Cart_BLL();
-       
+        IAdmin admin = new Admin();
         IDiscount discount = new discount_BLL();
         Class1 to = new Class1();
         public ActionResult Shop()//shop toàn bộ sản phẩm
         {
+            return View();
+        }
+        public void deleteOrder(string madonhang)
+        {
+            sp.deleteOrder(madonhang);
+        }
+        public JsonResult getOrderDetails(string maHoaDon)
+        {
+            return Json(admin.getListOrderDetails(maHoaDon), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult detail()
+        {
+
             return View();
         }
         public ActionResult search()
@@ -88,6 +101,13 @@ namespace project_3_fresh_food.Controllers
         {
             return Json(sp.searchName(tensanpham, 1, 100),JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult odertList()
+        {
+            return View();
+        }
+        public JsonResult listOrder(string makhachhang)
+        {
+            return Json(sp.getlistOrder(makhachhang), JsonRequestBehavior.AllowGet);
+        }
     }
 }
