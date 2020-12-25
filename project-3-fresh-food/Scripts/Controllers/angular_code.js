@@ -765,13 +765,14 @@ app.controller('CartInHeader', function ($rootScope, $scope, $http) {
 })
 app.controller('ListOrder', function ($scope, $rootScope, $http) {
     $rootScope.$on('dataKhachHang', function (event, data) {
-        $http.get('/Product/listOrder?makhachhang?=' + data.MaKhachhang).then(function (e) {
+        $http.get('/Product/listOrder?makhachhang=' + data.MaKhachhang).then(function (e) {
+            console.log(data)
             console.log(e)
             $scope.listInCart = e.data
         })
         $scope.delete = function (s) {
-            $http.post('/Product/deleteOrder?madonhang?='+s).then(function () {
-                $http.get('/Product/listOrder?makhachhang?=' + data.MaKhachhang).then(function (e) {
+            $http.post('/Product/deleteOrder?madonhang='+s).then(function () {
+                $http.get('/Product/listOrder?makhachhang=' + data.MaKhachhang).then(function (e) {
                     console.log(e)
                     $scope.listInCart = e.data
                 })

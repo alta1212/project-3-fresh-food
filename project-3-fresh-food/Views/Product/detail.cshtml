@@ -1,12 +1,5 @@
 ﻿
 @{
-    ViewBag.Title = "detail";
-    Layout = "~/Views/Shared/MainLayOut.cshtml";
-}
-
-
-
-@{
     ViewBag.Title = "odertList";
     Layout = "~/Views/Shared/MainLayOut.cshtml";
 }
@@ -19,42 +12,24 @@
         <table class="andro_responsive-table">
             <thead>
                 <tr>
-                    <th></th>
-                    <th>No</th>
-                    <th>Ngày Mua</th>
-                    <th>Tổng Tiền</th>
-                    <th>Ngày Xác Thực</th>
-                    <th></th>
+                    <th >No</th>
+                    <th >Tên Sản Phẩm</th>
+                    <th >Số Lượng</th>
+                    <th >Giá Bán</th>
+                    <th >Thành tiền</th>
+                    <th >Ngày Mua</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="i in listInCart" ng-switch="i.TrangThai == 0">
+                <tr ng-repeat="i in getJsonResults" ng-switch="i.TrangThai == 0">
 
 
-                    <td ng-switch-when="true" class="remove">
-                        <button ng-click="delete(i.MaDonHang)" type="button" class="close-btn close-danger remove-from-cart">
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </td>
-                    <td>
-                        {{$index+1}}
-                    </td>
-                    <td>
-                        {{i.NgayMua | filterdate | date:'dd/MM/yyyy'}}
-                    </td>
-                    <td data-title="Price">
-                        {{i.TongTien|number}}
-                    </td>
-                    <td data-title="Total">
-                        <div ng-switch-when="true">
-                            <strong>Chưa Xác Thực <br>Vui lòng kiểm tra mail</strong> <br />
-                        </div>
-                        <div ng-switch-when="false">
-                            {{i.NgayXacThuc| filterdate | date:'dd/MM/yyyy'}}
-                        </div>
-                    </td>
-                    <td style="text-align:center"><in style="cursor:pointer" class="fa fa-eye"></in></td>
+                    <td>{{$index + 1}}</td>
+                    <td>{{i.tenSanPham}}</td>
+                    <td>{{i.soLuong}}</td>
+                    <td>{{i.giaBan | number}} VNĐ</td>
+                    <td>{{i.thanhTien | number}} VNĐ</td>
+                    <td>{{i.NgayMua | filterdate | date:'dd/MM/yyyy'}}</td>
                 </tr>
 
 

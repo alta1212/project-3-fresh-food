@@ -65,9 +65,9 @@ namespace DAO_Data_Access_Object_
         public IList<Order_DTO> listOrder(string makhachhang)
         {
             DataTable dt = new DataTable();
-            string cmdtext = string.Format(@"select * from DON_HANG");//lấy về 6 sản phẩm ngẫu nhiên để tạo
+            string cmdtext = string.Format(@"select * from DON_HANG where MaKhachHang = '{0}'",makhachhang);//lấy về 6 sản phẩm ngẫu nhiên để tạo
             dt = DataAccessHelper.log(cmdtext);
-            List<Order_DTO> li = new List<Order_DTO>();
+            List<Order_DTO> li = new List<Order_DTO>(); 
             foreach (DataRow dr in dt.Rows)
             {
                 Order_DTO sp = new Order_DTO();
@@ -77,7 +77,13 @@ namespace DAO_Data_Access_Object_
                 sp.TrangThai = int.Parse(dr[3].ToString());
                 sp.TongTien = int.Parse(dr[4].ToString());
                 sp.NgayMua = DateTime.Parse(dr[5].ToString());
-                sp.NgayXacThuc = DateTime.Parse(dr[6].ToString());
+                try { 
+                    sp.NgayXacThuc = DateTime.Parse(dr[6].ToString());
+                }
+                catch
+                {
+
+                }
                 sp.SoDienThoai = dr[7].ToString();
                 sp.DiaChi = dr[8].ToString();
                 li.Add(sp);

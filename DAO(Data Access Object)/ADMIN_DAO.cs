@@ -89,7 +89,7 @@ namespace DAO_Data_Access_Object_
         {
             DataTable dt = new DataTable();
             string cmdtext = string.Format(@"
-                Select SP.TenSanPham,CTDH.SoLuong,CTDH.GiaBan,DH.NgayMua,CTDH.ThanhTien 
+                Select SP.TenSanPham,CTDH.SoLuong,CTDH.GiaBan,CTDH.ThanhTien,DH.NgayMua 
                     From dbo.Chi_Tiet_Don_Hang CTDH Inner Join dbo.Don_Hang DH
 	                    On CTDH.MaDonHang = DH.MaDonHang Inner Join dbo.San_Pham SP
 		                    On SP.MaSanPham = CTDH.MaSanPham

@@ -17,19 +17,14 @@
                     <th>Ngày Mua</th>
                     <th>Tổng Tiền</th>
                     <th>Ngày Xác Thực</th>
-                    <th></th>
+                    <th>Xem Chi Tiết</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="i in listInCart" ng-switch="i.TrangThai == 0">
 
                   
-                    <td ng-switch-when="true" class="remove">
-                        <button ng-click="delete(i.MaDonHang)" type="button" class="close-btn close-danger remove-from-cart">
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </td>
+                    
                     <td>
                         {{$index+1}}
                     </td>
@@ -37,7 +32,7 @@
                         {{i.NgayMua | filterdate | date:'dd/MM/yyyy'}}
                     </td>
                     <td data-title="Price">
-                        {{i.TongTien|number}}
+                        {{i.TongTien|number}} VNĐ
                     </td>
                     <td data-title="Total">
                         <div ng-switch-when="true">
@@ -47,7 +42,7 @@
                             {{i.NgayXacThuc| filterdate | date:'dd/MM/yyyy'}}
                         </div>
                     </td>
-                    <td style="text-align:center"><a href="/Product/detail#!?madonhang={{i.MaDonHang}}" style="cursor:pointer" class="fa fa-eye"></a></td>
+                    <td style="text-align:center"><a href="/Product/detail#!?madonhang={{i.MaDonHang}}" target="_blank" style="cursor:pointer" class="fa fa-eye"></a></td>
                 </tr>
 
 
