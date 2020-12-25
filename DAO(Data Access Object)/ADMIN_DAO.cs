@@ -85,6 +85,30 @@ namespace DAO_Data_Access_Object_
             DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Edit_Profile", parm);
         }
 
+        public object getDiscount(string page)
+        {
+            DataTable dt = new DataTable();
+            string sql= string.Format(@"select gg.*,sp.tensanpham from gia_giam gg,san_pham sp  where
+			getdate() between ngaybatdau and ngayketthuc and gg.masanpham=sp.MaSanPham
+                            order by magiagiam ASC Offset 10 * ({0} - 1) Rows Fetch next 10 rows only", page);
+            dt = DataAccessHelper.log(sql);
+            IList<promotion_dto> li = new List<promotion_dto>();
+          
+            foreach (DataRow dr in dt.Rows)
+            {
+                promotion_dto or = new promotion_dto();
+                // tên số lượng giá bán thành tiền ngày mua
+                or.maGiaGiam = dr[0].ToString();
+                or.maSanPham = dr[1].ToString();
+                or.percent = int.Parse(dr[2].ToString());
+                or.batDau =DateTime.Parse( dr[3].ToString());
+                or.ketThuc = DateTime.Parse(dr[4].ToString());
+                or.tenSanPham = dr[5].ToString();
+                li.Add(or);
+            }
+            return li;
+        }
+
         public object getListOrderDetails( string maHoaDon)
         {
             DataTable dt = new DataTable();
@@ -385,6 +409,10 @@ namespace DAO_Data_Access_Object_
 		(
         SELECT COUNT(*)
         FROM   LOAI_SAN_PHAM
+        ) AS count2,
+		(
+        SELECT COUNT(*)
+        FROM   gia_giam
         ) AS count2
 ");
             dt = DataAccessHelper.log(cmdtext);
@@ -398,6 +426,7 @@ namespace DAO_Data_Access_Object_
                 ad.admin = dr[2].ToString();
                 ad.price = dr[3].ToString();
                 ad.loaisanpham= dr[5].ToString();
+                ad.discount = dr[6].ToString();
                 li.Add(ad);
             }
             return li;

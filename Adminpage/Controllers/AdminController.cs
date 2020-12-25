@@ -11,6 +11,7 @@ namespace AdminPage.Controllers
         IAdmin ad = new Admin();
         IProduct sp = new SAN_PHAM_BLL();
         Class1 to = new Class1();
+        IDiscount ds=new discount_BLL();
         // GET: accountsAdmin
         public ActionResult login()
         {
@@ -64,6 +65,21 @@ namespace AdminPage.Controllers
 
             return View();
         }
+        public ActionResult discount()
+        {
+
+            return View();
+        }
+        public JsonResult getDiscount(string page)
+        {
+            return Json(ad.getDiscount(page),JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult discountList()
+        {
+
+            return View();
+        }
+        
         public ActionResult editprofile()
         {
 

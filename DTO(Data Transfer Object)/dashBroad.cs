@@ -15,5 +15,6 @@ namespace DTO_Data_Transfer_Object_
 
         public string loaisanpham { get; set; }
         public string price { get; set; }
+        public string discount { get; set; }
     }
 }

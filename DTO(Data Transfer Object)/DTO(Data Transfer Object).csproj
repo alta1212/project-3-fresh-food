@@ -61,6 +61,7 @@
     <Compile Include="orderDetail.cs" />
     <Compile Include="Order_DTO.cs" />
     <Compile Include="Price_DTO.cs" />
+    <Compile Include="promotion_dto.cs" />
     <Compile Include="SAN_PHAM.cs" />
     <Compile Include="KHACH_HANG.cs" />
     <Compile Include="LOAI_SAN_PHAM.cs" />

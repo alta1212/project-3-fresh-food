@@ -709,7 +709,66 @@ myApp.controller("editPrice", function ($filter, $http, $scope, $location) {
         else return null;
     };
 });
+myApp.controller('managerDiscount', function ($http, $scope, $location) {
+    $scope.pagesize = 10;
+    $scope.list = [];
+    $http.get('/Admin/dash').then(function (data) {
+        // Lấy về danh sách số lượng về khách hàng, user, sản phẩm, đơn hàng,giá bán
+        console.log(data);
+        $http.get('/Admin/getDiscount?page=1').then(function (res) {
+            $scope.getJsonResults = res.data;
+            console.log($scope.getJsonResults)
+            var quotient = data.data[0].discount / $scope.pagesize;
+            if (quotient % 10 !== 0) {
+                quotient += 1;
+            }
+            for (var i = 1; i <= quotient; i++) {
+                $scope.list.push(i);
+            }
+            $scope.count = 1;
+            var changeStyle = 1;
+            $scope.changePage = function (a) {
+                document.getElementById('work').style.display = "block"
+                $http.get('/Admin/getDiscount?page=' + a).then(function (getListPrice) {
+                    $scope.getJsonResults = getListPrice.data;
+                    document.getElementById('work').style.display = "none"
+                })
+                $scope.count = a;
+                changeStyle = a - 1;
+            }
+        })
+    })
 
+    $scope.EditProductLink = function (e) {
+        window.open(e, '', 'width=1000,height=800');
+    }
+    $scope.xoa = function (e, date) {
+        if (date === '/Date(-62135596800000)/') {
+            toastr.error('Không thể xoá giá mặc định', 'Lỗi!!', { timeOut: 5000 })
+
+        }
+        else {
+            var data = {
+                "ma": e
+            }
+            $http.post("/Admin/deltePrice", data).then(function () {
+                toastr.success('Xoá thông tin thành công', 'Thành công!', { timeOut: 5000 })
+                $http.get('/Admin/getPrice').then(function (res) {
+                    $scope.getJsonResults = res.data;
+                    console.log($scope.getJsonResults)
+                })
+            })
+
+        }
+    }
+}).filter("filterdate", function () {
+    var re = /\/Date\(([0-9]*)\)\//;
+    return function (x) {
+        var m = x.match(re);
+        if (m) return new Date(parseInt(m[1]));
+        else return null;
+    };
+});
 myApp.controller("addPrice", function ($filter, $http, $scope, $location) {
     $http({
         method: 'get',
@@ -720,10 +779,10 @@ myApp.controller("addPrice", function ($filter, $http, $scope, $location) {
         console.log(s.data)
 
     })
-
+    
     $scope.MinDateBatDau = new Date().toJSON().slice(0, 10)
     $scope.MinDateKetThuc = new Date().addDays(1).toJSON().slice(0, 10)
-    console.log($scope.MinDateKetThuc)
+   
     $scope.add = function () {
         console.log($scope.getJsonResults);
         $http.post('/Admin/add_Price', $scope.getJsonResults).then(function () {

@@ -32,5 +32,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         void addConfirmCode(string manv, string confirmationCode);
         void ComfimforgetPass(string confirmationCode, string newPass);
         object getListOrderDetails(string maHoaDon);
+        object getDiscount(string size);
     }
 }

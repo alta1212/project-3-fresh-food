@@ -377,6 +377,8 @@
     <Content Include="Views\Admin\ListUser.cshtml" />
     <Content Include="Views\Admin\UpdateProfileUser.cshtml" />
     <Content Include="Views\Admin\OrderDetails.cshtml" />
+    <Content Include="Views\Admin\discount.cshtml" />
+    <Content Include="Views\Admin\discountList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

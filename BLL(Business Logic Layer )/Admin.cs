@@ -116,5 +116,10 @@ namespace BLL_Business_Logic_Layer__
         {
             return ad.getListOrderDetails(maHoaDon);
         }
+
+        public object getDiscount(string size)
+        {
+            return ad.getDiscount(size);
+        }
     }
 }
