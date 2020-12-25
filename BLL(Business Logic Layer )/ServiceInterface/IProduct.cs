@@ -22,6 +22,7 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<SAN_PHAM> getbyloaisp(string loai,string page);
         void postcomment(string masp, string mkh, string binhluan, string hinhanh, float stars);
         void AddToCart(string mkh, string msp, int donGia, int soLuong);
+        void deleteOrder(string madonhang);
         string confirmOrder(string madonhang, string manv);
       
         int getslsp(string maloai);
@@ -32,6 +33,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
         IList<SAN_PHAM> getdaylyDeal();
         void xoaSp(string ma);
         void editProcduct(SAN_PHAM info);
-        
+        IList<Order_DTO> getlistOrder(string makhachhang);
     }
 }

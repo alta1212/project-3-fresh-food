@@ -20,27 +20,6 @@
                         <div class="table-responsive">
                             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dataTables_length" id="DataTables_Table_0_length">
-                                            <label>
-                                                Show <select ng-change="changeview()" ng-model="pagesize" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="custom-select custom-select-sm form-control form-control-sm">
-                                                    <option ng-selected="true" value="10">10</option>
-                                                    <option value="25">25</option>
-                                                    <option value="50">50</option>
-                                                    <option value="100">100</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                            <label>
-                                                Tìm kiếm:
-                                                <input type="search" id="searchname" class="form-control form-control-sm" placeholder="Tìm kiếm ở đây" aria-controls="DataTables_Table_0">
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div><div class="row">
                                     <div class="col-sm-12">
                                         <table class="data-tables table table-striped table-bordered dataTable no-footer" style="width:100%" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                             <thead>
@@ -102,21 +81,15 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-12 col-md-7">
-                                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                                        <ul class="pagination">
-                                            <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
-                                                <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                            </li>
-                                            <li class="paginate_button page-item active">
-                                                <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                                            </li>
-                                            <li class="paginate_button page-item next disabled" id="DataTables_Table_0_next">
-                                                <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link">Next</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                      <div class="col-sm-12 col-md-7">
+                                          <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                              <ul class="pagination">
+                                                  <li class="paginate_button page-item active" ng-repeat="item in list">
+                                                      <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="{{item}}" tabindex="0" ng-class="{'active-task': count == $index + 1}" ng-click="changePage(item)" class="page-link">{{item}}</a>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </div>
                             </div>
                         </div>
                     </div>

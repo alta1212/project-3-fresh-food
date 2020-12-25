@@ -85,9 +85,9 @@ namespace AdminPage.Controllers
        
         
 
-        public JsonResult getOrder(string pagesize)
+        public JsonResult getOrder(string page)
         {
-            return Json(ad.getListOrder(pagesize),JsonRequestBehavior.AllowGet);
+            return Json(ad.getListOrder(page),JsonRequestBehavior.AllowGet);
         }
        
         public JsonResult getOrderDetails(string maHoaDon)

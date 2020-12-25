@@ -22,6 +22,10 @@ namespace project_3_fresh_food.Controllers
            
             sp.AddToCart(maKhachHang, maSanPham, donGia,soLuong);
         }
+        public void deleteCart(string maChiTietcart)
+        {
+            cart.deleteCart(maChiTietcart);
+        }
         public void postComment(string masp, string mkh, string binhluan, string hinhanh, float stars)
         {
             sp.postcomment(masp,mkh,binhluan,hinhanh,stars);

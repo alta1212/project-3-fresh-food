@@ -13,18 +13,18 @@
             <thead>
                 <tr>
                     <th class="remove-item"></th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Qunantity</th>
-                    <th>Total</th>
+                    <th>Sản Phẩm</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Tổng Tiền</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="i in listInCart" ng-switch="i.GiaGiam > 0">
                     <td class="remove">
-                        <button type="button" class="close-btn close-danger remove-from-cart">
-                            <span></span>
-                            <span></span> 
+                        <button ng-click="delete(i.MaChiTietGioHang)" type="button" class="close-btn close-danger remove-from-cart">
+                            <span  ></span>
+                            <span ></span> 
                         </button>
                     </td>
                     <td data-title="Product">
@@ -64,13 +64,13 @@
         <!-- Cart Table End -->
         <!-- Coupon Code Start -->
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-2">
                 <div class="form-group mb-0">
                     <div class="input-group mb-0">
-                        <input type="text" class="form-control" placeholder="Enter Coupon Code" aria-label="Coupon Code">
-                        <div class="input-group-append">
-                            <button class="andro_btn-custom shadow-none" type="button">Apply</button>
-                        </div>
+                       
+                     
+                            <a class="andro_btn-custom primary btn-block" href="/Product/odertList">Ds Đơn Hàng</a>
+                        
                     </div>
                 </div>
             </div>

@@ -12,20 +12,20 @@ namespace DAO_Data_Access_Object_
     public class Cart_DAO
     {
         Cart_DTO cart_DTO = new Cart_DTO();
-        public IList<Cart_DTO> GetAllProductInCart(string maKhachHang)
+        public IList<Cart_DTO> GetAllProductInCart(string magiohang)
         {
             List<Cart_DTO> listCart_DTOs = new List<Cart_DTO>();
             DataTable dt = new DataTable();
             string strQuery = string.Format(@"
                     Select PAAPT.MaSanPham,PAAPT.TenSanPham,PAAPT.HinhAnh,PAAPT.DonViTinh,
-	                    PAAPT.GiaBan,PAAPDT.GiaBan - PAAPDT.GiaBan * PAAPDT.PhanTram / 100 N'Giá Khuyến Mại', CTGH.SoLuong
+	                    PAAPT.GiaBan,PAAPDT.GiaBan - PAAPDT.GiaBan * PAAPDT.PhanTram / 100 N'Giá Khuyến Mại', CTGH.SoLuong,CTGH.MaChITietGioHang
                             From ProductAndAllPriceTest PAAPT
                                  Left Join ProductAndAllPriceDiscountTest PAAPDT 
 	                                 On PAAPT.MaSanPham = PAAPDT.MaSanPham
 										Inner Join  dbo.Chi_Tiet_Gio_Hang CTGH
 											On CTGH.MaSanPHam = PAAPT.MaSanPHam
 												Where CTGH.MaGioHang = '{0}' 
-                            ", maKhachHang);
+                            ", magiohang);
             dt = DataAccessHelper.log(strQuery);
             foreach (DataRow Cart in dt.Rows)
             {
@@ -46,11 +46,16 @@ namespace DAO_Data_Access_Object_
                     cart.GiaGiam = 0;
                     cart.ThanhTien = cart.GiaBan;
                 }
-                
-                
+                cart.MaChiTietGioHang= Cart[7].ToString();
+
                 listCart_DTOs.Add(cart);
             }
             return listCart_DTOs;
+        }
+
+        public void deleteCart(string maChiTietcart)
+        {
+            DataAccessHelper.exec(string.Format("delete CHI_TIET_GIO_HANG where MaChITietGioHang='{0}'", maChiTietcart));
         }
 
         public void UpdateAmountInCartDetails(Cart_DTO cart_DTO)

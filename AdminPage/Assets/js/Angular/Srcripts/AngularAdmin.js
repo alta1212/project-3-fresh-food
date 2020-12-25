@@ -32,9 +32,10 @@ myApp.controller('managerProduct', function ($scope, $location, $window, $http) 
                 $scope.count = 1;
                 var changeStyle = 1;
                 $scope.changePage = function (a) {
-                    
+                    document.getElementById('work').style.display = "block"
                     $http.get('/SanPhamAdmin/GetAllProduct?page='+a+'&&size=10').then(function (get) {
                         $scope.getJsonResults = get.data;
+                        document.getElementById('work').style.display = "none"
                     })
                     $scope.count = a;
                     changeStyle = a - 1;
@@ -78,7 +79,37 @@ myApp.controller('managerProduct', function ($scope, $location, $window, $http) 
 }
 );
 myApp.controller('managerProductType', function ($scope, $http) {
+    $scope.list = [];
 
+    $http.get('/Admin/dash').then(function (s) {
+        console.log(s)
+
+        var quotient = s.data[0].loaisanpham / 10;
+        if (quotient % 10 !== 0) {
+            quotient += 1;
+        }
+        for (var i = 1; i <= quotient; i++) {
+            $scope.list.push(i);
+            console.log($scope.list[i - 1])
+        }
+
+        $scope.count = 1;
+
+        $scope.changePage = function (a) {
+            document.getElementById('work').style.display = "block"
+            $http({
+                method: 'get',
+                url: '/LoaiSanPhamAdmin/GetAllProductTypeJS?page='+a
+
+            }).then(function (jsonResults) {
+                $scope.getJsonResults = jsonResults.data;
+                console.log($scope.getJsonResults)
+                document.getElementById('work').style.display = "none"
+            })
+            $scope.count = a;
+
+        }
+    })
     $scope.deleteProductType = function (e) {
         data = {
             key: e
@@ -88,13 +119,12 @@ myApp.controller('managerProductType', function ($scope, $http) {
 
     $http({
         method: 'get',
-        url: '/LoaiSanPhamAdmin/GetAllProductTypeJS'
+        url: '/LoaiSanPhamAdmin/GetAllProductTypeJS?page=1'
 
-    })
-        .then(function (jsonResults) {
+    }).then(function (jsonResults) {
             $scope.getJsonResults = jsonResults.data;
             console.log($scope.getJsonResults)
-        })
+    })
 }
 );
 
@@ -275,12 +305,31 @@ myApp.controller('orderDetail', function ($scope, $http, $location) {
 });
 //lấy về danh sách order
 myApp.controller('managerOrder', function ($rootScope, $scope, $http) {
-    $scope.size = 10;
-
-    getoder($http, $scope.size, $scope)
-    $scope.changeview = function () {
-        getoder($http, $scope.pagesize, $scope)
-    }
+    $scope.list = [];
+   
+    $http.get('/Admin/dash').then(function (s) {
+        console.log(s)
+       
+                var quotient = s.data[0].order / 10;
+                if (quotient % 10 !== 0) {
+                    quotient += 1;
+                }
+                for (var i = 1; i <= quotient; i++) {
+                    $scope.list.push(i);
+                    console.log($scope.list[i - 1])
+                }
+              
+                $scope.count = 1;
+               
+                $scope.changePage = function (a) {
+                   
+                    getoder($http, a, $scope)
+                    $scope.count = a;
+                   
+                }
+    })
+    getoder($http, 1, $scope)
+   
     $scope.ViewOrderdetail = function (e) {
         window.open(e, '', 'width=1000,height=800');
     }
@@ -292,12 +341,12 @@ myApp.controller('managerOrder', function ($rootScope, $scope, $http) {
         }
 
         $http.post('/Admin/confirmorder', data).then(function (s) { console.log(s) })
-        getoder($http, $scope.size, $scope)
+        getoder($http, 1, $scope)
         toastr.success('Xác nhận đơn hàng thành công', 'Thành công!!', { timeOut: 5000 })
     }
     $scope.delete = function () {
         toastr.success('xoá dòng 284', 'Thành công!!', { timeOut: 5000 })
-        getoder($http, $scope.pagesize, $scope)
+        getoder($http, 1, $scope)
     }
 }).filter("filterdate", function () {
     var re = /\/Date\(([0-9]*)\)\//;
@@ -353,8 +402,10 @@ myApp.controller('getListUser', function ($rootScope, $scope, $http, imgurUpload
             $scope.count = 1;
             var changeStyle = 1;
             $scope.changePage = function (a) {
+                document.getElementById('work').style.display = "block"
                 $http.get('/Admin/GetListUser?page=' + a + '&&pagesize=10').then(function (getlistUser) {
                     $scope.UserInfo = getlistUser.data;
+                    document.getElementById('work').style.display = "none"
                 })
                 $scope.count = a;
                 changeStyle = a - 1;
@@ -501,12 +552,14 @@ myApp.controller('editPro', function (imgurUpload, $scope, $http, $rootScope, $l
 
 
 function getoder($http, size, $scope) {
+    document.getElementById('work').style.display = "block"
     $http({
         method: 'GET',
-        url: '/Admin/getOrder?pagesize=' + size
+        url: '/Admin/getOrder?page=' + size
     }).then(function (res) {
         console.log(res.data);
         $scope.getJsonResults = res.data;
+        document.getElementById('work').style.display = "none"
     })
 }
 
@@ -545,8 +598,10 @@ myApp.controller("managerPrice", function ($http, $scope) {
             $scope.count = 1;
             var changeStyle = 1;
             $scope.changePage = function (a) {
+                document.getElementById('work').style.display = "block"
                 $http.get('/Admin/getPrice?page=' + a + '&&pagesize=10').then(function (getListPrice) {
                     $scope.getJsonResults = getListPrice.data;
+                    document.getElementById('work').style.display = "none"
                 })
                 $scope.count = a;
                 changeStyle = a - 1;

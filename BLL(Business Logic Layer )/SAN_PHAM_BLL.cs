@@ -93,6 +93,14 @@ namespace BLL_Business_Logic_Layer__
           return  sp.confirmOrder(madonhang,manv);
         }
 
-     
+        public IList<Order_DTO> getlistOrder(string makhachhang)
+        {
+            return sp.listOrder(makhachhang);
+        }
+
+        public void deleteOrder(string madonhang)
+        {
+            sp.deleteOrder(madonhang);
+        }
     }
 }

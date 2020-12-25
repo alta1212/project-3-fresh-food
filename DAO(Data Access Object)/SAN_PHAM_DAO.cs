@@ -62,7 +62,33 @@ namespace DAO_Data_Access_Object_
             return li;
         }
 
-       
+        public IList<Order_DTO> listOrder(string makhachhang)
+        {
+            DataTable dt = new DataTable();
+            string cmdtext = string.Format(@"select * from DON_HANG");//lấy về 6 sản phẩm ngẫu nhiên để tạo
+            dt = DataAccessHelper.log(cmdtext);
+            List<Order_DTO> li = new List<Order_DTO>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                Order_DTO sp = new Order_DTO();
+                sp.MaDonHang = dr[0].ToString();
+                sp.MaKhachhang = dr[1].ToString();
+                sp.MaNhanVien = dr[2].ToString();
+                sp.TrangThai = int.Parse(dr[3].ToString());
+                sp.TongTien = int.Parse(dr[4].ToString());
+                sp.NgayMua = DateTime.Parse(dr[5].ToString());
+                sp.NgayXacThuc = DateTime.Parse(dr[6].ToString());
+                sp.SoDienThoai = dr[7].ToString();
+                sp.DiaChi = dr[8].ToString();
+                li.Add(sp);
+            }
+            return li;
+        }
+
+        public void deleteOrder(string madonhang)
+        {
+            DataAccessHelper.exec(string.Format("delete DON_HANG where MaDonHang='{0}'",madonhang));
+        }
 
         public string confirmOrder(string madonhang, string manv)
         {

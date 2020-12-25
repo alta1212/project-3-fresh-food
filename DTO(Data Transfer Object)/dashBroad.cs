@@ -13,6 +13,7 @@ namespace DTO_Data_Transfer_Object_
         public string order { get; set; }
         public string admin { get; set; }
 
+        public string loaisanpham { get; set; }
         public string price { get; set; }
     }
 }

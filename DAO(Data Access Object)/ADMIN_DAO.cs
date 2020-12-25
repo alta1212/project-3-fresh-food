@@ -376,6 +376,10 @@ namespace DAO_Data_Access_Object_
 		(
         SELECT COUNT(*)
         FROM   DON_HANG
+        ) AS count2,
+		(
+        SELECT COUNT(*)
+        FROM   LOAI_SAN_PHAM
         ) AS count2
 ");
             dt = DataAccessHelper.log(cmdtext);
@@ -388,19 +392,20 @@ namespace DAO_Data_Access_Object_
                 ad.order = dr[4].ToString();
                 ad.admin = dr[2].ToString();
                 ad.price = dr[3].ToString();
+                ad.loaisanpham= dr[5].ToString();
                 li.Add(ad);
             }
             return li;
 
         }
-        public IList<Order_DTO> getListOrder(string pagesize)
+        public IList<Order_DTO> getListOrder(string page)
         {
             DataTable dt = new DataTable();
             string cmdText = string.Format(@"Select DH.*,NV.TenNhanVien, KH.TenKhachHang
 	                    From dbo.DON_HANG  DH Left Join dbo.Nhan_Vien_ NV
 		                    On DH.MaNhanVien = NV.MaNhanVien Inner Join dbo.Khach_Hang  KH
 			                    On KH.MaKhachHang = DH.MaKhachHang
-		            Order By MaDonHang Desc Offset 0 Rows Fetch Next {0} Rows Only", pagesize);
+		            Order By MaDonHang Desc Offset 10*({0}-1) Rows Fetch Next 10 Rows Only", page);
             dt = DataAccessHelper.log(cmdText);
             List<Order_DTO> li = new List<Order_DTO>();
             foreach (DataRow dr in dt.Rows)

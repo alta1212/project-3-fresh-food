@@ -14,6 +14,12 @@ namespace BLL_Business_Logic_Layer__
 
     {
         Cart_DAO cart_DAO = new Cart_DAO();
+
+        public void deleteCart(string maChiTietcart)
+        {
+            cart_DAO.deleteCart(maChiTietcart);
+        }
+
         public IList<Cart_DTO> GetAllProductInCart(string maKhachHang)
         {
             return cart_DAO.GetAllProductInCart(maKhachHang);   
