@@ -3175,6 +3175,11 @@ td.remove{
   margin: 0;
   padding: 20px 20px 10px 20px;
 }
+.andro_category-mm-body ul li:hover {
+        background-color: #8adb88;
+        color: white;
+        transition: width 2s, height 4s;
+    }
 .andro_category-mm-body > ul > li:last-child{
   padding: 10px 20px 20px 20px;
 }
