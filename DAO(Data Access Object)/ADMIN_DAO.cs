@@ -88,7 +88,12 @@ namespace DAO_Data_Access_Object_
         public object getListOrderDetails( string maHoaDon)
         {
             DataTable dt = new DataTable();
-            string cmdtext = string.Format("");
+            string cmdtext = string.Format(@"
+                Select SP.TenSanPham,CTDH.SoLuong,CTDH.GiaBan,DH.NgayMua,CTDH.ThanhTien 
+                    From dbo.Chi_Tiet_Don_Hang CTDH Inner Join dbo.Don_Hang DH
+	                    On CTDH.MaDonHang = DH.MaDonHang Inner Join dbo.San_Pham SP
+		                    On SP.MaSanPham = CTDH.MaSanPham
+		                        Where CTDH.MaDonHang= '{0}'", maHoaDon);
             dt = DataAccessHelper.log(cmdtext);
             List<orderDetail> li = new List<orderDetail>();
             foreach (DataRow dr in dt.Rows)
@@ -96,10 +101,10 @@ namespace DAO_Data_Access_Object_
                 orderDetail or = new orderDetail();
                 // tên số lượng giá bán thành tiền ngày mua
                 or.tenSanPham = dr[0].ToString();
-                or.soLuong = int.Parse(dr[0].ToString());
-                or.giaBan = int.Parse(dr[0].ToString());
-                or.thanhTien = int.Parse(dr[0].ToString());
-                or.NgayMua = DateTime.Parse(dr[0].ToString());
+                or.soLuong = int.Parse(dr[1].ToString());
+                or.giaBan = int.Parse(dr[2].ToString());
+                or.thanhTien = int.Parse(dr[3].ToString());
+                or.NgayMua = DateTime.Parse(dr[4].ToString());
                 li.Add(or);
             }
             return li;
