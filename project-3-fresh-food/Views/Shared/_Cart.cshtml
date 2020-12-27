@@ -7,7 +7,7 @@
                 <i class="flaticon-shopping-basket"></i>
                 <div class="andro_header-cart-content">
                     <span>{{length}} Sản phẩm</span>
-                    <span>{{getTotal()|number}} VNĐ</span>
+                    <span>{{getTotal()-getTotal()*percent/100 | number}} VNĐ</span>
                 </div>
             </a>
         </li>

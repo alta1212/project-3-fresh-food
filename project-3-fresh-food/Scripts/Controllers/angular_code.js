@@ -735,6 +735,7 @@ app.controller('CartInHeader', function ($rootScope, $scope, $http) {
         console.log(data.MaGioHang)
         console.log("here")
         $scope.getCart = function () {
+
             $http({
                 method: 'get',
                 url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
@@ -757,6 +758,22 @@ app.controller('CartInHeader', function ($rootScope, $scope, $http) {
                     }
                     return total;
                 }
+                $rootScope.$on('percent', function (event, data) {
+                    $scope.percent = 0;
+                })  
+                $http.get('/Product/getchietkhau').then(function (listDiscount) {
+
+                    for (var i = 0; i < listDiscount.data.length; i++) {
+                        if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiThieu) {
+                            $rootScope.percent = listDiscount.data[i].PhanTram;
+                        }
+                    }
+                    if ($scope.getTotal() >= listDiscount.data[listDiscount.data.length - 1].TienToiDa) {
+                        $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
+                    }
+
+
+                })
             });
         }
         $scope.getCart()
@@ -852,7 +869,7 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
             $http.get('/Product/getchietkhau').then(function (listDiscount) {
 
                 for (var i = 0; i < listDiscount.data.length; i++) {
-                    if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiTieu) {
+                    if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiThieu) {
                         $rootScope.percent = listDiscount.data[i].PhanTram;
                     }
                 }
@@ -898,6 +915,9 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
                             }
                             return total;
                         }
+                        $rootScope.$on('percent', function (event, data) {
+                            $scope.percent = 0;
+                        })  
                         $http.get('/Product/getchietkhau').then(function (listDiscount) {
 
                             for (var i = 0; i < listDiscount.data.length; i++) {
@@ -909,8 +929,9 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
                                 $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
                             }
                         })
-                        angular.element(document.getElementById('cart-in-header')).scope().getCart()
+                        
                         angular.element(document.getElementById('cart-in-total')).scope().GetTotalChange()
+                        angular.element(document.getElementById('cart-in-header')).scope().getCart()
                         toastr.info("cập nhật giỏ hàng thành công", "", 3000)
                     });
                 })
@@ -931,6 +952,7 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
     $rootScope.$on('dataKhachHang', function (event, data) {
         console.log(data.MaGioHang)
         $scope.GetTotalChange = function () {
+
             $http({
                 method: 'get',
                 url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
@@ -952,7 +974,23 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
                     }
                     return total;
                 }
+                $rootScope.$on('percent', function (event, data) {
+                    $scope.percent = 0;
+                })  
+                $http.get('/Product/getchietkhau').then(function (listDiscount) {
 
+                    for (var i = 0; i < listDiscount.data.length; i++) {
+                        debugger
+                        if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiThieu) {
+                            $rootScope.percent = listDiscount.data[i].PhanTram;
+                        }
+                    }
+                    if ($scope.getTotal() >= listDiscount.data[listDiscount.data.length - 1].TienToiDa) {
+                        $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
+                    }
+                    console.log($rootScope.percent)
+
+                })
 
             });
         }
@@ -1005,11 +1043,11 @@ app.controller('CheckOut', function ($scope, $rootScope, $http, $location, $wind
             }
             $rootScope.$on('percent', function (event, data) {
                 $scope.percent = 0;
-            })
+            })  
             $http.get('/Product/getchietkhau').then(function (listDiscount) {
 
                 for (var i = 0; i < listDiscount.data.length; i++) {
-                    if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiTieu) {
+                    if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiThieu) {
                         $rootScope.percent = listDiscount.data[i].PhanTram;
                     }
                 }
