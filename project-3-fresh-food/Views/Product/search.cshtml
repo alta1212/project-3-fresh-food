@@ -56,12 +56,12 @@
                                 <span ng-switch-when="true">{{i.Giamoi| number }} VNĐ</span>
                             </div>
                             <div class="btn-group">
-                                <a ng-click="AddToCart(i.MaSanPham,i.Giaban)" href="#" class="andro_btn-custom btn-sm">Buy Now</a>
+                                <a ng-click="AddToCart(i.MaSanPham,i.Giaban)" href="#" class="andro_btn-custom btn-sm">Mua Ngay</a>
                                 <button type="button" class="andro_btn-custom dropdown-toggle dropdown-toggle-split btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" onclick="c(this)" href="#" data-toggle="modal" data-target="#quickViewModal"> <i class="fa fa-eye"></i> Quick View</a>
+                                    <a class="dropdown-item" onclick="c(this)" href="#" data-toggle="modal" data-target="#quickViewModal"> <i class="fa fa-eye"></i> Xem Nhanh</a>
                                     <a class="dropdown-item" href="#"> <i class="fa fa-sync"></i> Compare</a>
                                     <a class="dropdown-item" href="#"> <i class="fa fa-heart"></i> Add To Wishlist</a>
                                 </div>
@@ -89,7 +89,7 @@
                     <!-- Search End -->
                     <!-- Filter: Categories Start -->
                     <div ng-controller="navmenu" class="sidebar-widget">
-                        <h5 class="widget-title"> Category </h5>
+                        <h5 class="widget-title"> Loại Sản Phẩm </h5>
                         <ul class="sidebar-widget-list">
                             <li ng-repeat="i in lsp">
                                 <div class="custom-control custom-checkbox">

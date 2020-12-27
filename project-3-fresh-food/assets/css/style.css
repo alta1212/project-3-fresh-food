@@ -1,4 +1,4 @@
-/*
+﻿/*
 Template Name: Organista - Organic Shop HTML Template
 Author: Androthemes
 Author URL: https://themeforest.net/user/androthemes
@@ -31,7 +31,7 @@ Version: 1.0.0
  6.3. Products
  6.3.1. Products (List view)
  6.3.2 Products (Minimal View)
- 6.3.3 Products Quick view & details
+ 6.3.3 Products Xem Nhanh & details
  6.3.4. Cart & Wishlist
  6.3.5. Checkout
  6.3.6 Products (Recent View)
@@ -2827,7 +2827,7 @@ table img{
   background-color: #383838;
 }
 
-/* 6.3.3 Products Quick View & Details */
+/* 6.3.3 Products Xem Nhanh & Details */
 .andro_quick-view-modal .andro_product-single-content{
   padding: 0 40px;
 }
@@ -3174,6 +3174,13 @@ td.remove{
   position: relative;
   margin: 0;
   padding: 20px 20px 10px 20px;
+}
+.mota {
+    min-height: 10vw;
+}
+img.img-pro {
+    /* display: none; */
+    height: 14vw;
 }
 .andro_category-mm-body ul li:hover {
         background-color: #8adb88;
