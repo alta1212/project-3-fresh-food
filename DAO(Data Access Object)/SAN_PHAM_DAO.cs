@@ -17,7 +17,7 @@ namespace DAO_Data_Access_Object_
             string cmdtext = string.Format(@"
             Select TOP(6) SP.MaSanPham,SP.TenSanPham,SP.HinhAnh,SP.MoTa,SP.Stars,SP.DonViTinh,GB.GiaBan
                     From dbo.SAN_PHAM SP Inner join dbo.GIA_BAN GB
-	                        On SP.MaSanPham = GB.MaSanPham
+	                        On SP.MaSanPham = GB.MaSanPham Where  GB.NgayKetThuc is Null
                                  Order By NEWID()");//lấy về 6 sản phẩm ngẫu nhiên để tạo
             dt = DataAccessHelper.log(cmdtext);
             List<SAN_PHAM> li = new List<SAN_PHAM>();
