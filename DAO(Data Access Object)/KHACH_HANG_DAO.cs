@@ -39,18 +39,22 @@ namespace DAO_Data_Access_Object_
 
         public object LoginGoogle(KHACH_HANG kh)
         {
-            SqlParameter[] parm = new SqlParameter[]
-                {
+            if(kh.tenkhachhang!=null)
+            {
+                SqlParameter[] parm = new SqlParameter[]
+    {
                  new SqlParameter("@IDGoogle",SqlDbType.NVarChar,100),
                  new SqlParameter("@TenKhachHang",SqlDbType.NVarChar,100),
                  new SqlParameter("@HinhAnh",SqlDbType.NVarChar,200),
                  new SqlParameter("@mail",SqlDbType.NVarChar,200),
-                };
-            parm[0].Value = kh.makhachhang;
-            parm[1].Value = kh.TenKhachHang;
-            parm[2].Value = kh.AnhDaiDien; ;
-            parm[3].Value = kh.email;
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "login_google", parm);
+    };
+                parm[0].Value = kh.makhachhang;
+                parm[1].Value = kh.TenKhachHang;
+                parm[2].Value = kh.AnhDaiDien; ;
+                parm[3].Value = kh.email;
+                DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "login_google", parm);
+            }    
+
             string cmdtext = string.Format(@"select * from KHACH_HANG where MaKhachHang='{0}' or Email='{1}'",kh.makhachhang,kh.email);
 
             return list(cmdtext);
@@ -114,7 +118,8 @@ namespace DAO_Data_Access_Object_
                 new SqlParameter(parm_GioiTinh,SqlDbType.Bit),
                 new SqlParameter(parm_NgaySinh,SqlDbType.DateTime,50),
                 new SqlParameter(parm_AnhDaiDien,SqlDbType.NVarChar,200),
-                new SqlParameter(parm_IdFaceBook,SqlDbType.NVarChar,50)
+                new SqlParameter(parm_IdFaceBook,SqlDbType.NVarChar,50),
+                new SqlParameter(parm_MaKhachHang,SqlDbType.NVarChar,100)
             };
             if(tk==null&& mk == null)
             {
@@ -134,7 +139,16 @@ namespace DAO_Data_Access_Object_
             parm[6].Value = kHACH_HANG.dateofbirth;
             parm[7].Value = kHACH_HANG.anhdaidien;
             if(kHACH_HANG.idFacebook==null)
-            parm[8].Value = "hold";
+            {
+                parm[9].Value = kHACH_HANG.makhachhang;
+                parm[8].Value = "hold";
+            }
+           
+            if(kHACH_HANG.makhachhang!=null)
+            {
+                parm[9].Value = kHACH_HANG.makhachhang;
+                parm[8].Value = "hold";
+            }    
             else
                 parm[8].Value = kHACH_HANG.idFacebook;
 

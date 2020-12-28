@@ -129,8 +129,8 @@ app.controller("login", function ($scope, $http, $window, $location) {
             "kh.Email": respone.cu
         }
         $http.post('/Account/LoginWithGoogle', info).then(function (response) {
-            console.log(respone);
-            localStorage.setItem('idGg', respone.id)
+            console.log(response);
+            localStorage.setItem('idGg', respone.NT)
         });
     }
 })
@@ -247,6 +247,120 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload, $rootS
     //trường hợp đăng nhập =gg
     else if (localStorage.getItem("idFb") === null) {
 
+
+
+
+
+
+
+        var data = {
+            "kh.MaKhachhang": localStorage.getItem("idGg")+"mkh"
+        }
+
+        $http.post('/Account/LoginWithGoogle', data).then(function (bool) {
+            $scope.src = bool.data[0].anhdaidien;
+            $scope.ten = bool.data[0].TenKhachHang;
+            $scope.gt = bool.data[0].sex;
+            console.log(bool)
+            if (bool.data[0].Active == "2") { //nếu là 2 thì tk đã hoàn tất chuyển về trang chủ
+                $window.location.href = '/Index/Index';
+            } else if (bool.data[0].Active == "1") { //nếu là 1 thì chưa điền thông tin cá nhận
+                $scope.username = localStorage.getItem('taikhoan');
+                console.log("đúng tài khoản này rồi chưa điền thông tin");
+
+                $scope.link = "placeholder";
+
+                $scope.fill = function () {
+                    if (document.getElementById('file').files.length == 0) {
+                        $rootScope.link = $scope.src;
+
+                        var info = //lưu thông tin khách vào object
+                        {
+                            tentk: localStorage.getItem('taikhoan'),
+                            mk: localStorage.getItem('matkhau'),
+                            "KHACH_HANG.SoDienThoai": document.getElementById('sdt').value,
+                            "KHACH_HANG.DateOfBirth": document.getElementById('date').value,
+                            "KHACH_HANG.Sex": document.getElementById('sex').value,
+                            "KHACH_HANG.TenKhachHang": document.getElementById('ten').value,
+                            "KHACH_HANG.AnhDaiDien": $rootScope.link,
+                            "KHACH_HANG.Adress": document.getElementById('address').value,
+                            "kHACH_HANG.MaKhachhang": localStorage.getItem("idGg")+"mkh",
+                        }
+
+
+                        console.log(info)
+
+                        $http({
+                            method: 'post',
+                            url: '/account/addinfo', //cập nhật i4 khách
+                            data: info
+                        }).then(function () {
+                           $window.location.href = '/Index/Index';
+                        })
+                    }
+                    else {
+
+                        var image = document.getElementById('file').files[0];
+
+                        var clientId = "5c31a53dda3c8e0";
+                        imgurUpload.setClientId(clientId);
+                        imgurUpload
+                            .upload(image)
+                            .then(function (a) {
+                                $rootScope.link = a.data.link;
+                                var info = //lưu thông tin khách vào object
+                                {
+
+                                    tentk: localStorage.getItem('taikhoan'),
+                                    mk: localStorage.getItem('matkhau'),
+                                    "KHACH_HANG.SoDienThoai": document.getElementById('sdt').value,
+                                    "KHACH_HANG.DateOfBirth": document.getElementById('date').value,
+                                    "KHACH_HANG.Sex": document.getElementById('sex').value,
+                                    "KHACH_HANG.TenKhachHang": document.getElementById('ten').value,
+                                    "KHACH_HANG.AnhDaiDien": $rootScope.link,
+                                    "KHACH_HANG.Adress": document.getElementById('address').value,
+                                    "kHACH_HANG.idFacebook": localStorage.getItem("idFb"),
+                                }
+
+
+                                console.log(info)
+
+                                $http({
+                                    method: 'post',
+                                    url: '/account/addinfo', //cập nhật i4 khách
+                                    data: info
+                                }).then(function () {
+                                    $window.location.href = '/Index/Index';
+                                })
+                            })
+                    }
+
+
+
+
+                }
+
+            }
+            else {
+
+                localStorage.clear();
+                $window.location.href = '/Index/Index';
+
+
+
+            }
+        })
+
+
+
+
+
+
+
+
+
+
+
     }
     //đăng nhập = facebook
     else {
@@ -275,6 +389,30 @@ app.controller("fillinfo", function ($window, $scope, $http, imgurUpload, $rootS
                 $scope.fill = function () {
                     if (document.getElementById('file').files.length == 0) {
                         $rootScope.link = $scope.src;
+                        var info = //lưu thông tin khách vào object
+                        {
+
+                            tentk: localStorage.getItem('taikhoan'),
+                            mk: localStorage.getItem('matkhau'),
+                            "KHACH_HANG.SoDienThoai": document.getElementById('sdt').value,
+                            "KHACH_HANG.DateOfBirth": document.getElementById('date').value,
+                            "KHACH_HANG.Sex": document.getElementById('sex').value,
+                            "KHACH_HANG.TenKhachHang": document.getElementById('ten').value,
+                            "KHACH_HANG.AnhDaiDien": $rootScope.link,
+                            "KHACH_HANG.Adress": document.getElementById('address').value,
+                            "kHACH_HANG.idFacebook": localStorage.getItem("idFb"),
+                        }
+
+
+                        console.log(info)
+
+                        $http({
+                            method: 'post',
+                            url: '/account/addinfo', //cập nhật i4 khách
+                            data: info
+                        }).then(function () {
+                            $window.location.href = '/Index/Index';
+                        })
                     }
                     else {
 
@@ -385,29 +523,21 @@ app.controller("acccontroller", function ($window, $scope, $rootScope, $http) {
 
     }
     //dn bằng gg
-    else if (localStorage.getItem("idFb") === null) {
-        $scope.logout = function () {
-            signOut()
-            localStorage.clear();
-            $window.location.href = '/Account/Login';
-        }
-    }
-    //đăng nhập = facebook
-    else {
-        $scope.logout = function () {
-            LogOutFaceBook();
-            localStorage.clear();
-            $window.location.href = '/Account/Login';
-        }
-        var data = {
-            "kHACH_HANG.IDFacebook": localStorage.getItem("idFb")
-        }
+    else if (localStorage.getItem("idFb") === null)
+    {
+            $scope.logout = function ()
+            {
+                signOut()
+                localStorage.clear();
+                $window.location.href = '/Account/Login';
+            }
 
-        $http({
-            mmethod: "POST", //method gửi dữ liệu
-            url: '/Account/LoginWithFaceBook', //gọi hàm controller/account/Login
-            params: data
-        }).then(function (bool) {
+
+            var data = {
+                "kh.MaKhachhang": localStorage.getItem("idGg")+"mkh"
+            }
+
+            $http.post('/Account/LoginWithGoogle', data).then(function(bool) {
             console.log(bool)
             $rootScope.khachHang = bool.data[0];
             if (bool.data[0].Active == "1" && $window.location.pathname != "/account/fillinfo") {
@@ -431,8 +561,50 @@ app.controller("acccontroller", function ($window, $scope, $rootScope, $http) {
 
         })
 
-
     }
+    //đăng nhập = facebook
+    else {
+            $scope.logout = function () {
+                LogOutFaceBook();
+                localStorage.clear();
+                $window.location.href = '/Account/Login';
+            }
+            var data = {
+                "kHACH_HANG.IDFacebook": localStorage.getItem("idFb")
+            }
+
+            $http({
+                mmethod: "POST", //method gửi dữ liệu
+                url: '/Account/LoginWithFaceBook', //gọi hàm controller/account/Login
+                params: data
+            }).then(function (bool) {
+                console.log(bool)
+                $rootScope.khachHang = bool.data[0];
+                if (bool.data[0].Active == "1" && $window.location.pathname != "/account/fillinfo") {
+                    $scope.lin = false;
+                    $scope.out = true;
+                    $window.location.href = '/account/fillinfo';
+                }
+                else if (bool.data[0].Active == "2")
+                { //kiểm tra dữ liệu đăng nhập trả về
+                    $scope.lin = false;
+                    $scope.out = true;
+                    $scope.ten = bool.data[0].TenKhachHang
+                    $scope.anhdaidien = bool.data[0].AnhDaiDien;
+                    if ($window.location.pathname == "/Account/Login")
+                        $window.location.href = '/Index/Index';
+                }
+                else
+                {
+                        $scope.lin = true;
+                        $scope.out = false;
+                }
+                $rootScope.$broadcast('dataKhachHang', bool.data[0]);
+
+                })
+
+
+         }
 
 })
 
@@ -450,7 +622,7 @@ app.controller("seach", function ($scope, $http) {
     })
     $scope.searchProduct = function () {
         window.location.href = "/Product/search#!?tensanpham=" + $scope.keySearch
-        window.location.reload()
+        setTimeout(function () { window.location.reload() }, 100)
     }
 })
 
@@ -1105,6 +1277,24 @@ function addcart($location, msp, giaban, $http, soluong) {
     else if (data.idFb !== null) {
         var chiTietGioHang = {
             maKhachHang: localStorage.getItem("idFb") + "mkh",
+            maSanPham: msp,
+            soLuong: soluong,
+            donGia: giaban
+        }
+        $http({
+            method: 'POST',
+            url: '/guestEvent/AddToCart',
+            data: chiTietGioHang
+        }).then(function successCallback(response) {
+            console.log(response);
+            angular.element(document.getElementById('cart-in-header')).scope().getCart()
+            toastr.info("thêm vào giỏ hàng thành công", "", 3000)
+        })
+    }
+
+    else if (data.idGg !== null) {
+        var chiTietGioHang = {
+            maKhachHang: localStorage.getItem("idGg") + "mkh",
             maSanPham: msp,
             soLuong: soluong,
             donGia: giaban
