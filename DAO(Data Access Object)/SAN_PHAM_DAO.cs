@@ -103,7 +103,7 @@ namespace DAO_Data_Access_Object_
             SqlParameter[] parm = new SqlParameter[]
                {
 
-                new SqlParameter("@MaDonHang",SqlDbType.NVarChar,50),
+                new SqlParameter("@MaDonHang",SqlDbType.NVarChar,100),
                 new SqlParameter("@MaNhanVien",SqlDbType.NVarChar,50),
                };
             parm[0].Value = madonhang;

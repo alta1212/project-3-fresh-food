@@ -333,16 +333,20 @@ myApp.controller('managerOrder', function ($rootScope, $scope, $http) {
     $scope.ViewOrderdetail = function (e) {
         window.open(e, '', 'width=1000,height=800');
     }
-    $scope.veri = function (e) {
+    $scope.veri = function (es) {
+        console.log(es);
         var data =
         {
-            maorder: e,
+            maorder: es,
             manv: $rootScope.manv
         }
-
+        console.log(data)
+        console.log(es.data)
         $http.post('/Admin/confirmorder', data).then(function (s) { console.log(s) })
-        getoder($http, 1, $scope)
+        
         toastr.success('Xác nhận đơn hàng thành công', 'Thành công!!', { timeOut: 5000 })
+        getoder($http, 1, $scope)
+        window.location.reload()
     }
     $scope.delete = function () {
         toastr.success('xoá dòng 284', 'Thành công!!', { timeOut: 5000 })

@@ -907,7 +907,6 @@ app.controller('CartInHeader', function ($rootScope, $scope, $http) {
         console.log(data.MaGioHang)
         console.log("here")
         $scope.getCart = function () {
-
             $http({
                 method: 'get',
                 url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
@@ -1158,6 +1157,7 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
                     console.log($rootScope.percent)
 
                 })
+
                 
             });
         }
