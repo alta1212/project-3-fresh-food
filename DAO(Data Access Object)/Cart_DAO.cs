@@ -62,13 +62,14 @@ namespace DAO_Data_Access_Object_
         {
             SqlParameter [] parm = new SqlParameter[] 
             {
-                 new SqlParameter("@MaGioHang",SqlDbType.NVarChar,100),
-                 new SqlParameter("@MaSanPham",SqlDbType.NVarChar,100),
+                 new SqlParameter("@MaChiTietGioHang",SqlDbType.NVarChar,100),
                  new SqlParameter("@SoLuong",SqlDbType.NVarChar,200),
             };
             foreach (var item in listInCarts)
             {
-
+                parm[0].Value = item.MaChiTietGioHang;
+                parm[1].Value = item.SoLuong;
+                DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Update_Amount_In_Cart_Details", parm);
             }
             //string[] a = listInCarts as string[];
             //if (a != null)

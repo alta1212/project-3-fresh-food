@@ -1008,10 +1008,10 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
             $http.post('/guestEvent/deleteCart?maChiTietCart=' + s).then(function () {
                 toastr.info("", "Xoá khỏi giỏ hàng thành công", 1000)
                 $scope.load(data);
+                angular.element(document.getElementById('cart-in-header')).scope().getCart()
+                angular.element(document.getElementById('cart-in-total')).scope().GetTotalChange()
+                $scope.load(data);
             })
-            angular.element(document.getElementById('cart-in-header')).scope().getCart()
-            angular.element(document.getElementById('cart-in-total')).scope().GetTotalChange()
-            toastr.info("cập nhật giỏ hàng thành công", "", 3000)
         }
         $scope.load(data);
         });
@@ -1020,6 +1020,7 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
             method: 'get',
             url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
         }).then(function successGetAll(response) {
+            $scope.hideUpdateCart = true;
             $scope.listInCart = response.data;
             $scope.listDiscount = [];
             console.log(response.data)
@@ -1053,6 +1054,7 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
                 }
                 console.log($scope.listDiscount);
                 $scope.Hay = function (idCartDetails, value) {
+                    $scope.hideUpdateCart = false;
                     console.log(idCartDetails)
                     console.log(value)
                     console.log(value.i.MaSanPham)
@@ -1082,24 +1084,20 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
                     console.log($rootScope.percent);
                     console.log($scope.getTotal());
                     angular.element(document.getElementById('cart-in-total')).scope().UpgradeCart($scope.getTotal(), $rootScope.percent)
-                    toastr.info("thay đổi giỏ hàng thành công", "", 3000)
-                    console.log($scope.listInCart);
-                    debugger
-                    $http({
-                        method: 'POST',
-                        url: '/guestEvent/UpdateAmountInCartDetails?listInCarts=' + $scope.listInCart,
-                        data:
-                    })
-                    $http.post('/guestEvent/UpdateAmountInCartDetails?listInCarts=' + $scope.listInCart).then(
-                        function ShowCart(e) {
-                            $http({
-                                method: 'get',
-                                url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
-                            }).then(function successGetAll(response) { })
-                        }
-                    );
-                    
+                    $scope.Update = function () {
+                        $http({
+                            method: 'POST',
+                            url: '/guestEvent/UpdateAmountInCartDetails',
+                            data: JSON.stringify($scope.listInCart),
+                            dataType: "json"
+                        }).then(function (e) {
+                            window.location.reload();
+                        });
 
+                        
+                        //toastr.info("thay đổi giỏ hàng thành công", "", 3000)
+                        //console.log($scope.listInCart);
+                    }
                 }
                 console.log($scope.listInCart);
                 
@@ -1120,7 +1118,7 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
     
     $rootScope.$on('dataKhachHang', function (event, data) {
         console.log(data.MaGioHang)
-        //$scope.GetTotalChange = function () {
+        $scope.GetTotalChange = function () {
 
             $http({
                 method: 'get',
@@ -1162,8 +1160,8 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
                 })
                 
             });
-        //}
-        //$scope.GetTotalChange();
+        }
+        $scope.GetTotalChange();
     });
     $scope.UpgradeCart = function (totalMoney, percent) {
         $scope.getTotalMoney = totalMoney;

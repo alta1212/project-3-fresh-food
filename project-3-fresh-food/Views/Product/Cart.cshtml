@@ -32,7 +32,7 @@
                             <img src="{{i.HinhAnh}}" alt="prod1">
                             <div class="andro_cart-product-body">
                                 <h6> <a href="/Product/Product_Details#!?masanpham={{i.MaSanPham}}">{{i.TenSanPham}}</a> </h6>
-                                <p> {{i.DonViTinh}} {{$index}}</p>
+                                <p> {{i.DonViTinh}} </p>
                             </div>
                         </div>
                     </td>
@@ -68,7 +68,7 @@
                 <div class="form-group mb-0">
                     <div class="input-group mb-0" style="display:flex;justify-content: space-between;">
                             <a style="width:20%" class="andro_btn-custom primary btn-block" href="/Product/odertList">Danh sách đơn hàng</a>
-                            <a style="width:20%" class="andro_btn-custom primary btn-block" href="/Product/odertList">Cập nhật giỏ hàng</a>
+                            <a ng-hide="hideUpdateCart" ng-click="Update()" style="width:20%" class="andro_btn-custom primary btn-block" href="#">Cập nhật giỏ hàng</a>
                     </div>
                 </div>
             </div>

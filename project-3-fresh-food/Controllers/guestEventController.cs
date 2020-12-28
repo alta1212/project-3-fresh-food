@@ -30,9 +30,9 @@ namespace project_3_fresh_food.Controllers
         {
             sp.postcomment(masp,mkh,binhluan,hinhanh,stars);
         }
-        public void UpdateAmountInCartDetails(List<Cart_DTO> listInCarts)
+        public void UpdateAmountInCartDetails(List<Cart_DTO> listInCart)
         {
-            cart.UpdateAmountInCartDetails(listInCarts);
+            cart.UpdateAmountInCartDetails(listInCart);
         }
         public ActionResult confirmOrder(string madonhang)
         {
