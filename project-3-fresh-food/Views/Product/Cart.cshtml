@@ -5,7 +5,7 @@
 }
 
 <!--Cart Start -->
-<div class="section" ng-controller="CartInDetail">
+<div class="section" ng-controller="CartInDetail" id="cart-in-detail">
     <div class="container">
 
         <!-- Cart Table Start -->
@@ -64,13 +64,11 @@
         <!-- Cart Table End -->
         <!-- Coupon Code Start -->
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-12">
                 <div class="form-group mb-0">
-                    <div class="input-group mb-0">
-                       
-                     
-                            <a class="andro_btn-custom primary btn-block" href="/Product/odertList">Ds Đơn Hàng</a>
-                        
+                    <div class="input-group mb-0" style="display:flex;justify-content: space-between;">
+                            <a style="width:20%" class="andro_btn-custom primary btn-block" href="/Product/odertList">Danh sách đơn hàng</a>
+                            <a style="width:20%" class="andro_btn-custom primary btn-block" href="/Product/odertList">Cập nhật giỏ hàng</a>
                     </div>
                 </div>
             </div>
@@ -233,15 +231,15 @@
                     <tbody>
                         <tr>
                             <th>Subtotal</th>
-                            <td>{{ getTotal() |number }} VNĐ</td>
+                            <td>{{ getTotalMoney |number }} VNĐ</td>
                         </tr>
                         <tr>
                             <th>Tax</th>
-                            <td> {{getTotal()*percent/100 | number}} VND <span class="small">({{percent}} %)</span> </td>
+                            <td> {{getTotalMoney*percent/100 | number}} VND <span class="small">({{percent}} %)</span> </td>
                         </tr>
                         <tr>
                             <th>Total</th>
-                            <td> <b>{{getTotal()-getTotal()*percent/100 | number}} VND</b> </td>
+                            <td> <b>{{getTotalMoney-getTotalMoney*percent/100 | number}} VND</b> </td>
                         </tr>
                     </tbody>
                 </table>

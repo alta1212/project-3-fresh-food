@@ -25,9 +25,9 @@ namespace BLL_Business_Logic_Layer__
             return cart_DAO.GetAllProductInCart(maKhachHang);   
         }
 
-        public void UpdateAmountInCartDetails(Cart_DTO cart_DTO)
+        public void UpdateAmountInCartDetails(List<Cart_DTO> listInCarts)
         {
-            cart_DAO.UpdateAmountInCartDetails(cart_DTO);
+            cart_DAO.UpdateAmountInCartDetails(listInCarts);
         }
     }
 }

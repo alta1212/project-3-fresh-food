@@ -144,7 +144,7 @@ app.controller("sender", function ($scope, $http, $window) {
         mail: localStorage.getItem('mail'),
     };
     $scope.resend = function () {
-        window.location.reload();
+        window.location.reload();   
     }
 
 
@@ -849,6 +849,7 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
             url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
         }).then(function successGetAll(response) {
             $scope.listInCart = response.data;
+            $scope.listDiscount = [];
             console.log(response.data)
             console.log($scope.listInCart[0].SoLuong)
             $scope.getTotal = function () {
@@ -867,7 +868,9 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
                 return total;
             }
             $http.get('/Product/getchietkhau').then(function (listDiscount) {
-
+                $scope.listDiscount = listDiscount.data;
+                console.log($scope.listDiscount);
+                console.log(listDiscount);
                 for (var i = 0; i < listDiscount.data.length; i++) {
                     if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiThieu) {
                         $rootScope.percent = listDiscount.data[i].PhanTram;
@@ -876,71 +879,64 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
                 if ($scope.getTotal() >= listDiscount.data[listDiscount.data.length - 1].TienToiDa) {
                     $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
                 }
-
-
-            })
-            $scope.Hay = function (idCartDetails, value) {
-                console.log(idCartDetails)
-                console.log(value)
-                console.log(value.i.MaSanPham)
-                $scope.listInCart[idCartDetails].SoLuong = value.SoLuongChange;
-                console.log(response.data[idCartDetails].SoLuong)
-                console.log($scope.listInCart);
-                var cartDetailsChange = {
-                    "cart_DTO.MaGioHang": data.MaGioHang,
-                    "cart_DTO.MaSanPham": value.i.MaSanPham,
-                    "cart_DTO.SoLuong": value.SoLuongChange
-                }
-                console.log(cartDetailsChange);
-                $http.post('/guestEvent/UpdateAmountInCartDetails', cartDetailsChange).then(function (e) {
-                    $http({
-                        method: 'get',
-                        url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
-                    }).then(function successGetAll(response) {
-                        $scope.listInCart = response.data;
-                        console.log(response.data)
-                        console.log($scope.listInCart[0].SoLuong)
-                        $scope.getTotal = function () {
-                            var total = 0;
-                            for (var i = 0; i < response.data.length; i++) {
-                                var giaBan = response.data[i].GiaBan;
-                                var giaGiam = response.data[i].GiaGiam;
-                                var soLuong = response.data[i].SoLuong;
-                                if (giaGiam > 0) {
-                                    total += giaGiam * soLuong;
-                                }
-                                else {
-                                    total += giaBan * soLuong;
-                                }
+                console.log($scope.listDiscount);
+                $scope.Hay = function (idCartDetails, value) {
+                    console.log(idCartDetails)
+                    console.log(value)
+                    console.log(value.i.MaSanPham)
+                    $scope.listInCart[idCartDetails].SoLuong = value.SoLuongChange;
+                    console.log(response.data[idCartDetails].SoLuong)
+                    console.log($scope.listInCart);
+                    var cartDetailsChange = {
+                        "cart_DTO.MaGioHang": data.MaGioHang,
+                        "cart_DTO.MaSanPham": value.i.MaSanPham,
+                        "cart_DTO.SoLuong": value.SoLuongChange
+                    }
+                    $scope.getTotal();
+                    $rootScope.$on('percent', function (event, data) {
+                        $scope.percent = 0;
+                    })
+                    for (var i = 0; i < $scope.listDiscount.length; i++) {
+                        if ($scope.getTotal() < $scope.listDiscount[i].TienToiDa && $scope.getTotal() > $scope.listDiscount[i].TienToiThieu) {
+                            $rootScope.percent = $scope.listDiscount[i].PhanTram;
                             }
-                            return total;
                         }
-                        $rootScope.$on('percent', function (event, data) {
-                            $scope.percent = 0;
-                        })  
-                        $http.get('/Product/getchietkhau').then(function (listDiscount) {
+                    if ($scope.getTotal() >= $scope.listDiscount[$scope.listDiscount.length - 1].TienToiDa) {
+                        $rootScope.percent = $scope.listDiscount[$scope.listDiscount.length - 1].PhanTram;
+                    }
+                    
+                    console.log($scope.listDiscount);
+                    console.log(cartDetailsChange);
+                    console.log($rootScope.percent);
+                    console.log($scope.getTotal());
+                    angular.element(document.getElementById('cart-in-total')).scope().UpgradeCart($scope.getTotal(), $rootScope.percent)
+                    toastr.info("thay đổi giỏ hàng thành công", "", 3000)
+                    console.log($scope.listInCart);
+                    debugger
+                    $http({
+                        method: 'POST',
+                        url: '/guestEvent/UpdateAmountInCartDetails?listInCarts=' + $scope.listInCart,
+                        data:
+                    })
+                    $http.post('/guestEvent/UpdateAmountInCartDetails?listInCarts=' + $scope.listInCart).then(
+                        function ShowCart(e) {
+                            $http({
+                                method: 'get',
+                                url: '/Product/GetAllProductInCart?maGioHang=' + data.MaGioHang,
+                            }).then(function successGetAll(response) { })
+                        }
+                    );
+                    
 
-                            for (var i = 0; i < listDiscount.data.length; i++) {
-                                if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiTieu) {
-                                    $rootScope.percent = listDiscount.data[i].PhanTram;
-                                }
-                            }
-                            if ($scope.getTotal() >= listDiscount.data[listDiscount.data.length - 1].TienToiDa) {
-                                $rootScope.percent = listDiscount.data[listDiscount.data.length - 1].PhanTram;
-                            }
-                        })
-                        
-                        angular.element(document.getElementById('cart-in-total')).scope().GetTotalChange()
-                        angular.element(document.getElementById('cart-in-header')).scope().getCart()
-                        toastr.info("cập nhật giỏ hàng thành công", "", 3000)
-                    });
-                })
-
-            }
+                }
+                console.log($scope.listInCart);
+                
+            })
+            
+            
         });
     }
-   
-
+    
     $rootScope.$on('percent', function (event, data) {
         $scope.percent = 0;
     })
@@ -949,9 +945,10 @@ app.controller('CartInDetail', function ($scope, $rootScope, $http) {
 app.controller('CartInTotal', function ($scope, $rootScope, $http) {
    
     var scopeAcount = angular.element(document.getElementById("accountcontroller")).scope().$root;
+    
     $rootScope.$on('dataKhachHang', function (event, data) {
         console.log(data.MaGioHang)
-        $scope.GetTotalChange = function () {
+        //$scope.GetTotalChange = function () {
 
             $http({
                 method: 'get',
@@ -974,13 +971,13 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
                     }
                     return total;
                 }
+                $scope.getTotalMoney = $scope.getTotal()
                 $rootScope.$on('percent', function (event, data) {
                     $scope.percent = 0;
                 })  
                 $http.get('/Product/getchietkhau').then(function (listDiscount) {
 
                     for (var i = 0; i < listDiscount.data.length; i++) {
-                        debugger
                         if ($scope.getTotal() < listDiscount.data[i].TienToiDa && $scope.getTotal() > listDiscount.data[i].TienToiThieu) {
                             $rootScope.percent = listDiscount.data[i].PhanTram;
                         }
@@ -991,11 +988,15 @@ app.controller('CartInTotal', function ($scope, $rootScope, $http) {
                     console.log($rootScope.percent)
 
                 })
-
+                
             });
-        }
-        $scope.GetTotalChange();
+        //}
+        //$scope.GetTotalChange();
     });
+    $scope.UpgradeCart = function (totalMoney, percent) {
+        $scope.getTotalMoney = totalMoney;
+        $rootScope.percent = percent;
+    }
     
 })
 
@@ -1106,17 +1107,11 @@ app.controller('daylyDeal', function ($scope, $http) {
 
 function addcart($location, msp, giaban, $http, soluong) {
     var data = {
-
         taikhoan: localStorage.getItem('taikhoan'),
-
         matkhau: localStorage.getItem('matkhau'),
-
         idFb: localStorage.getItem('idFb'),
-
         idGg: localStorage.getItem('idGg'),
-
     };
-
     //chưa đăng nhập
     if (data.taikhoan === null && data.matkhau === null && data.idFb === null && data.idGg === null) {
         window.location.href = '/Account/Login#!?next=' + window.location.href;
@@ -1135,7 +1130,7 @@ function addcart($location, msp, giaban, $http, soluong) {
             data: chiTietGioHang
         }).then(function successCallback(response) {
             console.log(response);
-            angular.element(document.getElementById('cart-in-header')).scope().getCart()
+           angular.element(document.getElementById('cart-in-header')).scope().getCart()
             toastr.info("thêm vào giỏ hàng thành công", "", 3000)
         })
     }

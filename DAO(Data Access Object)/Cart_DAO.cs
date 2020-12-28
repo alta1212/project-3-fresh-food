@@ -58,7 +58,7 @@ namespace DAO_Data_Access_Object_
             DataAccessHelper.exec(string.Format("delete CHI_TIET_GIO_HANG where MaChITietGioHang='{0}'", maChiTietcart));
         }
 
-        public void UpdateAmountInCartDetails(Cart_DTO cart_DTO)
+        public void UpdateAmountInCartDetails(List<Cart_DTO> listInCarts)
         {
             SqlParameter [] parm = new SqlParameter[] 
             {
@@ -66,11 +66,22 @@ namespace DAO_Data_Access_Object_
                  new SqlParameter("@MaSanPham",SqlDbType.NVarChar,100),
                  new SqlParameter("@SoLuong",SqlDbType.NVarChar,200),
             };
-            parm[0].Value = cart_DTO.MaGioHang;
-            parm[1].Value = cart_DTO.MaSanPham;
-            parm[2].Value = cart_DTO.SoLuong;
-            DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Update_Amount_In_Cart_Details", parm);
+            foreach (var item in listInCarts)
+            {
 
+            }
+            //string[] a = listInCarts as string[];
+            //if (a != null)
+            //{
+            //    string[] sRes = a.OfType<string>().ToArray();
+            //}
+            //foreach (var item in listInCarts)
+            //{
+            //    parm[0].Value = cart_DTO.MaGioHang;
+            //    parm[1].Value = cart_DTO.MaSanPham;
+            //    parm[2].Value = cart_DTO.SoLuong;
+            //    DataAccessHelper.ExecuteNonQuery(DataAccessHelper.ConnectionString, CommandType.StoredProcedure, "Update_Amount_In_Cart_Details", parm);
+            //}
         }
 
         public int GetDiscount(DateTime dateTime)
