@@ -119,7 +119,7 @@ namespace DAO_Data_Access_Object_
                 new SqlParameter(parm_NgaySinh,SqlDbType.DateTime,50),
                 new SqlParameter(parm_AnhDaiDien,SqlDbType.NVarChar,200),
                 new SqlParameter(parm_IdFaceBook,SqlDbType.NVarChar,50),
-                new SqlParameter(parm_MaKhachHang,SqlDbType.NVarChar,100)
+              
             };
             if(tk==null&& mk == null)
             {
@@ -140,13 +140,13 @@ namespace DAO_Data_Access_Object_
             parm[7].Value = kHACH_HANG.anhdaidien;
             if(kHACH_HANG.idFacebook==null)
             {
-                parm[9].Value = kHACH_HANG.makhachhang;
+               
                 parm[8].Value = "hold";
             }
            
             if(kHACH_HANG.makhachhang!=null)
             {
-                parm[9].Value = kHACH_HANG.makhachhang;
+               
                 parm[8].Value = "hold";
             }    
             else
