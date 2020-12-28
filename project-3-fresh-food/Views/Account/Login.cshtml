@@ -38,16 +38,17 @@
                         <span>OR</span>
                     </div>
                     <div class="andro_social-login">
-                        <button type="button" onclick='document.getElementsByClassName("_8jan")[0].click()' class="andro_social-login-btn facebook"><i class="fab fa-facebook-f"></i> Continue with Facebook </button>
+                        <div class="fb-login-button" style="margin-bottom:5%" scope="public_profile,email"
+                             onlogin="LoginFaceBook();" data-size="large" data-button-type="continue_with"
+                             data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="true" data-width="390">
+
+                        </div>
+                        
                         <button type="button" onclick='document.getElementsByClassName("abcRioButtonContentWrapper")[0].click()' class="andro_social-login-btn google"><i class="fab fa-google"></i> Continue with Google</button>
                     </div>
                     <div style="display:none" class="andro_social-login">
 
-                        <div class="fb-login-button" scope="public_profile,email"
-                             onlogin="LoginFaceBook();" data-size="large" data-button-type="continue_with"
-                             data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false" data-width="">
-
-                        </div>
+                        
 
 
                         <div  class="g-signin2 andro_social-login-btn" data-onsuccess="onSignIn"></div>
