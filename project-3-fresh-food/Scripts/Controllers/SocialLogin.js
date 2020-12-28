@@ -47,11 +47,7 @@ function onSignIn(googleUser) {
     scopeGetAPI.loginGoole(profile)
 }
 function signOut() {
-    if (!gapi.auth2) {
-        gapi.load('auth2', function () {
-            gapi.auth2.init();
-        });
-    }
+  
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         console.log('User signed out.');
