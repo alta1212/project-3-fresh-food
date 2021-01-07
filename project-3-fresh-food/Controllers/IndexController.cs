@@ -23,6 +23,10 @@ namespace project_3_fresh_food.Controllers
         {
             return View();
         }
+        public ActionResult Home()
+        {
+            return View();
+        }
         public ActionResult Sorry()//trang 404
         {
             Response.StatusCode = 404;
@@ -37,6 +41,11 @@ namespace project_3_fresh_food.Controllers
         public JsonResult spHighlights()
         {
             listsp = sp.Getall();
+            return Json(listsp, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getLatestSp()
+        {
+            listsp = sp.getLatestSp();
             return Json(listsp, JsonRequestBehavior.AllowGet);
         }
     }

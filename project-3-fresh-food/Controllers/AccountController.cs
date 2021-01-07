@@ -15,6 +15,7 @@ namespace project_3_fresh_food.Controllers
         IAccountBll acc = new KHACH_HANG_BLL();
         // GET: Account
         // Xử lý các sự kiện liên quan đến tài khoản
+
         public ActionResult Login()
         {
             return View();

@@ -14,9 +14,16 @@ namespace project_3_fresh_food
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Index", action = "Index", id = UrlParameter.Optional }
+            name: "Partials",
+            url: "partials/{controller}",
+            defaults: new { controller = "Index", action = "Home" }
+        );
+
+            // Will handle all other requests by sending it to the main controller
+            routes.MapRoute(
+                name: "Application",
+                url: "{*url}",
+                defaults: new { controller = "Index", action = "Home" }
             );
         }
     }

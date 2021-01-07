@@ -10,5 +10,6 @@ namespace BLL_Business_Logic_Layer__.ServiceInterface
     public interface IProduct
     {
         IList<SAN_PHAM> Getall();
+        IList<SAN_PHAM> getLatestSp();
     }
 }

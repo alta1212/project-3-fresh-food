@@ -26,8 +26,10 @@
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/angular-cookies.js"></script>
     <script src="~/Scripts/angular-imgur-upload.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 
-   @* <script src="~/Scripts/Controllers/product.js"></script>*@
+
+    @* <script src="~/Scripts/Controllers/product.js"></script>*@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/favicon.ico">
     <link href="~/assets/css/css.css" rel="stylesheet" />
@@ -74,7 +76,6 @@
         </div>
     </div>
     <!-- Newsletter Modal End -->
-
     <!-- Aside (Right Panel) -->
     <aside class="andro_aside andro_aside-right">
         <div class="sidebar">
@@ -242,7 +243,7 @@
                                                         Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC,
                                                         making it over 2000 years old.
                                                     </p>
-                                                    <a href="/Account/Login" class="andro_btn-custom shadow-none btn-sm">Become a Member</a>
+                                                    <a href="#!Account/Login" class="andro_btn-custom shadow-none btn-sm">Become a Member</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -270,8 +271,8 @@
     </header>
     <!-- Header End -->
 
+    <ng-view></ng-view>
 
-    @RenderBody()
     <!-- Instagram Start -->
     <div class="row no-gutters">
         <div class="col-lg-4 secondary-bg pattern-bg">
@@ -415,14 +416,12 @@
     <script src="~/assets/js/plugins/ion.rangeSlider.min.js"></script>
     <script src="~/assets/js/plugins/jquery.zoom.min.js"></script>
     <script src="~/Scripts/Controllers/angular_code.js"></script>
-   @* <script src="~/Scripts/Controllers/product.js"></script>*@
+    @* <script src="~/Scripts/Controllers/product.js"></script>*@
 
 
     <!-- Organista Scripts -->
     <script src="~/assets/js/main.js"></script>
 
 </body>
-@RenderSection("Scripts", required: false)
-@RenderSection("Styles", false)
 <!-- Mirrored from androthemes.com/themes/html/organista/home-v2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Oct 2020 15:05:26 GMT -->
 </html>

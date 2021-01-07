@@ -13,7 +13,7 @@ namespace DAO_Data_Access_Object_
         public IList<SAN_PHAM> getallsp()
         {
             DataTable dt = new DataTable();
-            string cmdtext = string.Format("SELECT TOP 6 *  FROM [dbo].[SAN_PHAM] order by NEWID()");
+            string cmdtext = string.Format("SELECT TOP 6 *  FROM [dbo].[SAN_PHAM] order by NEWID()");//lấy về 6 sản phẩm ngẫu nhiên để tạo
             dt = DataAccessHelper.log(cmdtext);
             List<SAN_PHAM> li = new List<SAN_PHAM>();
             foreach (DataRow dr in dt.Rows)
@@ -28,6 +28,11 @@ namespace DAO_Data_Access_Object_
                 li.Add(sp);
             }
             return li;
+        }
+
+        public IList<SAN_PHAM> getLatestSp()
+        {
+            throw new NotImplementedException();
         }
     }
 }

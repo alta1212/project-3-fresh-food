@@ -318,7 +318,6 @@
     <Content Include="assets\fonts\font-awesome\webfonts\fa-solid-900d41d.eot" />
     <None Include="Models\.placeholder" />
     <None Include="packages.config" />
-    <Content Include="Views\Shared\MainLayOut.cshtml" />
     <Content Include="Views\Shared\_Seachbar.cshtml" />
     <Content Include="Views\Shared\_Cart.cshtml" />
     <Content Include="Views\Index\Index.cshtml" />
@@ -341,6 +340,7 @@
     <Content Include="Views\Account\FillInfo.cshtml" />
     <Content Include="Views\Shared\_featuredproductindex.cshtml" />
     <Content Include="Views\Shared\_NavMenu.cshtml" />
+    <Content Include="Views\Index\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
