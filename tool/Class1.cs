@@ -149,7 +149,7 @@ namespace tool
             client.BaseUrl = new Uri("https://api.mailgun.net/v3");
             client.Authenticator =
                 new HttpBasicAuthenticator("api",
-                    "140382be91ae3beab3c7b1969d670b07-360a0b2c-7cf8abe2");
+                    "api key");
             RestRequest request = new RestRequest();
             request.AddParameter("domain", "tk16food.com", ParameterType.UrlSegment);
             request.Resource = "tk16food.com/messages";
