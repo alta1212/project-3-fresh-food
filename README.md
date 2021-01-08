@@ -6,7 +6,7 @@
 
 ## General info
 This project is simple website using MVC model, Angular JS, SQL Sever, Azure, HTML, CSS, JS .
-	
+* This project using online database just run doesn't need run query file, but i put it in the project
 ## Technologies
 Project is created with:
 * Visual Studio
