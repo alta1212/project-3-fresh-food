@@ -5,8 +5,9 @@
 
 
 ## General info
-* [You can run it directly ](http://www.tk16food.com)
+* You can run it directly by click [here](http://www.tk16food.com)
 * [Admin page](http://www.admin.tk16food.com)
+
 This project is simple website using MVC model, Angular JS, SQL Sever, Azure, HTML, CSS, JS .
 This project using online database just run it, doesn't need run query file, but i put it in the project
 ## Technologies
